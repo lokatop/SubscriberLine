@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ControllerInformationFrame">
+   <children>
+      <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+         <children>
+            <Label alignment="CENTER" maxHeight="100.0" maxWidth="760.0" prefHeight="58.0" prefWidth="760.0" text="Информационно справочный раздел" textAlignment="CENTER" wrapText="true" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="16.0">
+               <font>
+                  <Font size="36.0" />
+               </font></Label>
+            <GridPane alignment="CENTER" layoutX="-7.0" layoutY="8.0" prefHeight="720.0" prefWidth="960.0">
+               <children>
+                  <Label lineSpacing="6.0" prefHeight="200.0" prefWidth="445.0" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                     <font>
+                        <Font name="Arial Bold" size="36.0" />
+                     </font>
+                  </Label>
+                  <VBox alignment="BOTTOM_CENTER" maxHeight="1.7976931348623157E308" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                     <children>
+                        <Label alignment="CENTER" text="Аппаратные тактического звена управления">
+                           <VBox.margin>
+                              <Insets left="40.0" right="40.0" top="16.0" />
+                           </VBox.margin>
+                        </Label>
+                        <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0">
+                           <children>
+                              <ChoiceBox prefWidth="240.0" />
+                              <Button mnemonicParsing="false" onAction="#toShow" text="Показать" />
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="20.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <Label alignment="CENTER" text="Аппаратные оперативного звена управления">
+                           <VBox.margin>
+                              <Insets left="40.0" right="40.0" />
+                           </VBox.margin>
+                        </Label>
+                        <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0">
+                           <children>
+                              <ChoiceBox prefWidth="240.0" />
+                              <Button mnemonicParsing="false" onAction="#toShow" text="Показать" />
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="20.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <VBox alignment="BOTTOM_CENTER" maxHeight="1.7976931348623157E308" prefHeight="200.0" prefWidth="100.0">
+                           <children>
+                              <Label alignment="CENTER" text="Внести изменения в раздел">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Label>
+                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <ChoiceBox prefWidth="230.0" />
+                                    <Button mnemonicParsing="false" onAction="#change" text="Изменить" />
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </children>
+                  </VBox>
+                  <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Абонентское оборудование" textAlignment="CENTER" wrapText="true" GridPane.rowIndex="1">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets left="16.0" right="16.0" />
+                     </GridPane.margin>
+                  </Label>
+                  <VBox alignment="TOP_CENTER" prefHeight="401.0" prefWidth="332.0" GridPane.rowIndex="2">
+                     <children>
+                        <Label alignment="CENTER" text="Телефонные аппараты ДС" />
+                        <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0">
+                           <children>
+                              <ChoiceBox prefWidth="200.0" />
+                              <Button mnemonicParsing="false" onAction="#toShow" text="Показать" />
+                           </children>
+                           <VBox.margin>
+                              <Insets top="5.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <Label alignment="CENTER" text="Телефонные аппараты ЗАС" />
+                        <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0">
+                           <children>
+                              <ChoiceBox prefWidth="200.0" />
+                              <Button mnemonicParsing="false" onAction="#toShow" text="Показать" />
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="20.0" top="5.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <Label alignment="CENTER" text="Автоматизированные рабочие места" />
+                        <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0">
+                           <children>
+                              <ChoiceBox prefWidth="200.0" />
+                              <Button mnemonicParsing="false" onAction="#toShow" text="Показать" />
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="20.0" top="5.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <Label alignment="CENTER" text="Кабель применяемый для развертывания абонентской сети" textAlignment="CENTER" wrapText="true" />
+                        <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0">
+                           <children>
+                              <ChoiceBox prefWidth="200.0" />
+                              <Button mnemonicParsing="false" onAction="#toShow" text="Показать" />
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="20.0" top="5.0" />
+                           </VBox.margin>
+                        </HBox>
+                     </children>
+                     <padding>
+                        <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
+                     </padding>
+                  </VBox>
+                  <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Аппаратные связи от которых развертывается абонентская сеть" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="416.0" minWidth="10.0" prefWidth="416.0" />
+                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="440.0" minWidth="113.0" prefWidth="113.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="431.0" minWidth="10.0" prefWidth="431.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints maxHeight="110.0" minHeight="10.0" prefHeight="110.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="128.0" minHeight="10.0" prefHeight="100.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="441.0" minHeight="10.0" prefHeight="420.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="315.0" minHeight="10.0" prefHeight="89.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+            </GridPane>
+         </children>
+      </AnchorPane>
+   </children>
+</VBox>
