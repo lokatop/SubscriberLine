@@ -95,7 +95,7 @@ public class ControllerInformationFrame implements Initializable{
         ZAS.getItems().addAll(telephoneSetsZAS);
         ARM.getItems().addAll(ARMset);
         telCable.getItems().addAll(telCableAndOther);
-        telCable.getItems().addAll(ListAOZU);
-        telCable.getItems().addAll(ListATZU);
+        AOZU.getItems().addAll(ListAOZU);
+        ATZU.getItems().addAll(ListATZU);
     }
 }
