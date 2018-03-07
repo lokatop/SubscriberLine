@@ -30,7 +30,7 @@
                         </Label>
                         <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0">
                            <children>
-                              <ChoiceBox prefWidth="240.0" />
+                              <ComboBox fx:id="ATZU" prefWidth="240.0" />
                               <Button mnemonicParsing="false" onAction="#toShow" text="Показать" />
                            </children>
                            <VBox.margin>
@@ -44,7 +44,7 @@
                         </Label>
                         <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0">
                            <children>
-                              <ChoiceBox prefWidth="240.0" />
+                              <ComboBox fx:id="AOZU" prefWidth="240.0" />
                               <Button mnemonicParsing="false" onAction="#toShow" text="Показать" />
                            </children>
                            <VBox.margin>
@@ -60,7 +60,7 @@
                               </Label>
                               <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                                  <children>
-                                    <ChoiceBox prefWidth="230.0" />
+                                    <ComboBox prefWidth="230.0" />
                                     <Button mnemonicParsing="false" onAction="#change" text="Изменить" />
                                  </children>
                               </HBox>
@@ -81,7 +81,7 @@
                         <Label alignment="CENTER" text="Телефонные аппараты ДС" />
                         <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0">
                            <children>
-                              <ChoiceBox prefWidth="200.0" />
+                              <ComboBox fx:id="DC" prefWidth="200.0" />
                               <Button mnemonicParsing="false" onAction="#toShow" text="Показать" />
                            </children>
                            <VBox.margin>
@@ -91,7 +91,7 @@
                         <Label alignment="CENTER" text="Телефонные аппараты ЗАС" />
                         <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0">
                            <children>
-                              <ChoiceBox prefWidth="200.0" />
+                              <ComboBox fx:id="ZAS" prefWidth="200.0" />
                               <Button mnemonicParsing="false" onAction="#toShow" text="Показать" />
                            </children>
                            <VBox.margin>
@@ -101,7 +101,7 @@
                         <Label alignment="CENTER" text="Автоматизированные рабочие места" />
                         <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0">
                            <children>
-                              <ChoiceBox prefWidth="200.0" />
+                              <ComboBox fx:id="ARM" prefWidth="200.0" />
                               <Button mnemonicParsing="false" onAction="#toShow" text="Показать" />
                            </children>
                            <VBox.margin>
@@ -111,7 +111,7 @@
                         <Label alignment="CENTER" text="Кабель применяемый для развертывания абонентской сети" textAlignment="CENTER" wrapText="true" />
                         <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0">
                            <children>
-                              <ChoiceBox prefWidth="200.0" />
+                              <ComboBox fx:id="telCable" prefWidth="200.0" />
                               <Button mnemonicParsing="false" onAction="#toShow" text="Показать" />
                            </children>
                            <VBox.margin>
