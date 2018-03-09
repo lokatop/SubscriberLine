@@ -20,48 +20,13 @@ public class ControllerSecondFrame implements Initializable{
     public VBox VBoxRoot;
 
     public  void buttonInformation(javafx.event.ActionEvent actionEvent) throws IOException {
-
-
         VBox vBox = FXMLLoader.load(getClass().getResource("../fxml/information_frame_first.fxml"));
         VBoxRoot.getChildren().setAll(vBox);
-
-        /*
-        try {
-
-            final Node source = (Node) actionEvent.getSource();
-            final Stage stage1 = (Stage) source.getScene().getWindow();
-            stage1.close();
-
-            Stage stage = new Stage();
-            Parent root = FXMLLoader.load(getClass().getResource("../fxml/information_frame_first.fxml"));
-            stage.setResizable(true);
-            stage.setScene(new Scene(root));
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        */
     }
 
     public void FormingADocument(javafx.event.ActionEvent actionEvent) throws IOException {
         VBox vBox = FXMLLoader.load(getClass().getResource("../fxml/choose_category.fxml"));
         VBoxRoot.getChildren().setAll(vBox);
-        /*
-        try {
-
-            final Node source = (Node) actionEvent.getSource();
-            final Stage stage1 = (Stage) source.getScene().getWindow();
-            stage1.close();
-
-                Stage stage = new Stage();
-            Parent root = FXMLLoader.load(getClass().getResource("../fxml/choose_category.fxml"));
-            stage.setResizable(true);
-            stage.setScene(new Scene(root));
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        */
     }
 
     @Override

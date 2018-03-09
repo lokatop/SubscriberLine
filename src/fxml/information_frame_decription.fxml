@@ -11,7 +11,7 @@
    <children>
       <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
          <children>
-            <Label fx:id="fxLabel" alignment="CENTER" maxHeight="100.0" maxWidth="760.0" prefHeight="58.0" prefWidth="760.0" text="fxid : fxLabel(Тут название ТА)" textAlignment="CENTER" wrapText="true" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="16.0">
+            <Label fx:id="lblLabel" alignment="CENTER" maxHeight="100.0" maxWidth="760.0" prefHeight="58.0" prefWidth="760.0" text="fxid : fxLabel(Тут название ТА)" textAlignment="CENTER" wrapText="true" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="16.0">
                <font>
                   <Font size="36.0" />
                </font>
@@ -27,13 +27,23 @@
                         <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
                      </GridPane.margin>
                      <children>
-                        <Label alignment="TOP_CENTER" layoutX="237.0" layoutY="151.0" prefHeight="550.0" prefWidth="473.0" text="Описание" textAlignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <Label fx:id="lblDesc" alignment="TOP_CENTER" layoutX="237.0" layoutY="151.0" prefHeight="550.0" prefWidth="473.0" text="Описание" textAlignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <font>
                               <Font name="Times New Roman" size="14.0" />
                            </font>
                         </Label>
                      </children>
                   </AnchorPane>
+                  <Button mnemonicParsing="false" onAction="#btnBackClick" text="Назад">
+                     <GridPane.margin>
+                        <Insets left="20.0" />
+                     </GridPane.margin>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#btnToMenuClick" text="Главное меню" GridPane.columnIndex="1" GridPane.halignment="RIGHT">
+                     <GridPane.margin>
+                        <Insets right="20.0" />
+                     </GridPane.margin>
+                  </Button>
                </children>
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="544.0" minWidth="10.0" prefWidth="488.0" />

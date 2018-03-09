@@ -45,6 +45,7 @@
                         </HBox>
                      </children>
                   </VBox>
+                  <Button mnemonicParsing="false" onAction="#btnBackClick" text="Назад" />
                </children>
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="416.0" minWidth="10.0" prefWidth="397.0" />

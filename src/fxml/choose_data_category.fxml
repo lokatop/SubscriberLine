@@ -65,12 +65,12 @@
                   </VBox>
                   <Pane prefHeight="200.0" prefWidth="200.0">
                      <children>
-                        <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" text="Назад" />
+                        <Button fx:id="btnBackClick" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#btnBackClick" text="Назад" />
                      </children>
                   </Pane>
                   <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2">
                      <children>
-                        <Button layoutX="202.0" layoutY="14.0" mnemonicParsing="false" text="В главное меню" />
+                        <Button fx:id="btnToMenuClick" layoutX="202.0" layoutY="14.0" mnemonicParsing="false" onAction="#btnToMenuClick" text="В главное меню" />
                      </children>
                   </Pane>
                </children>

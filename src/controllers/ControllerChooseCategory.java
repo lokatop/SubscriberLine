@@ -44,6 +44,19 @@ public class ControllerChooseCategory{
             VboxChoose.getChildren().setAll(vBox);
 
     }
+
+
+    @FXML
+    private void btnBackClick() throws IOException {
+        VBox vBox = FXMLLoader.load(getClass().getResource("../fxml/second_frame.fxml"));
+        VboxChoose.getChildren().setAll(vBox);
+    }
+
+    @FXML
+    private void btnToMenuClick() throws IOException {
+        VBox vBox = FXMLLoader.load(getClass().getResource("../fxml/second_frame.fxml"));
+        VboxChoose.getChildren().setAll(vBox);
+    }
 }
 
 
