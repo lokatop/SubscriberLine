@@ -25,23 +25,6 @@ public class ControllerFirstFrame implements Initializable {
 
         VBox vBox = FXMLLoader.load(getClass().getResource("../fxml/second_frame.fxml"));
         VBoxRoot1.getChildren().setAll(vBox);
-
-       /*
-        try {
-
-            final Node source = (Node) actionEvent.getSource();
-            final Stage stage1 = (Stage) source.getScene().getWindow();
-            stage1.close();
-
-            Stage stage = new Stage();
-            Parent root = FXMLLoader.load(getClass().getResource("../fxml/second_frame.fxml"));
-            stage.setResizable(true);
-            stage.setScene(new Scene(root));
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        */
     }
 
     @Override

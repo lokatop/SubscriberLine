@@ -3,28 +3,33 @@ package model;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
-import java.util.Properties;
+import java.io.Externalizable;
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
 
-public class InfoModel {
+public class InfoModel implements Externalizable {
     private final StringProperty title;
     private final StringProperty type;
     private final StringProperty description;
+    private final StringProperty imageURL; // TODO:Возможно, заменить на изображение
 
     /**
      * Конструктор по умолчанию.
      */
     public InfoModel() {
-        this(null, null, null);
+        this(null, null, null, null);
     }
 
     /**
      * Конструктор с некоторыми начальными данными.
      *
      */
-    public InfoModel(String title, String type, String description) {
+    public InfoModel(String title, String type, String description, String imageURL) {
         this.title = new SimpleStringProperty(title);
         this.type = new SimpleStringProperty(type);
         this.description = new SimpleStringProperty(description);
+        this.imageURL = new SimpleStringProperty(imageURL);
     }
 
     public String getTitle() {
@@ -50,6 +55,7 @@ public class InfoModel {
     public StringProperty typeProperty() {
         return type;
     }
+
     public String getDescription() {
         return description.get().toString();
     }
@@ -62,9 +68,37 @@ public class InfoModel {
         return description;
     }
 
+    public String getImageURL() {
+        return imageURL.get().toString();
+    }
+
+    public void setImageURL(String imageURL) {
+        this.imageURL.set(imageURL);
+    }
+
+    public StringProperty imageURLProperty() {
+        return imageURL;
+    }
+
 // Для ComboBox'ов (Добавляем список моделей, получаем список заголовков)
     @Override
     public String toString()  {
         return this.getTitle();
+    }
+
+    @Override
+    public void writeExternal(ObjectOutput out) throws IOException {
+        out.writeObject(getTitle());
+        out.writeObject(getDescription());
+        out.writeObject(getType());
+        out.writeObject(getImageURL());
+    }
+
+    @Override
+    public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+        setTitle(in.readObject().toString());
+        setDescription(in.readObject().toString());
+        setType(in.readObject().toString());
+        setImageURL(in.readObject().toString());
     }
 }

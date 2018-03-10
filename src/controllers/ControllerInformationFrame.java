@@ -7,22 +7,17 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 import model.InfoModel;
 
-import java.io.IOException;
+import java.io.*;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.Set;
-import java.util.TreeSet;
 import java.util.function.Predicate;
+import java.util.prefs.Preferences;
 
 public class ControllerInformationFrame implements Initializable{
 
@@ -59,10 +54,12 @@ public class ControllerInformationFrame implements Initializable{
 
         try{
             VBox vBox = (VBox)loader.load();
+
+            // Передаём выбранную модель в контроллер фрейма Описание
             ControllerInformationDescription controller = loader.getController();
             controller.setModel(model);
 
-            //отображаем
+            // Оотображаем
             Vbox.getChildren().setAll(vBox);
         } catch(Exception e){
             e.printStackTrace();
@@ -81,52 +78,55 @@ public class ControllerInformationFrame implements Initializable{
 
     private void addTele(){
         // В качестве образца добавляем некоторые данные
-        infoData.add(new InfoModel("ТА-57","DS","Описание"));
-        infoData.add(new InfoModel("ТА-88","DS","Описание"));
-        infoData.add(new InfoModel("П-380 ТА","DS","Описание"));
-        infoData.add(new InfoModel("Селенит","DS","Описание"));
+//        infoData.add(new InfoModel("ТА-57","DS","Описание", "image.png"));
+//        infoData.add(new InfoModel("ТА-88","DS","Описание", "image.png"));
+//        infoData.add(new InfoModel("П-380 ТА","DS","Описание", "image.png"));
+//        infoData.add(new InfoModel("Селенит","DS","Описание", "image.png"));
+//
+//        infoData.add(new InfoModel("П-170","ZAS","Описание", "image.png"));
+//        infoData.add(new InfoModel("П-171Д","ZAS","Описание", "image.png"));
+//        infoData.add(new InfoModel("АТ-3031","ZAS","Описание", "image.png"));
+//        infoData.add(new InfoModel("Селенит","ZAS","Описание", "image.png"));
+//
+//        infoData.add(new InfoModel("Рамек-2","ARM","Описание", "image.png"));
+//
+//        infoData.add(new InfoModel("П-274М","CableAndOther","Описание", "image.png"));
+//        infoData.add(new InfoModel("П-269 4х2+2х4","CableAndOther","Описание", "image.png"));
+//        infoData.add(new InfoModel("ПРК 5х2","CableAndOther","Описание", "image.png"));
+//        infoData.add(new InfoModel("ПТРК 5х2","CableAndOther","Описание", "image.png"));
+//        infoData.add(new InfoModel("Витая пара","CableAndOther","Описание", "image.png"));
+//        infoData.add(new InfoModel("ВП","CableAndOther","Описание", "image.png"));
+//        infoData.add(new InfoModel("РМ2","CableAndOther","Описание", "image.png"));
+//
+//        infoData.add(new InfoModel("П-240И","AOZU","Описание", "image.png"));
+//        infoData.add(new InfoModel("МП-1И","AOZU","Описание", "image.png"));
+//        infoData.add(new InfoModel("МП-2И","AOZU","Описание", "image.png"));
+//
+//        infoData.add(new InfoModel("П-260-О","ATZU","Описание", "image.png"));
+//        infoData.add(new InfoModel("П-260-У","ATZU","Описание", "image.png"));
+//        infoData.add(new InfoModel("П-260-Т","ATZU","Описание", "image.png"));
+//        infoData.add(new InfoModel("П-244И","ATZU","Описание", "image.png"));
+//        infoData.add(new InfoModel("П-244И-4","ATZU","Описание", "image.png"));
+//        infoData.add(new InfoModel("П-242И","ATZU","Описание", "image.png"));
 
-        infoData.add(new InfoModel("П-170","ZAS","Описание"));
-        infoData.add(new InfoModel("П-171Д","ZAS","Описание"));
-        infoData.add(new InfoModel("АТ-3031","ZAS","Описание"));
-        infoData.add(new InfoModel("Селенит","ZAS","Описание"));
+        infoData.addAll(loadInfoModelsFromFile());
 
-        infoData.add(new InfoModel("Рамек-2","ARM","Описание"));
-
-        infoData.add(new InfoModel("П-274М","CableAndOther","Описание"));
-        infoData.add(new InfoModel("П-269 4х2+2х4","CableAndOther","Описание"));
-        infoData.add(new InfoModel("ПРК 5х2","CableAndOther","Описание"));
-        infoData.add(new InfoModel("ПТРК 5х2","CableAndOther","Описание"));
-        infoData.add(new InfoModel("Витая пара","CableAndOther","Описание"));
-        infoData.add(new InfoModel("ВП","CableAndOther","Описание"));
-        infoData.add(new InfoModel("РМ2","CableAndOther","Описание"));
-
-        infoData.add(new InfoModel("П-240И","AOZU","Описание"));
-        infoData.add(new InfoModel("МП-1И","AOZU","Описание"));
-        infoData.add(new InfoModel("МП-2И","AOZU","Описание"));
-
-        infoData.add(new InfoModel("П-260-О","ATZU","Описание"));
-        infoData.add(new InfoModel("П-260-У","ATZU","Описание"));
-        infoData.add(new InfoModel("П-260-Т","ATZU","Описание"));
-        infoData.add(new InfoModel("П-244И","ATZU","Описание"));
-        infoData.add(new InfoModel("П-244И-4","ATZU","Описание"));
-        infoData.add(new InfoModel("П-242И","ATZU","Описание"));
-
-
-        // Добавляем фильтрованный по "типу" список в ComboBox
-        DC.getItems().addAll(filterInfoModelByType("DS"));
-        // Выбираем первый эл-т для отображения
-        DC.getSelectionModel().select(0);
-        ZAS.getItems().addAll(filterInfoModelByType("ZAS"));
-        ZAS.getSelectionModel().select(0);
-        ARM.getItems().addAll(filterInfoModelByType("ARM"));
-        ARM.getSelectionModel().select(0);
-        telCable.getItems().addAll(filterInfoModelByType("CableAndOther"));
-        telCable.getSelectionModel().select(0);
-        AOZU.getItems().addAll(filterInfoModelByType("AOZU"));
-        AOZU.getSelectionModel().select(0);
-        ATZU.getItems().addAll(filterInfoModelByType("ATZU"));
-        ATZU.getSelectionModel().select(0);
+        if (!infoData.isEmpty()) {
+            // Добавляем фильтрованный по "типу" список в ComboBox
+            DC.getItems().addAll(filterInfoModelByType("DS"));
+            // Выбираем первый эл-т для отображения
+            DC.getSelectionModel().select(0);
+            ZAS.getItems().addAll(filterInfoModelByType("ZAS"));
+            ZAS.getSelectionModel().select(0);
+            ARM.getItems().addAll(filterInfoModelByType("ARM"));
+            ARM.getSelectionModel().select(0);
+            telCable.getItems().addAll(filterInfoModelByType("CableAndOther"));
+            telCable.getSelectionModel().select(0);
+            AOZU.getItems().addAll(filterInfoModelByType("AOZU"));
+            AOZU.getSelectionModel().select(0);
+            ATZU.getItems().addAll(filterInfoModelByType("ATZU"));
+            ATZU.getSelectionModel().select(0);
+        }
     }
 
     @FXML
@@ -135,21 +135,76 @@ public class ControllerInformationFrame implements Initializable{
         Vbox.getChildren().setAll(vBox);
     }
 
+
     /**
      * Фильтрует модели по типу
      * @param type
      * @return FilteredList<InfoModel>
      */
+
     private FilteredList<InfoModel> filterInfoModelByType(String type){
         return infoData.filtered(new Predicate<InfoModel>() {
             @Override
             public boolean test(InfoModel infoModel) {
-                if (infoModel.getType() == type) {
+                if (infoModel.getType().equals(type)) {
                     return true;
                 } else {
                     return false;
                 }
             }
         });
+    }
+
+    // Сохранение в XML
+
+    /**
+     * Сохраняет список объектов InfoModel в файл file.xml
+     * @param list
+     */
+    private void saveInfoModelsToFile(FilteredList<InfoModel> list){
+        try {
+            FileOutputStream file = new FileOutputStream("file.xml");
+            ObjectOutputStream in = new ObjectOutputStream(file);
+
+            for (InfoModel model : list){
+                in.writeObject(model);
+            }
+
+            in.close();
+            file.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Загружает список объектов InfoModel из файла file.xml
+     * @return
+     */
+    private ObservableList<InfoModel> loadInfoModelsFromFile(){
+        try {
+            FileInputStream file = new FileInputStream("file.xml");
+            ObjectInputStream in = new ObjectInputStream(file);
+
+            ObservableList<InfoModel> infoDataReaded = FXCollections.observableArrayList();
+
+            Integer i = 0; // TODO: КОСТЫЛИИИ!!!!!!!!!!!!!!!!!!!1111
+            do{
+                i++;
+                try {
+                    InfoModel im = (InfoModel) in.readObject();
+
+                    infoDataReaded.add(im);
+                } catch (Exception e){}
+            }while (i < 999);
+
+            in.close();
+            file.close();
+
+            return infoDataReaded;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }
