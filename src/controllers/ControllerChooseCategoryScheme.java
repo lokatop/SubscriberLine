@@ -16,8 +16,9 @@ public class ControllerChooseCategoryScheme {
 
     }
 
-    public void theNext(ActionEvent actionEvent){
-
+    public void theNext(ActionEvent actionEvent) throws IOException {
+        VBox vBox = FXMLLoader.load(getClass().getResource("../fxml/choose_category_of_official_1.fxml"));
+        VboxChooseSheme.getChildren().setAll(vBox);
     }
 
     @FXML
