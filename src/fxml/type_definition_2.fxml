@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox fx:id="typeDefinition" prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ControllerTypeDefinition2">
+   <children>
+      <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+         <children>
+            <GridPane alignment="CENTER" prefHeight="720.0" prefWidth="960.0">
+               <children>
+                  <Label fx:id="labelUpOnPage" text="Определения типа аппаратных от которых будет развернута абонентская сеть" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1">
+                     <font>
+                        <Font name="Times New Roman Bold" size="24.0" />
+                     </font>
+                  </Label>
+                  <VBox alignment="CENTER" prefHeight="194.0" prefWidth="440.0" GridPane.columnSpan="3" GridPane.rowIndex="2">
+                     <children>
+                        <Label text="В данном разделе программы необходимо выбрать тип аппаратных от которых будет развертываться абонентская сеть и устанавливать их количество." wrapText="true">
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                        </Label>
+                     </children>
+                     <GridPane.margin>
+                        <Insets left="50.0" right="50.0" />
+                     </GridPane.margin>
+                  </VBox>
+                  <Button alignment="CENTER" mnemonicParsing="false" onAction="#theNext" prefWidth="150.0" text="ДАЛЕЕ" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <Pane prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <Button alignment="CENTER" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#btnBackClick" text="Назад" />
+                     </children>
+                  </Pane>
+                  <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2">
+                     <children>
+                        <Button contentDisplay="RIGHT" layoutX="141.0" layoutY="14.0" mnemonicParsing="false" onAction="#btnToMenuClick" text="В главное меню" />
+                     </children>
+                  </Pane>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnSpan="3" GridPane.rowIndex="1">
+                     <children>
+                        <VBox alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" HBox.hgrow="NEVER">
+                           <HBox.margin>
+                              <Insets left="50.0" />
+                           </HBox.margin>
+                           <children>
+                              <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Наименование аппаратных" textAlignment="CENTER">
+                                 <font>
+                                    <Font name="Times New Roman" size="20.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets left="16.0" right="16.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <ListView fx:id="listViewApp" maxHeight="1.7976931348623157E308" prefWidth="200.0" />
+                           </children>
+                        </VBox>
+                        <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" HBox.hgrow="SOMETIMES">
+                           <children>
+                              <Label text="Количество аппаратных" textAlignment="CENTER">
+                                 <font>
+                                    <Font name="Times New Roman" size="20.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets left="16.0" right="16.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <HBox alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" VBox.vgrow="SOMETIMES">
+                                 <children>
+                                    <TextField fx:id="textFieldApp" maxWidth="-Infinity" prefWidth="50.0">
+                                       <HBox.margin>
+                                          <Insets left="16.0" />
+                                       </HBox.margin>
+                                    </TextField>
+                                    <CheckBox fx:id="checkBoxApp" mnemonicParsing="false">
+                                       <HBox.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </HBox.margin>
+                                    </CheckBox>
+                                 </children>
+                              </HBox>
+                           </children>
+                           <HBox.margin>
+                              <Insets left="50.0" right="50.0" />
+                           </HBox.margin>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#EditOriginalData" prefWidth="200.0" text="Изменить исходные данные" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+               </children>
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="260.0" minWidth="10.0" prefWidth="260.0" />
+                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="440.0" minWidth="440.0" prefWidth="440.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="260.0" minWidth="10.0" prefWidth="260.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints maxHeight="150.0" minHeight="10.0" prefHeight="150.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="435.0" minHeight="10.0" prefHeight="414.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="179.0" minHeight="0.0" prefHeight="62.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="179.0" minHeight="10.0" prefHeight="58.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+            </GridPane>
+         </children>
+      </AnchorPane>
+   </children>
+</VBox>

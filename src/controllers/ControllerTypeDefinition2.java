@@ -6,13 +6,13 @@ import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 
-public class ControllerTypeDefinition1 {
+public class ControllerTypeDefinition2 {
     @FXML
     public VBox typeDefinition;
 
     @FXML
     private void btnBackClick() throws IOException {
-        VBox vBox = FXMLLoader.load(getClass().getResource("../fxml/choose_category_of_official_1.fxml"));
+        VBox vBox = FXMLLoader.load(getClass().getResource("../fxml/type_definition_1.fxml"));
         typeDefinition.getChildren().setAll(vBox);
     }
 
@@ -24,8 +24,10 @@ public class ControllerTypeDefinition1 {
 
     @FXML
     private void theNext() throws IOException{
-        VBox vBox = FXMLLoader.load(getClass().getResource("../fxml/type_definition_2.fxml"));
-        typeDefinition.getChildren().setAll(vBox);
+        //VBox vBox = FXMLLoader.load(getClass().getResource("../fxml/.fxml"));
+        //typeDefinition.getChildren().setAll(vBox);
 
     }
+    @FXML
+    private void EditOriginalData(){}
 }
