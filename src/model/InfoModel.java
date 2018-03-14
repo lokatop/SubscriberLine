@@ -3,6 +3,8 @@ package model;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 import java.io.Externalizable;
@@ -10,7 +12,11 @@ import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
 
-public class InfoModel implements Externalizable {
+// определяем корневой элемент
+//@XmlRootElement(name = "InfoModel")
+// определяем последовательность тегов в XML
+@XmlType(propOrder = {"title", "type", "description", "imageURL"})
+public class InfoModel {
     private final StringProperty title;
     private final StringProperty type;
     private final StringProperty description;
@@ -34,6 +40,7 @@ public class InfoModel implements Externalizable {
         this.imageURL = new SimpleStringProperty(imageURL);
     }
 
+    @XmlElement
     public String getTitle() {
         return title.get().toString();
     }
@@ -46,6 +53,7 @@ public class InfoModel implements Externalizable {
         return title;
     }
 
+    @XmlElement
     public String getType() {
         return type.get().toString();
     }
@@ -58,6 +66,7 @@ public class InfoModel implements Externalizable {
         return type;
     }
 
+    @XmlElement
     public String getDescription() {
         return description.get().toString();
     }
@@ -70,6 +79,7 @@ public class InfoModel implements Externalizable {
         return description;
     }
 
+    @XmlElement
     public String getImageURL() {
         return imageURL.get().toString();
     }
@@ -88,19 +98,19 @@ public class InfoModel implements Externalizable {
         return this.getTitle();
     }
 
-    @Override
-    public void writeExternal(ObjectOutput out) throws IOException {
-        out.writeObject(getTitle());
-        out.writeObject(getDescription());
-        out.writeObject(getType());
-        out.writeObject(getImageURL());
-    }
-
-    @Override
-    public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
-        setTitle(in.readObject().toString());
-        setDescription(in.readObject().toString());
-        setType(in.readObject().toString());
-        setImageURL(in.readObject().toString());
-    }
+//    @Override
+//    public void writeExternal(ObjectOutput out) throws IOException {
+//        out.writeObject(getTitle());
+//        out.writeObject(getDescription());
+//        out.writeObject(getType());
+//        out.writeObject(getImageURL());
+//    }
+//
+//    @Override
+//    public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+//        setTitle(in.readObject().toString());
+//        setDescription(in.readObject().toString());
+//        setType(in.readObject().toString());
+//        setImageURL(in.readObject().toString());
+//    }
 }

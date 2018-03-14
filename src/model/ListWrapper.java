@@ -10,18 +10,18 @@ import javax.xml.bind.annotation.XmlSeeAlso;
  * Вспомогательный класс для обёртывания списка адресатов.
  * Используется для сохранения списка адресатов в XML.
  */
-@XmlRootElement(name = "InfoModelList")
+@XmlRootElement(name = "List")
 @XmlSeeAlso({InfoModel.class})
-public class InfoModelListWrapper {
+public class ListWrapper {
 
-    private List infoModelList;
+    private List list;
 
-    @XmlElement(name = "InfoModel")
-    public List getInfoModels() {
-        return infoModelList;
+    @XmlElement(name = "item")
+    public List getList() {
+        return list;
     }
 
-    public void setInfoModels(List infoModelList) {
-        this.infoModelList = infoModelList;
+    public void setList(List list) {
+        this.list = list;
     }
 }
