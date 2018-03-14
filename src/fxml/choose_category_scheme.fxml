@@ -39,7 +39,7 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <ComboBox prefWidth="250.0">
+                        <ComboBox fx:id="comboChooseCategory" prefWidth="250.0">
                            <VBox.margin>
                               <Insets top="16.0" />
                            </VBox.margin>

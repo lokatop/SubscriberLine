@@ -25,7 +25,7 @@ public class ControllerSecondFrame implements Initializable{
     }
 
     public void FormingADocument(javafx.event.ActionEvent actionEvent) throws IOException {
-        VBox vBox = FXMLLoader.load(getClass().getResource("../fxml/choose_category.fxml"));
+        VBox vBox = FXMLLoader.load(getClass().getResource("../fxml/choose_category_scheme.fxml"));
         VBoxRoot.getChildren().setAll(vBox);
     }
 

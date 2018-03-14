@@ -17,7 +17,7 @@ public class ControllerDataCategory {
 
     @FXML
     private void btnBackClick() throws IOException {
-        VBox vBox = FXMLLoader.load(getClass().getResource("../fxml/choose_category.fxml"));
+        VBox vBox = FXMLLoader.load(getClass().getResource("../fxml/choose_category_scheme.fxml"));
         VboxChooseData.getChildren().setAll(vBox);
     }
 
