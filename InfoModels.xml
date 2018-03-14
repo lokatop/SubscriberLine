@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<InfoModelList>
+<InfoModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="infoModel">
+        <description>Описаниеlolkek</description>
+        <imageURL>image.png</imageURL>
+        <title>ТА-57_2</title>
+        <type>DS</type>
+    </InfoModel>
+    <InfoModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="infoModel">
+        <description>Описание</description>
+        <imageURL>image.png</imageURL>
+        <title>ТА-57</title>
+        <type>DS</type>
+    </InfoModel>
+    <InfoModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="infoModel">
+        <description>Описание</description>
+        <imageURL>image.png</imageURL>
+        <title>ТА-88</title>
+        <type>DS</type>
+    </InfoModel>
+    <InfoModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="infoModel">
+        <description>Описание</description>
+        <imageURL>image.png</imageURL>
+        <title>П-380 ТА</title>
+        <type>DS</type>
+    </InfoModel>
+    <InfoModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="infoModel">
+        <description>Описание</description>
+        <imageURL>image.png</imageURL>
+        <title>Селенит</title>
+        <type>DS</type>
+    </InfoModel>
+    <InfoModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="infoModel">
+        <description>Описание</description>
+        <imageURL>image.png</imageURL>
+        <title>П-170</title>
+        <type>ZAS</type>
+    </InfoModel>
+    <InfoModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="infoModel">
+        <description>Описание</description>
+        <imageURL>image.png</imageURL>
+        <title>П-171Д</title>
+        <type>ZAS</type>
+    </InfoModel>
+    <InfoModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="infoModel">
+        <description>Описание</description>
+        <imageURL>image.png</imageURL>
+        <title>АТ-3031</title>
+        <type>ZAS</type>
+    </InfoModel>
+    <InfoModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="infoModel">
+        <description>Описание</description>
+        <imageURL>image.png</imageURL>
+        <title>Селенит</title>
+        <type>ZAS</type>
+    </InfoModel>
+    <InfoModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="infoModel">
+        <description>Описание</description>
+        <imageURL>image.png</imageURL>
+        <title>Рамек-2</title>
+        <type>ARM</type>
+    </InfoModel>
+    <InfoModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="infoModel">
+        <description>Описание</description>
+        <imageURL>image.png</imageURL>
+        <title>П-274М</title>
+        <type>CableAndOther</type>
+    </InfoModel>
+    <InfoModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="infoModel">
+        <description>Описание</description>
+        <imageURL>image.png</imageURL>
+        <title>П-269 4х2+2х4</title>
+        <type>CableAndOther</type>
+    </InfoModel>
+    <InfoModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="infoModel">
+        <description>Описание</description>
+        <imageURL>image.png</imageURL>
+        <title>ПРК 5х2</title>
+        <type>CableAndOther</type>
+    </InfoModel>
+    <InfoModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="infoModel">
+        <description>Описание</description>
+        <imageURL>image.png</imageURL>
+        <title>ПТРК 5х2</title>
+        <type>CableAndOther</type>
+    </InfoModel>
+    <InfoModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="infoModel">
+        <description>Описание</description>
+        <imageURL>image.png</imageURL>
+        <title>Витая пара</title>
+        <type>CableAndOther</type>
+    </InfoModel>
+    <InfoModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="infoModel">
+        <description>Описание</description>
+        <imageURL>image.png</imageURL>
+        <title>ВП</title>
+        <type>CableAndOther</type>
+    </InfoModel>
+    <InfoModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="infoModel">
+        <description>Описание</description>
+        <imageURL>image.png</imageURL>
+        <title>РМ2</title>
+        <type>CableAndOther</type>
+    </InfoModel>
+    <InfoModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="infoModel">
+        <description>Описание</description>
+        <imageURL>image.png</imageURL>
+        <title>П-240И</title>
+        <type>AOZU</type>
+    </InfoModel>
+    <InfoModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="infoModel">
+        <description>Описание</description>
+        <imageURL>image.png</imageURL>
+        <title>МП-1И</title>
+        <type>AOZU</type>
+    </InfoModel>
+    <InfoModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="infoModel">
+        <description>Описание</description>
+        <imageURL>image.png</imageURL>
+        <title>МП-2И</title>
+        <type>AOZU</type>
+    </InfoModel>
+    <InfoModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="infoModel">
+        <description>Описание</description>
+        <imageURL>image.png</imageURL>
+        <title>П-260-О</title>
+        <type>ATZU</type>
+    </InfoModel>
+    <InfoModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="infoModel">
+        <description>Описание</description>
+        <imageURL>image.png</imageURL>
+        <title>П-260-У</title>
+        <type>ATZU</type>
+    </InfoModel>
+    <InfoModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="infoModel">
+        <description>Описание</description>
+        <imageURL>image.png</imageURL>
+        <title>П-260-Т</title>
+        <type>ATZU</type>
+    </InfoModel>
+    <InfoModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="infoModel">
+        <description>Описание</description>
+        <imageURL>image.png</imageURL>
+        <title>П-244И</title>
+        <type>ATZU</type>
+    </InfoModel>
+    <InfoModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="infoModel">
+        <description>Описание</description>
+        <imageURL>image.png</imageURL>
+        <title>П-244И-4</title>
+        <type>ATZU</type>
+    </InfoModel>
+    <InfoModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="infoModel">
+        <description>Описание</description>
+        <imageURL>image.png</imageURL>
+        <title>П-242И</title>
+        <type>ATZU</type>
+    </InfoModel>
+</InfoModelList>

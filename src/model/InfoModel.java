@@ -3,6 +3,8 @@ package model;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 import java.io.Externalizable;
 import java.io.IOException;
 import java.io.ObjectInput;

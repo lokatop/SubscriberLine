@@ -12,12 +12,18 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import model.InfoModel;
+import model.InfoModelListWrapper;
+import model.XMLsaver;
 
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
 import java.io.*;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.function.Predicate;
-import java.util.prefs.Preferences;
 
 public class ControllerInformationFrame implements Initializable{
 
@@ -109,7 +115,8 @@ public class ControllerInformationFrame implements Initializable{
 //        infoData.add(new InfoModel("П-244И-4","ATZU","Описание", "image.png"));
 //        infoData.add(new InfoModel("П-242И","ATZU","Описание", "image.png"));
 
-        infoData.addAll(loadInfoModelsFromFile());
+        //Пробуем сохранить  в xml
+        infoData.addAll(loadInfoModelsFromXMLFile());
 
         if (!infoData.isEmpty()) {
             // Добавляем фильтрованный по "типу" список в ComboBox
@@ -141,7 +148,6 @@ public class ControllerInformationFrame implements Initializable{
      * @param type
      * @return FilteredList<InfoModel>
      */
-
     private FilteredList<InfoModel> filterInfoModelByType(String type){
         return infoData.filtered(new Predicate<InfoModel>() {
             @Override
@@ -156,14 +162,65 @@ public class ControllerInformationFrame implements Initializable{
     }
 
     // Сохранение в XML
+    public void saveInfoModelsToXMLFile(ObservableList<InfoModel> infoData) {
+        try {
+            JAXBContext context = JAXBContext.newInstance(InfoModelListWrapper.class);
+            Marshaller m = context.createMarshaller();
+            m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+
+            // Обёртываем наши данные об адресатах.
+            InfoModelListWrapper wrapper = new InfoModelListWrapper();
+            wrapper.setInfoModels(infoData);
+
+            // Открываем файл
+            FileOutputStream file = new FileOutputStream("InfoModels.xml");
+
+            // Маршаллируем и сохраняем XML в файл.
+            m.marshal(wrapper, file);
+
+            // Закрываем файл
+            file.close();
+
+        } catch (Exception e) { // catches ANY exception
+            String a = "";
+        }
+    }
+    /**
+     * Загружает список объектов InfoModel из файла file.xml
+     * @return
+     */
+    private ObservableList<InfoModel> loadInfoModelsFromXMLFile(){
+        try {
+            JAXBContext context = JAXBContext.newInstance(InfoModelListWrapper.class);
+            Unmarshaller um = context.createUnmarshaller();
+
+            // Открываем файл
+            FileInputStream file = new FileInputStream("InfoModels.xml");
+
+            // Чтение XML из файла и демаршализация.
+            InfoModelListWrapper wrapper = (InfoModelListWrapper) um.unmarshal(file);
+
+            ObservableList<InfoModel> infoDataReaded = FXCollections.observableArrayList();
+
+            infoDataReaded.addAll(wrapper.getInfoModels());
+
+
+            file.close();
+
+            return infoDataReaded;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 
     /**
-     * Сохраняет список объектов InfoModel в файл file.xml
+     * Сохраняет список объектов InfoModel в файл file
      * @param list
      */
     private void saveInfoModelsToFile(FilteredList<InfoModel> list){
         try {
-            FileOutputStream file = new FileOutputStream("file.xml");
+            FileOutputStream file = new FileOutputStream("file");
             ObjectOutputStream in = new ObjectOutputStream(file);
 
             for (InfoModel model : list){
@@ -178,12 +235,12 @@ public class ControllerInformationFrame implements Initializable{
     }
 
     /**
-     * Загружает список объектов InfoModel из файла file.xml
+     * Загружает список объектов InfoModel из файла file
      * @return
      */
     private ObservableList<InfoModel> loadInfoModelsFromFile(){
         try {
-            FileInputStream file = new FileInputStream("file.xml");
+            FileInputStream file = new FileInputStream("file");
             ObjectInputStream in = new ObjectInputStream(file);
 
             ObservableList<InfoModel> infoDataReaded = FXCollections.observableArrayList();
