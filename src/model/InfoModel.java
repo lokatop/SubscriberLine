@@ -97,20 +97,4 @@ public class InfoModel {
     public String toString()  {
         return this.getTitle();
     }
-
-//    @Override
-//    public void writeExternal(ObjectOutput out) throws IOException {
-//        out.writeObject(getTitle());
-//        out.writeObject(getDescription());
-//        out.writeObject(getType());
-//        out.writeObject(getImageURL());
-//    }
-//
-//    @Override
-//    public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
-//        setTitle(in.readObject().toString());
-//        setDescription(in.readObject().toString());
-//        setType(in.readObject().toString());
-//        setImageURL(in.readObject().toString());
-//    }
 }

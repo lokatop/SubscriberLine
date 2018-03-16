@@ -17,10 +17,15 @@ import java.util.List;
 public class XMLsaver {
 
     /**
-     *
-     * @param data
-     * @param fileName
-     * @return
+     * <p>Сохраняет список элементов в файла</p>
+     * <p>Например:</p>
+     * <p>ObservableList<InfoModel> infoData = FXCollections.observableArrayList();</p>
+     * <p>infoData.add(new InfoModel("ТА-57","DS","Описание", "image.png"));</p>
+     * <p>infoData.add(new InfoModel("ТА-88","DS","Описание", "image.png"));</p>
+     * <p>XMLsaver.saveToXML(infoData, "InfoModels.xml");</p>
+     * @param data одиночный элемент изи список (расширяющий List) элементов для сохранения
+     * @param fileName путь к файлу (включая имя файла)
+     * @return true/false - в зависимости от результата сохранения
      */
     public static boolean saveToXML(Object data, String fileName){
         try {
@@ -57,6 +62,15 @@ public class XMLsaver {
         }
     }
 
+    /**
+     * <p>Загружает список элементов из файла</p>
+     * <p>Например:</p>
+     * <p>ObservableList<InfoModel> infoData = FXCollections.observableArrayList();</p>
+     * <p>infoData.addAll(XMLsaver.loadFromXML("InfoModels.xml"));</p>
+     * @param fileName путь к файлу (включая имя файла)
+     * @return List - содержит список загруженных элементов
+     *
+     */
     public static List loadFromXML(String fileName){
         try {
             JAXBContext context = JAXBContext.newInstance(ListWrapper.class);
@@ -76,53 +90,4 @@ public class XMLsaver {
             return null;
         }
     }
-
-    /**
-     * Сохраняет список объектов InfoModel из файла InfoModels.xml
-     * @return
-     */
-    public boolean saveInfoModelsToXMLFile(ObservableList<InfoModel> infoData) {
-        try {
-//            JAXBContext context = JAXBContext.newInstance(InfoModelListWrapper.class);
-//
-//            // Обёртываем наши данные об адресатах.
-//            InfoModelListWrapper wrapper = new InfoModelListWrapper();
-//            wrapper.setInfoModels(infoData);
-//
-////            this.saveToXML(wrapper,"InfoModels.xml",context);
-
-            return true;
-        } catch (Exception e) { // catches ANY exception
-            return false;
-        }
-    }
-    /**
-     * Загружает список объектов InfoModel из файла InfoModels.xml
-     * @return
-//     */
-//    private ObservableList<InfoModel> loadInfoModelsFromXMLFile(){
-//        try {
-//            JAXBContext context = JAXBContext.newInstance(InfoModelListWrapper.class);
-//            Unmarshaller um = context.createUnmarshaller();
-//
-//            // Открываем файл
-//            FileInputStream file = new FileInputStream("InfoModels.xml");
-//
-//            // Чтение XML из файла и демаршализация.
-//            InfoModelListWrapper wrapper = (InfoModelListWrapper) um.unmarshal(file);
-//
-//            ObservableList<InfoModel> infoDataReaded = FXCollections.observableArrayList();
-//
-//            infoDataReaded.addAll(wrapper.getInfoModels());
-//
-//
-//            file.close();
-//
-//            return infoDataReaded;
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            return null;
-//        }
-//    }
-
 }
