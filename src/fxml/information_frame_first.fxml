@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ControllerInformationFrame">
+<VBox fx:id="Vbox" prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ControllerInformationFrame">
    <children>
       <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
          <children>
@@ -14,7 +14,7 @@
                <font>
                   <Font size="36.0" />
                </font></Label>
-            <GridPane alignment="CENTER" layoutX="-7.0" layoutY="8.0" prefHeight="720.0" prefWidth="960.0">
+            <GridPane alignment="CENTER" layoutX="-7.0" layoutY="8.0" minHeight="720.0" minWidth="960.0" prefHeight="720.0" prefWidth="960.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
                   <Label lineSpacing="6.0" prefHeight="200.0" prefWidth="445.0" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <font>
@@ -30,7 +30,7 @@
                         </Label>
                         <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0">
                            <children>
-                              <ChoiceBox prefWidth="240.0" />
+                              <ComboBox fx:id="ATZU" prefWidth="240.0" />
                               <Button mnemonicParsing="false" onAction="#toShow" text="Показать" />
                            </children>
                            <VBox.margin>
@@ -44,7 +44,7 @@
                         </Label>
                         <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0">
                            <children>
-                              <ChoiceBox prefWidth="240.0" />
+                              <ComboBox fx:id="AOZU" prefWidth="240.0" />
                               <Button mnemonicParsing="false" onAction="#toShow" text="Показать" />
                            </children>
                            <VBox.margin>
@@ -60,7 +60,7 @@
                               </Label>
                               <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                                  <children>
-                                    <ChoiceBox prefWidth="230.0" />
+                                    <ComboBox prefWidth="230.0" />
                                     <Button mnemonicParsing="false" onAction="#change" text="Изменить" />
                                  </children>
                               </HBox>
@@ -81,7 +81,7 @@
                         <Label alignment="CENTER" text="Телефонные аппараты ДС" />
                         <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0">
                            <children>
-                              <ChoiceBox prefWidth="200.0" />
+                              <ComboBox fx:id="DC" prefWidth="200.0" />
                               <Button mnemonicParsing="false" onAction="#toShow" text="Показать" />
                            </children>
                            <VBox.margin>
@@ -91,7 +91,7 @@
                         <Label alignment="CENTER" text="Телефонные аппараты ЗАС" />
                         <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0">
                            <children>
-                              <ChoiceBox prefWidth="200.0" />
+                              <ComboBox fx:id="ZAS" prefWidth="200.0" />
                               <Button mnemonicParsing="false" onAction="#toShow" text="Показать" />
                            </children>
                            <VBox.margin>
@@ -101,7 +101,7 @@
                         <Label alignment="CENTER" text="Автоматизированные рабочие места" />
                         <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0">
                            <children>
-                              <ChoiceBox prefWidth="200.0" />
+                              <ComboBox fx:id="ARM" prefWidth="200.0" />
                               <Button mnemonicParsing="false" onAction="#toShow" text="Показать" />
                            </children>
                            <VBox.margin>
@@ -111,7 +111,7 @@
                         <Label alignment="CENTER" text="Кабель применяемый для развертывания абонентской сети" textAlignment="CENTER" wrapText="true" />
                         <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0">
                            <children>
-                              <ChoiceBox prefWidth="200.0" />
+                              <ComboBox fx:id="telCable" prefWidth="200.0" />
                               <Button mnemonicParsing="false" onAction="#toShow" text="Показать" />
                            </children>
                            <VBox.margin>
@@ -128,6 +128,15 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
+                  <VBox prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#btnBackClick" text="Назад">
+                           <VBox.margin>
+                              <Insets left="16.0" top="16.0" />
+                           </VBox.margin>
+                        </Button>
+                     </children>
+                  </VBox>
                </children>
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="416.0" minWidth="10.0" prefWidth="416.0" />
