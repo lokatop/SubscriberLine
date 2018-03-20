@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox fx:id="VboxDesc" prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ControllerInformationDescription">
+<VBox fx:id="VboxDesc" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ControllerInformationDescription">
    <children>
       <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
          <children>
@@ -16,7 +16,7 @@
                   <Font size="36.0" />
                </font>
             </Label>
-            <GridPane alignment="CENTER" prefHeight="734.0" prefWidth="1008.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <GridPane alignment="CENTER" minHeight="720.0" minWidth="960.0" prefHeight="720.0" prefWidth="960.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
                   <VBox alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" prefHeight="420.0" prefWidth="338.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <children>
@@ -34,16 +34,24 @@
                         </Label>
                      </children>
                   </AnchorPane>
-                  <Button mnemonicParsing="false" onAction="#btnBackClick" text="Назад">
-                     <GridPane.margin>
-                        <Insets left="20.0" />
-                     </GridPane.margin>
-                  </Button>
-                  <Button mnemonicParsing="false" onAction="#btnToMenuClick" text="Главное меню" GridPane.columnIndex="1" GridPane.halignment="RIGHT">
-                     <GridPane.margin>
-                        <Insets right="20.0" />
-                     </GridPane.margin>
-                  </Button>
+                  <VBox prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#btnBackClick" text="Назад">
+                           <VBox.margin>
+                              <Insets left="16.0" />
+                           </VBox.margin>
+                        </Button>
+                     </children>
+                  </VBox>
+                  <VBox alignment="TOP_RIGHT" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#btnToMenuClick" text="Главное меню">
+                           <VBox.margin>
+                              <Insets right="16.0" />
+                           </VBox.margin>
+                        </Button>
+                     </children>
+                  </VBox>
                </children>
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="544.0" minWidth="10.0" prefWidth="488.0" />
