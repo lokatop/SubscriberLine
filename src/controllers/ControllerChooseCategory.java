@@ -81,6 +81,8 @@ public class ControllerChooseCategory implements Initializable{
                 "Передовой пункт управления ГВ (с) на ТВД",
                 "Вспомогательный пункт управления ГВ (с) на ТВД"
         );
+
+        comboChooseCategory.getSelectionModel().select(0);
     }
 }
 

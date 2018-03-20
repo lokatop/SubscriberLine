@@ -45,7 +45,7 @@ public class ControllerInformationFrame implements Initializable{
     /**
      * Данные, в виде наблюдаемого списка адресатов.
      */
-    private ObservableList<InfoModel> infoData = FXCollections.observableArrayList();
+    public static ObservableList<InfoModel> infoData = FXCollections.observableArrayList();
 
     public void toShow(ActionEvent actionEvent) throws IOException {
 

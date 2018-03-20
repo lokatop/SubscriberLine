@@ -14,7 +14,7 @@
                <font>
                   <Font size="36.0" />
                </font></Label>
-            <GridPane alignment="CENTER" layoutX="-7.0" layoutY="8.0" prefHeight="720.0" prefWidth="960.0">
+            <GridPane alignment="CENTER" layoutX="-7.0" layoutY="8.0" minHeight="720.0" minWidth="960.0" prefHeight="720.0" prefWidth="960.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
                   <Label lineSpacing="6.0" prefHeight="200.0" prefWidth="445.0" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <font>
@@ -128,11 +128,15 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <Button mnemonicParsing="false" onAction="#btnBackClick" text="Назад">
-                     <GridPane.margin>
-                        <Insets left="14.0" />
-                     </GridPane.margin>
-                  </Button>
+                  <VBox prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#btnBackClick" text="Назад">
+                           <VBox.margin>
+                              <Insets left="16.0" top="16.0" />
+                           </VBox.margin>
+                        </Button>
+                     </children>
+                  </VBox>
                </children>
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="416.0" minWidth="10.0" prefWidth="416.0" />
