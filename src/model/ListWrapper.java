@@ -11,7 +11,7 @@ import javax.xml.bind.annotation.XmlSeeAlso;
  * Используется для сохранения списка адресатов в XML.
  */
 @XmlRootElement(name = "List")
-@XmlSeeAlso({InfoModel.class})
+@XmlSeeAlso({InfoModel.class, ChooseModel.class})
 public class ListWrapper {
 
     private List list;
