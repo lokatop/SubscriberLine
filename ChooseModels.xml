@@ -2,72 +2,68 @@
 <List>
     <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="chooseModel">
         <title>Командный пункт полка</title>
-        <type>Категории пункта управления</type>
+        <type>Пункты управления</type>
         <description></description>
     </item>
     <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="chooseModel">
         <title>Запасный командный пункт полка</title>
-        <type>Категории пункта управления</type>
+        <type>Пункты управления</type>
         <description></description>
     </item>
     <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="chooseModel">
         <title>Командный пункт бригады</title>
-        <type>Категории пункта управления</type>
+        <type>Пункты управления</type>
         <description></description>
     </item>
     <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="chooseModel">
         <title>Запасный командный пункт бригады</title>
-        <type>Категории пункта управления</type>
+        <type>Пункты управления</type>
         <description></description>
     </item>
     <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="chooseModel">
         <title>Передовой пункт управления бригады</title>
-        <type>Категории пункта управления</type>
+        <type>Пункты управления</type>
         <description></description>
     </item>
     <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="chooseModel">
         <title>Командный пункт армии</title>
-        <type>Категории пункта управления</type>
+        <type>Пункты управления</type>
         <description></description>
     </item>
     <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="chooseModel">
         <title>Запасный командный пункт армии</title>
-        <type>Категории пункта управления</type>
+        <type>Пункты управления</type>
         <description></description>
     </item>
     <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="chooseModel">
         <title>Передовой пункт управления армии</title>
-        <type>Категории пункта управления</type>
+        <type>Пункты управления</type>
         <description></description>
     </item>
     <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="chooseModel">
         <title>Вспомогательный пункт управления армии</title>
-        <type>Категории пункта управления</type>
+        <type>Пункты управления</type>
         <description></description>
     </item>
     <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="chooseModel">
         <title>Командный пункт ГВ (с) на ТВД</title>
-        <type>Категории пункта управления</type>
+        <type>Пункты управления</type>
         <description></description>
     </item>
+	
     <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="chooseModel">
         <title>Запасный командный пункт ГВ (с) на ТВД</title>
-        <type>Категории пункта управления</type>
+        <type>Пункты управления</type>
         <description></description>
     </item>
     <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="chooseModel">
         <title>Передовой пункт управления ГВ (с) на ТВД</title>
-        <type>Категории пункта управления</type>
+        <type>Пункты управления</type>
         <description></description>
     </item>
     <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="chooseModel">
         <title>Вспомогательный пункт управления ГВ (с) на ТВД</title>
-        <type>Категории пункта управления</type>
-        <description></description>
-    </item>
-    <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="chooseModel">
-        <title>dghb</title>
-        <type>Категории пункта управления</type>
+        <type>Пункты управления</type>
         <description></description>
     </item>
 </List>

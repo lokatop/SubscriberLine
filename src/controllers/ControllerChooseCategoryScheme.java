@@ -75,7 +75,7 @@ public class ControllerChooseCategoryScheme implements Initializable{
 
         if (!chooseData.isEmpty()) {
             // Добавляем фильтрованный по "типу" список в ComboBox
-            comboChooseCategory.getItems().addAll(filterChooseModelByType("Категории пункта управления"));
+            comboChooseCategory.getItems().addAll(filterChooseModelByType("Пункты управления"));
             // Выбираем первый эл-т для отображения
             comboChooseCategory.getSelectionModel().select(0);
         }
