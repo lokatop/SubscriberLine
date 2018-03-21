@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
@@ -21,6 +22,7 @@ import java.util.TreeSet;
 
 import static controllers.ControllerChooseCategoryScheme.arrayOfList;
 import static controllers.ControllerChooseCategoryScheme.chooseData;
+import static controllers.ControllerChooseCategoryScheme.filterChooseModelByType;
 
 public class ControllerDataCategory implements Initializable{
 
@@ -30,15 +32,21 @@ public class ControllerDataCategory implements Initializable{
     @FXML
     private TextField textField;
 
+    @FXML
+    private ComboBox comboChooseDate;
+
 
     @FXML
     public ListView<ChooseModel> listViewChooseDate;
     private ObservableList observableList = FXCollections.observableArrayList();
     private ArrayList arrayOfList;
 
-    public void buttonApply(){
+    public void buttonApply() throws IOException {
 
         XMLsaver.saveToXML(chooseData, "ChooseModels.xml");
+
+        VBox vBox = FXMLLoader.load(getClass().getResource("../fxml/choose_category_scheme.fxml"));
+        VboxChooseData.getChildren().setAll(vBox);
     }
 
     @FXML
@@ -78,8 +86,18 @@ public class ControllerDataCategory implements Initializable{
     @Override
     public void initialize(URL location, ResourceBundle resources)
     {
-        listViewChooseDate.setItems(chooseData);
+        comboChooseDate.getItems().addAll(filterChooseModelByType("types"));
+        comboChooseDate.getSelectionModel().select(0);
 
+        listViewChooseDate.setItems(filterChooseModelByType(comboChooseDate.getSelectionModel().getSelectedItem().toString()));
+
+
+
+    }
+
+    @FXML
+    public void comboChooseAction(){
+        listViewChooseDate.setItems(filterChooseModelByType(comboChooseDate.getSelectionModel().getSelectedItem().toString()));
 
     }
 

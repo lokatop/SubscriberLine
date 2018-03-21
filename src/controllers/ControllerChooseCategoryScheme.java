@@ -86,7 +86,7 @@ public class ControllerChooseCategoryScheme implements Initializable{
      * @param type
      * @return FilteredList<ChooseModel>
      */
-    private FilteredList<ChooseModel> filterChooseModelByType(String type){
+    public static FilteredList<ChooseModel> filterChooseModelByType(String type){
         return chooseData.filtered(new Predicate<ChooseModel>() {
             @Override
             public boolean test(ChooseModel chooseModel) {
