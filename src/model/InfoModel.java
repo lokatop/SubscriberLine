@@ -2,6 +2,8 @@ package model;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
@@ -11,16 +13,28 @@ import java.io.Externalizable;
 import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
+import java.util.function.Predicate;
 
 // определяем корневой элемент
 //@XmlRootElement(name = "InfoModel")
 // определяем последовательность тегов в XML
 @XmlType(propOrder = {"title", "type", "description", "imageURL"})
 public class InfoModel {
+    public static String FILENAME_INFOMODELS = "InfoModels.xml";
+
     private final StringProperty title;
     private final StringProperty type;
     private final StringProperty description;
     private final StringProperty imageURL; // TODO:Возможно, заменить на изображение
+
+    /**
+     * Список сокращений категоий
+     */
+    public static String[] CATEGORIES = {"DS","ZAS","ARM","CableAndOther","AOZU","ATZU"};
+    /**
+     * Список описаний категоий
+     */
+    public static String[] CATEGORIES_DESC = {"Телефонные аппараты ДС","Телефонные аппараты ЗАС","Автоматизированные рабочие места","Кабель применяемый для развертывания абонентской сети","Аппаратные тактического звена управления","Аппаратные оперативного звена управления"};
 
     /**
      * Конструктор по умолчанию.
@@ -96,5 +110,25 @@ public class InfoModel {
     @Override
     public String toString()  {
         return this.getTitle();
+    }
+
+
+    /**
+     * Фильтрует модели по типу
+     * @param type
+     * @param infoData
+     * @return FilteredList&lt;InfoModel&gt;
+     */
+    public static FilteredList<InfoModel> filterInfoModelByType(String type, ObservableList<InfoModel> infoData){
+        return infoData.filtered(new Predicate<InfoModel>() {
+            @Override
+            public boolean test(InfoModel infoModel) {
+                if (infoModel.getType().equals(type)) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        });
     }
 }

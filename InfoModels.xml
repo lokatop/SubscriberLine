@@ -9,7 +9,7 @@
     <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="infoModel">
         <title>ТА-88</title>
         <type>DS</type>
-        <description>Описание</description>
+        <description>&lt;html dir="ltr"&gt;&lt;head&gt;&lt;/head&gt;&lt;body contenteditable="true"&gt;&lt;p style="text-align: center;"&gt;&lt;font size="4" face="Times New Roman" color="#1a3399"&gt;Половой телефонный аппарат ТА-88&lt;/font&gt;&lt;/p&gt;&lt;p style="text-align: center;"&gt;&lt;font face="Times New Roman"&gt;предназначен для работы в полевых условиях&lt;/font&gt;&lt;/p&gt;&lt;p style="text-align: justify;"&gt;&lt;font face="Times New Roman"&gt;Питание аппарата в режиме МБ осуществляется от батареи, состоящей из б элементов А-316. При отсутствии батареи питания возможность ведения разговора обеспечивается индуктором нажимного типа. Одного нажатия на клавишу достаточно для ведения разговора в течении 5 сек.&lt;/font&gt;&lt;/p&gt;&lt;p style="text-align: justify;"&gt;&lt;font face="Times New Roman"&gt;ТА-88 обеспечивает качественный прием и передачу речи при экстремальном уровне шумов в месте приема. ТА-88 перекрывает затухание 44дБ. что гарантирует надежную связь:&lt;/font&gt;&lt;/p&gt;&lt;p style="text-align: justify;"&gt;&lt;ul&gt;&lt;li&gt;&lt;span style="font-family: 'Times New Roman';"&gt;по полевым кабельным линиям до 40 км;&lt;/span&gt;&lt;/li&gt;&lt;li&gt;&lt;span style="font-family: 'Times New Roman';"&gt;по воздушным линиям с диаметром проводов 3 мм до 100-200 км.&lt;/span&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/p&gt;&lt;p style="text-align: justify;"&gt;&lt;font face="Times New Roman"&gt;Наработка на отказ не менее 14000ч. Срок службы 20 лет.&lt;/font&gt;&lt;/p&gt;&lt;p style="text-align: justify;"&gt;&lt;font face="Times New Roman"&gt;Полевой переносной телефонный аппарат ТА-88 предназначен для работы по двухпроводным и четырех проводным линиям связи в режимах местной батареи (МБ) и центральной батареи (ЦБ). ТА-88 может применяться для дистанционного управления радиостанцией. Возможно параллельное включение в одну линию до четырех аппаратов.&lt;/font&gt;&lt;/p&gt;&lt;p style="text-align: justify;"&gt;&lt;font face="Times New Roman"&gt;Условия эксплуатации:&lt;/font&gt;&lt;/p&gt;&lt;p style="text-align: justify;"&gt;&lt;ul&gt;&lt;li&gt;&lt;span style="font-family: 'Times New Roman';"&gt;температура окружающего воздуха&lt;/span&gt;&lt;/li&gt;&lt;li&gt;&lt;span style="font-family: 'Times New Roman';"&gt;относительная влажность воздуха от минус 40&amp;nbsp;°С до плюс 55 °С&lt;/span&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/p&gt;&lt;p style="text-align: justify;"&gt;&lt;font face="Times New Roman"&gt;до 98% при температуре +35&amp;nbsp;&lt;/font&gt;&lt;span style="font-family: 'Times New Roman';"&gt;°&lt;/span&gt;&lt;span style="font-family: 'Times New Roman';"&gt;С&amp;nbsp;&lt;/span&gt;&lt;/p&gt;&lt;p style="text-align: justify;"&gt;&lt;span style="font-family: 'Times New Roman';"&gt;Масса аппарата не более Зкг (без батарей)&lt;/span&gt;&lt;/p&gt;&lt;p style="text-align: left;"&gt;&lt;font face="Times New Roman"&gt;Габариты, мм&lt;/font&gt;&lt;/p&gt;&lt;br&gt;&lt;/body&gt;&lt;/html&gt;</description>
         <imageURL>image.png</imageURL>
     </item>
     <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="infoModel">
@@ -21,18 +21,6 @@
     <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="infoModel">
         <title>Селенит</title>
         <type>DS</type>
-        <description>Описание</description>
-        <imageURL>image.png</imageURL>
-    </item>
-    <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="infoModel">
-        <title>П-170</title>
-        <type>ZAS</type>
-        <description>Описание</description>
-        <imageURL>image.png</imageURL>
-    </item>
-    <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="infoModel">
-        <title>П-171Д</title>
-        <type>ZAS</type>
         <description>Описание</description>
         <imageURL>image.png</imageURL>
     </item>

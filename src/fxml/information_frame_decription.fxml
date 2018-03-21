@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.web.*?>
 <?import javafx.scene.image.*?>
 <?import java.lang.*?>
 <?import javafx.geometry.*?>
@@ -27,11 +28,7 @@
                         <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
                      </GridPane.margin>
                      <children>
-                        <Label fx:id="lblDesc" alignment="TOP_CENTER" layoutX="237.0" layoutY="151.0" prefHeight="550.0" prefWidth="473.0" text="Описание" textAlignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                           <font>
-                              <Font name="Times New Roman" size="14.0" />
-                           </font>
-                        </Label>
+                        <WebView fx:id="lblDesc" layoutX="106.0" layoutY="109.0" prefHeight="550.0" prefWidth="448.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                      </children>
                   </AnchorPane>
                   <VBox prefHeight="200.0" prefWidth="100.0">

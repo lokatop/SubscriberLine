@@ -22,10 +22,13 @@
                   <VBox alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" prefHeight="420.0" prefWidth="338.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
                   <VBox alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <children>
-                        <Button mnemonicParsing="false" text="Применить изменения" />
+                        <Button mnemonicParsing="false" onAction="#info_model_add" text="Добавить" />
+                        <Button fx:id="__btn_edit" disable="true" layoutX="10.0" layoutY="195.0" mnemonicParsing="false" onAction="#info_model_edit" text="Изменить" />
+                        <Button fx:id="__btn_delete" disable="true" mnemonicParsing="false" onAction="#info_model_delete" text="Удалить" />
+                        <Button mnemonicParsing="false" onAction="#info_model_save" text="Применить изменения" />
                      </children>
                   </VBox>
-                  <ListView prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2" />
+                  <ListView fx:id="__list_of_items" onMouseClicked="#enable_btns" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2" />
                   <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnSpan="3" GridPane.rowIndex="1">
                      <children>
                         <Label text="Внести изменения в раздел" textAlignment="CENTER">
@@ -35,12 +38,11 @@
                         </Label>
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                            <children>
-                              <ComboBox prefWidth="250.0">
+                              <ComboBox fx:id="__list_of_categories" onHidden="#updateLists" prefWidth="250.0">
                                  <HBox.margin>
                                     <Insets />
                                  </HBox.margin>
                               </ComboBox>
-                              <Button mnemonicParsing="false" text="Изменить" />
                            </children>
                         </HBox>
                      </children>
