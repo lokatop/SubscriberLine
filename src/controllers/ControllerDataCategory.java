@@ -64,7 +64,7 @@ public class ControllerDataCategory implements Initializable{
     @FXML
     private void AddData(){
         if(textField.getText()!= null){
-            chooseData.add(new ChooseModel(textField.getText(),"Категории пункта управления",""));
+            chooseData.add(new ChooseModel(textField.getText(),comboChooseDate.getSelectionModel().getSelectedItem().toString(),""));
             textField.setText("");
         }
     }
