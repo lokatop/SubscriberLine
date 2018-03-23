@@ -1,0 +1,458 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<List>
+    <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="chooseModel">
+        <title>Командный пункт полка</title>
+        <type>Пункты управления</type>
+        <description></description>
+    </item>
+    <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="chooseModel">
+        <title>Запасный командный пункт полка</title>
+        <type>Пункты управления</type>
+        <description></description>
+    </item>
+    <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="chooseModel">
+        <title>Командный пункт бригады</title>
+        <type>Пункты управления</type>
+        <description></description>
+    </item>
+    <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="chooseModel">
+        <title>Запасный командный пункт бригады</title>
+        <type>Пункты управления</type>
+        <description></description>
+    </item>
+    <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="chooseModel">
+        <title>Передовой пункт управления бригады</title>
+        <type>Пункты управления</type>
+        <description></description>
+    </item>
+    <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="chooseModel">
+        <title>Командный пункт армии</title>
+        <type>Пункты управления</type>
+        <description></description>
+    </item>
+    <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="chooseModel">
+        <title>Запасный командный пункт армии</title>
+        <type>Пункты управления</type>
+        <description></description>
+    </item>
+    <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="chooseModel">
+        <title>Передовой пункт управления армии</title>
+        <type>Пункты управления</type>
+        <description></description>
+    </item>
+    <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="chooseModel">
+        <title>Вспомогательный пункт управления армии</title>
+        <type>Пункты управления</type>
+        <description></description>
+    </item>
+    <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="chooseModel">
+        <title>Командный пункт ГВ (с) на ТВД</title>
+        <type>Пункты управления</type>
+        <description></description>
+    </item>
+    <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="chooseModel">
+        <title>Запасный командный пункт ГВ (с) на ТВД</title>
+        <type>Пункты управления</type>
+        <description></description>
+    </item>
+    <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="chooseModel">
+        <title>Передовой пункт управления ГВ (с) на ТВД</title>
+        <type>Пункты управления</type>
+        <description></description>
+    </item>
+    <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="chooseModel">
+        <title>Вспомогательный пункт управления ГВ (с) на ТВД</title>
+        <type>Пункты управления</type>
+        <description></description>
+    </item>
+    <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="chooseModel">
+        <title>Командир полка</title>
+        <type>Должностные лица полка</type>
+        <description></description>
+    </item>
+    <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="chooseModel">
+        <title>Заместитель командира полка</title>
+        <type>Должностные лица полка</type>
+        <description></description>
+    </item>
+    <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="chooseModel">
+        <title>Начальник штаба полка</title>
+        <type>Должностные лица полка</type>
+        <description></description>
+    </item>
+    <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="chooseModel">
+        <title>Заместитель начальника штаба полка</title>
+        <type>Должностные лица полка</type>
+        <description></description>
+    </item>
+    <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="chooseModel">
+        <title>Начальник артиллерии полка</title>
+        <type>Должностные лица полка</type>
+        <description></description>
+    </item>
+    <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="chooseModel">
+        <title>Начальник ПВО полка</title>
+        <type>Должностные лица полка</type>
+        <description></description>
+    </item>
+    <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="chooseModel">
+        <title>Начальник разведки полка</title>
+        <type>Должностные лица полка</type>
+        <description></description>
+    </item>
+    <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="chooseModel">
+        <title>Начальник связи полка</title>
+        <type>Должностные лица полка</type>
+        <description></description>
+    </item>
+    <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="chooseModel">
+        <title>Начальник инженерной службы полка</title>
+        <type>Должностные лица полка</type>
+        <description></description>
+    </item>
+    <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="chooseModel">
+        <title>Начальник службы РХБЗ полка </title>
+        <type>Должностные лица полка</type>
+        <description></description>
+    </item>
+    <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="chooseModel">
+        <title>Заместитель командира полка по вооружению</title>
+        <type>Должностные лица полка</type>
+        <description></description>
+    </item>
+    <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="chooseModel">
+        <title>Начальник службы РАВ полка</title>
+        <type>Должностные лица полка</type>
+        <description></description>
+    </item>
+    <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="chooseModel">
+        <title>Начальник автомобильной службы полка</title>
+        <type>Должностные лица полка</type>
+        <description></description>
+    </item>
+    <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="chooseModel">
+        <title>Начальник бронетанковой службы полка</title>
+        <type>Должностные лица полка</type>
+        <description></description>
+    </item>
+    <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="chooseModel">
+        <title>Заместитель командира полка по тылу</title>
+        <type>Должностные лица полка</type>
+        <description></description>
+    </item>
+    <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="chooseModel">
+        <title>Начальник службы ГСМ полка</title>
+        <type>Должностные лица полка</type>
+        <description></description>
+    </item>
+    <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="chooseModel">
+        <title>Начальник продовольственной службы полка</title>
+        <type>Должностные лица полка</type>
+        <description></description>
+    </item>
+    <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="chooseModel">
+        <title>Начальник вещевой службы полка</title>
+        <type>Должностные лица полка</type>
+        <description></description>
+    </item>
+    <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="chooseModel">
+        <title>Командир бригады</title>
+        <type>Должностные лица бригады</type>
+        <description></description>
+    </item>
+    <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="chooseModel">
+        <title>Заместитель командира бригады</title>
+        <type>Должностные лица бригады</type>
+        <description></description>
+    </item>
+    <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="chooseModel">
+        <title>Начальник штаба бригады</title>
+        <type>Должностные лица бригады</type>
+        <description></description>
+    </item>
+    <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="chooseModel">
+        <title>Начальник оперативного отделения бригады</title>
+        <type>Должностные лица бригады</type>
+        <description></description>
+    </item>
+    <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="chooseModel">
+        <title>Заместитель начальника оперативного отделения бригады</title>
+        <type>Должностные лица бригады</type>
+        <description></description>
+    </item>
+    <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="chooseModel">
+        <title>Старший офицер оперативного отделения бригады</title>
+        <type>Должностные лица бригады</type>
+        <description></description>
+    </item>
+    <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="chooseModel">
+        <title>Офицер оперативного отделения бригады</title>
+        <type>Должностные лица бригады</type>
+        <description></description>
+    </item>
+    <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="chooseModel">
+        <title>Начальник артиллерии бригады</title>
+        <type>Должностные лица бригады</type>
+        <description></description>
+    </item>
+    <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="chooseModel">
+        <title>Начальник ПВО бригады</title>
+        <type>Должностные лица бригады</type>
+        <description></description>
+    </item>
+    <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="chooseModel">
+        <title>Начальник разведки бригады</title>
+        <type>Должностные лица бригады</type>
+        <description></description>
+    </item>
+    <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="chooseModel">
+        <title>Начальник связи бригады</title>
+        <type>Должностные лица бригады</type>
+        <description></description>
+    </item>
+    <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="chooseModel">
+        <title>Начальник инженерной службы  бригады</title>
+        <type>Должностные лица бригады</type>
+        <description></description>
+    </item>
+    <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="chooseModel">
+        <title>Начальник службы РХБЗ  бригады</title>
+        <type>Должностные лица бригады</type>
+        <description></description>
+    </item>
+    <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="chooseModel">
+        <title>Заместитель командира бригады по вооружению</title>
+        <type>Должностные лица бригады</type>
+        <description></description>
+    </item>
+    <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="chooseModel">
+        <title>Начальник службы РАВ  бригады</title>
+        <type>Должностные лица бригады</type>
+        <description></description>
+    </item>
+    <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="chooseModel">
+        <title>Начальник автомобильной службы  бригады</title>
+        <type>Должностные лица бригады</type>
+        <description></description>
+    </item>
+    <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="chooseModel">
+        <title>Начальник бронетанковой службы  бригады</title>
+        <type>Должностные лица бригады</type>
+        <description></description>
+    </item>
+    <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="chooseModel">
+        <title>Заместитель командира  бригады  по тылу</title>
+        <type>Должностные лица бригады</type>
+        <description></description>
+    </item>
+    <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="chooseModel">
+        <title>Начальник службы ГСМ  бригады</title>
+        <type>Должностные лица бригады</type>
+        <description></description>
+    </item>
+    <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="chooseModel">
+        <title>Начальник продовольственной службы  бригады</title>
+        <type>Должностные лица бригады</type>
+        <description></description>
+    </item>
+    <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="chooseModel">
+        <title>Начальник вещевой службы  бригады</title>
+        <type>Должностные лица бригады</type>
+        <description></description>
+    </item>
+    <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="chooseModel">
+        <title>Командир полка</title>
+        <type>Должностные лица армии</type>
+        <description></description>
+    </item>
+    <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="chooseModel">
+        <title>Заместитель командира полка</title>
+        <type>Должностные лица армии</type>
+        <description></description>
+    </item>
+    <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="chooseModel">
+        <title>Начальник штаба полка</title>
+        <type>Должностные лица армии</type>
+        <description></description>
+    </item>
+    <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="chooseModel">
+        <title>Начальник артиллерии полка</title>
+        <type>Должностные лица армии</type>
+        <description></description>
+    </item>
+    <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="chooseModel">
+        <title>Начальник ПВО полка</title>
+        <type>Должностные лица армии</type>
+        <description></description>
+    </item>
+    <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="chooseModel">
+        <title>Начальник разведки полка</title>
+        <type>Должностные лица армии</type>
+        <description></description>
+    </item>
+    <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="chooseModel">
+        <title>Начальник связи полка</title>
+        <type>Должностные лица армии</type>
+        <description></description>
+    </item>
+    <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="chooseModel">
+        <title>Начальник инженерной службы полка</title>
+        <type>Должностные лица армии</type>
+        <description></description>
+    </item>
+    <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="chooseModel">
+        <title>Начальник службы РХБЗ полка </title>
+        <type>Должностные лица армии</type>
+        <description></description>
+    </item>
+    <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="chooseModel">
+        <title>Заместитель командира полка по вооружению</title>
+        <type>Должностные лица армии</type>
+        <description></description>
+    </item>
+    <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="chooseModel">
+        <title>Начальник службы РАВ полка</title>
+        <type>Должностные лица армии</type>
+        <description></description>
+    </item>
+    <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="chooseModel">
+        <title>Начальник автомобильной службы полка</title>
+        <type>Должностные лица армии</type>
+        <description></description>
+    </item>
+    <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="chooseModel">
+        <title>Начальник бронетанковой службы полка</title>
+        <type>Должностные лица армии</type>
+        <description></description>
+    </item>
+    <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="chooseModel">
+        <title>Заместитель командира полка по тылу</title>
+        <type>Должностные лица армии</type>
+        <description></description>
+    </item>
+    <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="chooseModel">
+        <title>Начальник службы ГСМ полка</title>
+        <type>Должностные лица армии</type>
+        <description></description>
+    </item>
+    <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="chooseModel">
+        <title>Начальник продовольственной службы полка</title>
+        <type>Должностные лица армии</type>
+        <description></description>
+    </item>
+    <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="chooseModel">
+        <title>Начальник вещевой службы полка</title>
+        <type>Должностные лица армии</type>
+        <description></description>
+    </item>
+    <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="chooseModel">
+        <title>Командир полка</title>
+        <type>Должностные лица ГВ(с) на ТВД</type>
+        <description></description>
+    </item>
+    <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="chooseModel">
+        <title>Заместитель командира полка</title>
+        <type>Должностные лица ГВ(с) на ТВД</type>
+        <description></description>
+    </item>
+    <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="chooseModel">
+        <title>Начальник штаба полка</title>
+        <type>Должностные лица ГВ(с) на ТВД</type>
+        <description></description>
+    </item>
+    <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="chooseModel">
+        <title>Заместитель начальника штаба полка</title>
+        <type>Должностные лица ГВ(с) на ТВД</type>
+        <description></description>
+    </item>
+    <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="chooseModel">
+        <title>Начальник артиллерии полка</title>
+        <type>Должностные лица ГВ(с) на ТВД</type>
+        <description></description>
+    </item>
+    <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="chooseModel">
+        <title>Начальник ПВО полка</title>
+        <type>Должностные лица ГВ(с) на ТВД</type>
+        <description></description>
+    </item>
+    <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="chooseModel">
+        <title>Начальник разведки полка</title>
+        <type>Должностные лица ГВ(с) на ТВД</type>
+        <description></description>
+    </item>
+    <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="chooseModel">
+        <title>Начальник связи полка</title>
+        <type>Должностные лица ГВ(с) на ТВД</type>
+        <description></description>
+    </item>
+    <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="chooseModel">
+        <title>Начальник инженерной службы полка</title>
+        <type>Должностные лица ГВ(с) на ТВД</type>
+        <description></description>
+    </item>
+    <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="chooseModel">
+        <title>Начальник службы РХБЗ полка </title>
+        <type>Должностные лица ГВ(с) на ТВД</type>
+        <description></description>
+    </item>
+    <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="chooseModel">
+        <title>Заместитель командира полка по вооружению</title>
+        <type>Должностные лица ГВ(с) на ТВД</type>
+        <description></description>
+    </item>
+    <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="chooseModel">
+        <title>Начальник службы РАВ полка</title>
+        <type>Должностные лица ГВ(с) на ТВД</type>
+        <description></description>
+    </item>
+    <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="chooseModel">
+        <title>Начальник автомобильной службы полка</title>
+        <type>Должностные лица ГВ(с) на ТВД</type>
+        <description></description>
+    </item>
+    <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="chooseModel">
+        <title>Начальник бронетанковой службы полка</title>
+        <type>Должностные лица ГВ(с) на ТВД</type>
+        <description></description>
+    </item>
+    <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="chooseModel">
+        <title>Заместитель командира полка по тылу</title>
+        <type>Должностные лица ГВ(с) на ТВД</type>
+        <description></description>
+    </item>
+    <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="chooseModel">
+        <title>Начальник службы ГСМ полка</title>
+        <type>Должностные лица ГВ(с) на ТВД</type>
+        <description></description>
+    </item>
+    <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="chooseModel">
+        <title>Начальник продовольственной службы полка</title>
+        <type>Должностные лица ГВ(с) на ТВД</type>
+        <description></description>
+    </item>
+    <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="chooseModel">
+        <title>Начальник вещевой службы полка</title>
+        <type>Должностные лица ГВ(с) на ТВД</type>
+        <description></description>
+    </item>
+    <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="chooseModel">
+        <title>Пункты управления</title>
+        <type>types</type>
+        <description></description>
+    </item>
+    <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="chooseModel">
+        <title>Должностные лица полка</title>
+        <type>types</type>
+        <description></description>
+    </item>
+    <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="chooseModel">
+        <title>Должностные лица бригады</title>
+        <type>types</type>
+        <description></description>
+    </item>
+    <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="chooseModel">
+        <title>Должностные лица армии</title>
+        <type>types</type>
+        <description></description>
+    </item>
+</List>
