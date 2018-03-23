@@ -89,8 +89,6 @@ public class ControllerChooseCategoryOfOfficial implements Initializable{
 
         ObservableList<TableViewChooseCategory> list = getTableViewChooseCategoryList();
         tableView.setItems(list);
-
-        tableView.getColumns().addAll(tableColumn1, tableColumn2);
     }
 
     private ObservableList<TableViewChooseCategory> getTableViewChooseCategoryList() {
