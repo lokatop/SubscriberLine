@@ -5,7 +5,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TreeView;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
+import javafx.scene.web.WebView;
 import model.InfoModel;
 
 import java.awt.*;
@@ -20,7 +23,8 @@ public class ControllerInformationDescription {
     public VBox VboxDesc;
 
     public Label lblLabel;
-    public Label lblDesc;
+    public ImageView imageDescr;
+    public WebView lblDesc;
 
     private InfoModel infoModel;
 
@@ -28,9 +32,11 @@ public class ControllerInformationDescription {
         this.infoModel = model;
 
         // Заголовок
-        lblLabel.setText(this.infoModel.getTitle());
+        lblLabel.setText(infoModel.getTitle());
         // Описание
-        lblDesc.setText(this.infoModel.getDescription());
+        lblDesc.getEngine().loadContent(infoModel.getDescription());
+        // Изображение
+        imageDescr.setImage(infoModel.getImage());
     }
 
     @FXML

@@ -60,7 +60,7 @@
                               </Label>
                               <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                                  <children>
-                                    <ComboBox prefWidth="230.0" />
+                                    <ComboBox fx:id="list_for_edit" prefWidth="230.0" />
                                     <Button mnemonicParsing="false" onAction="#change" text="Изменить" />
                                  </children>
                               </HBox>
