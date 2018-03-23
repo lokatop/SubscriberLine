@@ -3,14 +3,24 @@ package model;
 import com.sun.org.apache.xerces.internal.xs.datatypes.ObjectList;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.embed.swing.SwingFXUtils;
+import javafx.scene.image.Image;
 
+import javax.imageio.ImageIO;
 import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.XmlSeeAlso;
+import javax.xml.bind.annotation.adapters.XmlAdapter;
+import javax.xml.transform.Result;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 
 @XmlSeeAlso(InfoModel.class)
@@ -43,6 +53,7 @@ public class XMLsaver {
 
             JAXBContext context = JAXBContext.newInstance(ListWrapper.class);
             Marshaller m = context.createMarshaller();
+            m.setAdapter(new ImageAdapter());
             // устанавливаем флаг для читабельного вывода XML в JAXB
             m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 
@@ -87,7 +98,39 @@ public class XMLsaver {
 
             return result.getList();
         } catch (Exception e) { // catches ANY exception
-            return null;
+            return FXCollections.emptyObservableList();
+        }
+    }
+
+
+    public static class ImageAdapter extends XmlAdapter<String, Image> {
+
+        @Override
+        public Image unmarshal(String data) throws Exception {
+
+            if (data == null || data.isEmpty()){
+                return null;
+            } else {
+                Image img;
+                try {
+                    img = new Image(new ByteArrayInputStream(Base64.getDecoder().decode(data)));
+                } catch (Exception e){
+                    img = new Image("resource/noimage.png");
+                }
+                return img;
+            }
+        }
+
+        @Override
+        public String marshal(Image v) throws Exception {
+            if (v == null) {
+                return "";
+            }
+            BufferedImage bImg = SwingFXUtils.fromFXImage(v, null);
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            ImageIO.write(bImg, "png", bos);
+
+            return Base64.getEncoder().encodeToString(bos.toByteArray());
         }
     }
 }

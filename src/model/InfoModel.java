@@ -1,31 +1,29 @@
 package model;
 
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.scene.image.Image;
 
-import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
-import java.io.Externalizable;
-import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectOutput;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.util.function.Predicate;
 
 // определяем корневой элемент
 //@XmlRootElement(name = "InfoModel")
 // определяем последовательность тегов в XML
-@XmlType(propOrder = {"title", "type", "description", "imageURL"})
+@XmlType(propOrder = {"title", "type", "description", "image"})
 public class InfoModel {
     public static String FILENAME_INFOMODELS = "InfoModels.xml";
 
     private final StringProperty title;
     private final StringProperty type;
     private final StringProperty description;
-    private final StringProperty imageURL; // TODO:Возможно, заменить на изображение
+    private final ObjectProperty<Image> image; // TODO:Возможно, заменить на изображение
 
     /**
      * Список сокращений категоий
@@ -47,11 +45,11 @@ public class InfoModel {
      * Конструктор с некоторыми начальными данными.
      *
      */
-    public InfoModel(String title, String type, String description, String imageURL) {
+    public InfoModel(String title, String type, String description, Image image) {
         this.title = new SimpleStringProperty(title);
         this.type = new SimpleStringProperty(type);
         this.description = new SimpleStringProperty(description);
-        this.imageURL = new SimpleStringProperty(imageURL);
+        this.image = new SimpleObjectProperty<Image>(image);
     }
 
     @XmlElement
@@ -93,17 +91,17 @@ public class InfoModel {
         return description;
     }
 
-    @XmlElement
-    public String getImageURL() {
-        return imageURL.get().toString();
+    @XmlJavaTypeAdapter(XMLsaver.ImageAdapter.class)
+    public Image getImage() {
+        return image.get();
     }
 
-    public void setImageURL(String imageURL) {
-        this.imageURL.set(imageURL);
+    public void setImage(Image image) {
+        this.image.set(image);
     }
 
-    public StringProperty imageURLProperty() {
-        return imageURL;
+    public ObjectProperty<Image> imageProperty() {
+        return image;
     }
 
 // Для ComboBox'ов (Добавляем список моделей, получаем список заголовков)

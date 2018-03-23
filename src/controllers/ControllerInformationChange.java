@@ -1,6 +1,7 @@
 package controllers;
 
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -9,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
@@ -46,8 +48,6 @@ public class ControllerInformationChange{
      */
     private ObservableList<InfoModel> changingList = FXCollections.observableArrayList();
 
-
-
     @FXML
     private void btnBackClick() throws IOException {
         VBox vBox = FXMLLoader.load(getClass().getResource("../fxml/information_frame_first.fxml"));
@@ -66,14 +66,21 @@ public class ControllerInformationChange{
         __list_of_categories.getSelectionModel().select(CATEGORIES_DESC[changingTypeId]);
 
         updateLists();
-        disable_bbuttons();
-    }
 
+        __list_of_items.getItems().addListener(new ListChangeListener() {
+            @Override
+            public void onChanged(Change c) {
+                if (__list_of_items.getSelectionModel().isEmpty())
+                    disable_buttons();
+                else
+                    enable_buttons();
+            }
+        });
+    }
 
     public void info_model_add(ActionEvent actionEvent) {
         showAddDialog();
         updateLists();
-        disable_bbuttons();
     }
 
     public void info_model_save(ActionEvent actionEvent) throws IOException {
@@ -89,7 +96,6 @@ public class ControllerInformationChange{
     public void info_model_edit(ActionEvent actionEvent) {
         showEditDialog();
         updateLists();
-        disable_bbuttons();
     }
 
     public void enable_btns(MouseEvent mouseEvent) {
@@ -97,17 +103,13 @@ public class ControllerInformationChange{
     }
 
     private void enable_buttons() {
-        if(!__list_of_items.getSelectionModel().isEmpty()) {
-            __btn_edit.setDisable(false);
-            __btn_delete.setDisable(false);
-        }
+        __btn_edit.setDisable(false);
+        __btn_delete.setDisable(false);
     }
 
-    private void disable_bbuttons() {
-        if(!__list_of_items.getSelectionModel().isEmpty()) {
-            __btn_edit.setDisable(true);
-            __btn_delete.setDisable(true);
-        }
+    private void disable_buttons() {
+        __btn_edit.setDisable(true);
+        __btn_delete.setDisable(true);
     }
 
     public boolean showEditDialog() {
@@ -140,7 +142,6 @@ public class ControllerInformationChange{
             // Отображаем диалоговое окно и ждём, пока пользователь его не закроет
             dialogStage.showAndWait();
 
-
             return controller.isOkClicked();
         } catch (IOException e) {
             e.printStackTrace();
@@ -171,7 +172,7 @@ public class ControllerInformationChange{
             controller.setDialogStage(dialogStage);
 
             // Отправляем модель
-            InfoModel model = new InfoModel("",CATEGORIES[changingTypeId],"","");
+            InfoModel model = new InfoModel("",CATEGORIES[changingTypeId],"",new Image("resource/noimage.png"));
 
             controller.setInfoModel(model);
 
@@ -213,5 +214,6 @@ public class ControllerInformationChange{
         infoData.remove(changingList.get(id));
 
         updateLists();
+
     }
 }

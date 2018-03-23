@@ -8,6 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import model.InfoModel;
@@ -111,35 +112,36 @@ public class ControllerInformationFrame implements Initializable {
 
         if (infoData.isEmpty()) {
             // В качестве образца добавляем некоторые данные
-            infoData.add(new InfoModel("ТА-57", "DS", "Описание", "image.png"));
-            infoData.add(new InfoModel("ТА-88", "DS", "Описание", "image.png"));
-            infoData.add(new InfoModel("П-380 ТА", "DS", "Описание", "image.png"));
-            infoData.add(new InfoModel("Селенит", "DS", "Описание", "image.png"));
+            Image noImage = new Image("resource/noimage.png");
+            infoData.add(new InfoModel("ТА-57", "DS", "Описание", noImage));
+            infoData.add(new InfoModel("ТА-88", "DS", "Описание", noImage));
+            infoData.add(new InfoModel("П-380 ТА", "DS", "Описание", noImage));
+            infoData.add(new InfoModel("Селенит", "DS", "Описание", noImage));
 
-            infoData.add(new InfoModel("П-170", "ZAS", "Описание", "image.png"));
-            infoData.add(new InfoModel("П-171Д", "ZAS", "Описание", "image.png"));
-            infoData.add(new InfoModel("АТ-3031", "ZAS", "Описание", "image.png"));
-            infoData.add(new InfoModel("Селенит", "ZAS", "Описание", "image.png"));
+            infoData.add(new InfoModel("П-170", "ZAS", "Описание", noImage));
+            infoData.add(new InfoModel("П-171Д", "ZAS", "Описание", noImage));
+            infoData.add(new InfoModel("АТ-3031", "ZAS", "Описание", noImage));
+            infoData.add(new InfoModel("Селенит", "ZAS", "Описание", noImage));
 
-            infoData.add(new InfoModel("Рамек-2", "ARM", "Описание", "image.png"));
+            infoData.add(new InfoModel("Рамек-2", "ARM", "Описание", noImage));
 
-            infoData.add(new InfoModel("П-274М", "CableAndOther", "Описание", "image.png"));
-            infoData.add(new InfoModel("П-269 4х2+2х4", "CableAndOther", "Описание", "image.png"));
-            infoData.add(new InfoModel("ПРК 5х2", "CableAndOther", "Описание", "image.png"));
-            infoData.add(new InfoModel("ПТРК 5х2", "CableAndOther", "Описание", "image.png"));
-            infoData.add(new InfoModel("Витая пара", "CableAndOther", "Описание", "image.png"));
-            infoData.add(new InfoModel("ВП", "CableAndOther", "Описание", "image.png"));
-            infoData.add(new InfoModel("РМ2", "CableAndOther", "Описание", "image.png"));
+            infoData.add(new InfoModel("П-274М", "CableAndOther", "Описание", noImage));
+            infoData.add(new InfoModel("П-269 4х2+2х4", "CableAndOther", "Описание", noImage));
+            infoData.add(new InfoModel("ПРК 5х2", "CableAndOther", "Описание", noImage));
+            infoData.add(new InfoModel("ПТРК 5х2", "CableAndOther", "Описание", noImage));
+            infoData.add(new InfoModel("Витая пара", "CableAndOther", "Описание", noImage));
+            infoData.add(new InfoModel("ВП", "CableAndOther", "Описание", noImage));
+            infoData.add(new InfoModel("РМ2", "CableAndOther", "Описание", noImage));
 
-            infoData.add(new InfoModel("П-240И", "AOZU", "Описание", "image.png"));
-            infoData.add(new InfoModel("МП-1И", "AOZU", "Описание", "image.png"));
-            infoData.add(new InfoModel("МП-2И", "AOZU", "Описание", "image.png"));
+            infoData.add(new InfoModel("П-240И", "AOZU", "Описание", noImage));
+            infoData.add(new InfoModel("МП-1И", "AOZU", "Описание", noImage));
+            infoData.add(new InfoModel("МП-2И", "AOZU", "Описание", noImage));
 
-            infoData.add(new InfoModel("П-260-О", "ATZU", "Описание", "image.png"));
-            infoData.add(new InfoModel("П-260-У", "ATZU", "Описание", "image.png"));
-            infoData.add(new InfoModel("П-260-Т", "ATZU", "Описание", "image.png"));
-            infoData.add(new InfoModel("П-244И", "ATZU", "Описание", "image.png"));
-            infoData.add(new InfoModel("П-244И-4", "ATZU", "Описание", "image.png"));
+            infoData.add(new InfoModel("П-260-О", "ATZU", "Описание", noImage));
+            infoData.add(new InfoModel("П-260-У", "ATZU", "Описание", noImage));
+            infoData.add(new InfoModel("П-260-Т", "ATZU", "Описание", noImage));
+            infoData.add(new InfoModel("П-244И", "ATZU", "Описание", noImage));
+            infoData.add(new InfoModel("П-244И-4", "ATZU", "Описание", noImage));
         }
 
         // Добавляем фильтрованный по "типу" список в ComboBox

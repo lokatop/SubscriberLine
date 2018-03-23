@@ -32,9 +32,11 @@ public class ControllerInformationDescription {
         this.infoModel = model;
 
         // Заголовок
-        lblLabel.setText(this.infoModel.getTitle());
+        lblLabel.setText(infoModel.getTitle());
         // Описание
-        lblDesc.getEngine().loadContent(this.infoModel.getDescription());
+        lblDesc.getEngine().loadContent(infoModel.getDescription());
+        // Изображение
+        imageDescr.setImage(infoModel.getImage());
     }
 
     @FXML
