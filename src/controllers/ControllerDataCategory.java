@@ -35,6 +35,7 @@ public class ControllerDataCategory implements Initializable{
     @FXML
     private ComboBox comboChooseDate;
 
+    public String description = "";
 
     @FXML
     public ListView<ChooseModel> listViewChooseDate;
@@ -66,7 +67,7 @@ public class ControllerDataCategory implements Initializable{
     @FXML
     private void AddData(){
         if(textField.getText()!= null){
-            chooseData.add(new ChooseModel(textField.getText(),comboChooseDate.getSelectionModel().getSelectedItem().toString(),""));
+            chooseData.add(new ChooseModel(textField.getText(),comboChooseDate.getSelectionModel().getSelectedItem().toString(),description));
             textField.setText("");
         }
     }
@@ -100,8 +101,12 @@ public class ControllerDataCategory implements Initializable{
     @FXML
     public void comboChooseAction(){
         listViewChooseDate.setItems(filterChooseModelByType(comboChooseDate.getSelectionModel().getSelectedItem().toString()));
-
     }
 
+    public void setSelectToComboBox(String s){
+        comboChooseDate.getSelectionModel().select(1);
+        listViewChooseDate.setItems(filterChooseModelByType(comboChooseDate.getSelectionModel().getSelectedItem().toString()));
+        this.description = s;
+    }
 
 }

@@ -25,6 +25,8 @@ public class ControllerChooseCategoryScheme implements Initializable{
     public VBox VboxChooseSheme;
     @FXML
     public ComboBox comboChooseCategory;
+    @FXML
+    public ComboBox ComboBoxPart;
 
     public static ArrayList arrayOfList = new ArrayList();
 
@@ -45,7 +47,7 @@ public class ControllerChooseCategoryScheme implements Initializable{
 
             // Передаём выбранную модель в контроллер фрейма Описание
             ControllerChooseCategoryOfOfficial controller = loader.getController();
-            controller.setChooseCategory(comboChooseCategory.getSelectionModel().getSelectedItem().toString());
+            controller.setChooseCategory(comboChooseCategory.getSelectionModel().getSelectedItem().toString(),ComboBoxPart.getSelectionModel().getSelectedItem().toString());
 
             // Оотображаем
             VboxChooseSheme.getChildren().setAll(vBox);
@@ -78,6 +80,9 @@ public class ControllerChooseCategoryScheme implements Initializable{
             comboChooseCategory.getItems().addAll(filterChooseModelByType("Пункты управления"));
             // Выбираем первый эл-т для отображения
             comboChooseCategory.getSelectionModel().select(0);
+
+            ComboBoxPart.getItems().addAll(filterChooseModelByType("Вид воинской части"));
+            ComboBoxPart.getSelectionModel().select(0);
         }
     }
 
@@ -91,6 +96,24 @@ public class ControllerChooseCategoryScheme implements Initializable{
             @Override
             public boolean test(ChooseModel chooseModel) {
                 if (chooseModel.getType().equals(type)) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        });
+    }
+
+    /**
+     * Фильтрует модели по типу
+     * @param description
+     * @return FilteredList<ChooseModel>
+     */
+    public static FilteredList<ChooseModel> filterChooseModelByDescription(String description){
+        return chooseData.filtered(new Predicate<ChooseModel>() {
+            @Override
+            public boolean test(ChooseModel chooseModel) {
+                if (chooseModel.getDescription().equals(description)) {
                     return true;
                 } else {
                     return false;
