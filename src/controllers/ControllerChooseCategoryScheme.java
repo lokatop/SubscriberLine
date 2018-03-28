@@ -9,6 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.VBox;
+import model.InfoModel;
 import model.XMLsaver;
 import model.ChooseModel;
 
@@ -18,6 +19,9 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.TreeSet;
 import java.util.function.Predicate;
+
+import static controllers.ControllerInformationFrame.infoData;
+import static model.InfoModel.filterInfoModelByType;
 
 public class ControllerChooseCategoryScheme implements Initializable{
 
@@ -115,6 +119,19 @@ public class ControllerChooseCategoryScheme implements Initializable{
             public boolean test(ChooseModel chooseModel) {
                 if (chooseModel.getDescription().equals(description)) {
                     return true;
+                } else {
+                    return false;
+                }
+            }
+        });
+    }
+    public static FilteredList<InfoModel> filterInfoModelByTypeSecond(String type){
+        return infoData.filtered(new Predicate<InfoModel>() {
+            @Override
+            public boolean test(InfoModel infoModel) {
+                if (infoModel.getType().equals(type)) {
+                    return true;
+
                 } else {
                     return false;
                 }

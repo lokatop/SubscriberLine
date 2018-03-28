@@ -12,6 +12,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import model.ChooseModel;
+import model.TableViewChooseCategory;
 import model.XMLsaver;
 
 import java.io.IOException;
@@ -39,7 +40,6 @@ public class ControllerDataCategory implements Initializable{
 
     @FXML
     public ListView<ChooseModel> listViewChooseDate;
-    private ObservableList observableList = FXCollections.observableArrayList();
     private ArrayList arrayOfList;
 
     public void buttonApply() throws IOException {
@@ -48,8 +48,6 @@ public class ControllerDataCategory implements Initializable{
 
         VBox vBox = FXMLLoader.load(getClass().getResource("../fxml/choose_category_scheme.fxml"));
         VboxChooseData.getChildren().setAll(vBox);
-
-
     }
 
     @FXML
@@ -75,16 +73,7 @@ public class ControllerDataCategory implements Initializable{
     @FXML
     private void DeleteData(){
         chooseData.remove(listViewChooseDate.getSelectionModel().getSelectedItem());
-
     }
-/*
-    public void setSetOfList(ArrayList arrayOfList){
-        this.arrayOfList = arrayOfList;
-
-        observableList.addAll(arrayOfList);
-        listViewChooseDate.setItems(observableList);
-    }
-*/
 
     @Override
     public void initialize(URL location, ResourceBundle resources)
@@ -93,9 +82,6 @@ public class ControllerDataCategory implements Initializable{
         comboChooseDate.getSelectionModel().select(0);
 
         listViewChooseDate.setItems(filterChooseModelByType(comboChooseDate.getSelectionModel().getSelectedItem().toString()));
-
-
-
     }
 
     @FXML

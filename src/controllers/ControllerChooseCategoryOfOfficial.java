@@ -24,6 +24,7 @@ import model.TableViewChooseCategory;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.ResourceBundle;
 
 import static controllers.ControllerChooseCategoryScheme.filterChooseModelByDescription;
@@ -45,7 +46,11 @@ public class ControllerChooseCategoryOfOfficial implements Initializable{
     private static String nameForFindFromXml;
     private static String viewForFindFromXml;
     private FilteredList<ChooseModel> list2;
-    ObservableList<TableViewChooseCategory> listSetTable;
+    private static ObservableList<TableViewChooseCategory> listSetTable;
+
+    private LinkedHashSet arraySetOfficial = new LinkedHashSet();
+
+    private static ObservableList<TableViewChooseCategory> observableList = FXCollections.observableArrayList();
 
 
     @FXML
@@ -62,8 +67,19 @@ public class ControllerChooseCategoryOfOfficial implements Initializable{
 
     @FXML
     private void theNext() throws IOException{
-        VBox vBox = FXMLLoader.load(getClass().getResource("../fxml/type_definition_1.fxml"));
-        selectionOfOfficials.getChildren().setAll(vBox);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/type_definition_1.fxml"));
+        try{
+            VBox vBox = (VBox)loader.load();
+
+            // Передаём выбранную модель в контроллер фрейма Описание
+            ControllerTypeDefinition1 controller = loader.getController();
+            controller.setTrueIsChangeList(arraySetOfficial);
+
+            // Оотображаем
+            selectionOfOfficials.getChildren().setAll(vBox);
+        } catch(Exception e){
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -107,6 +123,8 @@ public class ControllerChooseCategoryOfOfficial implements Initializable{
                     @Override
                     public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
                         tableViewChooseCategory.setChoose(newValue);
+                        //observableList.add(new TableViewChooseCategory(tableViewChooseCategory.getFullName(),newValue));
+                        arraySetOfficial.add(tableViewChooseCategory.getFullName());
                     }
                 });
                 return booleanProperty;
@@ -121,11 +139,8 @@ public class ControllerChooseCategoryOfOfficial implements Initializable{
             }
         });
 
-
         listSetTable = getTableViewChooseCategoryList();
         tableView.setItems(listSetTable);
-
-
     }
 
 
