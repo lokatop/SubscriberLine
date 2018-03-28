@@ -5,10 +5,12 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -16,11 +18,15 @@ import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
 import javafx.util.Callback;
+import model.ChooseModel;
 import model.TableViewChooseCategory;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
+
+import static controllers.ControllerChooseCategoryScheme.filterChooseModelByType;
 
 public class ControllerChooseCategoryOfOfficial implements Initializable{
     @FXML
@@ -32,6 +38,11 @@ public class ControllerChooseCategoryOfOfficial implements Initializable{
     private TableColumn<TableViewChooseCategory, String> tableColumn1;
     @FXML
     private TableColumn<TableViewChooseCategory, Boolean> tableColumn2;
+    @FXML
+    private Label label;
+
+    private String nameForFindFromXml;
+    private FilteredList<ChooseModel> list2;
 
 
     @FXML
@@ -57,6 +68,14 @@ public class ControllerChooseCategoryOfOfficial implements Initializable{
 
         VBox vBox = FXMLLoader.load(getClass().getResource("../fxml/choose_category_of_official_apple.fxml"));
         selectionOfOfficials.getChildren().setAll(vBox);
+    }
+
+    public void setChooseCategory(String s){
+        this.nameForFindFromXml = s;
+        ObservableList<TableViewChooseCategory> list = getTableViewChooseCategoryList();
+        tableView.setItems(list);
+
+        label.setText(nameForFindFromXml);
     }
 
     @Override
@@ -87,18 +106,28 @@ public class ControllerChooseCategoryOfOfficial implements Initializable{
             }
         });
 
-        ObservableList<TableViewChooseCategory> list = getTableViewChooseCategoryList();
-        tableView.setItems(list);
+
     }
+
+
 
     private ObservableList<TableViewChooseCategory> getTableViewChooseCategoryList() {
 
-        TableViewChooseCategory person1 = new TableViewChooseCategory("Susan Smith",  false);
-        TableViewChooseCategory person2 = new TableViewChooseCategory("Anne McNeil",  false);
-        TableViewChooseCategory person3 = new TableViewChooseCategory("Kenvin White", false);
+        //TableViewChooseCategory person1 = new TableViewChooseCategory("Susan Smith",  false);
+        //TableViewChooseCategory person2 = new TableViewChooseCategory("Anne McNeil",  false);
+        //TableViewChooseCategory person3 = new TableViewChooseCategory("Kenvin White", false);
+        ObservableList<TableViewChooseCategory> list = FXCollections.observableArrayList();
 
-        ObservableList<TableViewChooseCategory> list = FXCollections.observableArrayList(person1, person2, person3);
+        list2 = filterChooseModelByType(nameForFindFromXml);
+        for (int i = 0; i<list2.size();i++){
+
+         list.add( new TableViewChooseCategory(
+                 list2.get(i).getTitle()
+         ));
+        }
         return list;
     }
+
+
 
 }

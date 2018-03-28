@@ -33,25 +33,25 @@ public class ControllerChooseCategoryScheme implements Initializable{
 
     public void changeData(ActionEvent actionEvent) throws IOException {
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/choose_data_category.fxml"));
+        VBox vBox = FXMLLoader.load(getClass().getResource("../fxml/choose_data_category.fxml"));
+        VboxChooseSheme.getChildren().setAll(vBox);
+    }
+
+    public void theNext(ActionEvent actionEvent) throws IOException {
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/choose_category_of_official_1.fxml"));
         try{
             VBox vBox = (VBox)loader.load();
 
             // Передаём выбранную модель в контроллер фрейма Описание
-            ControllerDataCategory controller = loader.getController();
-           // controller.setSetOfList(chooseData);
+            ControllerChooseCategoryOfOfficial controller = loader.getController();
+            controller.setChooseCategory(comboChooseCategory.getSelectionModel().getSelectedItem().toString());
 
             // Оотображаем
             VboxChooseSheme.getChildren().setAll(vBox);
         } catch(Exception e){
             e.printStackTrace();
         }
-    }
-
-    public void theNext(ActionEvent actionEvent) throws IOException {
-
-        VBox vBox = FXMLLoader.load(getClass().getResource("../fxml/choose_category_of_official_1.fxml"));
-        VboxChooseSheme.getChildren().setAll(vBox);
     }
 
     @FXML

@@ -12,11 +12,6 @@
          <children>
             <GridPane alignment="CENTER" minHeight="720.0" minWidth="960.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <Label fx:id="labelUpOnPage" text="Выбор категории должностных лиц размещающихся на командном пункте бригады" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1">
-                     <font>
-                        <Font name="Times New Roman Bold" size="24.0" />
-                     </font>
-                  </Label>
                   <VBox alignment="CENTER" prefHeight="194.0" prefWidth="440.0" GridPane.columnSpan="3" GridPane.rowIndex="3">
                      <children>
                         <Label text="В данном разделе программы необходимо выбрать категорию должностных лиц размещающихся на пункте управления категорю пункта управления на котором будет развернута абонентская сеть" wrapText="true">
@@ -56,6 +51,20 @@
                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                            </columnResizePolicy>
                         </TableView>
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
+                     <children>
+                        <Label fx:id="labelUpOnPage" text="Выбор категории должностных лиц " textAlignment="CENTER" wrapText="true">
+                           <font>
+                              <Font name="Times New Roman Bold" size="24.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="label">
+                           <font>
+                              <Font name="Times New Roman Bold" size="24.0" />
+                           </font>
+                        </Label>
                      </children>
                   </VBox>
                </children>

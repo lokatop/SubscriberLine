@@ -47,6 +47,8 @@ public class ControllerDataCategory implements Initializable{
 
         VBox vBox = FXMLLoader.load(getClass().getResource("../fxml/choose_category_scheme.fxml"));
         VboxChooseData.getChildren().setAll(vBox);
+
+
     }
 
     @FXML

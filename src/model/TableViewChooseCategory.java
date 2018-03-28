@@ -2,6 +2,7 @@ package model;
 
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.transformation.FilteredList;
 
 public class TableViewChooseCategory {
 
@@ -11,6 +12,11 @@ public class TableViewChooseCategory {
     public TableViewChooseCategory(String fullName, boolean choose) {
         this.fullName = new SimpleStringProperty(fullName);
         this.choose = new SimpleBooleanProperty(choose);
+    }
+
+    public TableViewChooseCategory(String fullName) {
+        this.fullName = new SimpleStringProperty(fullName);
+        this.choose = new SimpleBooleanProperty(false);
     }
 
     public String getFullName() {
