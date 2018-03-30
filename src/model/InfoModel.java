@@ -4,6 +4,7 @@ import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.scene.image.Image;
@@ -11,6 +12,7 @@ import javafx.scene.image.Image;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import java.util.List;
 import java.util.function.Predicate;
 
 // определяем корневой элемент
@@ -117,16 +119,28 @@ public class InfoModel {
      * @param infoData
      * @return FilteredList&lt;InfoModel&gt;
      */
-    public static FilteredList<InfoModel> filterInfoModelByType(String type, ObservableList<InfoModel> infoData){
+    public static ObservableList<InfoModel> filterInfoModelByType(String type, ObservableList<InfoModel> infoData){
         return infoData.filtered(new Predicate<InfoModel>() {
             @Override
             public boolean test(InfoModel infoModel) {
-                if (infoModel.getType().equals(type)) {
-                    return true;
+                // Если несколько разделены запятой, то хренацим массив да цикл
+                if(infoModel.getType().contains(",")){
+                    String[] types = infoModel.getType().split(",");
+                    for (int i = 0; i < types.length; i++) {
+                        if (type.equals(types[i])) {
+                            return true;
+                        }
+                    }
                 } else {
-                    return false;
+                    if (infoModel.getType().equals(type)) {
+                        return true;
+                    } else {
+                        return false;
+                    }
                 }
+                return false;
             }
         });
     }
+
 }

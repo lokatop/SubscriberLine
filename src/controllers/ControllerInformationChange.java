@@ -34,6 +34,8 @@ public class ControllerInformationChange{
     @FXML
     public Button __btn_edit;
     public Button __btn_delete;
+    public Button __btn_copy_past;
+    public Button __btn_copy_past_cancel;
 
     /**
      * Изменяемая категория
@@ -47,6 +49,9 @@ public class ControllerInformationChange{
      * Список изменяемых моделей
      */
     private ObservableList<InfoModel> changingList = FXCollections.observableArrayList();
+
+    // Копирование/вставка
+    private Integer modelCopyPastID = null;
 
     @FXML
     private void btnBackClick() throws IOException {
@@ -105,11 +110,15 @@ public class ControllerInformationChange{
     private void enable_buttons() {
         __btn_edit.setDisable(false);
         __btn_delete.setDisable(false);
+        __btn_copy_past.setDisable(false);
     }
 
     private void disable_buttons() {
         __btn_edit.setDisable(true);
         __btn_delete.setDisable(true);
+        if (modelCopyPastID == null) {
+            __btn_copy_past.setDisable(true);
+        }
     }
 
     public boolean showEditDialog() {
@@ -214,6 +223,31 @@ public class ControllerInformationChange{
         infoData.remove(changingList.get(id));
 
         updateLists();
+    }
 
+    public void info_model_copy_past(ActionEvent actionEvent) {
+        int id = __list_of_items.getSelectionModel().getSelectedIndex();
+
+        // Если буфер пуст - копируем, если нет - вставляем
+        if (modelCopyPastID == null){
+            modelCopyPastID = id;
+            __btn_copy_past_cancel.setDisable(false);
+            __btn_copy_past.setText("Вставить");
+        } else {
+            // Модифицируем тип модели
+            infoData.get(modelCopyPastID).setType(infoData.get(modelCopyPastID).getType()+","+InfoModel.CATEGORIES[changingTypeId]);
+            modelCopyPastID = null;
+            __btn_copy_past_cancel.setDisable(true);
+            __btn_copy_past.setText("Копировать");
+            updateLists();
+        }
+    }
+
+    public void info_model_copy_past_cancel(ActionEvent actionEvent) {
+        modelCopyPastID = null;
+
+        __btn_copy_past.setDisable(true);
+        __btn_copy_past.setText("Копировать");
+        __btn_copy_past_cancel.setDisable(true);
     }
 }
