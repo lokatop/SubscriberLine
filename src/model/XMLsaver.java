@@ -23,7 +23,7 @@ import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
 
-@XmlSeeAlso(InfoModel.class)
+@XmlSeeAlso({InfoModel.class, ChooseModel.class})
 public class XMLsaver {
 
     /**

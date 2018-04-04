@@ -117,7 +117,7 @@ public class InfoModel {
      * @param infoData
      * @return FilteredList&lt;InfoModel&gt;
      */
-    public static FilteredList<InfoModel> filterInfoModelByType(String type, ObservableList<InfoModel> infoData){
+    public static FilteredList<InfoModel> filterInfoModelByType(final String type, ObservableList<InfoModel> infoData){
         return infoData.filtered(new Predicate<InfoModel>() {
             @Override
             public boolean test(InfoModel infoModel) {

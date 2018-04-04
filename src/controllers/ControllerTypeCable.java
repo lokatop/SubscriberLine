@@ -27,9 +27,9 @@ import java.util.ResourceBundle;
 
 import static model.InfoModel.filterInfoModelByType;
 
-public class ControllerTypeDefinition1 implements Initializable{
+public class ControllerTypeCable implements Initializable{
     @FXML
-    public VBox typeDefinition;
+    public VBox vbox;
     @FXML
     private ListView listViewOfficial;
 
@@ -48,61 +48,55 @@ public class ControllerTypeDefinition1 implements Initializable{
 
     @FXML
     private void btnBackClick() throws IOException {
-        VBox vBox = FXMLLoader.load(getClass().getResource("../fxml/choose_category_of_official_1.fxml"));
-        typeDefinition.getChildren().setAll(vBox);
+        VBox vBox = FXMLLoader.load(getClass().getResource("../fxml/type_definition_2.fxml"));
+        vbox.getChildren().setAll(vBox);
     }
 
     @FXML
     private void btnToMenuClick() throws IOException {
         VBox vBox = FXMLLoader.load(getClass().getResource("../fxml/second_frame.fxml"));
-        typeDefinition.getChildren().setAll(vBox);
+        vbox.getChildren().setAll(vBox);
     }
 
     @FXML
-    private void theNext() throws IOException{
-        VBox vBox = FXMLLoader.load(getClass().getResource("../fxml/type_definition_2.fxml"));
-        typeDefinition.getChildren().setAll(vBox);
-
+    private void theNext() throws IOException {
+        VBox vBox = FXMLLoader.load(getClass().getResource("../fxml/calculate.fxml"));
+        vbox.getChildren().setAll(vBox);
     }
 
-    public void setTrueIsChangeList(LinkedHashSet s){
-        observableListIsChange.clear();
-        observableListIsChange.addAll(s);
-        listViewOfficial.setItems(observableListIsChange);
+    public void setList(LinkedHashSet s){
+        //observableListIsChange.addAll(s);
+        //listViewOfficial.setItems(observableListIsChange);
+        //demo();
     }
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
-        //listViewOfficial.getItems().clear();
+        demo();//TODO удалить и раскомментить setList
         changingList.clear();
         changingList.addAll(XMLsaver.loadFromXML(InfoModel.FILENAME_INFOMODELS));
 
         listViewOfficial.setItems(observableListIsChange);
-        listViewOfficial.getSelectionModel().selectedItemProperty()
-                .addListener(new javafx.beans.value.ChangeListener() {
+        listViewOfficial.getSelectionModel().selectedItemProperty().addListener(new javafx.beans.value.ChangeListener() {
             @Override
             public void changed(ObservableValue observable, Object oldValue, Object newValue) {
                 changingListAnother.clear();
                 observableListForTable.clear();
 
-                changingListAnother.addAll(filterInfoModelByType("DS", changingList));
-                changingListAnother.addAll(filterInfoModelByType("ZAS", changingList));
-                changingListAnother.addAll(filterInfoModelByType("ARM", changingList));
+                changingListAnother.addAll(filterInfoModelByType("CableAndOther", changingList));
 
                 for (int i = 0; i < changingListAnother.size();i++) {
-                    observableListForTable.add
-                            (new TableViewChooseCategory(changingListAnother.get(i).getTitle()));
+                    observableListForTable.add(new TableViewChooseCategory(changingListAnother.get(i).getTitle()));
                 }
             }
         });
 
-
-        tableColumn1.setCellValueFactory(new PropertyValueFactory<TableViewChooseCategory,String>("fullName"));
+        tableColumn1.setCellValueFactory(new PropertyValueFactory<>("fullName"));
         tableColumn2.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<TableViewChooseCategory, Boolean>, ObservableValue<Boolean>>() {
             @Override
             public ObservableValue<Boolean> call(TableColumn.CellDataFeatures<TableViewChooseCategory, Boolean> param) {
-                final TableViewChooseCategory tableViewChooseCategory = param.getValue();
+                TableViewChooseCategory tableViewChooseCategory = param.getValue();
 
                 SimpleBooleanProperty booleanProperty = new SimpleBooleanProperty(tableViewChooseCategory.isChoose());
                 booleanProperty.addListener(new javafx.beans.value.ChangeListener<Boolean>() {
@@ -126,5 +120,18 @@ public class ControllerTypeDefinition1 implements Initializable{
         });
 
         tableView.setItems(observableListForTable);
+    }
+
+    public void demo(){
+        LinkedHashSet s = new LinkedHashSet();
+        s.add("что-то 1");
+        s.add("что-то 2");
+        s.add("что-то 3");
+        observableListIsChange.addAll(s);
+        listViewOfficial.setItems(observableListIsChange);
+    }
+
+    public static void getTypeCable(){
+
     }
 }
