@@ -4,6 +4,8 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
+import javax.xml.bind.annotation.XmlType;
+
 public class TableViewApparatus {
 
     private SimpleStringProperty fullName;
@@ -56,5 +58,10 @@ public class TableViewApparatus {
 
     public void setCount(int count) {
         this.count.set(count);
+    }
+
+    @Override
+    public String toString() {
+        return getFullName();
     }
 }

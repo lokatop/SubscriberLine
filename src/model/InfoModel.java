@@ -25,7 +25,7 @@ public class InfoModel {
     private final StringProperty title;
     private final StringProperty type;
     private final StringProperty description;
-    private final ObjectProperty<Image> image; // TODO:Возможно, заменить на изображение
+    private final ObjectProperty<Image> image;
 
     /**
      * Список сокращений категоий

@@ -4,6 +4,7 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -27,6 +28,7 @@ import java.util.ResourceBundle;
 public class ControllerTypeDefinition2 implements Initializable {
     @FXML
     public VBox typeDefinition;
+    public Button _btn_next;
 
     @FXML
     private TableView _tableView;
@@ -41,6 +43,9 @@ public class ControllerTypeDefinition2 implements Initializable {
 
     //TODO Статическая переменная ниже передается и используется далее(чтобы изменения там сразу отражались и здесь)
     public static ObservableList<InfoModel> apparatusData = FXCollections.observableArrayList();
+    public static ObservableList<TableViewApparatus> choosedApparatus = FXCollections.observableArrayList();
+
+//    private static ObservableList<TableViewApparatus> tableData = FXCollections.observableArrayList();
 
 
     @FXML
@@ -57,13 +62,14 @@ public class ControllerTypeDefinition2 implements Initializable {
 
     @FXML
     private void theNext() throws IOException{
-        //VBox vBox = FXMLLoader.load(getClass().getResource("../fxml/.fxml"));
-        //typeDefinition.getChildren().setAll(vBox);
+        VBox vBox = FXMLLoader.load(getClass().getResource("../fxml/type_definition_3.fxml"));
+        typeDefinition.getChildren().setAll(vBox);
 
     }
 
     public void readData(){
         apparatusData.clear();
+        choosedApparatus.clear();
 
         ObservableList unfilterred = FXCollections.observableArrayList();
         unfilterred.addAll(XMLsaver.loadFromXML(InfoModel.FILENAME_INFOMODELS));
@@ -90,6 +96,9 @@ public class ControllerTypeDefinition2 implements Initializable {
 
             Integer newCount= event.getNewValue();
 
+            // Делаем кол-во положительным
+            if (newCount<1) newCount = 1;
+
             int row = pos.getRow();
             TableViewApparatus apparatus = event.getTableView().getItems().get(row);
 
@@ -107,7 +116,17 @@ public class ControllerTypeDefinition2 implements Initializable {
                 booleanProperty.addListener(new ChangeListener<Boolean>() {
                     @Override
                     public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                        if (newValue){
+                            if (!choosedApparatus.contains(tableViewApparatus)){
+                                choosedApparatus.add(tableViewApparatus);
+                            }
+                        } else {
+                            if (choosedApparatus.contains(tableViewApparatus)){
+                                choosedApparatus.remove(tableViewApparatus);
+                            }
+                        }
                         tableViewApparatus.setChoose(newValue);
+
                     }
                 });
                 return booleanProperty;
@@ -122,7 +141,20 @@ public class ControllerTypeDefinition2 implements Initializable {
             }
         });
 
-        _tableView.setItems(getTableViewApparatusList());
+        if (_tableView.getItems().isEmpty()) {
+            _tableView.setItems(getTableViewApparatusList());
+        }
+
+        choosedApparatus.addListener(new ListChangeListener<TableViewApparatus>() {
+            @Override
+            public void onChanged(Change<? extends TableViewApparatus> c) {
+                if(choosedApparatus.isEmpty()){
+                    _btn_next.setDisable(true);
+                } else {
+                    _btn_next.setDisable(false);
+                }
+            }
+        });
     }
 
     private ObservableList<TableViewApparatus>  getTableViewApparatusList() {
@@ -130,14 +162,14 @@ public class ControllerTypeDefinition2 implements Initializable {
         //TableViewChooseCategory person1 = new TableViewChooseCategory("Susan Smith",  false);
         //TableViewChooseCategory person2 = new TableViewChooseCategory("Anne McNeil",  false);
         //TableViewChooseCategory person3 = new TableViewChooseCategory("Kenvin White", false);
-        ObservableList<TableViewApparatus> list = FXCollections.observableArrayList();
 
+        ObservableList<TableViewApparatus> tableData = FXCollections.observableArrayList();
         for (int i = 0; i<apparatusData.size(); i++){
 
-            list.add( new TableViewApparatus(
+            tableData.add( new TableViewApparatus(
                     apparatusData.get(i).getTitle()
             ));
         }
-        return list;
+        return tableData;
     }
 }
