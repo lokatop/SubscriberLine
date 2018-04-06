@@ -5,6 +5,8 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -13,25 +15,29 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.effect.Effect;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.util.Callback;
 import javafx.util.converter.IntegerStringConverter;
-import model.InfoModel;
 import model.TableViewAbonent;
 import model.TableViewApparatus;
 import model.XMLsaver;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.List;
 import java.util.ResourceBundle;
 
 public class ControllerTypeDefinition3 implements Initializable {
     @FXML
     public VBox typeDefinition;
-    public TableView _abonent_tableView;
+    public TableView<TableViewAbonent> _abonent_tableView;
     public ListView<TableViewApparatus> _apparatus_list;
+    public TextField _add_count;
+    public TextField _add_name;
+    public Button _add_btn;
+    public Button _del_btn;
     @FXML
     private TableColumn<TableViewAbonent, String> _tableColumn1;
     @FXML
@@ -49,6 +55,7 @@ public class ControllerTypeDefinition3 implements Initializable {
     public static ObservableList<TableViewApparatus> apparatusChoosedData = FXCollections.observableArrayList();
 
     private Integer apparatusChoosedId = null;
+    private TableViewAbonent abonentChoosedModel = null;
 
 
     @FXML
@@ -110,6 +117,17 @@ public class ControllerTypeDefinition3 implements Initializable {
     }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        // Инициализация переменных
+        apparatusChoosedId = null;
+        abonentChoosedModel = null;
+
+        // Инициализация GUI
+        _add_btn.setDisable(true);
+        _del_btn.setDisable(true);
+        _add_name.setDisable(true);
+        _add_count.setDisable(true);
+
         // Получаем выбранные ранне аппаратные
         apparatusChoosedData = ControllerTypeDefinition2.choosedApparatus;
 
@@ -133,7 +151,7 @@ public class ControllerTypeDefinition3 implements Initializable {
             int row = pos.getRow();
             TableViewAbonent apparatus = event.getTableView().getItems().get(row);
 
-            apparatus.setCount(newCount);
+            apparatus.setCount_used(newCount);
         });
 
         // Checkbox
@@ -164,11 +182,30 @@ public class ControllerTypeDefinition3 implements Initializable {
 
         _apparatus_list.getItems().clear();
         _apparatus_list.setItems(apparatusChoosedData);
+        // Слушатель выбранной моели в списке аппаратных
         _apparatus_list.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<TableViewApparatus>() {
             @Override
             public void changed(ObservableValue<? extends TableViewApparatus> observable, TableViewApparatus oldValue, TableViewApparatus newValue) {
                 setAbonentTable(newValue);
                 apparatusChoosedId = _apparatus_list.getSelectionModel().getSelectedIndex();
+
+                // Активируем поля и кнопку добавления
+                _add_btn.setDisable(false);
+                _add_name.setDisable(false);
+                _add_count.setDisable(false);
+                // Деактивируем кнопку удаления
+                _del_btn.setDisable(true);
+            }
+        });
+
+        // Слушатель выбранной моели в списке абон. оборуд.
+        _abonent_tableView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<TableViewAbonent>(){
+            @Override
+            public void changed(ObservableValue<? extends TableViewAbonent> observable, TableViewAbonent oldValue, TableViewAbonent newValue) {
+                abonentChoosedModel = _abonent_tableView.getSelectionModel().getSelectedItem();
+
+                // Активируем кнопку удаления
+                _del_btn.setDisable(false);
             }
         });
     }
@@ -180,5 +217,29 @@ public class ControllerTypeDefinition3 implements Initializable {
 
     public void _list_clicked(MouseEvent mouseEvent) {
 
+    }
+
+    public void _add(ActionEvent actionEvent) {
+        if (!_add_name.getText().isEmpty() && !_add_count.getText().isEmpty() && _add_count.getText().matches("^-?\\d+$") && apparatusChoosedId != null){
+            // TODO: предусмотреть совпадение имён абонентского оборудования
+
+            abonentsData.add(new TableViewAbonent(_add_name.getText(),Integer.parseInt(_add_count.getText()),apparatusChoosedData.get(apparatusChoosedId).getFullName()));
+
+            // Обновляем таблицу
+            setAbonentTable(apparatusChoosedData.get(apparatusChoosedId));
+        } else {
+//            if (_add_count.getText().isEmpty() || !_add_count.getText().matches("^-?\\d+$"))
+                // TODO: доабвить эффект с выделением красным цветом поля с ошибкой
+        }
+    }
+
+    public void _delete(ActionEvent actionEvent) {
+        if (abonentChoosedModel != null){
+            abonentsData.remove(abonentChoosedModel);
+            abonentChoosedModel = null;
+
+            // Обновляем таблицу
+            setAbonentTable(apparatusChoosedData.get(apparatusChoosedId));
+        }
     }
 }

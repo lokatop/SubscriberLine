@@ -29,7 +29,7 @@ public class TableViewAbonent {
     public TableViewAbonent(String fullName, Integer count, String parentApparatus) {
         this.fullName = new SimpleStringProperty(fullName);
         this.count = new SimpleIntegerProperty(count);
-        this.count_used = new SimpleIntegerProperty(1);
+        this.count_used = new SimpleIntegerProperty(count);
         this.choose = new SimpleBooleanProperty(false);
         this.parentApparatus = new SimpleStringProperty(parentApparatus);
     }

@@ -12,7 +12,7 @@
          <children>
             <GridPane alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="720.0" minWidth="960.0" prefHeight="720.0" prefWidth="960.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <Label fx:id="labelUpOnPage" prefHeight="86.0" prefWidth="498.0" text="Определения типа и количества абонентского оборудования аппаратных" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1">
+                  <Label prefHeight="86.0" prefWidth="498.0" text="Определения типа и количества абонентского оборудования аппаратных" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1">
                      <font>
                         <Font name="Times New Roman Bold" size="24.0" />
                      </font>
@@ -62,21 +62,63 @@
                            </HBox.margin>
                            <children>
                               <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="507.0" text="Тип и количество абонентского оборудования" />
-                              <TableView fx:id="_abonent_tableView" editable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="426.0" prefWidth="536.0">
+                              <TableView fx:id="_abonent_tableView" editable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="300.0" prefWidth="505.0">
                                  <columnResizePolicy>
                                     <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                                  </columnResizePolicy>
                                  <columns>
-                                    <TableColumn fx:id="_tableColumn1" maxWidth="1.7976931348623157E308" prefWidth="338.0" text="Абонентское оборудование" />
-                                    <TableColumn minWidth="200.0" prefWidth="200.0" text="Количество">
+                                    <TableColumn fx:id="_tableColumn1" maxWidth="230.0" minWidth="230.0" prefWidth="230.0" text="Абонентское оборудование" />
+                                    <TableColumn maxWidth="Infinity" minWidth="200.0" prefWidth="230.0" text="Количество">
                                        <columns>
                                           <TableColumn fx:id="_tableColumn2" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="100.0" text="в комплекте" />
                                           <TableColumn fx:id="_tableColumn3" maxWidth="1.7976931348623157E308" minWidth="130.0" prefWidth="100.0" text="при развёртывании" />
                                        </columns>
                                     </TableColumn>
-                                    <TableColumn fx:id="_tableColumn4" maxWidth="87.0" minWidth="42.0" prefWidth="42.0" text="Вкл." />
+                                    <TableColumn fx:id="_tableColumn4" maxWidth="1.7976931348623157E308" minWidth="42.0" prefWidth="42.0" text="Вкл." />
                                  </columns>
                               </TableView>
+                              <HBox prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <VBox prefHeight="70.0" prefWidth="220.0">
+                                       <children>
+                                          <Label text="Название абонентского оборудования" />
+                                          <TextField fx:id="_add_name" />
+                                       </children>
+                                       <HBox.margin>
+                                          <Insets left="16.0" right="16.0" />
+                                       </HBox.margin>
+                                    </VBox>
+                                    <VBox prefHeight="70.0" prefWidth="140.0">
+                                       <children>
+                                          <Label text="Количество в комплекте" />
+                                          <TextField fx:id="_add_count" />
+                                       </children>
+                                       <HBox.margin>
+                                          <Insets left="16.0" />
+                                       </HBox.margin>
+                                    </VBox>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin>
+                                 <padding>
+                                    <Insets top="16.0" />
+                                 </padding>
+                              </HBox>
+                              <HBox prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <Button fx:id="_add_btn" mnemonicParsing="false" onAction="#_add" text="Добавить">
+                                       <HBox.margin>
+                                          <Insets left="16.0" right="16.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                    <Button fx:id="_del_btn" mnemonicParsing="false" onAction="#_delete" text="Удалить">
+                                       <HBox.margin>
+                                          <Insets left="16.0" right="16.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                 </children>
+                              </HBox>
                            </children>
                         </VBox>
                      </children>

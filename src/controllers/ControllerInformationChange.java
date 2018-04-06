@@ -92,7 +92,7 @@ public class ControllerInformationChange{
         if (!infoData.isEmpty()) {
             XMLsaver.saveToXML(infoData, InfoModel.FILENAME_INFOMODELS);
         } else {
-            // TODO: Удаление файла
+            // TODO: Удаление файла, если удалили все модели?
         }
 
         this.btnBackClick();
