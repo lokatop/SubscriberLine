@@ -12,22 +12,14 @@ public class ControllerTypeDefinition2 {
 
     @FXML
     private void btnBackClick() throws IOException {
-        VBox vBox = FXMLLoader.load(getClass().getResource("../fxml/type_definition_1.fxml"));
-        typeDefinition.getChildren().setAll(vBox);
     }
 
     @FXML
     private void btnToMenuClick() throws IOException {
-        VBox vBox = FXMLLoader.load(getClass().getResource("../fxml/second_frame.fxml"));
-        typeDefinition.getChildren().setAll(vBox);
     }
 
     @FXML
     private void theNext() throws IOException{
-
-        //TODO поаставить вместо type_cable - >
-        VBox vBox = FXMLLoader.load(getClass().getResource("../fxml/type_cable.fxml"));
-        typeDefinition.getChildren().setAll(vBox);
 
     }
     @FXML
