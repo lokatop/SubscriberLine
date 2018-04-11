@@ -24,6 +24,12 @@
                      <children>
                         <Button mnemonicParsing="false" onAction="#info_model_add" text="Добавить" />
                         <Button fx:id="__btn_edit" disable="true" layoutX="10.0" layoutY="195.0" mnemonicParsing="false" onAction="#info_model_edit" text="Изменить" />
+                        <HBox prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Button fx:id="__btn_copy_past" disable="true" mnemonicParsing="false" onAction="#info_model_copy_past" text="Копировать" />
+                              <Button fx:id="__btn_copy_past_cancel" disable="true" mnemonicParsing="false" onAction="#info_model_copy_past_cancel" text="Отменить" />
+                           </children>
+                        </HBox>
                         <Button fx:id="__btn_delete" disable="true" mnemonicParsing="false" onAction="#info_model_delete" text="Удалить" />
                         <Button mnemonicParsing="false" onAction="#info_model_save" text="Применить изменения" />
                      </children>
