@@ -116,12 +116,11 @@ public class ControllerInformationFrame implements Initializable {
             infoData.add(new InfoModel("ТА-57", "DS", "Описание", noImage));
             infoData.add(new InfoModel("ТА-88", "DS", "Описание", noImage));
             infoData.add(new InfoModel("П-380 ТА", "DS", "Описание", noImage));
-            infoData.add(new InfoModel("Селенит", "DS", "Описание", noImage));
+            infoData.add(new InfoModel("Селенит", "DS,ZAS", "Описание", noImage));
 
             infoData.add(new InfoModel("П-170", "ZAS", "Описание", noImage));
             infoData.add(new InfoModel("П-171Д", "ZAS", "Описание", noImage));
             infoData.add(new InfoModel("АТ-3031", "ZAS", "Описание", noImage));
-            infoData.add(new InfoModel("Селенит", "ZAS", "Описание", noImage));
 
             infoData.add(new InfoModel("Рамек-2", "ARM", "Описание", noImage));
 

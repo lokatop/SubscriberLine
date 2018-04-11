@@ -15,10 +15,11 @@ import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.adapters.XmlAdapter;
 import javax.xml.transform.Result;
 import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
+import java.io.*;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.sql.Time;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
@@ -58,8 +59,14 @@ public class XMLsaver {
             m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 
             // Открываем файл
-            FileOutputStream file = new FileOutputStream(fileName);
+            String path = Paths.get(context.getClass().getResource("/").toURI()).toString();
+            FileOutputStream file = new FileOutputStream(path + "/" + fileName);
 
+            // Чистим папку для изображений
+            File folder = new File(path + "/resource/images");
+            if (folder.exists() && folder.listFiles().length != 0)
+                for (File f : folder.listFiles())
+                    if (f.isFile()) f.delete();
 
             // Маршаллируем и сохраняем XML в файл.
             m.marshal(wrapper, file);
@@ -88,7 +95,8 @@ public class XMLsaver {
             Unmarshaller um = context.createUnmarshaller();
 
             // Открываем файл
-            FileInputStream file = new FileInputStream(fileName);
+            String path = Paths.get(context.getClass().getResource("/").toURI()).toString();
+            FileInputStream file = new FileInputStream(path + "/" + fileName);
 
             // Чтение XML из файла и демаршализация.
             ListWrapper result = (ListWrapper) um.unmarshal(file);
@@ -113,7 +121,7 @@ public class XMLsaver {
             } else {
                 Image img;
                 try {
-                    img = new Image(new ByteArrayInputStream(Base64.getDecoder().decode(data)));
+                    img = new Image(data);
                 } catch (Exception e){
                     img = new Image("resource/noimage.png");
                 }
@@ -126,11 +134,25 @@ public class XMLsaver {
             if (v == null) {
                 return "";
             }
-            BufferedImage bImg = SwingFXUtils.fromFXImage(v, null);
-            ByteArrayOutputStream bos = new ByteArrayOutputStream();
-            ImageIO.write(bImg, "png", bos);
 
-            return Base64.getEncoder().encodeToString(bos.toByteArray());
+            String path = Paths.get(this.getClass().getResource("/resource").toURI()).toString();
+            File folder = new File(path + "/images");
+            File outputFile = new File(folder.toString() + "/" + System.currentTimeMillis() + ".png");
+            BufferedImage bImage = SwingFXUtils.fromFXImage(v, null);
+            try {
+                if (!folder.exists()){
+                    folder.mkdir();
+                }
+                outputFile.createNewFile();
+                ImageIO.write(bImage, "png", outputFile);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+//            BufferedImage bImg = SwingFXUtils.fromFXImage(v, null);
+//            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+//            ImageIO.write(bImg, "png", bos);
+
+            return outputFile.toURI().toString();
         }
     }
 }
