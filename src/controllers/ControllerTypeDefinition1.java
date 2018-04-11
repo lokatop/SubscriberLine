@@ -18,6 +18,7 @@ import javafx.scene.layout.VBox;
 import javafx.util.Callback;
 import model.InfoModel;
 import model.TableViewChooseCategory;
+import model.TableViewTypeDef1;
 import model.XMLsaver;
 
 import java.io.IOException;
@@ -42,6 +43,7 @@ public class ControllerTypeDefinition1 implements Initializable{
 
     private static ObservableList<TableViewChooseCategory> observableListIsChange = FXCollections.observableArrayList();
     private static ObservableList<TableViewChooseCategory> observableListForTable = FXCollections.observableArrayList();
+    private static ObservableList<TableViewTypeDef1> observableListTypeDef1 = FXCollections.observableArrayList();
     private ObservableList<InfoModel> changingList = FXCollections.observableArrayList();
     private ObservableList<InfoModel> changingListAnother = FXCollections.observableArrayList();
     private LinkedHashSet arraySetTypeDef = new LinkedHashSet();
@@ -75,8 +77,9 @@ public class ControllerTypeDefinition1 implements Initializable{
     public void initialize(URL location, ResourceBundle resources) {
 
         //listViewOfficial.getItems().clear();
-        changingList.clear();
-        changingList.addAll(XMLsaver.loadFromXML(InfoModel.FILENAME_INFOMODELS));
+        if (changingList.size() == 0){
+            changingList.addAll(XMLsaver.loadFromXML(InfoModel.FILENAME_INFOMODELS));
+        }
 
         listViewOfficial.setItems(observableListIsChange);
         listViewOfficial.getSelectionModel().selectedItemProperty()
@@ -94,10 +97,15 @@ public class ControllerTypeDefinition1 implements Initializable{
                     observableListForTable.add
                             (new TableViewChooseCategory(changingListAnother.get(i).getTitle()));
                 }
+                for (int i = 0; i < changingListAnother.size();i++) {
+                    observableListTypeDef1.add
+                            (new TableViewTypeDef1(changingListAnother.get(i).getTitle()));
+                }
             }
         });
 
 
+        //tableColumn1.setCellValueFactory(new PropertyValueFactory<TableViewChooseCategory,String>("fullName"));
         tableColumn1.setCellValueFactory(new PropertyValueFactory<TableViewChooseCategory,String>("fullName"));
         tableColumn2.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<TableViewChooseCategory, Boolean>, ObservableValue<Boolean>>() {
             @Override

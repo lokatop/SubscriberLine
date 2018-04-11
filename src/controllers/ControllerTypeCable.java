@@ -48,7 +48,7 @@ public class ControllerTypeCable implements Initializable{
 
     @FXML
     private void btnBackClick() throws IOException {
-        VBox vBox = FXMLLoader.load(getClass().getResource("../fxml/type_definition_2.fxml"));
+        VBox vBox = FXMLLoader.load(getClass().getResource("../fxml/type_definition_3.fxml"));
         vbox.getChildren().setAll(vBox);
     }
 

@@ -82,7 +82,6 @@ public class ControllerChooseCategoryScheme implements Initializable{
         chooseData.clear();
         List pathToXml = XMLsaver.loadFromXML(FILENAME_CHOOSEMODELS);
         chooseData.addAll(pathToXml);
-            System.out.println(chooseData);
         if (!chooseData.isEmpty()) {
             // Добавляем фильтрованный по "типу" список в ComboBox
             comboChooseCategory.getItems().addAll(filterChooseModelByType("Пункты управления"));

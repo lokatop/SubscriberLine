@@ -108,7 +108,7 @@ public class ControllerInformationFrame implements Initializable {
 //        XMLsaver.saveToXML(infoData, "InfoModels.xml");
         infoData.clear();
         infoData.addAll(XMLsaver.loadFromXML(InfoModel.FILENAME_INFOMODELS));
-
+        System.out.println(infoData);
 
         if (infoData.isEmpty()) {
             // В качестве образца добавляем некоторые данные
