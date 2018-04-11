@@ -11,32 +11,16 @@ public class TableViewTypeDef1 {
     private SimpleStringProperty nameOfOfficial;
     private SimpleStringProperty equipment;
     private SimpleBooleanProperty boolen;
-    private SimpleIntegerProperty index;
 
-    public TableViewTypeDef1(Integer index,String nameOfOfficial, String equipment, Boolean boolen) {
+    public TableViewTypeDef1(String nameOfOfficial, String equipment, Boolean boolen) {
         this.nameOfOfficial = new SimpleStringProperty(nameOfOfficial);
         this.equipment = new SimpleStringProperty(equipment);
         this.boolen = new SimpleBooleanProperty(boolen);
-        this.index = new SimpleIntegerProperty(index);
     }
 
-    public TableViewTypeDef1(Integer index,String nameOfOfficial,String equipment) {
-        this.nameOfOfficial = new SimpleStringProperty(nameOfOfficial);
+    public TableViewTypeDef1(String nameOfOfficial,String equipment) {
         this.equipment = new SimpleStringProperty(equipment);
         this.boolen = new SimpleBooleanProperty(false);
-        this.index = new SimpleIntegerProperty(index);
-    }
-
-    public int getIndex() {
-        return index.get();
-    }
-
-    public SimpleIntegerProperty indexProperty() {
-        return index;
-    }
-
-    public void setIndex(int index) {
-        this.index.set(index);
     }
 
     public String getNameOfOfficial() {

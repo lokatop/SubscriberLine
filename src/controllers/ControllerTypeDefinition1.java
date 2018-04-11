@@ -99,7 +99,7 @@ public class ControllerTypeDefinition1 implements Initializable{
                         //Создаем наши объекты из числа тех переменных
                         for (int i = 0; i < changingListAnother.size();i++) {
                             observableListTypeDef1.add
-                                    (new TableViewTypeDef1(i,listViewOfficial.getSelectionModel()
+                                    (new TableViewTypeDef1(listViewOfficial.getSelectionModel()
                                             .getSelectedItems().toString(),
                                             changingListAnother.get(i).getTitle()));
                         }
