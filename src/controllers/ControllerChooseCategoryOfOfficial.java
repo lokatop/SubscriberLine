@@ -23,9 +23,10 @@ import model.TableViewChooseCategory;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.ResourceBundle;
 
+import static controllers.ControllerChooseCategoryScheme.filterChooseModelByDescription;
 import static controllers.ControllerChooseCategoryScheme.filterChooseModelByType;
 
 public class ControllerChooseCategoryOfOfficial implements Initializable{
@@ -41,39 +42,72 @@ public class ControllerChooseCategoryOfOfficial implements Initializable{
     @FXML
     private Label label;
 
-    private String nameForFindFromXml;
+    private static String nameForFindFromXml;
+    private static String viewForFindFromXml;
     private FilteredList<ChooseModel> list2;
+    private static ObservableList<TableViewChooseCategory> listSetTable;
+
+    private LinkedHashSet arraySetOfficial = new LinkedHashSet();
+
+    private static ObservableList<TableViewChooseCategory> observableList = FXCollections.observableArrayList();
 
 
     @FXML
     private void btnBackClick() throws IOException {
-        VBox vBox = FXMLLoader.load(getClass().getResource("../fxml/choose_category_scheme.fxml"));
+        VBox vBox = FXMLLoader.load(getClass()
+                .getResource("../fxml/choose_category_scheme.fxml"));
         selectionOfOfficials.getChildren().setAll(vBox);
     }
 
     @FXML
     private void btnToMenuClick() throws IOException {
-        VBox vBox = FXMLLoader.load(getClass().getResource("../fxml/second_frame.fxml"));
+        VBox vBox = FXMLLoader.load(getClass()
+                .getResource("../fxml/second_frame.fxml"));
         selectionOfOfficials.getChildren().setAll(vBox);
     }
 
     @FXML
     private void theNext() throws IOException{
-        VBox vBox = FXMLLoader.load(getClass().getResource("../fxml/type_definition_1.fxml"));
-        selectionOfOfficials.getChildren().setAll(vBox);
+        FXMLLoader loader = new FXMLLoader(getClass()
+                .getResource("../fxml/type_definition_1.fxml"));
+        try{
+            VBox vBox = (VBox)loader.load();
+
+            // Передаём выбранную модель в контроллер фрейма Описание
+            ControllerTypeDefinition1 controller = loader.getController();
+            controller.setTrueIsChangeList(arraySetOfficial);
+
+            // Оотображаем
+            selectionOfOfficials.getChildren().setAll(vBox);
+        } catch(Exception e){
+            e.printStackTrace();
+        }
     }
 
     @FXML
     private void EditOriginalData() throws IOException{
+        FXMLLoader loader = new FXMLLoader(getClass()
+                .getResource("../fxml/choose_data_category.fxml"));
+        try{
+            VBox vBox = (VBox)loader.load();
 
-        VBox vBox = FXMLLoader.load(getClass().getResource("../fxml/choose_category_of_official_apple.fxml"));
-        selectionOfOfficials.getChildren().setAll(vBox);
+            // Передаём выбранную модель в контроллер фрейма Описание
+            ControllerDataCategory controller = loader.getController();
+            controller.setSelectToComboBox(viewForFindFromXml);
+
+            // Оотображаем
+            selectionOfOfficials.getChildren().setAll(vBox);
+        } catch(Exception e){
+            e.printStackTrace();
+        }
     }
 
-    public void setChooseCategory(String s){
+    public void setChooseCategory(String s, String a){
         this.nameForFindFromXml = s;
-        ObservableList<TableViewChooseCategory> list = getTableViewChooseCategoryList();
-        tableView.setItems(list);
+        this.viewForFindFromXml = a;
+
+        listSetTable = getTableViewChooseCategoryList();
+        tableView.setItems(listSetTable);
 
         label.setText(nameForFindFromXml);
     }
@@ -92,6 +126,8 @@ public class ControllerChooseCategoryOfOfficial implements Initializable{
                     @Override
                     public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
                         tableViewChooseCategory.setChoose(newValue);
+                        //observableList.add(new TableViewChooseCategory(tableViewChooseCategory.getFullName(),newValue));
+                        arraySetOfficial.add(tableViewChooseCategory.getFullName());
                     }
                 });
                 return booleanProperty;
@@ -106,19 +142,17 @@ public class ControllerChooseCategoryOfOfficial implements Initializable{
             }
         });
 
-
+        listSetTable = getTableViewChooseCategoryList();
+        tableView.setItems(listSetTable);
     }
 
 
 
     private ObservableList<TableViewChooseCategory> getTableViewChooseCategoryList() {
 
-        //TableViewChooseCategory person1 = new TableViewChooseCategory("Susan Smith",  false);
-        //TableViewChooseCategory person2 = new TableViewChooseCategory("Anne McNeil",  false);
-        //TableViewChooseCategory person3 = new TableViewChooseCategory("Kenvin White", false);
         ObservableList<TableViewChooseCategory> list = FXCollections.observableArrayList();
 
-        list2 = filterChooseModelByType(nameForFindFromXml);
+        list2 = filterChooseModelByDescription(viewForFindFromXml);
         for (int i = 0; i<list2.size();i++){
 
          list.add( new TableViewChooseCategory(

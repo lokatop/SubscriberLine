@@ -106,7 +106,7 @@ public class InfoModel {
         return image;
     }
 
-// Для ComboBox'ов (Добавляем список моделей, получаем список заголовков)
+    // Для ComboBox'ов (Добавляем список моделей, получаем список заголовков)
     @Override
     public String toString()  {
         return this.getTitle();

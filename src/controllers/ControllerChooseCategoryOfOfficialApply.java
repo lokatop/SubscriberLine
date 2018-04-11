@@ -26,6 +26,5 @@ public class ControllerChooseCategoryOfOfficialApply {
         VBox vBox = FXMLLoader.load(getClass().getResource("../fxml/choose_category_of_official_1.fxml"));
         selectionOfOfficials.getChildren().setAll(vBox);
         */
-
     }
 }

@@ -6,13 +6,13 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox fx:id="typeDefinition" prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ControllerTypeDefinition1">
+<VBox fx:id="vbox" prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ControllerTypeCable">
    <children>
       <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
          <children>
             <GridPane alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="720.0" minWidth="960.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <Label fx:id="labelUpOnPage" text="Выбор категории должностных лиц размещающихся на командном пункте бригады" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1">
+                  <Label fx:id="labelUpOnPage" text="Определение типа полевого кабеля, который имеется в комплекте аппаратных" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1">
                      <font>
                         <Font name="Times New Roman Bold" size="24.0" />
                      </font>
@@ -43,17 +43,14 @@
                   <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowIndex="2">
                      <children>
                         <VBox alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" HBox.hgrow="NEVER">
-                           <HBox.margin>
-                              <Insets left="50.0" />
-                           </HBox.margin>
                            <children>
                               <ListView fx:id="listViewOfficial" maxWidth="1.7976931348623157E308" prefWidth="270.0" />
                            </children>
+                           <HBox.margin>
+                              <Insets left="50.0" />
+                           </HBox.margin>
                         </VBox>
                         <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" HBox.hgrow="SOMETIMES">
-                           <HBox.margin>
-                              <Insets left="50.0" right="50.0" />
-                           </HBox.margin>
                            <children>
                               <TableView fx:id="tableView" editable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
                                  <columnResizePolicy>
@@ -65,6 +62,9 @@
                                  </columns>
                               </TableView>
                            </children>
+                           <HBox.margin>
+                              <Insets left="50.0" right="50.0" />
+                           </HBox.margin>
                         </VBox>
                      </children>
                   </HBox>
