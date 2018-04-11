@@ -13,6 +13,8 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(propOrder = {"title", "type", "description"})
 public class ChooseModel {
 
+    public static String FILENAME_CHOOSEMODELS = "ChooseModels.xml";
+
     private final StringProperty title;
     private final StringProperty type;
     private final StringProperty description;

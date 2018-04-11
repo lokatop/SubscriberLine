@@ -72,8 +72,8 @@ public class ControllerTypeDefinition3 implements Initializable {
 
     @FXML
     private void theNext() throws IOException{
-        //VBox vBox = FXMLLoader.load(getClass().getResource("../fxml/.fxml"));
-        //typeDefinition.getChildren().setAll(vBox);
+        VBox vBox = FXMLLoader.load(getClass().getResource("../fxml/type_cable.fxml"));
+        typeDefinition.getChildren().setAll(vBox);
 
     }
 

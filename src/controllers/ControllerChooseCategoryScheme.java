@@ -16,11 +16,13 @@ import model.ChooseModel;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.TreeSet;
 import java.util.function.Predicate;
 
 import static controllers.ControllerInformationFrame.infoData;
+import static model.ChooseModel.FILENAME_CHOOSEMODELS;
 import static model.InfoModel.filterInfoModelByType;
 
 public class ControllerChooseCategoryScheme implements Initializable{
@@ -78,8 +80,9 @@ public class ControllerChooseCategoryScheme implements Initializable{
 
         public void addData(){
         chooseData.clear();
-        chooseData.addAll(XMLsaver.loadFromXML("ChooseModels.xml"));
-
+        List pathToXml = XMLsaver.loadFromXML(FILENAME_CHOOSEMODELS);
+        chooseData.addAll(pathToXml);
+            System.out.println(chooseData);
         if (!chooseData.isEmpty()) {
             // Добавляем фильтрованный по "типу" список в ComboBox
             comboChooseCategory.getItems().addAll(filterChooseModelByType("Пункты управления"));
