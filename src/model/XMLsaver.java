@@ -121,7 +121,8 @@ public class XMLsaver {
             } else {
                 Image img;
                 try {
-                    img = new Image(data);
+                    String path = Paths.get(this.getClass().getResource("/resource/images").toURI()).toString();
+                    img = new Image(path + "/" + data);
                 } catch (Exception e){
                     img = new Image("resource/noimage.png");
                 }
@@ -137,7 +138,8 @@ public class XMLsaver {
 
             String path = Paths.get(this.getClass().getResource("/resource").toURI()).toString();
             File folder = new File(path + "/images");
-            File outputFile = new File(folder.toString() + "/" + System.currentTimeMillis() + ".png");
+            String filename = System.currentTimeMillis() + ".png";
+            File outputFile = new File(folder.toString() + "/" + filename);
             BufferedImage bImage = SwingFXUtils.fromFXImage(v, null);
             try {
                 if (!folder.exists()){
@@ -152,7 +154,7 @@ public class XMLsaver {
 //            ByteArrayOutputStream bos = new ByteArrayOutputStream();
 //            ImageIO.write(bImg, "png", bos);
 
-            return outputFile.toURI().toString();
+            return filename;
         }
     }
 }
