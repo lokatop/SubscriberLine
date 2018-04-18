@@ -104,7 +104,7 @@ public class ControllerTypeCable implements Initializable{
                     public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
                         tableViewChooseCategory.setChoose(newValue);
                         //observableList.add(new TableViewChooseCategory(tableViewChooseCategory.getFullName(),newValue));
-                        arraySetTypeDef.add(tableViewChooseCategory.getFullName());
+                        //arraySetTypeDef.add(tableViewChooseCategory.getFullName());
                     }
                 });
                 return booleanProperty;

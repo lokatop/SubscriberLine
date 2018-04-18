@@ -1,30 +1,23 @@
 package model;
 
-import com.sun.org.apache.xerces.internal.xs.datatypes.ObjectList;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
 
 import javax.imageio.ImageIO;
 import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.adapters.XmlAdapter;
-import javax.xml.transform.Result;
 import java.awt.image.BufferedImage;
-import java.io.*;
-import java.nio.file.Path;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.nio.file.Paths;
-import java.sql.Time;
-import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.Base64;
 import java.util.List;
 
-@XmlSeeAlso({InfoModel.class, ChooseModel.class})
+@XmlSeeAlso({InfoModel.class, ChooseModel.class, TheLastTable.class, TableViewTypeDef1.class})
 public class XMLsaver {
 
     /**

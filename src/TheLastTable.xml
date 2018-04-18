@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<List>
+    <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="theLastTable">
+        <officialPerson>ТА-57</officialPerson>
+        <typeAbon>DS</typeAbon>
+        <appFrom1>Описание</appFrom1>
+        <typeCable>Описание</typeCable>
+        <appFrom2>Описание</appFrom2>
+        <lengthCable>100</lengthCable>
+    </item>
+</List>

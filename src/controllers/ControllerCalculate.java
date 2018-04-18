@@ -10,10 +10,13 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
 import model.TheLastTable;
+import model.XMLsaver;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import static model.TheLastTable.FILENAME_THELASTTABLE;
 
 public class ControllerCalculate implements Initializable{
     @FXML
@@ -27,7 +30,7 @@ public class ControllerCalculate implements Initializable{
     @FXML
     private TableColumn<TheLastTable, Integer> lengthCable;
 
-    private static ObservableList<TheLastTable> theLastTableObservableList = FXCollections.observableArrayList();
+    public static ObservableList<TheLastTable> chooseData = FXCollections.observableArrayList();
 
     @FXML
     private void btnBackClick() throws IOException {
@@ -48,11 +51,21 @@ public class ControllerCalculate implements Initializable{
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        getData();
+
         officialPerson.setCellValueFactory(new PropertyValueFactory<>("officialPerson"  ));
         typeAbon.setCellValueFactory(      new PropertyValueFactory<>("typeAbon"        ));
         appFrom1.setCellValueFactory(      new PropertyValueFactory<>("appFrom1"        ));
         typeCable.setCellValueFactory(     new PropertyValueFactory<>("typeCable"       ));
         appFrom2.setCellValueFactory(      new PropertyValueFactory<>("appFrom2"        ));
         lengthCable.setCellValueFactory(   new PropertyValueFactory<>("lengthCable"     ));
+
+        tableView.setItems(chooseData);
+    }
+
+    public void getData(){
+        chooseData.clear();
+        chooseData.addAll(XMLsaver.loadFromXML(FILENAME_THELASTTABLE));
     }
 }

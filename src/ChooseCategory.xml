@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<List>
+    <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="tableViewChooseCategory">
+        <nameOfOfficial>ТА-57</nameOfOfficial>
+        <equipment>DS</equipment>
+        <boolen>false</boolen>
+    </item>
+</List>
