@@ -1,27 +1,20 @@
 package model;
 
-import com.sun.org.apache.xerces.internal.xs.datatypes.ObjectList;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
 
 import javax.imageio.ImageIO;
 import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.adapters.XmlAdapter;
-import javax.xml.transform.Result;
 import java.awt.image.BufferedImage;
-import java.io.*;
-import java.nio.file.Path;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.nio.file.Paths;
-import java.sql.Time;
-import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.Base64;
 import java.util.List;
 
 @XmlSeeAlso({InfoModel.class, ChooseModel.class})
@@ -59,11 +52,10 @@ public class XMLsaver {
             m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 
             // Открываем файл
-            String path = Paths.get(context.getClass().getResource("/").toURI()).toString();
-            FileOutputStream file = new FileOutputStream(path + "/" + fileName);
+            FileOutputStream file = new FileOutputStream(fileName);
 
             // Чистим папку для изображений
-            File folder = new File(path + "/resource/images");
+            File folder = new File(context.getClass().getResource("/resource/images").toURI());
             if (folder.exists() && folder.listFiles().length != 0)
                 for (File f : folder.listFiles())
                     if (f.isFile()) f.delete();
@@ -95,8 +87,8 @@ public class XMLsaver {
             Unmarshaller um = context.createUnmarshaller();
 
             // Открываем файл
-            String path = Paths.get(context.getClass().getResource("/").toURI()).toString();
-            FileInputStream file = new FileInputStream(path + "/" + fileName);
+//            String path = Paths.get(context.getClass().getResource("/").toURI()).toString();
+            FileInputStream file = new FileInputStream(fileName);
 
             // Чтение XML из файла и демаршализация.
             ListWrapper result = (ListWrapper) um.unmarshal(file);
@@ -121,7 +113,8 @@ public class XMLsaver {
             } else {
                 Image img;
                 try {
-                    img = new Image(data);
+                    String path = Paths.get(this.getClass().getResource("/resource/images").toURI()).toString();
+                    img = new Image("file:///" + path + "/" + data);
                 } catch (Exception e){
                     img = new Image("resource/noimage.png");
                 }
@@ -137,7 +130,8 @@ public class XMLsaver {
 
             String path = Paths.get(this.getClass().getResource("/resource").toURI()).toString();
             File folder = new File(path + "/images");
-            File outputFile = new File(folder.toString() + "/" + System.currentTimeMillis() + ".png");
+            String filename = System.currentTimeMillis() + ".png";
+            File outputFile = new File(folder.toString() + "/" + filename);
             BufferedImage bImage = SwingFXUtils.fromFXImage(v, null);
             try {
                 if (!folder.exists()){
@@ -152,7 +146,7 @@ public class XMLsaver {
 //            ByteArrayOutputStream bos = new ByteArrayOutputStream();
 //            ImageIO.write(bImg, "png", bos);
 
-            return outputFile.toURI().toString();
+            return filename;
         }
     }
 }
