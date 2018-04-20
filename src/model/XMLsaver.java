@@ -1,10 +1,12 @@
 package model;
 
+import com.sun.xml.internal.ws.api.message.ExceptionHasMessage;
 import javafx.collections.FXCollections;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
 
 import javax.imageio.ImageIO;
+import javax.naming.Context;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
@@ -14,11 +16,15 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.net.URISyntaxException;
 import java.nio.file.Paths;
 import java.util.List;
 
 @XmlSeeAlso({InfoModel.class, ChooseModel.class})
 public class XMLsaver {
+
+    private static String PATH_RESOURCE = "resource";
+    private static String PATH_IMAGES = "/images";
 
     /**
      * <p>Сохраняет список элементов в файла</p>
@@ -51,23 +57,42 @@ public class XMLsaver {
             // устанавливаем флаг для читабельного вывода XML в JAXB
             m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 
-            // Открываем файл
-            FileOutputStream file = new FileOutputStream(fileName);
+            if (createOrClearImagesFolder(context.getClass())) {
 
-            // Чистим папку для изображений
-            File folder = new File(context.getClass().getResource("/resource/images").toURI());
-            if (folder.exists() && folder.listFiles().length != 0)
-                for (File f : folder.listFiles())
-                    if (f.isFile()) f.delete();
+                // Открываем файл
+                FileOutputStream file = new FileOutputStream(fileName);
 
-            // Маршаллируем и сохраняем XML в файл.
-            m.marshal(wrapper, file);
+                // Маршаллируем и сохраняем XML в файл.
+                m.marshal(wrapper, file);
 
-            // Закрываем файл
-            file.close();
+                // Закрываем файл
+                file.close();
 
-            return true;
+                return true;
+            } else {
+                return false;
+            }
         } catch (Exception e) { // catches ANY exception
+            return false;
+        }
+    }
+
+    private static boolean createOrClearImagesFolder(Class context) {
+        try{
+//        String app_path = Paths.get(context.getClass().getResource("/").toURI()).toString();
+
+        File resourceFolder = new File( PATH_RESOURCE);
+        File imagesFolder = new File( PATH_RESOURCE + PATH_IMAGES);
+
+        if (!resourceFolder.exists()) resourceFolder.mkdir();
+        if (!imagesFolder.exists()) imagesFolder.mkdir();
+
+        if (imagesFolder.listFiles().length != 0)
+            for (File f : imagesFolder.listFiles())
+                if (f.isFile()) f.delete();
+
+        return true;
+        } catch (ExceptionHasMessage e){
             return false;
         }
     }
@@ -113,8 +138,8 @@ public class XMLsaver {
             } else {
                 Image img;
                 try {
-                    String path = Paths.get(this.getClass().getResource("/resource/images").toURI()).toString();
-                    img = new Image("file:///" + path + "/" + data);
+//                    String path = Paths.get(this.getClass().getResource(PATH_RESOURCE + PATH_IMAGES).toURI()).toString();
+                    img = new Image("file:" + PATH_RESOURCE + PATH_IMAGES + "/" + data);
                 } catch (Exception e){
                     img = new Image("resource/noimage.png");
                 }
@@ -127,25 +152,17 @@ public class XMLsaver {
             if (v == null) {
                 return "";
             }
-
-            String path = Paths.get(this.getClass().getResource("/resource").toURI()).toString();
-            File folder = new File(path + "/images");
+//            String path = Paths.get(this.getClass().getResource(PATH_RESOURCE+PATH_IMAGES).toURI()).toString();
+            File folder = new File(PATH_RESOURCE + PATH_IMAGES);
             String filename = System.currentTimeMillis() + ".png";
             File outputFile = new File(folder.toString() + "/" + filename);
             BufferedImage bImage = SwingFXUtils.fromFXImage(v, null);
             try {
-                if (!folder.exists()){
-                    folder.mkdir();
-                }
                 outputFile.createNewFile();
                 ImageIO.write(bImage, "png", outputFile);
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
-//            BufferedImage bImg = SwingFXUtils.fromFXImage(v, null);
-//            ByteArrayOutputStream bos = new ByteArrayOutputStream();
-//            ImageIO.write(bImg, "png", bos);
-
             return filename;
         }
     }
