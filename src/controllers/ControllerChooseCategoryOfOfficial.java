@@ -5,7 +5,6 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -27,7 +26,6 @@ import java.util.LinkedHashSet;
 import java.util.ResourceBundle;
 
 import static controllers.ControllerChooseCategoryScheme.filterChooseModelByDescription;
-import static controllers.ControllerChooseCategoryScheme.filterChooseModelByType;
 
 public class ControllerChooseCategoryOfOfficial implements Initializable{
     @FXML
@@ -44,7 +42,7 @@ public class ControllerChooseCategoryOfOfficial implements Initializable{
 
     private static String nameForFindFromXml;
     private static String viewForFindFromXml;
-    private FilteredList<ChooseModel> list2;
+    private ObservableList<ChooseModel> list2;
     private static ObservableList<TableViewChooseCategory> listSetTable;
 
     private LinkedHashSet arraySetOfficial = new LinkedHashSet();
@@ -114,11 +112,11 @@ public class ControllerChooseCategoryOfOfficial implements Initializable{
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        tableColumn1.setCellValueFactory(new PropertyValueFactory<>("fullName"));
+        tableColumn1.setCellValueFactory(new PropertyValueFactory<TableViewChooseCategory, String>("fullName"));
         tableColumn2.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<TableViewChooseCategory, Boolean>, ObservableValue<Boolean>>() {
             @Override
             public ObservableValue<Boolean> call(TableColumn.CellDataFeatures<TableViewChooseCategory, Boolean> param) {
-                TableViewChooseCategory tableViewChooseCategory = param.getValue();
+                final TableViewChooseCategory tableViewChooseCategory = param.getValue();
 
                 SimpleBooleanProperty booleanProperty = new SimpleBooleanProperty(tableViewChooseCategory.isChoose());
 

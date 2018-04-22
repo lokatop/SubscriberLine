@@ -2,7 +2,6 @@ package controllers;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,13 +18,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.TreeSet;
-import java.util.function.Predicate;
 
 import static controllers.ControllerInformationFrame.infoData;
 import static model.ChooseModel.FILENAME_CHOOSEMODELS;
 import static model.InfoModel.filterInfoModelByType;
 
-public class ControllerChooseCategoryScheme implements Initializable{
+public class ControllerChooseCategoryScheme implements Initializable {
 
     @FXML
     public VBox VboxChooseSheme;
@@ -47,18 +45,18 @@ public class ControllerChooseCategoryScheme implements Initializable{
 
         FXMLLoader loader = new FXMLLoader(getClass()
                 .getResource("../fxml/choose_category_of_official_1.fxml"));
-        try{
-            VBox vBox = (VBox)loader.load();
+        try {
+            VBox vBox = (VBox) loader.load();
 
             // Передаём выбранную модель в контроллер фрейма Описание
             ControllerChooseCategoryOfOfficial controller = loader.getController();
             controller.setChooseCategory(comboChooseCategory.getSelectionModel()
-                    .getSelectedItem().toString(),ComboBoxPart
+                    .getSelectedItem().toString(), ComboBoxPart
                     .getSelectionModel().getSelectedItem().toString());
 
             // Оотображаем
             VboxChooseSheme.getChildren().setAll(vBox);
-        } catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -76,9 +74,11 @@ public class ControllerChooseCategoryScheme implements Initializable{
     }
 
     @Override
-    public void initialize(URL location, ResourceBundle resources) { addData(); }
+    public void initialize(URL location, ResourceBundle resources) {
+        addData();
+    }
 
-        public void addData(){
+    public void addData() {
         chooseData.clear();
         List pathToXml = XMLsaver.loadFromXML(FILENAME_CHOOSEMODELS);
         chooseData.addAll(pathToXml);
@@ -95,53 +95,88 @@ public class ControllerChooseCategoryScheme implements Initializable{
 
     /**
      * Фильтрует модели по типу
+     *
      * @param type
      * @return FilteredList<ChooseModel>
      */
 
 
-    public static FilteredList<ChooseModel> filterChooseModelByType( String type){
-        return chooseData.filtered(new Predicate<ChooseModel>() {
-            @Override
-            public boolean test(ChooseModel chooseModel) {
-                if (chooseModel.getType().equals(type)) {
-                    return true;
-                } else {
-                    return false;
-                }
+    public static ObservableList<ChooseModel> filterChooseModelByType(String type) {
+
+        ObservableList<ChooseModel> result = FXCollections.emptyObservableList();
+
+        for (ChooseModel chooseModel : chooseData) {
+            if (chooseModel.getType().equals(type)) {
+                result.add(chooseModel);
             }
-        });
+        }
+
+        return result;
+
+//        return chooseData.filtered(new Predicate<ChooseModel>() {
+//            @Override
+//            public boolean test(ChooseModel chooseModel) {
+//                if (chooseModel.getType().equals(type)) {
+//                    return true;
+//                } else {
+//                    return false;
+//                }
+//            }
+//        });
     }
 
     /**
      * Фильтрует модели по типу
+     *
      * @param description
      * @return FilteredList<ChooseModel>
      */
-    public static FilteredList<ChooseModel> filterChooseModelByDescription( String description){
-        return chooseData.filtered(new Predicate<ChooseModel>() {
-            @Override
-            public boolean test(ChooseModel chooseModel) {
-                if (chooseModel.getDescription().equals(description)) {
-                    return true;
-                } else {
-                    return false;
-                }
-            }
-        });
-    }
-    public static FilteredList<InfoModel> filterInfoModelByTypeSecond( String type){
-        return infoData.filtered(new Predicate<InfoModel>() {
-            @Override
-            public boolean test(InfoModel infoModel) {
-                if (infoModel.getType().equals(type)) {
-                    return true;
+    public static ObservableList<ChooseModel> filterChooseModelByDescription(String description) {
 
-                } else {
-                    return false;
-                }
+        ObservableList<ChooseModel> result = FXCollections.emptyObservableList();
+
+        for (ChooseModel chooseModel : chooseData) {
+            if (chooseModel.getDescription().equals(description)) {
+                result.add(chooseModel);
             }
-        });
+        }
+
+        return result;
+//        return chooseData.filtered(new Predicate<ChooseModel>() {
+//            @Override
+//            public boolean test(ChooseModel chooseModel) {
+//                if (chooseModel.getDescription().equals(description)) {
+//                    return true;
+//                } else {
+//                    return false;
+//                }
+//            }
+//        });
+    }
+
+    public static ObservableList<InfoModel> filterInfoModelByTypeSecond(String type) {
+
+        ObservableList<InfoModel> result = FXCollections.emptyObservableList();
+
+        for (InfoModel infoModel : infoData) {
+            if (infoModel.getType().equals(type)) {
+                result.add(infoModel);
+            }
+        }
+
+        return result;
+
+//        return infoData.filtered(new Predicate<InfoModel>() {
+//            @Override
+//            public boolean test(InfoModel infoModel) {
+//                if (infoModel.getType().equals(type)) {
+//                    return true;
+//
+//                } else {
+//                    return false;
+//                }
+//            }
+//        });
     }
 
 }

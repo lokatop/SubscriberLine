@@ -5,7 +5,6 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.ObservableList;
 
-import java.util.function.Predicate;
 
 public class TableViewTypeDef1 {
     private SimpleStringProperty nameOfOfficial;

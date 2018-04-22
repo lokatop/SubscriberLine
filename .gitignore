@@ -51,7 +51,6 @@ crashlytics.properties
 crashlytics-build.properties
 fabric.properties
 
-/.idea/encodings.xml
 /misc.xml
 /modules.xml
 /vcs.xml
@@ -65,3 +64,7 @@ fabric.properties
 /.idea/
 /opisanie_prog_abonent.docx
 /1InfoModels.xml
+/resource/
+/SubscriberLine.iml
+/InfoModels.xml
+/ChooseModels.xml

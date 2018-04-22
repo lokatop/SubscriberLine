@@ -48,11 +48,11 @@ public class ControllerCalculate implements Initializable{
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        officialPerson.setCellValueFactory(new PropertyValueFactory<>("officialPerson"  ));
-        typeAbon.setCellValueFactory(      new PropertyValueFactory<>("typeAbon"        ));
-        appFrom1.setCellValueFactory(      new PropertyValueFactory<>("appFrom1"        ));
-        typeCable.setCellValueFactory(     new PropertyValueFactory<>("typeCable"       ));
-        appFrom2.setCellValueFactory(      new PropertyValueFactory<>("appFrom2"        ));
-        lengthCable.setCellValueFactory(   new PropertyValueFactory<>("lengthCable"     ));
+        officialPerson.setCellValueFactory(new PropertyValueFactory<TheLastTable,String>("officialPerson"  ));
+        typeAbon.setCellValueFactory(      new PropertyValueFactory<TheLastTable,String>("typeAbon"        ));
+        appFrom1.setCellValueFactory(      new PropertyValueFactory<TheLastTable,String>("appFrom1"        ));
+        typeCable.setCellValueFactory(     new PropertyValueFactory<TheLastTable,String>("typeCable"       ));
+        appFrom2.setCellValueFactory(      new PropertyValueFactory<TheLastTable, String>("appFrom2"        ));
+        lengthCable.setCellValueFactory(   new PropertyValueFactory<TheLastTable, Integer>("lengthCable"     ));
     }
 }
