@@ -2,7 +2,6 @@ package model;
 
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.collections.transformation.FilteredList;
 
 public class TableViewChooseCategory {
 

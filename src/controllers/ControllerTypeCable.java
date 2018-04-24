@@ -92,11 +92,11 @@ public class ControllerTypeCable implements Initializable{
             }
         });
 
-        tableColumn1.setCellValueFactory(new PropertyValueFactory<>("fullName"));
+        tableColumn1.setCellValueFactory(new PropertyValueFactory<TableViewChooseCategory, String>("fullName"));
         tableColumn2.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<TableViewChooseCategory, Boolean>, ObservableValue<Boolean>>() {
             @Override
             public ObservableValue<Boolean> call(TableColumn.CellDataFeatures<TableViewChooseCategory, Boolean> param) {
-                TableViewChooseCategory tableViewChooseCategory = param.getValue();
+                final TableViewChooseCategory tableViewChooseCategory = param.getValue();
 
                 SimpleBooleanProperty booleanProperty = new SimpleBooleanProperty(tableViewChooseCategory.isChoose());
                 booleanProperty.addListener(new javafx.beans.value.ChangeListener<Boolean>() {
