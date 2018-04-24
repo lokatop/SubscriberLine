@@ -27,7 +27,6 @@ import java.util.LinkedHashSet;
 import java.util.ResourceBundle;
 
 import static controllers.ControllerChooseCategoryScheme.filterChooseModelByDescription;
-import static controllers.ControllerChooseCategoryScheme.filterChooseModelByType;
 
 public class ControllerChooseCategoryOfOfficial implements Initializable{
     @FXML
@@ -126,7 +125,7 @@ public class ControllerChooseCategoryOfOfficial implements Initializable{
                     @Override
                     public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
                         tableViewChooseCategory.setChoose(newValue);
-                        //observableList.add(new TableViewChooseCategory(tableViewChooseCategory.getFullName(),newValue));
+                        observableList.add(new TableViewChooseCategory(tableViewChooseCategory.getFullName(),newValue));
                         arraySetOfficial.add(tableViewChooseCategory.getFullName());
                     }
                 });

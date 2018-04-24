@@ -9,21 +9,18 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.VBox;
+import model.ChooseModel;
 import model.InfoModel;
 import model.XMLsaver;
-import model.ChooseModel;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.TreeSet;
 import java.util.function.Predicate;
 
 import static controllers.ControllerInformationFrame.infoData;
 import static model.ChooseModel.FILENAME_CHOOSEMODELS;
-import static model.InfoModel.filterInfoModelByType;
 
 public class ControllerChooseCategoryScheme implements Initializable{
 

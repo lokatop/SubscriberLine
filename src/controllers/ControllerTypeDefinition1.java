@@ -17,15 +17,16 @@ import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
 import javafx.util.Callback;
-import model.*;
+import model.InfoModel;
+import model.TableViewTypeDef1;
+import model.TableViewTypeDef1_many;
+import model.XMLsaver;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.LinkedHashSet;
-import java.util.ResourceBundle;
+import java.util.*;
 
 import static model.InfoModel.filterInfoModelByType;
-import static model.TheLastTable.FILENAME_THELASTTABLE;
 
 public class ControllerTypeDefinition1 implements Initializable{
     @FXML
@@ -45,10 +46,17 @@ public class ControllerTypeDefinition1 implements Initializable{
     private static ObservableList<TableViewTypeDef1> observableListIsChange = FXCollections.observableArrayList();
     private static ObservableList<TableViewTypeDef1> observableListTypeDef1 = FXCollections.observableArrayList();
     private static ObservableList<TableViewTypeDef1> observableListTypeDef12 = FXCollections.observableArrayList();
+    private static ObservableList<TableViewTypeDef1> observableList = FXCollections.observableArrayList();
     private static ObservableList<TableViewTypeDef1> observableTheLast = FXCollections.observableArrayList();
     private static ObservableList<TableViewTypeDef1> observableTheLast2 = FXCollections.observableArrayList();
+
     private ObservableList<InfoModel> changingList = FXCollections.observableArrayList();
     private ObservableList<InfoModel> changingListAnother = FXCollections.observableArrayList();
+
+    private static Map<String,ObservableList<TableViewTypeDef1>> saveObsList = new HashMap<>();
+    private static ObservableList<TableViewTypeDef1_many> tableViewTypeDef1_many = FXCollections.observableArrayList();
+
+
     @FXML
     private void btnBackClick() throws IOException {
         VBox vBox = FXMLLoader.load(getClass().getResource("../fxml/choose_category_of_official_1.fxml"));
@@ -93,6 +101,16 @@ public class ControllerTypeDefinition1 implements Initializable{
                 changingListAnother.addAll(filterInfoModelByType("ARM", changingList));
             }
 
+            //--------------------------
+            if (!listViewOfficial.getItems().isEmpty()){
+
+                Object[][] massive = new Object[observableListIsChange.size()][];
+                for (int i = 0; i < observableListIsChange.size(); i++) {
+
+                }
+            }
+            //---------------------
+
         }
 
         listViewOfficial.setItems(observableListIsChange);
@@ -108,10 +126,39 @@ public class ControllerTypeDefinition1 implements Initializable{
                     @Override
                     public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
                         tableViewTypeDef1.setBoolen(newValue);
+                        observableListTypeDef12.clear();
                         observableListTypeDef12.add(tableViewTypeDef1);
 
-                        XMLsaver.saveToXML(tableViewTypeDef1, FILENAME_THELASTTABLE);
+                        //XMLsaver.saveToXML(tableViewTypeDef1, FILENAME_THELASTTABLE);
                         XMLsaver.saveToXML(observableListTypeDef1, "ChooseCategory.xml");
+
+
+                        String fromListViewName;
+
+                        if (listViewOfficial.getSelectionModel()
+                                .getSelectedItems().toString() != null){
+                            fromListViewName = listViewOfficial.getSelectionModel()
+                                .getSelectedItems().toString();
+
+                            observableTheLast2.clear();
+                            observableTheLast2.addAll(XMLsaver.loadFromXML("ChooseCategory.xml"));
+
+                            //saveObsList.remove(fromListViewName);
+                            //saveObsList.put(fromListViewName,observableTheLast2);
+
+                            //saveObsList.replace(fromListViewName, XMLsaver.loadFromXML("ChooseCategory.xml"));
+
+                            for (int i = 0; i < tableViewTypeDef1_many.size(); i++) {
+                                String getNameOfOfficialPerson = "";
+                                getNameOfOfficialPerson = tableViewTypeDef1_many.get(i).getNameOfOfficialPerson();
+
+                                if (getNameOfOfficialPerson.equals(fromListViewName)){
+                                    tableViewTypeDef1_many.get(i).setTableViewTypeDef1(observableTheLast2);
+                                    System.out.println(tableViewTypeDef1_many.toArray().toString());
+                                }
+                            }
+                        }
+
                     }
                 });
                 return booleanProperty;
@@ -137,6 +184,43 @@ public class ControllerTypeDefinition1 implements Initializable{
                         fromListViewName = listViewOfficial.getSelectionModel()
                                 .getSelectedItems().toString();
 
+                        //--------------------------
+                        if(!stringListFromListView.contains(fromListViewName)){
+
+                            //Создаем наши объекты из числа тех переменных
+                            for (int i = 0; i < changingListAnother.size();i++) {
+                                observableListTypeDef1.add
+                                        (new TableViewTypeDef1(fromListViewName,
+                                                changingListAnother.get(i).getTitle()));
+                            }
+                            XMLsaver.saveToXML(observableListTypeDef1, "ChooseCategory.xml");
+
+
+                            saveObsList.put(fromListViewName,observableListTypeDef1);
+                            stringListFromListView.add(fromListViewName);
+
+
+
+                            tableViewTypeDef1_many.add(new TableViewTypeDef1_many(
+                                    fromListViewName,observableTheLast2
+                            ));
+
+
+
+                            tableView.setItems(observableListTypeDef1);
+                        }else{
+
+                            tableView.setItems(saveObsList.get(fromListViewName));
+                        }
+                        //-------------------------
+
+                        //observableTheLast2.clear();
+
+
+                        //---------------------------------------------
+
+/*
+
                         if(stringListFromListView.contains(fromListViewName)){
 
                             observableTheLast2.addAll(XMLsaver.loadFromXML("ChooseCategory.xml"));
@@ -144,6 +228,8 @@ public class ControllerTypeDefinition1 implements Initializable{
                             for (int i = 0; i < observableTheLast2.size(); i++) {
                                 observableListTypeDef1.addAll(observableTheLast);
                             }
+
+                            tableView.setItems(observableTheLast2);
 
                         }
                         else {
@@ -157,9 +243,10 @@ public class ControllerTypeDefinition1 implements Initializable{
                             XMLsaver.saveToXML(observableListTypeDef1, "ChooseCategory.xml");
 
                             stringListFromListView.add(fromListViewName);
+                            tableView.setItems(observableListTypeDef1);
                         }
-
-                        tableView.setItems(observableListTypeDef1);
+                        //observableList.add(new TableViewChooseCategory(tableViewChooseCategory.getFullName(),newValue));
+*/
 
                     }
                 });

@@ -14,11 +14,10 @@ import javafx.scene.layout.VBox;
 import model.InfoModel;
 import model.XMLsaver;
 
-import java.io.*;
+import java.io.IOException;
 import java.net.URL;
-import java.util.*;
+import java.util.ResourceBundle;
 
-import static model.InfoModel.CATEGORIES;
 import static model.InfoModel.CATEGORIES_DESC;
 import static model.InfoModel.filterInfoModelByType;
 
