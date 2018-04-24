@@ -1,25 +1,25 @@
 package model;
 
 import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-
 
 public class TableViewTypeDef1 {
     private SimpleStringProperty nameOfOfficial;
     private SimpleStringProperty equipment;
-    private SimpleBooleanProperty boolen;
+    private SimpleBooleanProperty checked;
 
     public TableViewTypeDef1(String nameOfOfficial, String equipment, Boolean boolen) {
         this.nameOfOfficial = new SimpleStringProperty(nameOfOfficial);
         this.equipment = new SimpleStringProperty(equipment);
-        this.boolen = new SimpleBooleanProperty(boolen);
+        this.checked = new SimpleBooleanProperty(boolen);
     }
 
     public TableViewTypeDef1(String nameOfOfficial,String equipment) {
+        this.nameOfOfficial = new SimpleStringProperty(nameOfOfficial);
         this.equipment = new SimpleStringProperty(equipment);
-        this.boolen = new SimpleBooleanProperty(false);
+        this.checked = new SimpleBooleanProperty(false);
     }
 
     public String getNameOfOfficial() {
@@ -46,15 +46,25 @@ public class TableViewTypeDef1 {
         this.equipment.set(equipment);
     }
 
-    public boolean isBoolen() {
-        return boolen.get();
+    public boolean isChecked() {
+        return checked.get();
     }
 
-    public SimpleBooleanProperty boolenProperty() {
-        return boolen;
+    public SimpleBooleanProperty checkedProperty() {
+        return checked;
     }
 
-    public void setBoolen(boolean boolen) {
-        this.boolen.set(boolen);
+    public void setChecked(boolean boolen) {
+        this.checked.set(boolen);
+    }
+
+    public static ObservableList<TableViewTypeDef1> filterByNameOfOfficial(String official, ObservableList<TableViewTypeDef1> data){
+        ObservableList<TableViewTypeDef1> result = FXCollections.observableArrayList();
+
+        for (TableViewTypeDef1 tableViewTypeDef1 : data)
+            if(tableViewTypeDef1.getNameOfOfficial().equals(official))
+                result.add(tableViewTypeDef1);
+
+        return result;
     }
 }

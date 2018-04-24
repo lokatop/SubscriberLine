@@ -9,27 +9,30 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
-import javafx.scene.control.*;
+import javafx.scene.control.ListView;
+import javafx.scene.control.TableCell;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
 import javafx.util.Callback;
 import model.InfoModel;
-import model.TableViewChooseCategory;
 import model.TableViewTypeDef1;
 import model.XMLsaver;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.*;
+import java.util.ResourceBundle;
 
 import static model.InfoModel.filterInfoModelByType;
+import static model.TableViewTypeDef1.filterByNameOfOfficial;
 
-public class ControllerTypeDefinition1 implements Initializable{
+public class ControllerTypeDefinition1 implements Initializable {
     @FXML
     public VBox typeDefinition;
     @FXML
-    private ListView listViewOfficial;
+    private ListView<String> listViewOfficial;
 
     @FXML
     private TableView tableView;
@@ -38,12 +41,24 @@ public class ControllerTypeDefinition1 implements Initializable{
     @FXML
     private TableColumn<TableViewTypeDef1, Boolean> tableColumn2;
 
-    private static ObservableList<TableViewChooseCategory> observableListIsChange = FXCollections.observableArrayList();
-    private static ObservableList<TableViewTypeDef1> observableListTypeDef1 = FXCollections.observableArrayList();
-    private static ObservableList<TableViewTypeDef1> observableListTypeDef3 = FXCollections.observableArrayList();
-    private ObservableList<InfoModel> changingList = FXCollections.observableArrayList();
-    private ObservableList<InfoModel> changingListAnother = FXCollections.observableArrayList();
-    private static LinkedHashMap<String, ObservableList<TableViewTypeDef1>> callback = new LinkedHashMap<>();
+
+    /**
+     * Список выбранных должносей
+     */
+    private ObservableList<String> choosedOfficialList = FXCollections.observableArrayList();
+
+
+    /**
+     * Список всех ТА для должностей
+     */
+    private ObservableList<InfoModel> infoModelsList = FXCollections.observableArrayList();
+
+    /**
+     * Список строк таблицы с чекбоксами
+     */
+    private ObservableList<TableViewTypeDef1> tableViewTypeDef1s = FXCollections.observableArrayList();
+
+
     @FXML
     private void btnBackClick() throws IOException {
         VBox vBox = FXMLLoader.load(getClass().getResource("../fxml/choose_category_of_official_1.fxml"));
@@ -57,70 +72,53 @@ public class ControllerTypeDefinition1 implements Initializable{
     }
 
     @FXML
-    private void theNext() throws IOException{
+    private void theNext() throws IOException {
         VBox vBox = FXMLLoader.load(getClass().getResource("../fxml/type_definition_2.fxml"));
         typeDefinition.getChildren().setAll(vBox);
 
     }
 
-    //Тут получаем массим с выбранными людьми из прошлого фрейма
-    //И ставим tableView пустым
-    public void setTrueIsChangeList(LinkedHashSet s){
-        observableListIsChange.clear();
-        observableListIsChange.addAll(s);
-        listViewOfficial.setItems(observableListIsChange);
-        tableView.setItems(null);
+    private void readData() {
+        infoModelsList.clear();
+
+        // Чтение из файла
+        ObservableList unfilterred = FXCollections.observableArrayList();
+        unfilterred.addAll(XMLsaver.loadFromXML(InfoModel.FILENAME_INFOMODELS));
+
+        infoModelsList.addAll(filterInfoModelByType("DS", unfilterred));
+        infoModelsList.addAll(filterInfoModelByType("ZAS", unfilterred));
+        infoModelsList.addAll(filterInfoModelByType("ARM", unfilterred));
+
+        // Генерация объектов для таблицы
+        for (int officialIndex = 0; officialIndex < choosedOfficialList.size(); officialIndex++) {
+            for (int infoModelIndex = 0; infoModelIndex < infoModelsList.size(); infoModelIndex++) {
+                tableViewTypeDef1s.add(
+                        new TableViewTypeDef1(
+                                choosedOfficialList.get(officialIndex),
+                                infoModelsList.get(infoModelIndex).getTitle()
+                        )
+                );
+            }
+        }
     }
 
+    private void setupTable() {
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
+        // Очищение
+        tableView.setItems(null);
 
-        if (changingList.size() == 0){
-            changingList.addAll(XMLsaver.loadFromXML(InfoModel.FILENAME_INFOMODELS));
-        }
-
-        listViewOfficial.setItems(observableListIsChange);
-        listViewOfficial.getSelectionModel().selectedItemProperty()
-                .addListener(new ChangeListener() {
-                    @Override
-                    public void changed(ObservableValue observable, Object oldValue, Object newValue) {
-                        //Подчищаем
-                        observableListTypeDef1.clear();
-                        changingListAnother.clear();
-
-                        //Добавляем в переменную из infoModels
-                        if(changingList!= null) {
-                            changingListAnother.addAll(filterInfoModelByType("DS", changingList));
-                            changingListAnother.addAll(filterInfoModelByType("ZAS", changingList));
-                            changingListAnother.addAll(filterInfoModelByType("ARM", changingList));
-                        }
-
-                        //Создаем наши объекты из числа тех переменных
-                        for (int i = 0; i < changingListAnother.size();i++) {
-                            observableListTypeDef1.add
-                                    (new TableViewTypeDef1(listViewOfficial.getSelectionModel()
-                                            .getSelectedItems().toString(),
-                                            changingListAnother.get(i).getTitle()));
-                        }
-
-
-                        tableView.setItems(observableListTypeDef1);
-                    }
-                });
-
-
-        tableColumn1.setCellValueFactory(new PropertyValueFactory<TableViewTypeDef1,String>("equipment"));
+        // Настройка
+        tableColumn1.setCellValueFactory(new PropertyValueFactory<TableViewTypeDef1, String>("equipment"));
         tableColumn2.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<TableViewTypeDef1, Boolean>, ObservableValue<Boolean>>() {
             @Override
             public ObservableValue<Boolean> call(TableColumn.CellDataFeatures<TableViewTypeDef1, Boolean> param) {
                 final TableViewTypeDef1 tableViewTypeDef1 = param.getValue();
 
-                SimpleBooleanProperty booleanProperty = new SimpleBooleanProperty(tableViewTypeDef1.isBoolen());
+                SimpleBooleanProperty booleanProperty = new SimpleBooleanProperty(tableViewTypeDef1.isChecked());
                 booleanProperty.addListener(new javafx.beans.value.ChangeListener<Boolean>() {
                     @Override
                     public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                        tableViewTypeDef1.setBoolen(newValue);
+                        tableViewTypeDef1.setChecked(newValue);
                     }
                 });
                 return booleanProperty;
@@ -134,5 +132,62 @@ public class ControllerTypeDefinition1 implements Initializable{
                 return cell;
             }
         });
+    }
+
+    private void setupListView() {
+        // Очищение
+        listViewOfficial.getItems().clear();
+
+        // Заполнение listView
+        listViewOfficial.setItems(choosedOfficialList);
+
+        // Слушатель выбранного пункта списка
+        listViewOfficial.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                fillTable(newValue);
+            }
+        });
+
+        // Выбор первого пункта списка
+        listViewOfficial.getSelectionModel().select(0);
+    }
+
+    /**
+    * Заполнение таблицы
+    **/
+    private void fillTable(String official) {
+        tableView.setItems(filterByNameOfOfficial(official, tableViewTypeDef1s));
+    }
+
+    /**
+     * Метод выдаёт данные для финальной таблицы
+     * @return ObservableList<TableViewTypeDef1>
+     */
+    private ObservableList<TableViewTypeDef1> getFinalData(){
+        ObservableList<TableViewTypeDef1> result = FXCollections.observableArrayList();
+
+        for (TableViewTypeDef1 tableViewTypeDef1 : tableViewTypeDef1s)
+            if (tableViewTypeDef1.isChecked())
+                result.add(tableViewTypeDef1);
+
+        return result;
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+
+        // Получаем ранее выбранные должности
+        choosedOfficialList.clear();
+        choosedOfficialList.addAll(ControllerChooseCategoryOfOfficial.arraySetOfficial);
+
+        // Получаем список ТА
+        readData();
+
+        // Настройка таблицы
+        setupTable();
+
+        // Настройка listView
+        setupListView();
     }
 }

@@ -45,7 +45,7 @@ public class ControllerChooseCategoryOfOfficial implements Initializable{
     private ObservableList<ChooseModel> list2;
     private static ObservableList<TableViewChooseCategory> listSetTable;
 
-    private LinkedHashSet arraySetOfficial = new LinkedHashSet();
+    public static LinkedHashSet arraySetOfficial = new LinkedHashSet();
 
     private static ObservableList<TableViewChooseCategory> observableList = FXCollections.observableArrayList();
 
@@ -72,8 +72,8 @@ public class ControllerChooseCategoryOfOfficial implements Initializable{
             VBox vBox = (VBox)loader.load();
 
             // Передаём выбранную модель в контроллер фрейма Описание
-            ControllerTypeDefinition1 controller = loader.getController();
-            controller.setTrueIsChangeList(arraySetOfficial);
+//            ControllerTypeDefinition1 controller = loader.getController();
+//            controller.setTrueIsChangeList(arraySetOfficial);
 
             // Оотображаем
             selectionOfOfficials.getChildren().setAll(vBox);
@@ -112,6 +112,8 @@ public class ControllerChooseCategoryOfOfficial implements Initializable{
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        arraySetOfficial.clear();
         tableColumn1.setCellValueFactory(new PropertyValueFactory<TableViewChooseCategory, String>("fullName"));
         tableColumn2.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<TableViewChooseCategory, Boolean>, ObservableValue<Boolean>>() {
             @Override
