@@ -6,7 +6,6 @@ import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
 
 import javax.imageio.ImageIO;
-import javax.naming.Context;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
@@ -16,8 +15,6 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.net.URISyntaxException;
-import java.nio.file.Paths;
 import java.util.List;
 
 @XmlSeeAlso({InfoModel.class, ChooseModel.class})

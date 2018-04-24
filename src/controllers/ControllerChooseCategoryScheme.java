@@ -2,28 +2,27 @@ package controllers;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.VBox;
+import model.ChooseModel;
 import model.InfoModel;
 import model.XMLsaver;
-import model.ChooseModel;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.TreeSet;
+import java.util.function.Predicate;
 
 import static controllers.ControllerInformationFrame.infoData;
 import static model.ChooseModel.FILENAME_CHOOSEMODELS;
-import static model.InfoModel.filterInfoModelByType;
 
-public class ControllerChooseCategoryScheme implements Initializable {
+public class ControllerChooseCategoryScheme implements Initializable{
 
     @FXML
     public VBox VboxChooseSheme;
@@ -45,18 +44,18 @@ public class ControllerChooseCategoryScheme implements Initializable {
 
         FXMLLoader loader = new FXMLLoader(getClass()
                 .getResource("../fxml/choose_category_of_official_1.fxml"));
-        try {
-            VBox vBox = (VBox) loader.load();
+        try{
+            VBox vBox = (VBox)loader.load();
 
             // Передаём выбранную модель в контроллер фрейма Описание
             ControllerChooseCategoryOfOfficial controller = loader.getController();
             controller.setChooseCategory(comboChooseCategory.getSelectionModel()
-                    .getSelectedItem().toString(), ComboBoxPart
+                    .getSelectedItem().toString(),ComboBoxPart
                     .getSelectionModel().getSelectedItem().toString());
 
             // Оотображаем
             VboxChooseSheme.getChildren().setAll(vBox);
-        } catch (Exception e) {
+        } catch(Exception e){
             e.printStackTrace();
         }
     }
@@ -101,28 +100,17 @@ public class ControllerChooseCategoryScheme implements Initializable {
      */
 
 
-    public static ObservableList<ChooseModel> filterChooseModelByType(String type) {
-
-        ObservableList<ChooseModel> result = FXCollections.emptyObservableList();
-
-        for (ChooseModel chooseModel : chooseData) {
-            if (chooseModel.getType().equals(type)) {
-                result.add(chooseModel);
+    public static FilteredList<ChooseModel> filterChooseModelByType( String type){
+        return chooseData.filtered(new Predicate<ChooseModel>() {
+            @Override
+            public boolean test(ChooseModel chooseModel) {
+                if (chooseModel.getType().equals(type)) {
+                    return true;
+                } else {
+                    return false;
+                }
             }
-        }
-
-        return result;
-
-//        return chooseData.filtered(new Predicate<ChooseModel>() {
-//            @Override
-//            public boolean test(ChooseModel chooseModel) {
-//                if (chooseModel.getType().equals(type)) {
-//                    return true;
-//                } else {
-//                    return false;
-//                }
-//            }
-//        });
+        });
     }
 
     /**
@@ -131,52 +119,30 @@ public class ControllerChooseCategoryScheme implements Initializable {
      * @param description
      * @return FilteredList<ChooseModel>
      */
-    public static ObservableList<ChooseModel> filterChooseModelByDescription(String description) {
-
-        ObservableList<ChooseModel> result = FXCollections.emptyObservableList();
-
-        for (ChooseModel chooseModel : chooseData) {
-            if (chooseModel.getDescription().equals(description)) {
-                result.add(chooseModel);
+    public static FilteredList<ChooseModel> filterChooseModelByDescription( String description){
+        return chooseData.filtered(new Predicate<ChooseModel>() {
+            @Override
+            public boolean test(ChooseModel chooseModel) {
+                if (chooseModel.getDescription().equals(description)) {
+                    return true;
+                } else {
+                    return false;
+                }
             }
-        }
-
-        return result;
-//        return chooseData.filtered(new Predicate<ChooseModel>() {
-//            @Override
-//            public boolean test(ChooseModel chooseModel) {
-//                if (chooseModel.getDescription().equals(description)) {
-//                    return true;
-//                } else {
-//                    return false;
-//                }
-//            }
-//        });
+        });
     }
+    public static FilteredList<InfoModel> filterInfoModelByTypeSecond( String type){
+        return infoData.filtered(new Predicate<InfoModel>() {
+            @Override
+            public boolean test(InfoModel infoModel) {
+                if (infoModel.getType().equals(type)) {
+                    return true;
 
-    public static ObservableList<InfoModel> filterInfoModelByTypeSecond(String type) {
-
-        ObservableList<InfoModel> result = FXCollections.emptyObservableList();
-
-        for (InfoModel infoModel : infoData) {
-            if (infoModel.getType().equals(type)) {
-                result.add(infoModel);
+                } else {
+                    return false;
+                }
             }
-        }
-
-        return result;
-
-//        return infoData.filtered(new Predicate<InfoModel>() {
-//            @Override
-//            public boolean test(InfoModel infoModel) {
-//                if (infoModel.getType().equals(type)) {
-//                    return true;
-//
-//                } else {
-//                    return false;
-//                }
-//            }
-//        });
+        });
     }
 
 }

@@ -6,7 +6,6 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -15,8 +14,6 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
-import javafx.scene.effect.Effect;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.util.Callback;
@@ -134,34 +131,31 @@ public class ControllerTypeDefinition3 implements Initializable {
         readData();
 
         // Название
-        _tableColumn1.setCellValueFactory(new PropertyValueFactory<TableViewAbonent, String>("fullName"));
+        _tableColumn1.setCellValueFactory(new PropertyValueFactory<>("fullName"));
 
         // Колчество
-        _tableColumn2.setCellValueFactory(new PropertyValueFactory<TableViewAbonent, Integer>("count"));
+        _tableColumn2.setCellValueFactory(new PropertyValueFactory<>("count"));
 
         // Колчество
-        _tableColumn3.setCellValueFactory(new PropertyValueFactory<TableViewAbonent, Integer>("count_used"));
-        _tableColumn3.setCellFactory(TextFieldTableCell.<TableViewAbonent, Integer>forTableColumn(new IntegerStringConverter()));
+        _tableColumn3.setCellValueFactory(new PropertyValueFactory<>("count_used"));
+        _tableColumn3.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
         _tableColumn3.setMinWidth(10);
-        _tableColumn3.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<TableViewAbonent, Integer>>() {
-            @Override
-            public void handle(TableColumn.CellEditEvent<TableViewAbonent, Integer> event) {
-                TablePosition<TableViewAbonent, Integer> pos = event.getTablePosition();
+        _tableColumn3.setOnEditCommit((TableColumn.CellEditEvent<TableViewAbonent, Integer> event) -> {
+            TablePosition<TableViewAbonent, Integer> pos = event.getTablePosition();
 
-                Integer newCount= event.getNewValue();
+            Integer newCount= event.getNewValue();
 
-                int row = pos.getRow();
-                TableViewAbonent apparatus = event.getTableView().getItems().get(row);
+            int row = pos.getRow();
+            TableViewAbonent apparatus = event.getTableView().getItems().get(row);
 
-                apparatus.setCount_used(newCount);
-            }
+            apparatus.setCount_used(newCount);
         });
 
         // Checkbox
         _tableColumn4.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<TableViewAbonent, Boolean>, ObservableValue<Boolean>>() {
             @Override
             public ObservableValue<Boolean> call(TableColumn.CellDataFeatures<TableViewAbonent, Boolean> param) {
-                final TableViewAbonent tableViewApparatus = param.getValue();
+                TableViewAbonent tableViewApparatus = param.getValue();
 
                 SimpleBooleanProperty booleanProperty = new SimpleBooleanProperty(tableViewApparatus.isChoose());
 
