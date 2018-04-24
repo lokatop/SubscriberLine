@@ -41,13 +41,13 @@ public class ControllerInformationDescription {
 
     @FXML
     private void btnBackClick() throws IOException {
-        VBox vBox = FXMLLoader.load(getClass().getResource("../fxml/information_frame_first.fxml"));
+        VBox vBox = FXMLLoader.load(getClass().getResource("/fxml/information_frame_first.fxml"));
         VboxDesc.getChildren().setAll(vBox);
     }
 
     @FXML
     private void btnToMenuClick() throws IOException {
-        VBox vBox = FXMLLoader.load(getClass().getResource("../fxml/second_frame.fxml"));
+        VBox vBox = FXMLLoader.load(getClass().getResource("/fxml/second_frame.fxml"));
         VboxDesc.getChildren().setAll(vBox);
     }
 }

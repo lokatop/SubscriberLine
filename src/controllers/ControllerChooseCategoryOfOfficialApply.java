@@ -12,18 +12,18 @@ public class ControllerChooseCategoryOfOfficialApply {
     public VBox selectionOfOfficials;
 
     public void btnBackClick() throws IOException {
-        VBox vBox = FXMLLoader.load(getClass().getResource("../fxml/choose_category_of_official_1.fxml"));
+        VBox vBox = FXMLLoader.load(getClass().getResource("/fxml/choose_category_of_official_1.fxml"));
         selectionOfOfficials.getChildren().setAll(vBox);
     }
 
     public void btnToMenuClick() throws IOException {
-        VBox vBox = FXMLLoader.load(getClass().getResource("../fxml/second_frame.fxml"));
+        VBox vBox = FXMLLoader.load(getClass().getResource("/fxml/second_frame.fxml"));
         selectionOfOfficials.getChildren().setAll(vBox);
     }
 
     public void applyTheChange() throws IOException {
         /*
-        VBox vBox = FXMLLoader.load(getClass().getResource("../fxml/choose_category_of_official_1.fxml"));
+        VBox vBox = FXMLLoader.load(getClass().getResource("/fxml/choose_category_of_official_1.fxml"));
         selectionOfOfficials.getChildren().setAll(vBox);
         */
     }

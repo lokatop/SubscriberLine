@@ -55,7 +55,7 @@ public class ControllerInformationChange{
 
     @FXML
     private void btnBackClick() throws IOException {
-        VBox vBox = FXMLLoader.load(getClass().getResource("../fxml/information_frame_first.fxml"));
+        VBox vBox = FXMLLoader.load(getClass().getResource("/fxml/information_frame_first.fxml"));
         VboxInfFrame.getChildren().setAll(vBox);
     }
 
@@ -126,7 +126,7 @@ public class ControllerInformationChange{
             // Загружаем fxml-файл и создаём новую сцену
             // для всплывающего диалогового окна.
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("../fxml/information_frame_change_dialog.fxml"));
+            loader.setLocation(getClass().getResource("/fxml/information_frame_change_dialog.fxml"));
             AnchorPane page = (AnchorPane) loader.load();
 
             // Создаём диалоговое окно Stage.
@@ -163,7 +163,7 @@ public class ControllerInformationChange{
             // Загружаем fxml-файл и создаём новую сцену
             // для всплывающего диалогового окна.
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("../fxml/information_frame_change_dialog.fxml"));
+            loader.setLocation(getClass().getResource("/fxml/information_frame_change_dialog.fxml"));
             AnchorPane page = (AnchorPane) loader.load();
 
             // Создаём диалоговое окно Stage.

@@ -36,14 +36,14 @@ public class ControllerChooseCategoryScheme implements Initializable{
     public void changeData(ActionEvent actionEvent) throws IOException {
 
         VBox vBox = FXMLLoader.load(getClass()
-                .getResource("../fxml/choose_data_category.fxml"));
+                .getResource("/fxml/choose_data_category.fxml"));
         VboxChooseSheme.getChildren().setAll(vBox);
     }
 
     public void theNext(ActionEvent actionEvent) throws IOException {
 
         FXMLLoader loader = new FXMLLoader(getClass()
-                .getResource("../fxml/choose_category_of_official_1.fxml"));
+                .getResource("/fxml/choose_category_of_official_1.fxml"));
         try{
             VBox vBox = (VBox)loader.load();
 
@@ -62,13 +62,13 @@ public class ControllerChooseCategoryScheme implements Initializable{
 
     @FXML
     private void btnBackClick() throws IOException {
-        VBox vBox = FXMLLoader.load(getClass().getResource("../fxml/second_frame.fxml"));
+        VBox vBox = FXMLLoader.load(getClass().getResource("/fxml/second_frame.fxml"));
         VboxChooseSheme.getChildren().setAll(vBox);
     }
 
     @FXML
     private void btnToMenuClick() throws IOException {
-        VBox vBox = FXMLLoader.load(getClass().getResource("../fxml/second_frame.fxml"));
+        VBox vBox = FXMLLoader.load(getClass().getResource("/fxml/second_frame.fxml"));
         VboxChooseSheme.getChildren().setAll(vBox);
     }
 
