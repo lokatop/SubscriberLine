@@ -114,11 +114,11 @@ public class ControllerTypeDefinition1 implements Initializable {
             public ObservableValue<Boolean> call(TableColumn.CellDataFeatures<TableViewTypeDef1, Boolean> param) {
                 final TableViewTypeDef1 tableViewTypeDef1 = param.getValue();
 
-                SimpleBooleanProperty booleanProperty = new SimpleBooleanProperty(tableViewTypeDef1.isBoolen());
+                SimpleBooleanProperty booleanProperty = new SimpleBooleanProperty(tableViewTypeDef1.isChecked());
                 booleanProperty.addListener(new javafx.beans.value.ChangeListener<Boolean>() {
                     @Override
                     public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                        tableViewTypeDef1.setBoolen(newValue);
+                        tableViewTypeDef1.setChecked(newValue);
                     }
                 });
                 return booleanProperty;
@@ -153,9 +153,25 @@ public class ControllerTypeDefinition1 implements Initializable {
         listViewOfficial.getSelectionModel().select(0);
     }
 
-    // Заполнение таблицы
+    /**
+    * Заполнение таблицы
+    **/
     private void fillTable(String official) {
         tableView.setItems(filterByNameOfOfficial(official, tableViewTypeDef1s));
+    }
+
+    /**
+     * Метод выдаёт данные для финальной таблицы
+     * @return ObservableList<TableViewTypeDef1>
+     */
+    private ObservableList<TableViewTypeDef1> getFinalData(){
+        ObservableList<TableViewTypeDef1> result = FXCollections.observableArrayList();
+
+        for (TableViewTypeDef1 tableViewTypeDef1 : tableViewTypeDef1s)
+            if (tableViewTypeDef1.isChecked())
+                result.add(tableViewTypeDef1);
+
+        return result;
     }
 
     @Override
