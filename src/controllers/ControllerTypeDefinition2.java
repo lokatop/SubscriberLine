@@ -50,19 +50,19 @@ public class ControllerTypeDefinition2 implements Initializable {
 
     @FXML
     private void btnBackClick() throws IOException {
-        VBox vBox = FXMLLoader.load(getClass().getResource("../fxml/type_definition_1.fxml"));
+        VBox vBox = FXMLLoader.load(getClass().getResource("/fxml/type_definition_1.fxml"));
         typeDefinition.getChildren().setAll(vBox);
     }
 
     @FXML
     private void btnToMenuClick() throws IOException {
-        VBox vBox = FXMLLoader.load(getClass().getResource("../fxml/second_frame.fxml"));
+        VBox vBox = FXMLLoader.load(getClass().getResource("/fxml/second_frame.fxml"));
         typeDefinition.getChildren().setAll(vBox);
     }
 
     @FXML
     private void theNext() throws IOException{
-        VBox vBox = FXMLLoader.load(getClass().getResource("../fxml/type_definition_3.fxml"));
+        VBox vBox = FXMLLoader.load(getClass().getResource("/fxml/type_definition_3.fxml"));
         typeDefinition.getChildren().setAll(vBox);
 
     }

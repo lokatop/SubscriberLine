@@ -23,7 +23,7 @@ public class ControllerFirstFrame implements Initializable {
     public void loginToTheProgram(ActionEvent actionEvent) throws IOException {
 
 
-        VBox vBox = FXMLLoader.load(getClass().getResource("../fxml/second_frame.fxml"));
+        VBox vBox = FXMLLoader.load(getClass().getResource("/fxml/second_frame.fxml"));
         VBoxRoot1.getChildren().setAll(vBox);
     }
 

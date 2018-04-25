@@ -19,6 +19,7 @@ import javafx.scene.layout.VBox;
 import javafx.util.Callback;
 import model.InfoModel;
 import model.TableViewTypeDef1;
+import model.TheLastTable;
 import model.XMLsaver;
 
 import java.io.IOException;
@@ -41,6 +42,11 @@ public class ControllerTypeDefinition1 implements Initializable {
     @FXML
     private TableColumn<TableViewTypeDef1, Boolean> tableColumn2;
 
+    /**
+     * Список коненых данных (Для конечной таблицы)
+     */
+    public static ObservableList<TheLastTable> theLastTableList = FXCollections.observableArrayList();
+
 
     /**
      * Список выбранных должносей
@@ -61,20 +67,27 @@ public class ControllerTypeDefinition1 implements Initializable {
 
     @FXML
     private void btnBackClick() throws IOException {
-        VBox vBox = FXMLLoader.load(getClass().getResource("../fxml/choose_category_of_official_1.fxml"));
+        VBox vBox = FXMLLoader.load(getClass().getResource("/fxml/choose_category_of_official_1.fxml"));
         typeDefinition.getChildren().setAll(vBox);
     }
 
     @FXML
     private void btnToMenuClick() throws IOException {
-        VBox vBox = FXMLLoader.load(getClass().getResource("../fxml/second_frame.fxml"));
+        VBox vBox = FXMLLoader.load(getClass().getResource("/fxml/second_frame.fxml"));
         typeDefinition.getChildren().setAll(vBox);
     }
 
     @FXML
     private void theNext() throws IOException {
-        VBox vBox = FXMLLoader.load(getClass().getResource("../fxml/type_definition_2.fxml"));
+        VBox vBox = FXMLLoader.load(getClass().getResource("/fxml/type_definition_2.fxml"));
         typeDefinition.getChildren().setAll(vBox);
+
+        //*****
+        //  Создаем объекты и добавляем в них результат из getFinalData()
+        for (int i = 0; i < getFinalData().size(); i++) {
+            theLastTableList.add(new TheLastTable(getFinalData().get(i).getNameOfOfficial(),getFinalData().get(i).getEquipment()));
+        }
+
 
     }
 
@@ -154,8 +167,8 @@ public class ControllerTypeDefinition1 implements Initializable {
     }
 
     /**
-    * Заполнение таблицы
-    **/
+     * Заполнение таблицы
+     **/
     private void fillTable(String official) {
         tableView.setItems(filterByNameOfOfficial(official, tableViewTypeDef1s));
     }

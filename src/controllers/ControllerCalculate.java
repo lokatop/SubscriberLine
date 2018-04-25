@@ -31,13 +31,13 @@ public class ControllerCalculate implements Initializable{
 
     @FXML
     private void btnBackClick() throws IOException {
-        VBox vBox = FXMLLoader.load(getClass().getResource("../fxml/type_cable.fxml"));
+        VBox vBox = FXMLLoader.load(getClass().getResource("/fxml/type_cable.fxml"));
         vbox.getChildren().setAll(vBox);
     }
 
     @FXML
     private void btnToMenuClick() throws IOException {
-        VBox vBox = FXMLLoader.load(getClass().getResource("../fxml/second_frame.fxml"));
+        VBox vBox = FXMLLoader.load(getClass().getResource("/fxml/second_frame.fxml"));
         vbox.getChildren().setAll(vBox);
     }
 
@@ -54,5 +54,7 @@ public class ControllerCalculate implements Initializable{
         typeCable.setCellValueFactory(     new PropertyValueFactory<>("typeCable"       ));
         appFrom2.setCellValueFactory(      new PropertyValueFactory<>("appFrom2"        ));
         lengthCable.setCellValueFactory(   new PropertyValueFactory<>("lengthCable"     ));
+
+        tableView.setItems(ControllerTypeDefinition1.theLastTableList);
     }
 }

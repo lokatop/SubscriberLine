@@ -55,21 +55,21 @@ public class ControllerChooseCategoryOfOfficial implements Initializable{
     @FXML
     private void btnBackClick() throws IOException {
         VBox vBox = FXMLLoader.load(getClass()
-                .getResource("../fxml/choose_category_scheme.fxml"));
+                .getResource("/fxml/choose_category_scheme.fxml"));
         selectionOfOfficials.getChildren().setAll(vBox);
     }
 
     @FXML
     private void btnToMenuClick() throws IOException {
         VBox vBox = FXMLLoader.load(getClass()
-                .getResource("../fxml/second_frame.fxml"));
+                .getResource("/fxml/second_frame.fxml"));
         selectionOfOfficials.getChildren().setAll(vBox);
     }
 
     @FXML
     private void theNext() throws IOException{
         FXMLLoader loader = new FXMLLoader(getClass()
-                .getResource("../fxml/type_definition_1.fxml"));
+                .getResource("/fxml/type_definition_1.fxml"));
         try{
             VBox vBox = (VBox)loader.load();
 
@@ -87,7 +87,7 @@ public class ControllerChooseCategoryOfOfficial implements Initializable{
     @FXML
     private void EditOriginalData() throws IOException{
         FXMLLoader loader = new FXMLLoader(getClass()
-                .getResource("../fxml/choose_data_category.fxml"));
+                .getResource("/fxml/choose_data_category.fxml"));
         try{
             VBox vBox = (VBox)loader.load();
 

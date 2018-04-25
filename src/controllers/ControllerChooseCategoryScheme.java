@@ -15,15 +15,12 @@ import model.ChooseModel;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.TreeSet;
 import java.util.function.Predicate;
 
 import static controllers.ControllerInformationFrame.infoData;
 import static model.ChooseModel.FILENAME_CHOOSEMODELS;
-import static model.InfoModel.filterInfoModelByType;
 
 public class ControllerChooseCategoryScheme implements Initializable{
 
@@ -39,14 +36,14 @@ public class ControllerChooseCategoryScheme implements Initializable{
     public void changeData(ActionEvent actionEvent) throws IOException {
 
         VBox vBox = FXMLLoader.load(getClass()
-                .getResource("../fxml/choose_data_category.fxml"));
+                .getResource("/fxml/choose_data_category.fxml"));
         VboxChooseSheme.getChildren().setAll(vBox);
     }
 
     public void theNext(ActionEvent actionEvent) throws IOException {
 
         FXMLLoader loader = new FXMLLoader(getClass()
-                .getResource("../fxml/choose_category_of_official_1.fxml"));
+                .getResource("/fxml/choose_category_of_official_1.fxml"));
         try{
             VBox vBox = (VBox)loader.load();
 
@@ -65,18 +62,20 @@ public class ControllerChooseCategoryScheme implements Initializable{
 
     @FXML
     private void btnBackClick() throws IOException {
-        VBox vBox = FXMLLoader.load(getClass().getResource("../fxml/second_frame.fxml"));
+        VBox vBox = FXMLLoader.load(getClass().getResource("/fxml/second_frame.fxml"));
         VboxChooseSheme.getChildren().setAll(vBox);
     }
 
     @FXML
     private void btnToMenuClick() throws IOException {
-        VBox vBox = FXMLLoader.load(getClass().getResource("../fxml/second_frame.fxml"));
+        VBox vBox = FXMLLoader.load(getClass().getResource("/fxml/second_frame.fxml"));
         VboxChooseSheme.getChildren().setAll(vBox);
     }
 
     @Override
-    public void initialize(URL location, ResourceBundle resources) { addData(); }
+    public void initialize(URL location, ResourceBundle resources) {
+        addData();
+    }
 
         public void addData(){
         chooseData.clear();
@@ -143,5 +142,4 @@ public class ControllerChooseCategoryScheme implements Initializable{
             }
         });
     }
-
 }
