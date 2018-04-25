@@ -1,7 +1,5 @@
 package controllers;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -27,17 +25,16 @@ public class ControllerCalculate implements Initializable{
     @FXML
     private TableColumn<TheLastTable, Integer> lengthCable;
 
-    private static ObservableList<TheLastTable> theLastTableObservableList = FXCollections.observableArrayList();
 
     @FXML
     private void btnBackClick() throws IOException {
-        VBox vBox = FXMLLoader.load(getClass().getResource("../fxml/type_cable.fxml"));
+        VBox vBox = FXMLLoader.load(getClass().getResource("/fxml/type_cable.fxml"));
         vbox.getChildren().setAll(vBox);
     }
 
     @FXML
     private void btnToMenuClick() throws IOException {
-        VBox vBox = FXMLLoader.load(getClass().getResource("../fxml/second_frame.fxml"));
+        VBox vBox = FXMLLoader.load(getClass().getResource("/fxml/second_frame.fxml"));
         vbox.getChildren().setAll(vBox);
     }
 
@@ -54,5 +51,7 @@ public class ControllerCalculate implements Initializable{
         typeCable.setCellValueFactory(     new PropertyValueFactory<TheLastTable,String>("typeCable"       ));
         appFrom2.setCellValueFactory(      new PropertyValueFactory<TheLastTable, String>("appFrom2"        ));
         lengthCable.setCellValueFactory(   new PropertyValueFactory<TheLastTable, Integer>("lengthCable"     ));
+
+        tableView.setItems(ControllerTypeDefinition1.theLastTableList);
     }
 }

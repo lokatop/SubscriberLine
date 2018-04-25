@@ -14,11 +14,10 @@ import javafx.scene.layout.VBox;
 import model.InfoModel;
 import model.XMLsaver;
 
-import java.io.*;
+import java.io.IOException;
 import java.net.URL;
-import java.util.*;
+import java.util.ResourceBundle;
 
-import static model.InfoModel.CATEGORIES;
 import static model.InfoModel.CATEGORIES_DESC;
 import static model.InfoModel.filterInfoModelByType;
 
@@ -49,7 +48,7 @@ public class ControllerInformationFrame implements Initializable {
 
     public void toShow(ActionEvent actionEvent) throws IOException {
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/information_frame_decription.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/information_frame_decription.fxml"));
 
         //Получаем выбранную модель
         Button b = (Button) actionEvent.getTarget();
@@ -72,7 +71,7 @@ public class ControllerInformationFrame implements Initializable {
     }
 
     public void change(ActionEvent actionEvent) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/information_frame_change.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/information_frame_change.fxml"));
 
         //Получаем id выбранного типа
         Integer typeId = list_for_edit.getSelectionModel().getSelectedIndex();
@@ -161,7 +160,7 @@ public class ControllerInformationFrame implements Initializable {
 
     @FXML
     private void btnBackClick() throws IOException {
-        VBox vBox = FXMLLoader.load(getClass().getResource("../fxml/second_frame.fxml"));
+        VBox vBox = FXMLLoader.load(getClass().getResource("/fxml/second_frame.fxml"));
         Vbox.getChildren().setAll(vBox);
     }
 }
