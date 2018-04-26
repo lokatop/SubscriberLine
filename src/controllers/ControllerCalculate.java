@@ -10,10 +10,13 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
 import model.TheLastTable;
+import treads.FirstTreadOnCalc;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import static controllers.ControllerTypeDefinition1.theLastTableList;
 
 public class ControllerCalculate implements Initializable{
     @FXML
@@ -43,7 +46,11 @@ public class ControllerCalculate implements Initializable{
 
     @FXML
     private void calculate() throws IOException{
-
+        try {
+            createWordTable();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -55,6 +62,13 @@ public class ControllerCalculate implements Initializable{
         appFrom2.setCellValueFactory(      new PropertyValueFactory<>("appFrom2"        ));
         lengthCable.setCellValueFactory(   new PropertyValueFactory<>("lengthCable"     ));
 
-        tableView.setItems(ControllerTypeDefinition1.theLastTableList);
+        tableView.setItems(theLastTableList);
+
     }
+
+    public void createWordTable() throws IOException {
+        FirstTreadOnCalc tread = new FirstTreadOnCalc();
+        tread.run(theLastTableList);
+    }
+
 }
