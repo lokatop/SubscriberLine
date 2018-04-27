@@ -50,7 +50,7 @@ public class ControllerTypeDefinition2 implements Initializable {
 
     @FXML
     private void btnBackClick() throws IOException {
-        VBox vBox = FXMLLoader.load(getClass().getResource("/fxml/type_definition_1.fxml"));
+        VBox vBox = FXMLLoader.load(getClass().getResource("/fxml/type_definition_1_result_table.fxml"));
         typeDefinition.getChildren().setAll(vBox);
     }
 

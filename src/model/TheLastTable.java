@@ -2,6 +2,11 @@ package model;
 
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.ObservableList;
+
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.function.Predicate;
 
 public class TheLastTable {
     private SimpleStringProperty  officialPerson;
@@ -99,5 +104,52 @@ public class TheLastTable {
 
     public void setLengthCable(int lengthCable) {
         this.lengthCable.set(lengthCable);
+    }
+
+    public static ObservableList<TheLastTable> filterByOfficialPerson(String officialPerson, ObservableList<TheLastTable> data){
+        return data.filtered(new Predicate<TheLastTable>() {
+            @Override
+            public boolean test(TheLastTable item) {
+                if (item.getOfficialPerson().equals(officialPerson)) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        });
+    }
+    public static ObservableList<TheLastTable> filterByTypeAbon(String typeAbon, ObservableList<TheLastTable> data){
+        return data.filtered(new Predicate<TheLastTable>() {
+            @Override
+            public boolean test(TheLastTable item) {
+                if (item.getTypeAbon().equals(typeAbon)) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        });
+    }
+    public static ArrayList<String> getAllOfficialPerson(ObservableList<TheLastTable> data){
+
+        ArrayList<String> result = new ArrayList<String>();
+
+        for(TheLastTable item : data){
+            if (!result.contains(item.getOfficialPerson()))
+                result.add(item.getOfficialPerson());
+        }
+
+        return result;
+    }
+    public static ArrayList<String> getAllTypeAbon(ObservableList<TheLastTable> data){
+
+        ArrayList<String> result = new ArrayList<String>();
+
+        for(TheLastTable item : data){
+            if (!result.contains(item.getTypeAbon()))
+                result.add(item.getTypeAbon());
+        }
+
+        return result;
     }
 }

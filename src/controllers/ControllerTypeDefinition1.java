@@ -16,6 +16,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
+import javafx.scene.web.WebView;
 import javafx.util.Callback;
 import model.InfoModel;
 import model.TableViewTypeDef1;
@@ -79,16 +80,17 @@ public class ControllerTypeDefinition1 implements Initializable {
 
     @FXML
     private void theNext() throws IOException {
-        VBox vBox = FXMLLoader.load(getClass().getResource("/fxml/type_definition_2.fxml"));
-        typeDefinition.getChildren().setAll(vBox);
 
         //*****
         //  Создаем объекты и добавляем в них результат из getFinalData()
+        theLastTableList.clear();
         for (int i = 0; i < getFinalData().size(); i++) {
             theLastTableList.add(new TheLastTable(getFinalData().get(i).getNameOfOfficial(),getFinalData().get(i).getEquipment()));
         }
 
 
+        VBox vBox = FXMLLoader.load(getClass().getResource("/fxml/type_definition_1_result_table.fxml"));
+        typeDefinition.getChildren().setAll(vBox);
     }
 
     private void readData() {
