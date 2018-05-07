@@ -23,8 +23,9 @@ import java.io.IOException;
 
 import static model.InfoModel.CATEGORIES;
 import static model.InfoModel.CATEGORIES_DESC;
+import static model.InfoModel.filterInfoModelByType;
 
-public class ControllerInformationChange{
+public class ControllerInformationChange {
     @FXML
     public VBox VboxInfFrame;
     @FXML
@@ -84,7 +85,11 @@ public class ControllerInformationChange{
     }
 
     public void info_model_add(ActionEvent actionEvent) {
-        showAddDialog();
+
+        if (changingTypeId == 4 || changingTypeId == 5)
+            showAddDialogForApparatus();
+        else
+            showAddDialog();
         updateLists();
     }
 
@@ -99,7 +104,10 @@ public class ControllerInformationChange{
     }
 
     public void info_model_edit(ActionEvent actionEvent) {
-        showEditDialog();
+        if (changingTypeId == 4 || changingTypeId == 5)
+            showEditDialogForApparatus();
+        else
+            showEditDialog();
         updateLists();
     }
 
@@ -158,6 +166,50 @@ public class ControllerInformationChange{
         }
     }
 
+    public boolean showEditDialogForApparatus() {
+        try {
+            // Загружаем fxml-файл и создаём новую сцену
+            // для всплывающего диалогового окна.
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/fxml/information_frame_change_dialog_for_apparatus.fxml"));
+            AnchorPane page = (AnchorPane) loader.load();
+
+            // Создаём диалоговое окно Stage.
+            Stage dialogStage = new Stage();
+
+            // Заголовок окна
+            dialogStage.setTitle("Редактирование");
+
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner(VboxInfFrame.getParent().getScene().getWindow());
+            Scene scene = new Scene(page);
+            dialogStage.setScene(scene);
+
+            // Передаём адресата в контроллер.
+            ControllerInformationFrameChangeDialogForApparatus controller = loader.getController();
+            controller.setDialogStage(dialogStage);
+
+            // Отправляем модель
+            InfoModel model = changingList.get(__list_of_items.getSelectionModel().getSelectedIndex());
+            controller.setInfoModel(model);
+
+            // Отправляем список ТА для аппаратных
+            ObservableList<InfoModel> temp = FXCollections.observableArrayList();
+            temp.addAll(filterInfoModelByType("DS", infoData));
+            temp.addAll(filterInfoModelByType("ZAS", infoData));
+            temp.addAll(filterInfoModelByType("ARM", infoData));
+            controller.setTAList(temp);
+
+            // Отображаем диалоговое окно и ждём, пока пользователь его не закроет
+            dialogStage.showAndWait();
+
+            return controller.isOkClicked();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
     public boolean showAddDialog() {
         try {
             // Загружаем fxml-файл и создаём новую сцену
@@ -181,7 +233,7 @@ public class ControllerInformationChange{
             controller.setDialogStage(dialogStage);
 
             // Отправляем модель
-            InfoModel model = new InfoModel("",CATEGORIES[changingTypeId],"",new Image("resource/noimage.png"));
+            InfoModel model = new InfoModel("", CATEGORIES[changingTypeId], "", new Image("resource/noimage.png"));
 
             controller.setInfoModel(model);
 
@@ -189,7 +241,55 @@ public class ControllerInformationChange{
             dialogStage.showAndWait();
 
             // Добавляем новую модель
-            if (controller.isOkClicked()){
+            if (controller.isOkClicked()) {
+                infoData.add(controller.getInfoModel());
+            }
+
+            return controller.isOkClicked();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean showAddDialogForApparatus() {
+        try {
+            // Загружаем fxml-файл и создаём новую сцену
+            // для всплывающего диалогового окна.
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/fxml/information_frame_change_dialog_for_apparatus.fxml"));
+            AnchorPane page = (AnchorPane) loader.load();
+
+            // Создаём диалоговое окно Stage.
+            Stage dialogStage = new Stage();
+
+            // Заголовок окна
+            dialogStage.setTitle("Добавление");
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner(VboxInfFrame.getParent().getScene().getWindow());
+            Scene scene = new Scene(page);
+            dialogStage.setScene(scene);
+
+            // Передаём адресата в контроллер.
+            ControllerInformationFrameChangeDialogForApparatus controller = loader.getController();
+            controller.setDialogStage(dialogStage);
+
+            // Отправляем модель
+            InfoModel model = new InfoModel("", CATEGORIES[changingTypeId], "", new Image("resource/noimage.png"));
+            controller.setInfoModel(model);
+
+            // Отправляем список ТА для аппаратных
+            ObservableList<InfoModel> temp = FXCollections.observableArrayList();
+            temp.addAll(filterInfoModelByType("DS", infoData));
+            temp.addAll(filterInfoModelByType("ZAS", infoData));
+            temp.addAll(filterInfoModelByType("ARM", infoData));
+            controller.setTAList(temp);
+
+            // Отображаем диалоговое окно и ждём, пока пользователь его не закроет
+            dialogStage.showAndWait();
+
+            // Добавляем новую модель
+            if (controller.isOkClicked()) {
                 infoData.add(controller.getInfoModel());
             }
 
@@ -201,14 +301,14 @@ public class ControllerInformationChange{
     }
 
     @FXML
-    private void updateLists(){
+    private void updateLists() {
 
         // Меняем id категории
         changingTypeId = __list_of_categories.getSelectionModel().getSelectedIndex();
 
         // Фильтруем по типу
         changingList = null;
-        changingList = InfoModel.filterInfoModelByType(CATEGORIES[changingTypeId], infoData);
+        changingList = filterInfoModelByType(CATEGORIES[changingTypeId], infoData);
 
         // Выбираем категорию изменяемых моделей
         __list_of_categories.getSelectionModel().select(CATEGORIES_DESC[changingTypeId]);
@@ -229,13 +329,13 @@ public class ControllerInformationChange{
         int id = __list_of_items.getSelectionModel().getSelectedIndex();
 
         // Если буфер пуст - копируем, если нет - вставляем
-        if (modelCopyPastID == null){
+        if (modelCopyPastID == null) {
             modelCopyPastID = id;
             __btn_copy_past_cancel.setDisable(false);
             __btn_copy_past.setText("Вставить");
         } else {
             // Модифицируем тип модели
-            infoData.get(modelCopyPastID).setType(infoData.get(modelCopyPastID).getType()+","+InfoModel.CATEGORIES[changingTypeId]);
+            infoData.get(modelCopyPastID).setType(infoData.get(modelCopyPastID).getType() + "," + InfoModel.CATEGORIES[changingTypeId]);
             modelCopyPastID = null;
             __btn_copy_past_cancel.setDisable(true);
             __btn_copy_past.setText("Копировать");

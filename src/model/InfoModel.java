@@ -18,7 +18,7 @@ import java.util.function.Predicate;
 // определяем корневой элемент
 //@XmlRootElement(name = "InfoModel")
 // определяем последовательность тегов в XML
-@XmlType(propOrder = {"title", "type", "description", "image"})
+@XmlType(propOrder = {"title", "type", "description", "image", "data"})
 public class InfoModel {
     public static String FILENAME_INFOMODELS = "InfoModels.xml";
 
@@ -26,6 +26,7 @@ public class InfoModel {
     private final StringProperty type;
     private final StringProperty description;
     private final ObjectProperty<Image> image;
+    private final StringProperty data;
 
     /**
      * Список сокращений категоий
@@ -40,18 +41,22 @@ public class InfoModel {
      * Конструктор по умолчанию.
      */
     public InfoModel() {
-        this(null, null, null, null);
+        this(null, null, null, null, null);
+    }
+    public InfoModel(String title, String type, String description, Image image) {
+        this(title, type, description, image, null);
     }
 
     /**
      * Конструктор с некоторыми начальными данными.
      *
      */
-    public InfoModel(String title, String type, String description, Image image) {
+    public InfoModel(String title, String type, String description, Image image, String data) {
         this.title = new SimpleStringProperty(title);
         this.type = new SimpleStringProperty(type);
         this.description = new SimpleStringProperty(description);
         this.image = new SimpleObjectProperty<Image>(image);
+        this.data = new SimpleStringProperty(data);
     }
 
     @XmlElement
@@ -106,12 +111,23 @@ public class InfoModel {
         return image;
     }
 
+    public String getData() {
+        return data.get();
+    }
+    public void setData(String data){
+        this.data.set(data);
+    }
+
+    public StringProperty dataProperty() {
+        return data;
+    }
+
+
     // Для ComboBox'ов (Добавляем список моделей, получаем список заголовков)
     @Override
     public String toString()  {
         return this.getTitle();
     }
-
 
     /**
      * Фильтрует модели по типу
