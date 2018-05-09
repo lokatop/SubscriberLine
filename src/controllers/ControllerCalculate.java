@@ -10,7 +10,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
 import model.TheLastTable;
-import treads.FirstTreadOnCalc;
+import treads.FirstTreadOnCalc_2;
 
 import java.io.IOException;
 import java.net.URL;
@@ -67,7 +67,15 @@ public class ControllerCalculate implements Initializable{
     }
 
     public void createWordTable() throws IOException {
-        FirstTreadOnCalc tread = new FirstTreadOnCalc();
+        FirstTreadOnCalc_2 tread = new FirstTreadOnCalc_2();
+         //Тупо для примера
+        theLastTableObservableList.add(
+                new TheLastTable
+                        (
+                        "aaa","asd","asd","adsa","Ничего",1
+                        )
+        );
+
         tread.run(theLastTableList);
     }
 
