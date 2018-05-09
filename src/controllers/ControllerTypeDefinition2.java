@@ -80,10 +80,8 @@ public class ControllerTypeDefinition2 implements Initializable {
             apparatusData.addAll(InfoModel.filterInfoModelByType("ATZU", unfilterred));
         }
     }
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        readData();
 
+    private void setupTable(){
         // Название
         _tableColumn1.setCellValueFactory(new PropertyValueFactory<>("fullName"));
 
@@ -140,6 +138,12 @@ public class ControllerTypeDefinition2 implements Initializable {
                 return cell;
             }
         });
+    }
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        readData();
+
+        setupTable();
 
         if (_tableView.getItems().isEmpty()) {
             _tableView.setItems(getTableViewApparatusList());
@@ -167,7 +171,8 @@ public class ControllerTypeDefinition2 implements Initializable {
         for (int i = 0; i<apparatusData.size(); i++){
 
             tableData.add( new TableViewApparatus(
-                    apparatusData.get(i).getTitle()
+                    apparatusData.get(i).getTitle(),
+                    apparatusData.get(i).getData()
             ));
         }
         return tableData;

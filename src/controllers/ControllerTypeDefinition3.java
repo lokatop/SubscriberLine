@@ -115,24 +115,8 @@ public class ControllerTypeDefinition3 implements Initializable {
             }
         }
     }
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
 
-        // Инициализация переменных
-        apparatusChoosedId = null;
-        abonentChoosedModel = null;
-
-        // Инициализация GUI
-        _add_btn.setDisable(true);
-        _del_btn.setDisable(true);
-        _add_name.setDisable(true);
-        _add_count.setDisable(true);
-
-        // Получаем выбранные ранне аппаратные
-        apparatusChoosedData = ControllerTypeDefinition2.choosedApparatus;
-
-        readData();
-
+    private void setupTable(){
         // Название
         _tableColumn1.setCellValueFactory(new PropertyValueFactory<>("fullName"));
 
@@ -179,7 +163,9 @@ public class ControllerTypeDefinition3 implements Initializable {
                 return cell;
             }
         });
+    }
 
+    private void setupList(){
         _apparatus_list.getItems().clear();
         _apparatus_list.setItems(apparatusChoosedData);
         // Слушатель выбранной моели в списке аппаратных
@@ -209,6 +195,28 @@ public class ControllerTypeDefinition3 implements Initializable {
             }
         });
     }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+
+        // Инициализация переменных
+        apparatusChoosedId = null;
+        abonentChoosedModel = null;
+
+        // Инициализация GUI
+        _add_btn.setDisable(true);
+        _del_btn.setDisable(true);
+        _add_name.setDisable(true);
+        _add_count.setDisable(true);
+
+        // Получаем выбранные ранне аппаратные
+        apparatusChoosedData = ControllerTypeDefinition2.choosedApparatus;
+
+        readData();
+
+        setupTable();
+        setupList();
+        }
 
     public void setAbonentTable(TableViewApparatus apparatus){
 
