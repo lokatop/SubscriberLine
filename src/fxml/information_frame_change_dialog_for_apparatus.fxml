@@ -63,7 +63,7 @@
                         </HTMLEditor>
                         <VBox>
                            <children>
-                              <TableView fx:id="_ta_table" prefHeight="241.0" prefWidth="152.0">
+                              <TableView fx:id="_ta_table" editable="true" prefHeight="241.0" prefWidth="152.0">
                                 <columns>
                                   <TableColumn fx:id="_ta_column_1" editable="false" prefWidth="75.0" text="Наименование" />
                                   <TableColumn fx:id="_ta_column_2" prefWidth="75.0" text="Количество" />
@@ -76,7 +76,20 @@
                               <ComboBox fx:id="_ta_list" prefWidth="150.0" />
                               <Label text="Количество" />
                               <TextField fx:id="_ta_count" />
-                              <Button mnemonicParsing="false" onAction="#_ta_add" text="Добавить" />
+                              <HBox>
+                                 <children>
+                                    <Button mnemonicParsing="false" onAction="#_ta_add" text="Добавить">
+                                       <HBox.margin>
+                                          <Insets right="8.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                    <Button mnemonicParsing="false" onAction="#_ta_del" text="Удалить">
+                                       <HBox.margin>
+                                          <Insets left="8.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                 </children>
+                              </HBox>
                            </children>
                            <HBox.margin>
                               <Insets left="8.0" right="16.0" />

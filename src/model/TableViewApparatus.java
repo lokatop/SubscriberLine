@@ -9,17 +9,26 @@ public class TableViewApparatus {
     private SimpleStringProperty fullName;
     private SimpleIntegerProperty count;
     private SimpleBooleanProperty choose;
+    private SimpleStringProperty data;
 
-    public TableViewApparatus(String fullName, Integer count, boolean choose) {
+    public TableViewApparatus(String fullName, Integer count, boolean choose, String data) {
         this.fullName = new SimpleStringProperty(fullName);
         this.count = new SimpleIntegerProperty(count);
         this.choose = new SimpleBooleanProperty(choose);
+        this.data = new SimpleStringProperty(data);
     }
 
     public TableViewApparatus(String fullName) {
         this.fullName = new SimpleStringProperty(fullName);
         this.count = new SimpleIntegerProperty(1);
         this.choose = new SimpleBooleanProperty(false);
+        this.data = new SimpleStringProperty("");
+    }
+    public TableViewApparatus(String fullName, String data) {
+        this.fullName = new SimpleStringProperty(fullName);
+        this.count = new SimpleIntegerProperty(1);
+        this.choose = new SimpleBooleanProperty(false);
+        this.data = new SimpleStringProperty(data);
     }
 
     public String getFullName() {
@@ -61,5 +70,17 @@ public class TableViewApparatus {
     @Override
     public String toString() {
         return getFullName();
+    }
+
+    public String getData() {
+        return data.get();
+    }
+
+    public SimpleStringProperty dataProperty() {
+        return data;
+    }
+
+    public void setData(String data) {
+        this.data.set(data);
     }
 }

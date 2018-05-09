@@ -279,6 +279,8 @@ public class ControllerInformationFrameChangeDialogForApparatus implements Initi
 
     private void setupTAList() {
         _ta_list.setItems(TA);
+        if (_ta_list.getItems().size() != 0)
+            _ta_list.getSelectionModel().select(0);
     }
 
     public void _ta_add(ActionEvent actionEvent) {
@@ -302,6 +304,12 @@ public class ControllerInformationFrameChangeDialogForApparatus implements Initi
     public void initialize(URL location, ResourceBundle resources) {
         // Настройка таблицы
         setupTable();
+    }
+
+    public void _ta_del(ActionEvent actionEvent) {
+        try {
+            TATable.remove(_ta_table.getSelectionModel().getSelectedItem());
+        } catch (Exception e){}
     }
 
 
