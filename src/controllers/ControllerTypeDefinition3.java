@@ -50,6 +50,11 @@ public class ControllerTypeDefinition3 implements Initializable {
     @FXML
     private Label label;
 
+    /**
+     * Список коненых данных (Для конечной таблицы)
+     */
+    public static ObservableList<TheLastTable> theLastTableList2 = FXCollections.observableArrayList();
+
     // Статическая переменная ниже передается и используется далее(чтобы изменения там сразу отражались и здесь)
     public static ObservableList<TableViewAbonent> abonentsData = FXCollections.observableArrayList();
 
@@ -76,6 +81,13 @@ public class ControllerTypeDefinition3 implements Initializable {
         VBox vBox = FXMLLoader.load(getClass().getResource("/fxml/type_cable.fxml"));
         typeDefinition.getChildren().setAll(vBox);
 
+        for (TheLastTable item : ControllerTypeDefinition1.theLastTableList) {
+            for (TableViewAbonent t : abonentsData) {
+                if(t.getFullName().equals(item.getTypeAbon()) && t.isChoose()){
+                    item.setAppFrom1(t.getParentApparatus());
+                }
+            }
+        }
     }
 
     public void readData(){
@@ -92,8 +104,10 @@ public class ControllerTypeDefinition3 implements Initializable {
                     if (t.getFullName().equals(temp.getFullName()) && t.getParentApparatus().equals(temp.getParentApparatus()))
                         alredy_exist = true;
 
-                if (!alredy_exist)
-                    abonentsData.add(temp);
+                if (!alredy_exist){
+                    abonentsData.add(temp);}else {
+                }
+
             }
         }
     }
