@@ -23,6 +23,7 @@ import javafx.util.Callback;
 import javafx.util.converter.IntegerStringConverter;
 import model.TableViewAbonent;
 import model.TableViewApparatus;
+import model.TheLastTable;
 import model.XMLsaver;
 
 import java.io.IOException;
@@ -80,38 +81,19 @@ public class ControllerTypeDefinition3 implements Initializable {
     public void readData(){
         abonentsData.clear();
 
-        // Читаем из файла
-        ObservableList unfilterred = FXCollections.observableArrayList();
-        unfilterred.addAll(XMLsaver.loadFromXML(TableViewAbonent.XML_FILENAME));
+        // Берём данные для показа
+        for (TableViewApparatus app : apparatusChoosedData) {
+            for (TheLastTable item : ControllerTypeDefinition1.theLastTableList) {
 
-        if (unfilterred.isEmpty()){
-            // Заполняем дефолтами
-            abonentsData.add(new TableViewAbonent("АТ-3031",2,"МП-1И"));
-            abonentsData.add(new TableViewAbonent("ТА-88",10,"МП-1И"));
+                TableViewAbonent temp = new TableViewAbonent(item.getTypeAbon(),0,app.getFullName());
 
-            abonentsData.add(new TableViewAbonent("АТ-3031",2,"МП-2И"));
-            abonentsData.add(new TableViewAbonent("ТА-88",10,"МП-2И"));
+                boolean alredy_exist = false;
+                for (TableViewAbonent t : abonentsData)
+                    if (t.getFullName().equals(temp.getFullName()) && t.getParentApparatus().equals(temp.getParentApparatus()))
+                        alredy_exist = true;
 
-            abonentsData.add(new TableViewAbonent("АТ-3031",2,"П-240И"));
-            abonentsData.add(new TableViewAbonent("ТА-88",10,"П-240И"));
-
-            abonentsData.add(new TableViewAbonent("АТ-3031",2,"П-240ДА"));
-            abonentsData.add(new TableViewAbonent("ТА-88",10,"П-240ДА"));
-
-            abonentsData.add(new TableViewAbonent("АТ-3031",30,"П-244И"));
-
-            abonentsData.add(new TableViewAbonent("АТ-3031",20,"П-242И"));
-
-            abonentsData.add(new TableViewAbonent("АТ-3031",20,"П-244И-4"));
-
-            abonentsData.add(new TableViewAbonent("АТ-3031",12,"П-260-О"));
-
-            abonentsData.add(new TableViewAbonent("АТ-3031",6,"П-260-У"));
-
-            abonentsData.add(new TableViewAbonent("АТ-3031",6,"П-260-Т"));
-        } else {
-            for (int i = 0; i< apparatusChoosedData.size(); i++){
-                abonentsData.addAll(TableViewAbonent.filterInfoModelByApparatusName(apparatusChoosedData.get(i).getFullName(), unfilterred));
+                if (!alredy_exist)
+                    abonentsData.add(temp);
             }
         }
     }
