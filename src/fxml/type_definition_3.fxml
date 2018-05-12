@@ -56,7 +56,7 @@
                               <ListView fx:id="_apparatus_list" onMouseClicked="#_list_clicked" prefHeight="439.0" prefWidth="305.0" />
                            </children>
                         </VBox>
-                        <VBox alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="426.0" prefWidth="570.0">
+                        <VBox alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="570.0">
                            <HBox.margin>
                               <Insets left="25.0" right="50.0" />
                            </HBox.margin>
@@ -77,49 +77,16 @@
                                     <TableColumn fx:id="_tableColumn4" maxWidth="1.7976931348623157E308" minWidth="42.0" prefWidth="42.0" text="Вкл." />
                                  </columns>
                               </TableView>
-                              <HBox prefHeight="100.0" prefWidth="200.0">
-                                 <children>
-                                    <VBox prefHeight="70.0" prefWidth="220.0">
-                                       <children>
-                                          <Label text="Название абонентского оборудования" />
-                                          <TextField fx:id="_add_name" />
-                                       </children>
-                                       <HBox.margin>
-                                          <Insets left="16.0" right="16.0" />
-                                       </HBox.margin>
-                                    </VBox>
-                                    <VBox prefHeight="70.0" prefWidth="140.0">
-                                       <children>
-                                          <Label text="Количество в комплекте" />
-                                          <TextField fx:id="_add_count" />
-                                       </children>
-                                       <HBox.margin>
-                                          <Insets left="16.0" />
-                                       </HBox.margin>
-                                    </VBox>
-                                 </children>
-                                 <VBox.margin>
-                                    <Insets />
-                                 </VBox.margin>
-                                 <padding>
-                                    <Insets top="16.0" />
-                                 </padding>
-                              </HBox>
-                              <HBox prefHeight="100.0" prefWidth="200.0">
-                                 <children>
-                                    <Button fx:id="_add_btn" mnemonicParsing="false" onAction="#_add" text="Добавить">
-                                       <HBox.margin>
-                                          <Insets left="16.0" right="16.0" />
-                                       </HBox.margin>
-                                    </Button>
-                                    <Button fx:id="_del_btn" mnemonicParsing="false" onAction="#_delete" text="Удалить">
-                                       <HBox.margin>
-                                          <Insets left="16.0" right="16.0" />
-                                       </HBox.margin>
-                                    </Button>
-                                 </children>
-                              </HBox>
+                              <Label text="Список оборудования, которое не было использовано:" />
+                              <ScrollPane prefHeight="89.0" prefViewportHeight="17.0" prefViewportWidth="20.0" prefWidth="505.0">
+                                 <content>
+                                    <Label fx:id="_unused_list" text="Нет" />
+                                 </content>
+                              </ScrollPane>
                            </children>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
                         </VBox>
                      </children>
                   </HBox>

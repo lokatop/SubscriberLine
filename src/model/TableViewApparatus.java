@@ -4,6 +4,11 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 public class TableViewApparatus {
 
     private SimpleStringProperty fullName;
@@ -82,5 +87,29 @@ public class TableViewApparatus {
 
     public void setData(String data) {
         this.data.set(data);
+    }
+
+    /**
+     * Результат в виде<br>
+     *     List&lt;Map&lt;String, String&gt;&gt; data = app.getDataApparatus(); <br>
+     *     data.get(0).get("name");<br>
+     *     data.get(0).get("count"); // Это строка! Для перевода в число: Integer.parseInt(data.get(0).get("count"));
+     * @return
+     */
+    public List<Map< String, String >> getDataApparatus(){
+        List<Map< String, String >> result = new ArrayList<>();
+            if (this.getData() != null) {
+                String[] substrs;
+                substrs = this.getData().split(";");
+                for (String substr : substrs) {
+
+                    String strTA[] = substr.split(":");
+                    Map<String, String> toAdd = new HashMap<String, String>();
+                    toAdd.put("name", strTA[0]);
+                    toAdd.put("count", strTA[1]);
+                    result.add(toAdd);
+                }
+            }
+        return result;
     }
 }

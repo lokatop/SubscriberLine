@@ -1,5 +1,6 @@
 package model;
 
+import controllers.ControllerInformationFrameChangeDialogForApparatus;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -12,7 +13,10 @@ import javafx.scene.image.Image;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Predicate;
 
 // определяем корневой элемент
@@ -158,5 +162,4 @@ public class InfoModel {
             }
         });
     }
-
 }
