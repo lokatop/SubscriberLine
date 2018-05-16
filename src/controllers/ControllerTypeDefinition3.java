@@ -13,11 +13,9 @@ import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.util.Callback;
-import javafx.util.converter.IntegerStringConverter;
 import model.TableViewAbonent;
 import model.TableViewApparatus;
 import model.TheLastTable;
@@ -47,7 +45,7 @@ public class ControllerTypeDefinition3 implements Initializable {
     @FXML
     private Label label;
 
-    public static ObservableList<TheLastTable> theLastTableListNew = FXCollections.observableArrayList();
+    public static ObservableList<TheLastTable> theLastTableListUpdatedD3 = FXCollections.observableArrayList();
 
     // Статическая переменная ниже передается и используется далее(чтобы изменения там сразу отражались и здесь)
     public static ObservableList<TableViewAbonent> abonentsData = FXCollections.observableArrayList();
@@ -72,6 +70,7 @@ public class ControllerTypeDefinition3 implements Initializable {
 
     @FXML
     private void theNext() throws IOException {
+
         VBox vBox = FXMLLoader.load(getClass().getResource("/fxml/type_cable.fxml"));
         typeDefinition.getChildren().setAll(vBox);
 
@@ -79,6 +78,7 @@ public class ControllerTypeDefinition3 implements Initializable {
 
     public void readData() {
         abonentsData.clear();
+        theLastTableListUpdatedD3.clear();
 
         List<TheLastTable> unused = new ArrayList<>();
         unused.addAll(ControllerTypeDefinition1.theLastTableList);
@@ -103,7 +103,7 @@ public class ControllerTypeDefinition3 implements Initializable {
                         tlt.setAppFrom1(app.getFullName());
 
                         // Добавляем в временный список строку, если такой ещё не было
-                        if (!theLastTableListNew.contains(tlt)) {
+                        if (!theLastTableListUpdatedD3.contains(tlt)) {
 
                             // Добавляем абонентское устройство или увеличиваем количество "при развёртывании"
                             Integer count = Integer.parseInt(abon.get("count"));
@@ -116,12 +116,12 @@ public class ControllerTypeDefinition3 implements Initializable {
 
                             if (tva_existed == null) {
                                 abonentsData.add(tva_new);
-                                theLastTableListNew.add(tlt);
+                                theLastTableListUpdatedD3.add(tlt);
                                 unused.remove(item);
                             } else {
                                 if (tva_existed.getCount_used() < tva_existed.getCount()) {
                                     tva_existed.increaseCount_used();
-                                    theLastTableListNew.add(tlt);
+                                    theLastTableListUpdatedD3.add(tlt);
                                     unused.remove(item);
                                 }
 //                              else {
@@ -146,7 +146,7 @@ public class ControllerTypeDefinition3 implements Initializable {
 
         // Обновляем список для последней модели
 //        ControllerTypeDefinition1.theLastTableList.clear();
-//        ControllerTypeDefinition1.theLastTableList.addAll(theLastTableListNew);
+//        ControllerTypeDefinition1.theLastTableList.addAll(theLastTableListUpdatedD3);
 
         showUnusedMessage(unused);
     }
