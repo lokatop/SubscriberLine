@@ -137,6 +137,18 @@ public class TheLastTable {
             }
         });
     }
+    public static ObservableList<TheLastTable> filterFromApp(String appFrom, ObservableList<TheLastTable> data) {
+        return data.filtered(new Predicate<TheLastTable>() {
+            @Override
+            public boolean test(TheLastTable item) {
+                if (item.getAppFrom1().equals(appFrom)) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        });
+    }
 
     public static ObservableList<TheLastTable> filterByTypeAbon(String typeAbon, ObservableList<TheLastTable> data) {
         return data.filtered(new Predicate<TheLastTable>() {

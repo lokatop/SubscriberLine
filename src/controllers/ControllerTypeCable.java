@@ -17,10 +17,7 @@ import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
 import javafx.util.Callback;
-import model.InfoModel;
-import model.TableViewChooseCategory;
-import model.TableViewTypeDef1;
-import model.XMLsaver;
+import model.*;
 
 import java.io.IOException;
 import java.net.URL;
@@ -37,13 +34,11 @@ public class ControllerTypeCable implements Initializable{
     public VBox vbox;
     @FXML
     private ListView listViewOfficial;
+    @FXML
+    private ListView listViewEquipment;
 
     @FXML
-    private TableView tableView;
-    @FXML
-    private TableColumn<TableViewTypeDef1, String> tableColumn1;
-    @FXML
-    private TableColumn<TableViewTypeDef1, Boolean> tableColumn2;
+    private ListView listViewChoose;
 
     @FXML
     private void btnBackClick() throws IOException {
@@ -73,17 +68,24 @@ public class ControllerTypeCable implements Initializable{
 
     }
 
+    // Список для проверки
+    private static Set<String> setForEquipmentListView = new HashSet();
 
     /**
      * Список выбранных должносей
      */
     private ObservableList<String> choosedOfficialList = FXCollections.observableArrayList();
+    /**
+     * Список выбранного оборудования
+     */
+    private ObservableList<String> choosedEquipmentList = FXCollections.observableArrayList();
 
 
     /**
      * Список всех ТА для должностей
      */
     private ObservableList<InfoModel> infoModelsList = FXCollections.observableArrayList();
+    private ObservableList<String> infoModelsListForListView = FXCollections.observableArrayList();
 
     /**
      * Список строк таблицы с чекбоксами
@@ -112,64 +114,88 @@ public class ControllerTypeCable implements Initializable{
         }
     }
 
-    private void setupTable() {
-
-        // Очищение
-        tableView.setItems(null);
-
-        // Настройка
-        tableColumn1.setCellValueFactory(new PropertyValueFactory<TableViewTypeDef1, String>("equipment"));
-        tableColumn2.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<TableViewTypeDef1, Boolean>, ObservableValue<Boolean>>() {
-            @Override
-            public ObservableValue<Boolean> call(TableColumn.CellDataFeatures<TableViewTypeDef1, Boolean> param) {
-                final TableViewTypeDef1 tableViewTypeDef1 = param.getValue();
-
-                SimpleBooleanProperty booleanProperty = new SimpleBooleanProperty(tableViewTypeDef1.isChecked());
-                booleanProperty.addListener(new javafx.beans.value.ChangeListener<Boolean>() {
-                    @Override
-                    public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                        tableViewTypeDef1.setChecked(newValue);
-                    }
-                });
-                return booleanProperty;
-            }
-        });
-        tableColumn2.setCellFactory(new Callback<TableColumn<TableViewTypeDef1, Boolean>, TableCell<TableViewTypeDef1, Boolean>>() {
-            @Override
-            public TableCell<TableViewTypeDef1, Boolean> call(TableColumn<TableViewTypeDef1, Boolean> param) {
-                CheckBoxTableCell<TableViewTypeDef1, Boolean> cell = new CheckBoxTableCell<TableViewTypeDef1, Boolean>();
-                cell.setAlignment(Pos.CENTER);
-                return cell;
-            }
-        });
-    }
 
     private void setupListView() {
         // Очищение
         listViewOfficial.getItems().clear();
+        //listViewEquipment.getItems().clear();
 
         // Заполнение listView
         listViewOfficial.setItems(choosedOfficialList);
+        //listViewEquipment.setItems(choosedEquipmentList);
 
         // Слушатель выбранного пункта списка
         listViewOfficial.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                fillTable(newValue);
+                //fillTable(newValue);
+                //listViewEquipment.getItems().clear();
+                choosedEquipmentList.clear();
+
+                for (TheLastTable item : ControllerTypeDefinition3.theLastTableListUpdatedD3) {
+                    if (item.getAppFrom1().contains(newValue)) {
+                        if (item.getAppFrom1().equals(newValue)) {
+                            choosedEquipmentList.addAll(item.getTypeAbon());
+
+                            listViewEquipment.setItems(choosedEquipmentList);
+
+                            }else { choosedEquipmentList.clear();}
+                        }
+                }
+            }
+        });
+
+        // Слушатель выбранного пункта списка
+        listViewEquipment.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+
+                for (TheLastTable item : ControllerTypeDefinition3.theLastTableListUpdatedD3) {
+                    if (item.getTypeAbon().equals(newValue)) {
+                        if (item.getTypeAbon().equals(newValue) && item.getTypeCable() != null) {
+
+                            listViewChoose.getSelectionModel().select(item.getTypeCable());
+                        } else {
+                            listViewChoose.getItems().clear();
+                            infoModelsListForListView.clear();
+                            for (int i = 0; i < infoModelsList.size(); i++) {
+                                infoModelsListForListView.add(tableViewTypeDef1s.get(i).getEquipment());
+                            }
+                            listViewChoose.setItems(infoModelsListForListView);
+                        }
+                    }
+                }
+
+
+            }
+        });
+
+        listViewChoose.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                for (TheLastTable item : ControllerTypeDefinition3.theLastTableListUpdatedD3) {
+                    if (item.getAppFrom1().equals(listViewOfficial.getSelectionModel().getSelectedItem()) && item.getTypeAbon().equals(listViewEquipment.getSelectionModel().getSelectedItem())){
+                        item.setTypeCable(newValue);
+                    }else {
+                        String newString = listViewOfficial.getSelectionModel().toString()+ "  \n" + listViewEquipment.getSelectionModel().toString();
+                        System.out.println(newString);
+                    }
+                }
             }
         });
 
         // Выбор первого пункта списка
-        listViewOfficial.getSelectionModel().select(0);
+        //listViewOfficial.getSelectionModel().select(0);
     }
 
     /**
      * Заполнение таблицы
      **/
+    /*
     private void fillTable(String official) {
         tableView.setItems(filterByNameOfOfficial(official, tableViewTypeDef1s));
     }
-
+    */
     /**
      * Метод выдаёт данные для финальной таблицы
      * @return ObservableList<TableViewTypeDef1>
@@ -191,17 +217,18 @@ public class ControllerTypeCable implements Initializable{
         Set<String> setForListView = new HashSet();
         for (int i = 0; i < ControllerTypeDefinition3.apparatusChoosedData.size(); i++) {
             setForListView.add(ControllerTypeDefinition3.apparatusChoosedData.get(i).getFullName());
+            //setForEquipmentListView.add(ControllerTypeDefinition3.apparatusChoosedData.get(i).getDataApparatus());
         }
 
         // Получаем ранее выбранные должности
         choosedOfficialList.clear();
         choosedOfficialList.addAll(setForListView);
 
+        //choosedEquipmentList.clear();
+        //choosedEquipmentList.addAll(setForEquipmentListView);
+
         // Получаем список ТА
         readData();
-
-        // Настройка таблицы
-        setupTable();
 
         // Настройка listView
         setupListView();
