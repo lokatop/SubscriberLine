@@ -101,6 +101,9 @@ public class ControllerTypeDefinition2 implements Initializable {
             TableViewApparatus apparatus = event.getTableView().getItems().get(row);
 
             apparatus.setCount(newCount);
+
+            // Обновляем таблицу
+            event.getTableView().refresh();
         });
 
         // Checkbox
