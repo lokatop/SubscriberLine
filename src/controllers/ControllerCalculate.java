@@ -52,7 +52,6 @@ public class ControllerCalculate implements Initializable{
         typeAbon.setCellValueFactory(      new PropertyValueFactory<>("typeAbon"        ));
         appFrom1.setCellValueFactory(      new PropertyValueFactory<>("appFrom1"        ));
         typeCable.setCellValueFactory(     new PropertyValueFactory<>("typeCable"       ));
-        appFrom2.setCellValueFactory(      new PropertyValueFactory<>("appFrom2"        ));
         lengthCable.setCellValueFactory(   new PropertyValueFactory<>("lengthCable"     ));
 
         tableView.setItems(ControllerTypeDefinition3.theLastTableListUpdatedD3);
