@@ -11,7 +11,7 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ControllerInformationFrameChangeDialogForApparatus">
    <children>
-      <VBox layoutX="1.0" prefHeight="600.0" prefWidth="800.0">
+      <VBox layoutX="1.0" prefHeight="600.0" prefWidth="970.0">
          <children>
             <GridPane prefHeight="603.0" prefWidth="600.0">
               <columnConstraints>
@@ -63,7 +63,8 @@
                         </HTMLEditor>
                         <VBox>
                            <children>
-                              <TableView fx:id="_ta_table" editable="true" prefHeight="241.0" prefWidth="152.0">
+                              <Label text="Абонентские устройства" />
+                              <TableView fx:id="_ta_table" editable="true" prefHeight="240.0" prefWidth="150.0">
                                 <columns>
                                   <TableColumn fx:id="_ta_column_1" editable="false" prefWidth="75.0" text="Наименование" />
                                   <TableColumn fx:id="_ta_column_2" prefWidth="75.0" text="Количество" />
@@ -94,6 +95,38 @@
                            <HBox.margin>
                               <Insets left="8.0" right="16.0" />
                            </HBox.margin>
+                        </VBox>
+                        <VBox layoutX="642.0" layoutY="10.0">
+                           <children>
+                              <Label text="Кабели" />
+                              <TableView fx:id="_cable_table" editable="true" prefHeight="240.0" prefWidth="150.0">
+                                 <columns>
+                                    <TableColumn fx:id="_cable_column_1" editable="false" maxWidth="1.7976931348623157E308" prefWidth="75.0" resizable="false" text="Тип кабеля" />
+                                    <TableColumn fx:id="_cable_column_2" editable="false" maxWidth="1.7976931348623157E308" prefWidth="75.0" resizable="false" text="Жилы" />
+                                 </columns>
+                                 <HBox.margin>
+                                    <Insets right="16.0" />
+                                 </HBox.margin>
+                              </TableView>
+                              <Label text="Наименование" />
+                              <ComboBox fx:id="_cable_list" prefWidth="150.0" />
+                              <Label text="Количество жил" />
+                              <TextField fx:id="_cable_count" />
+                              <HBox>
+                                 <children>
+                                    <Button mnemonicParsing="false" onAction="#_cable_add" text="Добавить">
+                                       <HBox.margin>
+                                          <Insets right="8.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                    <Button mnemonicParsing="false" onAction="#_cable_del" text="Удалить">
+                                       <HBox.margin>
+                                          <Insets left="8.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                           </children>
                         </VBox>
                      </children>
                   </HBox>

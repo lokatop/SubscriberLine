@@ -1,7 +1,9 @@
 package controllers;
 
+import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -27,8 +29,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.net.URL;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class ControllerInformationFrameChangeDialogForApparatus implements Initializable {
 
@@ -45,9 +46,14 @@ public class ControllerInformationFrameChangeDialogForApparatus implements Initi
     @FXML
     public TextField _ta_count;
     @FXML
-    public TableColumn<TableModel, String> _ta_column_1;
+    public TableColumn<TableTAModel, String> _ta_column_1;
     @FXML
-    public TableColumn<TableModel, Integer> _ta_column_2;
+    public TableColumn<TableTAModel, Integer> _ta_column_2;
+    public TableView _cable_table;
+    public ComboBox<InfoModel> _cable_list;
+    public TextField _cable_count;
+    public TableColumn<TableCableModel, String> _cable_column_1;
+    public TableColumn<TableCableModel, Integer> _cable_column_2;
 
     // Для свременного сохранения изображения и отображения иконки DragAndDrop
     private Image dropIconTemp;
@@ -56,7 +62,9 @@ public class ControllerInformationFrameChangeDialogForApparatus implements Initi
     private InfoModel infoModel = null;
     private boolean okClicked = false;
     private ObservableList<InfoModel> TA = FXCollections.observableArrayList();
-    private ObservableList<TableModel> TATable = FXCollections.observableArrayList();
+    private ObservableList<InfoModel> Cables = FXCollections.observableArrayList();
+    private ObservableList<TableTAModel> TATable = FXCollections.observableArrayList();
+    private ArrayList<TableCableModel> CableTable = new ArrayList<>();
 
     /**
      * Устанавливает сцену для этого окна.
@@ -81,7 +89,7 @@ public class ControllerInformationFrameChangeDialogForApparatus implements Initi
         readData();
 
         // Заполняем таблицу
-        fillTable();
+        fillTaTable();
     }
 
     public void setTAList(ObservableList<InfoModel> TA) {
@@ -89,6 +97,13 @@ public class ControllerInformationFrameChangeDialogForApparatus implements Initi
 
         // Настройка выпадающего списка
         setupTAList();
+    }
+
+    public void setCableList(ObservableList<InfoModel> Cables) {
+        this.Cables = Cables;
+
+        // Настройка выпадающего списка
+        setupCableList();
     }
 
     public InfoModel getInfoModel() {
@@ -147,10 +162,17 @@ public class ControllerInformationFrameChangeDialogForApparatus implements Initi
 
             // Записываем доп информацию в data
             String data = "";
-            for (TableModel ta : TATable) {
+            for (TableTAModel ta : TATable) {
                 data += ta.getName() + ":" + ta.getCount() + ";";
             }
             infoModel.setData(data);
+
+            // Записываем доп информацию в cables
+            String cables = "";
+            for (TableCableModel cm : CableTable) {
+                cables += cm.getName() + ":" + cm.getCount() + ";";
+            }
+            infoModel.setCables(cables);
 
             okClicked = true;
             dialogStage.close();
@@ -233,19 +255,19 @@ public class ControllerInformationFrameChangeDialogForApparatus implements Initi
     public void __drag_done(DragEvent dragEvent) {
     }
 
-    private void setupTable() {
+    private void setupTaTable() {
         // Очищение
         _ta_table.getItems().clear();
 
         // Настройка
-        _ta_column_1.setCellValueFactory(new PropertyValueFactory<TableModel, String>("name"));
-        _ta_column_2.setCellValueFactory(new PropertyValueFactory<TableModel, Integer>("count"));
+        _ta_column_1.setCellValueFactory(new PropertyValueFactory<TableTAModel, String>("name"));
+        _ta_column_2.setCellValueFactory(new PropertyValueFactory<TableTAModel, Integer>("count"));
         _ta_column_2.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
         _ta_column_2.setMinWidth(10);
-        _ta_column_2.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<TableModel, Integer>>() {
+        _ta_column_2.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<TableTAModel, Integer>>() {
             @Override
-            public void handle(TableColumn.CellEditEvent<TableModel, Integer> event) {
-                TablePosition<TableModel, Integer> pos = event.getTablePosition();
+            public void handle(TableColumn.CellEditEvent<TableTAModel, Integer> event) {
+                TablePosition<TableTAModel, Integer> pos = event.getTablePosition();
 
                 Integer newCount = event.getNewValue();
 
@@ -253,26 +275,74 @@ public class ControllerInformationFrameChangeDialogForApparatus implements Initi
                 if (newCount < 1) newCount = 1;
 
                 int rowId = pos.getRow();
-                TableModel row = event.getTableView().getItems().get(rowId);
+                TableTAModel row = event.getTableView().getItems().get(rowId);
 
                 row.setCount(newCount);
             }
         });
     }
 
-    private void fillTable() {
+    private void setupCableTable() {
+        // Очищение
+        _cable_table.getItems().clear();
+
+        // Настройка
+        _cable_column_1.setCellValueFactory(new PropertyValueFactory<TableCableModel, String>("name"));
+        _cable_column_2.setCellValueFactory(new PropertyValueFactory<TableCableModel, Integer>("count"));
+        _cable_column_2.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
+        _cable_column_2.setMinWidth(10);
+        _cable_column_2.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<TableCableModel, Integer>>() {
+            @Override
+            public void handle(TableColumn.CellEditEvent<TableCableModel, Integer> event) {
+                TablePosition<TableCableModel, Integer> pos = event.getTablePosition();
+
+                Integer newCount = event.getNewValue();
+
+                // Делаем кол-во положительным
+                if (newCount < 1) newCount = 1;
+
+                int rowId = pos.getRow();
+                TableCableModel row = event.getTableView().getItems().get(rowId);
+
+                row.setCount(newCount);
+            }
+        });
+    }
+
+    private void fillTaTable() {
         _ta_table.setItems(TATable);
     }
 
+    private void fillCableTable() {
+        _cable_table.getItems().clear();
+        _cable_table.setItems(FXCollections.observableArrayList(CableTable));
+    }
+
     private void readData() {
+        if (infoModel.getCables() != null) {
+            CableTable.clear();
+
+            String[] substrs;
+            substrs = infoModel.getCables().split(";");
+            for (String substr : substrs) {
+                if (substr.contains(":")) {
+                    String strTA[] = substr.split(":");
+                    CableTable.add(new TableCableModel(strTA[0], Integer.parseInt(strTA[1])));
+                }
+            }
+            fillCableTable();
+        }
+
         if (infoModel.getData() != null) {
             TATable.clear();
 
             String[] substrs;
             substrs = infoModel.getData().split(";");
             for (String substr : substrs) {
-                String strTA[] = substr.split(":");
-                TATable.add(new TableModel(strTA[0], Integer.parseInt(strTA[1])));
+                if (substr.contains(":")) {
+                    String strTA[] = substr.split(":");
+                    TATable.add(new TableTAModel(strTA[0], Integer.parseInt(strTA[1])));
+                }
             }
         }
     }
@@ -281,6 +351,12 @@ public class ControllerInformationFrameChangeDialogForApparatus implements Initi
         _ta_list.setItems(TA);
         if (_ta_list.getItems().size() != 0)
             _ta_list.getSelectionModel().select(0);
+    }
+
+    private void setupCableList() {
+        _cable_list.setItems(Cables);
+        if (_cable_list.getItems().size() != 0)
+            _cable_list.getSelectionModel().select(0);
     }
 
     public void _ta_add(ActionEvent actionEvent) {
@@ -292,8 +368,50 @@ public class ControllerInformationFrameChangeDialogForApparatus implements Initi
 
         try {
             if (!name.isEmpty() && !count.isEmpty()) {
-                TATable.add(new TableModel(name, Integer.parseInt(count)));
-                fillTable();
+                TableTAModel newTableTAModel = new TableTAModel(name, Integer.parseInt(count));
+                if (TATable.size() != 0) {
+                    boolean isset = false;
+                    for (TableTAModel taModel : TATable)
+                        if (taModel.getName().equals(newTableTAModel.getName()))
+                            isset = true;
+                    if (!isset) {
+                        TATable.add(newTableTAModel);
+                        fillTaTable();
+                    }
+                } else {
+                    TATable.add(newTableTAModel);
+                    fillTaTable();
+                }
+            }
+        } catch (Exception e) {
+
+        }
+    }
+
+    public void _cable_add(ActionEvent actionEvent) {
+        String name;
+        String count;
+
+        name = _cable_list.getSelectionModel().getSelectedItem().getTitle();
+        count = _cable_count.getText();
+
+        try {
+            if (!name.isEmpty() && !count.isEmpty()) {
+                TableCableModel newCable = new TableCableModel(name, Integer.parseInt(count));
+
+                if (CableTable.size() != 0) {
+                    boolean isset = false;
+                    for (TableCableModel c : CableTable)
+                        if (c.getName().equals(newCable.getName()))
+                            isset = true;
+                    if (!isset) {
+                        CableTable.add(newCable);
+                        fillCableTable();
+                    }
+                } else {
+                    CableTable.add(newCable);
+                    fillCableTable();
+                }
             }
         } catch (Exception e) {
 
@@ -303,22 +421,31 @@ public class ControllerInformationFrameChangeDialogForApparatus implements Initi
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         // Настройка таблицы
-        setupTable();
+        setupTaTable();
+        setupCableTable();
     }
 
     public void _ta_del(ActionEvent actionEvent) {
         try {
             TATable.remove(_ta_table.getSelectionModel().getSelectedItem());
-        } catch (Exception e){}
+        } catch (Exception e) {
+        }
     }
 
+    public void _cable_del(ActionEvent actionEvent) {
+        try {
+            CableTable.remove(_cable_table.getSelectionModel().getSelectedItem());
+            fillCableTable();
+        } catch (Exception e) {
+        }
+    }
 
-    public class TableModel {
+    public class TableTAModel {
 
         private SimpleStringProperty name;
         private SimpleIntegerProperty count;
 
-        public TableModel(String name, Integer count) {
+        public TableTAModel(String name, Integer count) {
             this.name = new SimpleStringProperty(name);
             this.count = new SimpleIntegerProperty(count);
         }
@@ -345,6 +472,50 @@ public class ControllerInformationFrameChangeDialogForApparatus implements Initi
 
         public void setCount(int count) {
             this.count.set(count);
+        }
+    }
+
+    public class TableCableModel {
+        private final StringProperty name;
+        private final IntegerProperty count;
+
+        public TableCableModel(String name, Integer count) {
+            this.name = new SimpleStringProperty(name);
+            this.count = new SimpleIntegerProperty(count);
+        }
+
+        public String getName() {
+            return name.get();
+        }
+
+        public StringProperty nameProperty() {
+            return name;
+        }
+
+        public int getCount() {
+            return count.get();
+        }
+
+        public void setCount(Integer count) {
+            this.count.set(count);
+        }
+
+        public IntegerProperty countProperty() {
+            return count;
+        }
+
+        @Override
+        public boolean equals(Object obj) {
+
+            boolean condition_1 = false;
+            boolean condition_2 = false;
+
+            if (this.getName().equals(((TableCableModel)obj).getName()))
+                condition_1 = true;
+            if (this.getCount() == ((TableCableModel)obj).getCount())
+                condition_2 = true;
+
+            return condition_1 && condition_2;
         }
     }
 }

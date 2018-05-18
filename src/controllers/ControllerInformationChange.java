@@ -194,11 +194,14 @@ public class ControllerInformationChange {
             controller.setInfoModel(model);
 
             // Отправляем список ТА для аппаратных
-            ObservableList<InfoModel> temp = FXCollections.observableArrayList();
-            temp.addAll(filterInfoModelByType("DS", infoData));
-            temp.addAll(filterInfoModelByType("ZAS", infoData));
-            temp.addAll(filterInfoModelByType("ARM", infoData));
-            controller.setTAList(temp);
+            ObservableList<InfoModel> TaTemp = FXCollections.observableArrayList();
+            ObservableList<InfoModel> CableTemp = FXCollections.observableArrayList();
+            TaTemp.addAll(filterInfoModelByType("DS", infoData));
+            TaTemp.addAll(filterInfoModelByType("ZAS", infoData));
+            TaTemp.addAll(filterInfoModelByType("ARM", infoData));
+            CableTemp.addAll(filterInfoModelByType("CableAndOther", infoData));
+            controller.setTAList(TaTemp);
+            controller.setCableList(CableTemp);
 
             // Отображаем диалоговое окно и ждём, пока пользователь его не закроет
             dialogStage.showAndWait();
@@ -279,11 +282,14 @@ public class ControllerInformationChange {
             controller.setInfoModel(model);
 
             // Отправляем список ТА для аппаратных
-            ObservableList<InfoModel> temp = FXCollections.observableArrayList();
-            temp.addAll(filterInfoModelByType("DS", infoData));
-            temp.addAll(filterInfoModelByType("ZAS", infoData));
-            temp.addAll(filterInfoModelByType("ARM", infoData));
-            controller.setTAList(temp);
+            ObservableList<InfoModel> TaTemp = FXCollections.observableArrayList();
+            ObservableList<InfoModel> CableTemp = FXCollections.observableArrayList();
+            TaTemp.addAll(filterInfoModelByType("DS", infoData));
+            TaTemp.addAll(filterInfoModelByType("ZAS", infoData));
+            TaTemp.addAll(filterInfoModelByType("ARM", infoData));
+            CableTemp.addAll(filterInfoModelByType("CableAndOther", infoData));
+            controller.setTAList(TaTemp);
+            controller.setCableList(CableTemp);
 
             // Отображаем диалоговое окно и ждём, пока пользователь его не закроет
             dialogStage.showAndWait();
