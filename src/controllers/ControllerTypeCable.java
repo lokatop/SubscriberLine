@@ -21,11 +21,10 @@ import model.*;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.HashSet;
-import java.util.LinkedHashSet;
-import java.util.ResourceBundle;
-import java.util.Set;
+import java.util.*;
+import java.util.function.Predicate;
 
+import static controllers.ControllerTypeDefinition3.apparatusChoosedData;
 import static model.InfoModel.filterInfoModelByType;
 import static model.TableViewTypeDef1.filterByNameOfOfficial;
 
@@ -39,6 +38,7 @@ public class ControllerTypeCable implements Initializable{
 
     @FXML
     private ListView listViewChoose;
+    private ObservableList<InfoModel> infoData;
 
     @FXML
     private void btnBackClick() throws IOException {
@@ -68,8 +68,9 @@ public class ControllerTypeCable implements Initializable{
 
     }
 
+    private ObservableList unfilterred = FXCollections.observableArrayList();
     // Список для проверки
-    private static Set<String> setForEquipmentListView = new HashSet();
+    private static ObservableList<InfoModel> infoModelsData = FXCollections.observableArrayList();
 
     /**
      * Список выбранных должносей
@@ -96,11 +97,12 @@ public class ControllerTypeCable implements Initializable{
         infoModelsList.clear();
 
         // Чтение из файла
-        ObservableList unfilterred = FXCollections.observableArrayList();
-        unfilterred.addAll(XMLsaver.loadFromXML(InfoModel.FILENAME_INFOMODELS));
+       // ObservableList unfilterred = FXCollections.observableArrayList();
+       // unfilterred.addAll(XMLsaver.loadFromXML(InfoModel.FILENAME_INFOMODELS));
 
-        infoModelsList.addAll(filterInfoModelByType("CableAndOther", unfilterred));
+        //infoModelsList.addAll(filterInfoModelByType("CableAndOther", unfilterred));
 
+        /*
         // Генерация объектов для таблицы
         for (int officialIndex = 0; officialIndex < choosedOfficialList.size(); officialIndex++) {
             for (int infoModelIndex = 0; infoModelIndex < infoModelsList.size(); infoModelIndex++) {
@@ -112,6 +114,7 @@ public class ControllerTypeCable implements Initializable{
                 );
             }
         }
+        */
     }
 
 
@@ -142,6 +145,25 @@ public class ControllerTypeCable implements Initializable{
                             }else { choosedEquipmentList.clear();}
                         }
                 }
+
+
+                if (unfilterred.isEmpty()){
+                    // Чтение из файла
+                    unfilterred.addAll(XMLsaver.loadFromXML(InfoModel.FILENAME_INFOMODELS));
+                }
+                infoModelsList.clear();
+                infoModelsListForListView.clear();
+                infoModelsList.addAll(filterInfoModelByTitle(newValue, unfilterred));
+
+                for (InfoModel infoModel : infoModelsList) {
+                    List<Map<String, String>> data = infoModel.parseCables();
+                    for (Map<String,String> cable:data){
+                        infoModelsListForListView.add(cable.get("name"));
+                    }
+                }
+
+                listViewChoose.setItems(infoModelsListForListView);
+
             }
         });
 
@@ -150,18 +172,14 @@ public class ControllerTypeCable implements Initializable{
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
 
+
                 for (TheLastTable item : ControllerTypeDefinition3.theLastTableListUpdatedD3) {
                     if (item.getTypeAbon().equals(newValue)) {
                         if (item.getTypeAbon().equals(newValue) && item.getTypeCable() != null) {
 
                             listViewChoose.getSelectionModel().select(item.getTypeCable());
+
                         } else {
-                            listViewChoose.getItems().clear();
-                            infoModelsListForListView.clear();
-                            for (int i = 0; i < infoModelsList.size(); i++) {
-                                infoModelsListForListView.add(tableViewTypeDef1s.get(i).getEquipment());
-                            }
-                            listViewChoose.setItems(infoModelsListForListView);
                         }
                     }
                 }
@@ -174,7 +192,7 @@ public class ControllerTypeCable implements Initializable{
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
                 for (TheLastTable item : ControllerTypeDefinition3.theLastTableListUpdatedD3) {
-                    if (item.getAppFrom1().equals(listViewOfficial.getSelectionModel().getSelectedItem()) && item.getTypeAbon().equals(listViewEquipment.getSelectionModel().getSelectedItem())){
+                    if (item.getTypeAbon().equals(listViewEquipment.getSelectionModel().getSelectedItem()) && item.getAppFrom1().equals(listViewOfficial.getSelectionModel().getSelectedItem())){
                         item.setTypeCable(newValue);
                     }else {
                         String newString = listViewOfficial.getSelectionModel().toString()+ "  \n" + listViewEquipment.getSelectionModel().toString();
@@ -215,8 +233,8 @@ public class ControllerTypeCable implements Initializable{
 
         //Создаем Set  и в него добавляем наш список
         Set<String> setForListView = new HashSet();
-        for (int i = 0; i < ControllerTypeDefinition3.apparatusChoosedData.size(); i++) {
-            setForListView.add(ControllerTypeDefinition3.apparatusChoosedData.get(i).getFullName());
+        for (int i = 0; i < apparatusChoosedData.size(); i++) {
+            setForListView.add(apparatusChoosedData.get(i).getFullName());
             //setForEquipmentListView.add(ControllerTypeDefinition3.apparatusChoosedData.get(i).getDataApparatus());
         }
 
@@ -232,5 +250,36 @@ public class ControllerTypeCable implements Initializable{
 
         // Настройка listView
         setupListView();
+    }
+
+
+    /**
+     * Фильтрует модели по типу
+     * @param title
+     * @param infoData
+     * @return FilteredList&lt;InfoModel&gt;
+     */
+    public ObservableList<InfoModel> filterInfoModelByTitle(String title, ObservableList<InfoModel> infoData){
+        return infoData.filtered(new Predicate<InfoModel>() {
+            @Override
+            public boolean test(InfoModel infoModel) {
+                // Если несколько разделены запятой, то хренацим массив да цикл
+                if(infoModel.getTitle().contains(",")){
+                    String[] titles = infoModel.getTitle().split(",");
+                    for (int i = 0; i < titles.length; i++) {
+                        if (title.equals(titles[i])) {
+                            return true;
+                        }
+                    }
+                } else {
+                    if (infoModel.getTitle().equals(title)) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
+                return false;
+            }
+        });
     }
 }

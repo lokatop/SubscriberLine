@@ -186,7 +186,7 @@ public class InfoModel {
         List<Map< String, String >> result = new ArrayList<>();
         if (this.getData() != null) {
             String[] substrs;
-            substrs = this.getData().split(";");
+            substrs = this.getCables().split(";");
             for (String substr : substrs) {
 
                 String strTA[] = substr.split(":");
