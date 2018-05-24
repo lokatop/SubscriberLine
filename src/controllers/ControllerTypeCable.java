@@ -68,9 +68,12 @@ public class ControllerTypeCable implements Initializable{
 
     }
 
+    /**
+     * Список всех ТА для должностей
+     */
+    private ObservableList<InfoModel> infoModelsList = FXCollections.observableArrayList();
+    private ObservableList<String> infoModelsListForListView = FXCollections.observableArrayList();
     private ObservableList unfilterred = FXCollections.observableArrayList();
-    // Список для проверки
-    private static ObservableList<InfoModel> infoModelsData = FXCollections.observableArrayList();
 
     /**
      * Список выбранных должносей
@@ -82,11 +85,6 @@ public class ControllerTypeCable implements Initializable{
     private ObservableList<String> choosedEquipmentList = FXCollections.observableArrayList();
 
 
-    /**
-     * Список всех ТА для должностей
-     */
-    private ObservableList<InfoModel> infoModelsList = FXCollections.observableArrayList();
-    private ObservableList<String> infoModelsListForListView = FXCollections.observableArrayList();
 
     /**
      * Список строк таблицы с чекбоксами
@@ -259,7 +257,7 @@ public class ControllerTypeCable implements Initializable{
      * @param infoData
      * @return FilteredList&lt;InfoModel&gt;
      */
-    public ObservableList<InfoModel> filterInfoModelByTitle(String title, ObservableList<InfoModel> infoData){
+    public static ObservableList<InfoModel> filterInfoModelByTitle(String title, ObservableList<InfoModel> infoData){
         return infoData.filtered(new Predicate<InfoModel>() {
             @Override
             public boolean test(InfoModel infoModel) {
