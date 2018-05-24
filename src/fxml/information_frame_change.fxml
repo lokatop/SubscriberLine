@@ -34,7 +34,10 @@
                         <Button mnemonicParsing="false" onAction="#info_model_save" text="Применить изменения" />
                      </children>
                   </VBox>
-                  <ListView fx:id="__list_of_items" onMouseClicked="#enable_btns" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2" />
+                  <ListView fx:id="__list_of_items" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onMouseClicked="#enable_btns" GridPane.rowIndex="2">
+                     <GridPane.margin>
+                        <Insets left="16.0" right="16.0" />
+                     </GridPane.margin></ListView>
                   <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnSpan="3" GridPane.rowIndex="1">
                      <children>
                         <Label text="Внести изменения в раздел" textAlignment="CENTER">
@@ -53,7 +56,16 @@
                         </HBox>
                      </children>
                   </VBox>
-                  <Button mnemonicParsing="false" onAction="#btnBackClick" text="Назад" />
+                  <VBox prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#btnBackClick" text="Назад">
+                           <VBox.margin>
+                              <Insets left="16.0" top="16.0" />
+                           </VBox.margin>
+                        </Button>
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2" />
                </children>
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="416.0" minWidth="10.0" prefWidth="397.0" />
