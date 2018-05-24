@@ -1,8 +1,5 @@
 package controllers;
 
-import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
@@ -17,13 +14,12 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
-import javafx.util.Callback;
 import javafx.util.converter.DefaultStringConverter;
 import javafx.util.converter.IntegerStringConverter;
 import model.InfoModel;
 import model.TheLastTable;
-import model.TheLastTableCableBox;
 import model.XMLsaver;
+import thread.FirstTreadOnCalc_2;
 
 import java.io.IOException;
 import java.net.URL;
@@ -56,7 +52,7 @@ public class ControllerCalculate implements Initializable{
 
     @FXML
     private void btnBackClick() throws IOException {
-        VBox vBox = FXMLLoader.load(getClass().getResource("/fxml/type_cable.fxml"));
+        VBox vBox = FXMLLoader.load(getClass().getResource("/fxml/type_definition_3.fxml"));
         vbox.getChildren().setAll(vBox);
     }
 
@@ -68,7 +64,7 @@ public class ControllerCalculate implements Initializable{
 
     @FXML
     private void calculate() throws IOException{
-
+        createWordTable();
     }
 
     private void setupTable(){
@@ -173,5 +169,10 @@ public class ControllerCalculate implements Initializable{
         setupTable();
 
         tableView.setItems(ControllerTypeDefinition3.theLastTableListUpdatedD3);
+    }
+
+    public void createWordTable() throws IOException {
+        FirstTreadOnCalc_2 tread = new FirstTreadOnCalc_2();
+        tread.run(ControllerTypeDefinition3.theLastTableListUpdatedD3);
     }
 }
