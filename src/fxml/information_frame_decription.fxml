@@ -14,7 +14,7 @@
          <children>
             <Label fx:id="lblLabel" alignment="CENTER" maxHeight="100.0" maxWidth="760.0" prefHeight="58.0" prefWidth="760.0" text="fxid : fxLabel(Тут название ТА)" textAlignment="CENTER" wrapText="true" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="16.0">
                <font>
-                  <Font size="36.0" />
+                  <Font/>
                </font>
             </Label>
             <GridPane alignment="CENTER" minHeight="720.0" minWidth="960.0" prefHeight="720.0" prefWidth="960.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -25,7 +25,7 @@
                      </children></VBox>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
                      <GridPane.margin>
-                        <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
+                        <Insets/>
                      </GridPane.margin>
                      <children>
                         <WebView fx:id="lblDesc" layoutX="106.0" layoutY="109.0" prefHeight="550.0" prefWidth="448.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
@@ -35,7 +35,7 @@
                      <children>
                         <Button mnemonicParsing="false" onAction="#btnBackClick" text="Назад">
                            <VBox.margin>
-                              <Insets left="16.0" />
+                              <Insets/>
                            </VBox.margin>
                         </Button>
                      </children>
@@ -44,7 +44,7 @@
                      <children>
                         <Button mnemonicParsing="false" onAction="#btnToMenuClick" text="Главное меню">
                            <VBox.margin>
-                              <Insets right="16.0" />
+                              <Insets/>
                            </VBox.margin>
                         </Button>
                      </children>

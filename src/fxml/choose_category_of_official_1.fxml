@@ -21,7 +21,7 @@
                         </Label>
                      </children>
                      <GridPane.margin>
-                        <Insets left="50.0" right="50.0" />
+                        <Insets/>
                      </GridPane.margin>
                   </VBox>
                   <Button alignment="CENTER" mnemonicParsing="false" onAction="#theNext" prefWidth="150.0" text="ДАЛЕЕ" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="4" />
@@ -57,12 +57,12 @@
                      <children>
                         <Label fx:id="labelUpOnPage" text="Выбор категории должностных лиц " textAlignment="CENTER" wrapText="true">
                            <font>
-                              <Font name="Times New Roman Bold" size="24.0" />
+                              <Font/>
                            </font>
                         </Label>
                         <Label fx:id="label">
                            <font>
-                              <Font name="Times New Roman Bold" size="24.0" />
+                              <Font/>
                            </font>
                         </Label>
                      </children>

@@ -91,9 +91,9 @@ public class ControllerCalculate implements Initializable{
             }
         });
 
-        officialPerson.setCellValueFactory(new PropertyValueFactory<>("officialPerson"  ));
-        typeAbon.setCellValueFactory(      new PropertyValueFactory<>("typeAbon"        ));
-        appFrom1.setCellValueFactory(      new PropertyValueFactory<>("appFrom1"        ));
+        officialPerson.setCellValueFactory(new PropertyValueFactory<TheLastTable,String>("officialPerson"  ));
+        typeAbon.setCellValueFactory(      new PropertyValueFactory<TheLastTable,String>("typeAbon"        ));
+        appFrom1.setCellValueFactory(      new PropertyValueFactory<TheLastTable,String>("appFrom1"        ));
         appFrom1.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<TheLastTable, String>>() {
             @Override
             public void handle(TableColumn.CellEditEvent<TheLastTable, String> event) {
@@ -125,8 +125,8 @@ public class ControllerCalculate implements Initializable{
         //tableView.getSelectionModel().selectFirst();
 
 
-        typeCable.setCellValueFactory(     new PropertyValueFactory<>("typeCable"       ));
-        typeCable.setCellFactory(ComboBoxTableCell.forTableColumn(new DefaultStringConverter(),infoModelsListForListView));
+        typeCable.setCellValueFactory(     new PropertyValueFactory<TheLastTable, String>("typeCable"       ));
+        typeCable.setCellFactory(ComboBoxTableCell.<TheLastTable, String>forTableColumn(new DefaultStringConverter(),infoModelsListForListView));
         typeCable.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<TheLastTable, String>>() {
             @Override
             public void handle(TableColumn.CellEditEvent<TheLastTable, String> event) {
@@ -139,8 +139,8 @@ public class ControllerCalculate implements Initializable{
                 lastTable.setTypeCable(event.getNewValue());
             }
         });
-        lengthCable.setCellValueFactory(   new PropertyValueFactory<>("lengthCable"     ));
-        lengthCable.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
+        lengthCable.setCellValueFactory(   new PropertyValueFactory<TheLastTable, Integer>("lengthCable"     ));
+        lengthCable.setCellFactory(TextFieldTableCell.<TheLastTable, Integer>forTableColumn(new IntegerStringConverter()));
         lengthCable.setMinWidth(10);
         lengthCable.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<TheLastTable, Integer>>() {
             @Override
@@ -158,7 +158,8 @@ public class ControllerCalculate implements Initializable{
                 lastTable.setLengthCable(newLength);
 
                 // Обновляем таблицу
-                event.getTableView().refresh();
+                //TODO: а надо?
+//                event.getTableView().refresh();
             }
         });
     }

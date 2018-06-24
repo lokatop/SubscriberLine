@@ -1,6 +1,5 @@
 package controllers;
 
-import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -8,25 +7,18 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Pos;
 import javafx.scene.control.ListView;
-import javafx.scene.control.TableCell;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.cell.CheckBoxTableCell;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
-import javafx.util.Callback;
-import model.*;
+import model.InfoModel;
+import model.TableViewTypeDef1;
+import model.TheLastTable;
+import model.XMLsaver;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
-import java.util.function.Predicate;
 
 import static controllers.ControllerTypeDefinition3.apparatusChoosedData;
-import static model.InfoModel.filterInfoModelByType;
-import static model.TableViewTypeDef1.filterByNameOfOfficial;
 
 public class ControllerTypeCable implements Initializable{
     @FXML
@@ -258,26 +250,46 @@ public class ControllerTypeCable implements Initializable{
      * @return FilteredList&lt;InfoModel&gt;
      */
     public static ObservableList<InfoModel> filterInfoModelByTitle(String title, ObservableList<InfoModel> infoData){
-        return infoData.filtered(new Predicate<InfoModel>() {
-            @Override
-            public boolean test(InfoModel infoModel) {
-                // Если несколько разделены запятой, то хренацим массив да цикл
-                if(infoModel.getTitle().contains(",")){
-                    String[] titles = infoModel.getTitle().split(",");
-                    for (int i = 0; i < titles.length; i++) {
-                        if (title.equals(titles[i])) {
-                            return true;
-                        }
-                    }
-                } else {
-                    if (infoModel.getTitle().equals(title)) {
-                        return true;
-                    } else {
-                        return false;
+        ObservableList<InfoModel> result = FXCollections.observableArrayList();
+
+        for (InfoModel infoModel : infoData) {
+            // Если несколько разделены запятой, то хренацим массив да цикл
+            if(infoModel.getTitle().contains(",")){
+                String[] titles = infoModel.getTitle().split(",");
+                for (int i = 0; i < titles.length; i++) {
+                    if (title.equals(titles[i])) {
+                        result.add(infoModel);
                     }
                 }
-                return false;
+            } else {
+                if (infoModel.getTitle().equals(title)) {
+                    result.add(infoModel);
+                }
             }
-        });
+        }
+
+        return result;
+
+//        return infoData.filtered(new Predicate<InfoModel>() {
+//            @Override
+//            public boolean test(InfoModel infoModel) {
+//                // Если несколько разделены запятой, то хренацим массив да цикл
+//                if(infoModel.getTitle().contains(",")){
+//                    String[] titles = infoModel.getTitle().split(",");
+//                    for (int i = 0; i < titles.length; i++) {
+//                        if (title.equals(titles[i])) {
+//                            return true;
+//                        }
+//                    }
+//                } else {
+//                    if (infoModel.getTitle().equals(title)) {
+//                        return true;
+//                    } else {
+//                        return false;
+//                    }
+//                }
+//                return false;
+//            }
+//        });
     }
 }

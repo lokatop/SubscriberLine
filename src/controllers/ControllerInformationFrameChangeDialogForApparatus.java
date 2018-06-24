@@ -137,14 +137,15 @@ public class ControllerInformationFrameChangeDialogForApparatus implements Initi
         if (errorMessage.length() == 0) {
             return true;
         } else {
+            // TODO: отображение ошибок во всплывающем окне
             // Показываем сообщение об ошибке.
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.initOwner(dialogStage);
-            alert.setTitle("Поля с ошибками");
-            alert.setHeaderText("Пожалуйста, исправте ошибки");
-            alert.setContentText(errorMessage);
-
-            alert.showAndWait();
+//            Alert alert = new Alert(Alert.AlertType.ERROR);
+//            alert.initOwner(dialogStage);
+//            alert.setTitle("Поля с ошибками");
+//            alert.setHeaderText("Пожалуйста, исправте ошибки");
+//            alert.setContentText(errorMessage);
+//
+//            alert.showAndWait();
 
             return false;
         }
@@ -262,7 +263,7 @@ public class ControllerInformationFrameChangeDialogForApparatus implements Initi
         // Настройка
         _ta_column_1.setCellValueFactory(new PropertyValueFactory<TableTAModel, String>("name"));
         _ta_column_2.setCellValueFactory(new PropertyValueFactory<TableTAModel, Integer>("count"));
-        _ta_column_2.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
+        _ta_column_2.setCellFactory(TextFieldTableCell.<TableTAModel, Integer>forTableColumn(new IntegerStringConverter()));
         _ta_column_2.setMinWidth(10);
         _ta_column_2.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<TableTAModel, Integer>>() {
             @Override
@@ -289,7 +290,7 @@ public class ControllerInformationFrameChangeDialogForApparatus implements Initi
         // Настройка
         _cable_column_1.setCellValueFactory(new PropertyValueFactory<TableCableModel, String>("name"));
         _cable_column_2.setCellValueFactory(new PropertyValueFactory<TableCableModel, Integer>("count"));
-        _cable_column_2.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
+        _cable_column_2.setCellFactory(TextFieldTableCell.<TableCableModel, Integer>forTableColumn(new IntegerStringConverter()));
         _cable_column_2.setMinWidth(10);
         _cable_column_2.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<TableCableModel, Integer>>() {
             @Override

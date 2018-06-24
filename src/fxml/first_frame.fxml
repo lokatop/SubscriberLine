@@ -15,24 +15,24 @@
          <children>
             <GridPane alignment="CENTER" prefHeight="720.0" prefWidth="960.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <Label lineSpacing="6.0" prefHeight="200.0" prefWidth="445.0" text="    РАСЧЕТ     АБОНЕНСКОЙ СЕТИ НА ПУНКТЕ УПРАВЛЕНИЯ" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                  <Label prefHeight="200.0" prefWidth="445.0" text="    РАСЧЕТ     АБОНЕНСКОЙ СЕТИ НА ПУНКТЕ УПРАВЛЕНИЯ" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <font>
-                        <Font name="Arial Bold" size="36.0" />
+                        <Font />
                      </font>
                   </Label>
                   <Label alignment="CENTER" contentDisplay="CENTER" text="Военная академия связи" GridPane.columnIndex="1">
                      <font>
-                        <Font name="Arial Bold" size="30.0" />
+                        <Font />
                      </font>
                   </Label>
                   <Label prefHeight="64.0" prefWidth="199.0" text="Санкт-Петербург 2018" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="4">
                      <font>
-                        <Font name="Arial Bold" size="20.0" />
+                        <Font />
                      </font>
                   </Label>
                   <Button mnemonicParsing="false" onAction="#loginToTheProgram" style="-fx-background-color: #c59003;" text="ВХОД В ПРОГРАММУ" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="3">
                      <font>
-                        <Font name="Arial Bold" size="24.0" />
+                        <Font/>
                      </font>
                   </Button>
                </children>

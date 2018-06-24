@@ -123,7 +123,7 @@ public class XMLsaver {
 
             return result.getList();
         } catch (Exception e) { // catches ANY exception
-            return FXCollections.emptyObservableList();
+            return FXCollections.observableArrayList();
         }
     }
 

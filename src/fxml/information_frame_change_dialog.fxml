@@ -26,7 +26,7 @@
                <children>
                   <TextField fx:id="__title" alignment="CENTER" prefHeight="25.0" prefWidth="660.0" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                      <GridPane.margin>
-                        <Insets left="50.0" right="50.0" />
+                        <Insets/>
                      </GridPane.margin>
                   </TextField>
                   <FlowPane alignment="CENTER" columnHalignment="CENTER" orientation="VERTICAL" prefHeight="153.0" prefWidth="501.0" GridPane.rowIndex="2">
@@ -34,7 +34,7 @@
                         <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="317.0" text="Выбрать изображение" />
                         <ImageView fx:id="__image" fitHeight="118.0" fitWidth="330.0" onDragDone="#__drag_done" onDragDropped="#__drag_dropped" onDragEntered="#__drag_enter" onDragExited="#__drag_exit" onDragOver="#__drag_over" onMouseClicked="#__select_image" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../resource/noimage.png" />
+                              <!--<Image url="@../resource/noimage.png" />-->
                            </image>
                            <cursor>
                               <Cursor fx:constant="DEFAULT" />
@@ -42,14 +42,11 @@
                         </ImageView>
                      </children>
                   </FlowPane>
-                  <HBox alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                     <opaqueInsets>
-                        <Insets left="50.0" right="50.0" />
-                     </opaqueInsets>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <children>
                         <Button mnemonicParsing="false" onAction="#__save" text="Сохранить">
                            <HBox.margin>
-                              <Insets right="50.0" />
+                              <Insets/>
                            </HBox.margin></Button>
                         <Button mnemonicParsing="false" onAction="#__cancel" text="Отменить" />
                      </children>

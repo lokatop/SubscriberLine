@@ -2,11 +2,10 @@ package model;
 
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.util.ArrayList;
-import java.util.Map;
-import java.util.function.Predicate;
 
 public class TheLastTable {
     private SimpleStringProperty officialPerson;
@@ -109,41 +108,70 @@ public class TheLastTable {
     }
 
     public static ObservableList<TheLastTable> filterByOfficialPerson(String officialPerson, ObservableList<TheLastTable> data) {
-        return data.filtered(new Predicate<TheLastTable>() {
-            @Override
-            public boolean test(TheLastTable item) {
-                if (item.getOfficialPerson().equals(officialPerson)) {
-                    return true;
-                } else {
-                    return false;
-                }
+        ObservableList<TheLastTable> result = FXCollections.observableArrayList();
+
+        for (TheLastTable item : data) {
+            if (item.getOfficialPerson().equals(officialPerson)) {
+                result.add(item);
             }
-        });
+        }
+
+        return result;
+
+//        return data.filtered(new Predicate<TheLastTable>() {
+//            @Override
+//            public boolean test(TheLastTable item) {
+//                if (item.getOfficialPerson().equals(officialPerson)) {
+//                    return true;
+//                } else {
+//                    return false;
+//                }
+//            }
+//        });
     }
     public static ObservableList<TheLastTable> filterFromApp(String appFrom, ObservableList<TheLastTable> data) {
-        return data.filtered(new Predicate<TheLastTable>() {
-            @Override
-            public boolean test(TheLastTable item) {
-                if (item.getAppFrom1().equals(appFrom)) {
-                    return true;
-                } else {
-                    return false;
-                }
+        ObservableList<TheLastTable> result = FXCollections.observableArrayList();
+
+        for (TheLastTable item : data) {
+            if (item.getAppFrom1().equals(appFrom)) {
+                result.add(item);
             }
-        });
+        }
+
+        return result;
+
+//        return data.filtered(new Predicate<TheLastTable>() {
+//            @Override
+//            public boolean test(TheLastTable item) {
+//                if (item.getAppFrom1().equals(appFrom)) {
+//                    return true;
+//                } else {
+//                    return false;
+//                }
+//            }
+//        });
     }
 
     public static ObservableList<TheLastTable> filterByTypeAbon(String typeAbon, ObservableList<TheLastTable> data) {
-        return data.filtered(new Predicate<TheLastTable>() {
-            @Override
-            public boolean test(TheLastTable item) {
-                if (item.getTypeAbon().equals(typeAbon)) {
-                    return true;
-                } else {
-                    return false;
-                }
+        ObservableList<TheLastTable> result = FXCollections.observableArrayList();
+
+        for (TheLastTable item : data) {
+            if (item.getTypeAbon().equals(typeAbon)) {
+                result.add(item);
             }
-        });
+        }
+
+        return result;
+//        return data.filtered(new Predicate<TheLastTable>() {
+//            @Override
+//            public boolean test(TheLastTable item) {
+//                if (item.getTypeAbon().equals(typeAbon)) {
+//                    return true;
+//                } else {
+//                    return false;
+//                }
+//            }
+//        });
     }
 
     public static ArrayList<String> getAllOfficialPerson(ObservableList<TheLastTable> data) {

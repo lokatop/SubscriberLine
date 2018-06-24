@@ -12,20 +12,20 @@
          <children>
             <Label alignment="CENTER" maxHeight="100.0" maxWidth="760.0" prefHeight="58.0" prefWidth="760.0" text="Информационно справочный раздел" textAlignment="CENTER" wrapText="true" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="16.0">
                <font>
-                  <Font size="36.0" />
+                  <Font/>
                </font></Label>
             <GridPane alignment="CENTER" layoutX="-7.0" layoutY="8.0" minHeight="720.0" minWidth="960.0" prefHeight="720.0" prefWidth="960.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <Label lineSpacing="6.0" prefHeight="200.0" prefWidth="445.0" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                  <Label prefHeight="200.0" prefWidth="445.0" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <font>
-                        <Font name="Arial Bold" size="36.0" />
+                        <Font/>
                      </font>
                   </Label>
                   <VBox alignment="BOTTOM_CENTER" maxHeight="1.7976931348623157E308" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
                      <children>
                         <Label alignment="CENTER" text="Аппаратные тактического звена управления">
                            <VBox.margin>
-                              <Insets left="40.0" right="40.0" top="16.0" />
+                              <Insets/>
                            </VBox.margin>
                         </Label>
                         <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0">
@@ -34,12 +34,12 @@
                               <Button mnemonicParsing="false" onAction="#toShow" text="Показать" />
                            </children>
                            <VBox.margin>
-                              <Insets bottom="20.0" />
+                              <Insets/>
                            </VBox.margin>
                         </HBox>
                         <Label alignment="CENTER" text="Аппаратные оперативного звена управления">
                            <VBox.margin>
-                              <Insets left="40.0" right="40.0" />
+                              <Insets/>
                            </VBox.margin>
                         </Label>
                         <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0">
@@ -48,14 +48,14 @@
                               <Button mnemonicParsing="false" onAction="#toShow" text="Показать" />
                            </children>
                            <VBox.margin>
-                              <Insets bottom="20.0" />
+                              <Insets/>
                            </VBox.margin>
                         </HBox>
                         <VBox alignment="BOTTOM_CENTER" maxHeight="1.7976931348623157E308" prefHeight="200.0" prefWidth="100.0">
                            <children>
                               <Label alignment="CENTER" text="Внести изменения в раздел">
                                  <font>
-                                    <Font size="24.0" />
+                                    <Font/>
                                  </font>
                               </Label>
                               <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
@@ -70,10 +70,10 @@
                   </VBox>
                   <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Абонентское оборудование" textAlignment="CENTER" wrapText="true" GridPane.rowIndex="1">
                      <font>
-                        <Font size="18.0" />
+                        <Font/>
                      </font>
                      <GridPane.margin>
-                        <Insets left="16.0" right="16.0" />
+                        <Insets/>
                      </GridPane.margin>
                   </Label>
                   <VBox alignment="TOP_CENTER" prefHeight="401.0" prefWidth="332.0" GridPane.rowIndex="2">
@@ -85,7 +85,7 @@
                               <Button mnemonicParsing="false" onAction="#toShow" text="Показать" />
                            </children>
                            <VBox.margin>
-                              <Insets top="5.0" />
+                              <Insets/>
                            </VBox.margin>
                         </HBox>
                         <Label alignment="CENTER" text="Телефонные аппараты ЗАС" />
@@ -95,7 +95,7 @@
                               <Button mnemonicParsing="false" onAction="#toShow" text="Показать" />
                            </children>
                            <VBox.margin>
-                              <Insets bottom="20.0" top="5.0" />
+                              <Insets/>
                            </VBox.margin>
                         </HBox>
                         <Label alignment="CENTER" text="Автоматизированные рабочие места" />
@@ -105,7 +105,7 @@
                               <Button mnemonicParsing="false" onAction="#toShow" text="Показать" />
                            </children>
                            <VBox.margin>
-                              <Insets bottom="20.0" top="5.0" />
+                              <Insets/>
                            </VBox.margin>
                         </HBox>
                         <Label alignment="CENTER" text="Кабель применяемый для развертывания абонентской сети" textAlignment="CENTER" wrapText="true" />
@@ -115,24 +115,24 @@
                               <Button mnemonicParsing="false" onAction="#toShow" text="Показать" />
                            </children>
                            <VBox.margin>
-                              <Insets bottom="20.0" top="5.0" />
+                              <Insets/>
                            </VBox.margin>
                         </HBox>
                      </children>
                      <padding>
-                        <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
+                        <Insets/>
                      </padding>
                   </VBox>
                   <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Аппаратные связи от которых развертывается абонентская сеть" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
                      <font>
-                        <Font size="18.0" />
+                        <Font/>
                      </font>
                   </Label>
                   <VBox prefHeight="200.0" prefWidth="100.0">
                      <children>
                         <Button mnemonicParsing="false" onAction="#btnBackClick" text="Назад">
                            <VBox.margin>
-                              <Insets left="16.0" top="16.0" />
+                              <Insets/>
                            </VBox.margin>
                         </Button>
                      </children>

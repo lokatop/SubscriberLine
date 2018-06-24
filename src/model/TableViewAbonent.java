@@ -3,10 +3,10 @@ package model;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import javax.xml.bind.annotation.XmlType;
-import java.util.function.Predicate;
 
 @XmlType(propOrder = {"fullName", "count", "parentApparatus"})
 public class TableViewAbonent {
@@ -110,16 +110,26 @@ public class TableViewAbonent {
      * @return FilteredList&lt;TableViewAbonent&gt;
      */
     public static ObservableList<TableViewAbonent> filterInfoModelByApparatusName(String appName, ObservableList<TableViewAbonent> infoData) {
-        return infoData.filtered(new Predicate<TableViewAbonent>() {
-            @Override
-            public boolean test(TableViewAbonent abonent) {
-                if (abonent.getParentApparatus().equals(appName)) {
-                    return true;
-                } else {
-                    return false;
+        ObservableList<TableViewAbonent> result = FXCollections.observableArrayList();
+
+        for (TableViewAbonent abonent : infoData) {
+            if (abonent.getParentApparatus().equals(appName)) {
+                    result.add(abonent);
                 }
-            }
-        });
+        }
+
+        return result;
+
+//        return infoData.filtered(new Predicate<TableViewAbonent>() {
+//            @Override
+//            public boolean test(TableViewAbonent abonent) {
+//                if (abonent.getParentApparatus().equals(appName)) {
+//                    return true;
+//                } else {
+//                    return false;
+//                }
+//            }
+//        });
     }
 
     @Override

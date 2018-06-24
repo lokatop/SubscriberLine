@@ -162,13 +162,13 @@ public class ControllerTypeDefinition3 implements Initializable {
 
     private void setupTable() {
         // Название
-        _tableColumn1.setCellValueFactory(new PropertyValueFactory<>("fullName"));
+        _tableColumn1.setCellValueFactory(new PropertyValueFactory<TableViewAbonent, String>("fullName"));
 
         // Колчество
-        _tableColumn2.setCellValueFactory(new PropertyValueFactory<>("count"));
+        _tableColumn2.setCellValueFactory(new PropertyValueFactory<TableViewAbonent, Integer>("count"));
 
         // Колчество
-        _tableColumn3.setCellValueFactory(new PropertyValueFactory<>("count_used"));
+        _tableColumn3.setCellValueFactory(new PropertyValueFactory<TableViewAbonent, Integer>("count_used"));
 //        _tableColumn3.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
 //        _tableColumn3.setMinWidth(10);
 //        _tableColumn3.setOnEditCommit((TableColumn.CellEditEvent<TableViewAbonent, Integer> event) -> {
@@ -186,7 +186,7 @@ public class ControllerTypeDefinition3 implements Initializable {
         _tableColumn4.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<TableViewAbonent, Boolean>, ObservableValue<Boolean>>() {
             @Override
             public ObservableValue<Boolean> call(TableColumn.CellDataFeatures<TableViewAbonent, Boolean> param) {
-                TableViewAbonent tableViewApparatus = param.getValue();
+                final TableViewAbonent tableViewApparatus = param.getValue();
 
                 SimpleBooleanProperty booleanProperty = new SimpleBooleanProperty(tableViewApparatus.isChoose());
 

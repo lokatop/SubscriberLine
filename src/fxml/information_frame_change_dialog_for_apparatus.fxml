@@ -26,7 +26,7 @@
                <children>
                   <TextField fx:id="__title" alignment="CENTER" prefHeight="25.0" prefWidth="660.0" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                      <GridPane.margin>
-                        <Insets left="50.0" right="50.0" />
+                        <Insets/>
                      </GridPane.margin>
                   </TextField>
                   <FlowPane alignment="CENTER" columnHalignment="CENTER" orientation="VERTICAL" prefHeight="153.0" prefWidth="501.0" GridPane.rowIndex="2">
@@ -34,7 +34,7 @@
                         <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="317.0" text="Выбрать изображение" />
                         <ImageView fx:id="__image" fitHeight="118.0" fitWidth="330.0" onDragDone="#__drag_done" onDragDropped="#__drag_dropped" onDragEntered="#__drag_enter" onDragExited="#__drag_exit" onDragOver="#__drag_over" onMouseClicked="#__select_image" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../resource/noimage.png" />
+                              <!--<Image url="@../resource/noimage.png" />-->
                            </image>
                            <cursor>
                               <Cursor fx:constant="DEFAULT" />
@@ -42,14 +42,11 @@
                         </ImageView>
                      </children>
                   </FlowPane>
-                  <HBox alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                     <opaqueInsets>
-                        <Insets left="50.0" right="50.0" />
-                     </opaqueInsets>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <children>
                         <Button mnemonicParsing="false" onAction="#__save" text="Сохранить">
                            <HBox.margin>
-                              <Insets right="50.0" />
+                              <Insets/>
                            </HBox.margin></Button>
                         <Button mnemonicParsing="false" onAction="#__cancel" text="Отменить" />
                      </children>
@@ -58,7 +55,7 @@
                      <children>
                         <HTMLEditor fx:id="__description" htmlText="&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body contenteditable=&quot;true&quot;&gt;&lt;/body&gt;&lt;/html&gt;" prefHeight="389.0" prefWidth="512.0" GridPane.columnSpan="2" GridPane.rowIndex="1">
                            <HBox.margin>
-                              <Insets left="16.0" right="8.0" />
+                              <Insets/>
                            </HBox.margin>
                         </HTMLEditor>
                         <VBox>
@@ -70,7 +67,7 @@
                                   <TableColumn fx:id="_ta_column_2" prefWidth="75.0" text="Количество" />
                                 </columns>
                                  <HBox.margin>
-                                    <Insets right="16.0" />
+                                    <Insets/>
                                  </HBox.margin>
                               </TableView>
                               <Label text="Наименование" />
@@ -81,19 +78,19 @@
                                  <children>
                                     <Button mnemonicParsing="false" onAction="#_ta_add" text="Добавить">
                                        <HBox.margin>
-                                          <Insets right="8.0" />
+                                          <Insets/>
                                        </HBox.margin>
                                     </Button>
                                     <Button mnemonicParsing="false" onAction="#_ta_del" text="Удалить">
                                        <HBox.margin>
-                                          <Insets left="8.0" />
+                                          <Insets/>
                                        </HBox.margin>
                                     </Button>
                                  </children>
                               </HBox>
                            </children>
                            <HBox.margin>
-                              <Insets left="8.0" right="16.0" />
+                              <Insets/>
                            </HBox.margin>
                         </VBox>
                         <VBox layoutX="642.0" layoutY="10.0">
@@ -105,7 +102,7 @@
                                     <TableColumn fx:id="_cable_column_2" editable="false" maxWidth="1.7976931348623157E308" prefWidth="75.0" resizable="false" text="Жилы" />
                                  </columns>
                                  <HBox.margin>
-                                    <Insets right="16.0" />
+                                    <Insets/>
                                  </HBox.margin>
                               </TableView>
                               <Label text="Наименование" />
@@ -116,12 +113,12 @@
                                  <children>
                                     <Button mnemonicParsing="false" onAction="#_cable_add" text="Добавить">
                                        <HBox.margin>
-                                          <Insets right="8.0" />
+                                          <Insets/>
                                        </HBox.margin>
                                     </Button>
                                     <Button mnemonicParsing="false" onAction="#_cable_del" text="Удалить">
                                        <HBox.margin>
-                                          <Insets left="8.0" />
+                                          <Insets/>
                                        </HBox.margin>
                                     </Button>
                                  </children>

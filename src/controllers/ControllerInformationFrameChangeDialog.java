@@ -2,22 +2,24 @@ package controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.*;
+import javafx.scene.input.DragEvent;
+import javafx.scene.input.Dragboard;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.input.TransferMode;
 import javafx.scene.web.HTMLEditor;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import model.InfoModel;
 
-import javax.activation.MimetypesFileTypeMap;
-import javax.imageio.ImageIO;
-import javax.swing.filechooser.FileNameExtensionFilter;
-import java.io.*;
-import java.security.cert.Extension;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.List;
+
+//import javafx.scene.control.Alert;
 
 public class ControllerInformationFrameChangeDialog {
 
@@ -91,14 +93,15 @@ public class ControllerInformationFrameChangeDialog {
         if (errorMessage.length() == 0) {
             return true;
         } else {
-            // Показываем сообщение об ошибке.
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.initOwner(dialogStage);
-            alert.setTitle("Поля с ошибками");
-            alert.setHeaderText("Пожалуйста, исправте ошибки");
-            alert.setContentText(errorMessage);
-
-            alert.showAndWait();
+            // TODO: отображение ошибок во всплывающем окне
+//            // Показываем сообщение об ошибке.
+//            Alert alert = new Alert(Alert.AlertType.ERROR);
+//            alert.initOwner(dialogStage);
+//            alert.setTitle("Поля с ошибками");
+//            alert.setHeaderText("Пожалуйста, исправте ошибки");
+//            alert.setContentText(errorMessage);
+//
+//            alert.showAndWait();
 
             return false;
         }

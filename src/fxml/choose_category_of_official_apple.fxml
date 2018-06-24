@@ -14,7 +14,7 @@
                <children>
                   <VBox alignment="CENTER" prefHeight="194.0" prefWidth="440.0" GridPane.columnSpan="3" GridPane.rowIndex="3">
                      <GridPane.margin>
-                        <Insets left="50.0" right="50.0" />
+                        <Insets/>
                      </GridPane.margin>
                   </VBox>
                   <Pane prefHeight="200.0" prefWidth="200.0">
@@ -29,22 +29,22 @@
                   </Pane>
                   <ListView fx:id="ListViewOfficial" maxWidth="400.0" prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowIndex="2">
                      <GridPane.margin>
-                        <Insets left="50.0" />
+                        <Insets/>
                      </GridPane.margin>
                   </ListView>
                   <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
                      <children>
                         <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Изменения данных в разделе" textAlignment="CENTER" textFill="RED">
                            <font>
-                              <Font name="Times New Roman" size="20.0" />
+                              <Font/>
                            </font>
                            <VBox.margin>
-                              <Insets top="16.0" />
+                              <Insets/>
                            </VBox.margin>
                         </Label>
                         <Label fx:id="labelUpOnPage" text="Выбор категории должностных лиц размещающихся на командном пункте бригады" textAlignment="CENTER" wrapText="true">
                            <font>
-                              <Font name="Times New Roman Bold" size="20.0" />
+                              <Font/>
                            </font>
                         </Label>
                      </children>
@@ -53,12 +53,12 @@
                      <children>
                         <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Выбор категории раздела для изменения" textAlignment="CENTER" textFill="RED">
                            <font>
-                              <Font name="Times New Roman" size="20.0" />
+                              <Font/>
                            </font>
                         </Label>
                         <ComboBox fx:id="ComboBoxCategory" prefWidth="250.0">
                            <VBox.margin>
-                              <Insets top="10.0" />
+                              <Insets/>
                            </VBox.margin>
                         </ComboBox>
                      </children>

@@ -6,6 +6,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -14,12 +15,12 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
-import javafx.scene.control.cell.TextFieldTreeTableCell;
 import javafx.scene.layout.VBox;
 import javafx.util.Callback;
-import javafx.util.StringConverter;
 import javafx.util.converter.IntegerStringConverter;
-import model.*;
+import model.InfoModel;
+import model.TableViewApparatus;
+import model.XMLsaver;
 
 import java.io.IOException;
 import java.net.URL;
@@ -83,34 +84,38 @@ public class ControllerTypeDefinition2 implements Initializable {
 
     private void setupTable(){
         // Название
-        _tableColumn1.setCellValueFactory(new PropertyValueFactory<>("fullName"));
+        _tableColumn1.setCellValueFactory(new PropertyValueFactory<TableViewApparatus, String>("fullName"));
 
         // Колчество
-        _tableColumn2.setCellValueFactory(new PropertyValueFactory<>("count"));
-        _tableColumn2.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
+        _tableColumn2.setCellValueFactory(new PropertyValueFactory<TableViewApparatus, Integer>("count"));
+        _tableColumn2.setCellFactory(TextFieldTableCell.<TableViewApparatus, Integer>forTableColumn(new IntegerStringConverter()));
         _tableColumn2.setMinWidth(10);
-        _tableColumn2.setOnEditCommit((TableColumn.CellEditEvent<TableViewApparatus, Integer> event) -> {
-            TablePosition<TableViewApparatus, Integer> pos = event.getTablePosition();
+        _tableColumn2.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<TableViewApparatus, Integer>>() {
+            @Override
+            public void handle(TableColumn.CellEditEvent<TableViewApparatus, Integer> event) {
+                TablePosition<TableViewApparatus, Integer> pos = event.getTablePosition();
 
-            Integer newCount= event.getNewValue();
+                Integer newCount= event.getNewValue();
 
-            // Делаем кол-во положительным
-            if (newCount<1) newCount = 1;
+                // Делаем кол-во положительным
+                if (newCount<1) newCount = 1;
 
-            int row = pos.getRow();
-            TableViewApparatus apparatus = event.getTableView().getItems().get(row);
+                int row = pos.getRow();
+                TableViewApparatus apparatus = event.getTableView().getItems().get(row);
 
-            apparatus.setCount(newCount);
+                apparatus.setCount(newCount);
 
-            // Обновляем таблицу
-            event.getTableView().refresh();
+                // Обновляем таблицу
+                //TODO: а надо?
+//                event.getTableView().refresh();
+            }
         });
 
         // Checkbox
         _tableColumn3.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<TableViewApparatus, Boolean>, ObservableValue<Boolean>>() {
             @Override
             public ObservableValue<Boolean> call(TableColumn.CellDataFeatures<TableViewApparatus, Boolean> param) {
-                TableViewApparatus tableViewApparatus = param.getValue();
+                final TableViewApparatus tableViewApparatus = param.getValue();
 
                 SimpleBooleanProperty booleanProperty = new SimpleBooleanProperty(tableViewApparatus.isChoose());
 
