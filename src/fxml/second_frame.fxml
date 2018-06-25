@@ -39,7 +39,7 @@
                      <children>
                         <Button alignment="CENTER" maxWidth="1.7976931348623157E308" minHeight="50.0" mnemonicParsing="false" onAction="#buttonInformation" text="Информационно-справочный" textAlignment="CENTER" underline="true">
                            <VBox.margin>
-                              <Insets />
+                              <Insets/>
                            </VBox.margin>
                         </Button>
                         <Button alignment="CENTER" maxWidth="1.7976931348623157E308" minHeight="50.0" mnemonicParsing="false" onAction="#FormingADocument" text="Формирование графического документа&lt;Схема абонентской сети пункта управления&gt;" textAlignment="CENTER" underline="true" wrapText="true">

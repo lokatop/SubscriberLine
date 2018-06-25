@@ -14,24 +14,24 @@
                <children>
                   <Label fx:id="labelUpOnPage" text="Определения типа аппаратных от которых будет развернута абонентская сеть" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1">
                      <font>
-                        <Font name="Times New Roman Bold" size="24.0" />
+                        <Font/>
                      </font>
                   </Label>
                   <VBox alignment="CENTER" prefHeight="194.0" prefWidth="440.0" GridPane.columnSpan="3" GridPane.rowIndex="2">
                      <children>
                         <Label text="В данном разделе программы необходимо выбрать тип аппаратных от которых будет развертываться абонентская сеть и устанавливать их количество." wrapText="true">
                            <VBox.margin>
-                              <Insets />
+                              <Insets/>
                            </VBox.margin>
                         </Label>
                         <Label text="Изменение количества подтверждается надатием кнопки Ввод (Enter)" textFill="RED" wrapText="true">
                            <font>
-                              <Font size="14.0" />
+                              <Font/>
                            </font>
                         </Label>
                      </children>
                      <GridPane.margin>
-                        <Insets left="50.0" right="50.0" />
+                        <Insets/>
                      </GridPane.margin>
                   </VBox>
                   <Button fx:id="_btn_next" alignment="CENTER" disable="true" mnemonicParsing="false" onAction="#theNext" prefWidth="150.0" text="ДАЛЕЕ" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="3" />
@@ -49,7 +49,7 @@
                      <children>
                         <VBox alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="426.0" prefWidth="663.0" HBox.hgrow="NEVER">
                            <HBox.margin>
-                              <Insets left="50.0" />
+                              <Insets/>
                            </HBox.margin>
                            <children>
                               <TableView fx:id="_tableView" editable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="426.0" prefWidth="617.0">

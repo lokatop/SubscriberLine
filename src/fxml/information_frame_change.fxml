@@ -49,7 +49,7 @@
                            <children>
                               <ComboBox fx:id="__list_of_categories" onHidden="#updateLists" prefWidth="250.0">
                                  <HBox.margin>
-                                    <Insets />
+                                    <Insets/>
                                  </HBox.margin>
                               </ComboBox>
                            </children>

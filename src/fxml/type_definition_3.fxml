@@ -14,24 +14,24 @@
                <children>
                   <Label prefHeight="86.0" prefWidth="498.0" text="Определения типа и количества абонентского оборудования аппаратных" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1">
                      <font>
-                        <Font name="Times New Roman Bold" size="24.0" />
+                        <Font/>
                      </font>
                   </Label>
                   <VBox alignment="CENTER" prefHeight="194.0" prefWidth="440.0" GridPane.columnSpan="3" GridPane.rowIndex="2">
                      <children>
                         <Label text="В данном разделе необходимо выбрать тип и количество абонентских устройств, которые будут использованы при развёртывании абонентской линии" wrapText="true">
                            <VBox.margin>
-                              <Insets />
+                              <Insets/>
                            </VBox.margin>
                         </Label>
                         <Label text="Изменение количества подтверждается надатием кнопки Ввод (Enter)" textFill="RED" wrapText="true">
                            <font>
-                              <Font size="14.0" />
+                              <Font/>
                            </font>
                         </Label>
                      </children>
                      <GridPane.margin>
-                        <Insets left="50.0" right="50.0" />
+                        <Insets/>
                      </GridPane.margin>
                   </VBox>
                   <Button alignment="CENTER" mnemonicParsing="false" onAction="#theNext" prefWidth="150.0" text="ДАЛЕЕ" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="3" />
@@ -49,7 +49,7 @@
                      <children>
                         <VBox alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="426.0" prefWidth="370.0" HBox.hgrow="NEVER">
                            <HBox.margin>
-                              <Insets left="50.0" right="25.0" />
+                              <Insets/>
                            </HBox.margin>
                            <children>
                               <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="318.0" text="Наименование аппаратных" />
@@ -58,7 +58,7 @@
                         </VBox>
                         <VBox alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="570.0">
                            <HBox.margin>
-                              <Insets left="25.0" right="50.0" />
+                              <Insets/>
                            </HBox.margin>
                            <children>
                               <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="507.0" text="Тип и количество абонентского оборудования" />
@@ -84,9 +84,6 @@
                                  </content>
                               </ScrollPane>
                            </children>
-                           <opaqueInsets>
-                              <Insets />
-                           </opaqueInsets>
                         </VBox>
                      </children>
                   </HBox>

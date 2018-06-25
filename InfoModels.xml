@@ -3,142 +3,142 @@
     <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="infoModel">
         <title>ТА-57</title>
         <type>DS</type>
-        <description>Описание</description>
-        <image>1527090174778.png</image>
+        <description>&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body contenteditable=&quot;true&quot;&gt;&lt;div style=&quot;text-align: left;&quot;&gt;Описание&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;</description>
+        <image>1529958916458.png</image>
     </item>
     <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="infoModel">
         <title>ТА-88</title>
         <type>DS</type>
         <description>Описание</description>
-        <image>1527090174804.png</image>
+        <image>1529958917030.png</image>
     </item>
     <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="infoModel">
         <title>П-380 ТА</title>
         <type>DS</type>
         <description>Описание</description>
-        <image>1527090174830.png</image>
+        <image>1529958917225.png</image>
     </item>
     <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="infoModel">
         <title>Селенит</title>
         <type>DS,ZAS</type>
         <description>Описание</description>
-        <image>1527090174856.png</image>
+        <image>1529958917294.png</image>
     </item>
     <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="infoModel">
         <title>П-170</title>
         <type>ZAS</type>
         <description>Описание</description>
-        <image>1527090174881.png</image>
+        <image>1529958917406.png</image>
     </item>
     <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="infoModel">
         <title>П-171Д</title>
         <type>ZAS</type>
         <description>Описание</description>
-        <image>1527090174905.png</image>
+        <image>1529958917488.png</image>
     </item>
     <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="infoModel">
         <title>АТ-3031</title>
         <type>ZAS</type>
         <description>Описание</description>
-        <image>1527090174930.png</image>
+        <image>1529958917578.png</image>
     </item>
     <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="infoModel">
         <title>Рамек-2</title>
         <type>ARM</type>
         <description>Описание</description>
-        <image>1527090174955.png</image>
+        <image>1529958917655.png</image>
     </item>
     <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="infoModel">
         <title>П-274М</title>
         <type>CableAndOther</type>
         <description>Описание</description>
-        <image>1527090174981.png</image>
+        <image>1529958917729.png</image>
     </item>
     <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="infoModel">
         <title>П-269 4х2+2х4</title>
         <type>CableAndOther</type>
         <description>Описание</description>
-        <image>1527090175006.png</image>
+        <image>1529958917820.png</image>
     </item>
     <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="infoModel">
         <title>ПРК 5х2</title>
         <type>CableAndOther</type>
         <description>Описание</description>
-        <image>1527090175030.png</image>
+        <image>1529958917895.png</image>
     </item>
     <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="infoModel">
         <title>ПТРК 5х2</title>
         <type>CableAndOther</type>
         <description>Описание</description>
-        <image>1527090175056.png</image>
+        <image>1529958917969.png</image>
     </item>
     <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="infoModel">
         <title>Витая пара</title>
         <type>CableAndOther</type>
         <description>Описание</description>
-        <image>1527090175081.png</image>
+        <image>1529958918046.png</image>
     </item>
     <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="infoModel">
         <title>ВП</title>
         <type>CableAndOther</type>
         <description>Описание</description>
-        <image>1527090175106.png</image>
+        <image>1529958918122.png</image>
     </item>
     <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="infoModel">
         <title>РМ2</title>
         <type>CableAndOther</type>
         <description>Описание</description>
-        <image>1527090175131.png</image>
+        <image>1529958918206.png</image>
     </item>
     <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="infoModel">
         <title>П-240И</title>
         <type>AOZU</type>
         <description>Описание</description>
-        <image>1527090175156.png</image>
+        <image>1529958918283.png</image>
     </item>
     <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="infoModel">
         <title>МП-1И</title>
         <type>AOZU</type>
         <description>Описание</description>
-        <image>1527090175181.png</image>
+        <image>1529958918359.png</image>
     </item>
     <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="infoModel">
         <title>МП-2И</title>
         <type>AOZU</type>
         <description>Описание</description>
-        <image>1527090175205.png</image>
+        <image>1529958918433.png</image>
     </item>
     <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="infoModel">
         <title>П-260-О</title>
         <type>ATZU</type>
         <description>Описание</description>
-        <image>1527090175231.png</image>
+        <image>1529958918509.png</image>
     </item>
     <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="infoModel">
         <title>П-260-У</title>
         <type>ATZU</type>
         <description>Описание</description>
-        <image>1527090175256.png</image>
+        <image>1529958918582.png</image>
     </item>
     <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="infoModel">
         <title>П-260-Т</title>
         <type>ATZU</type>
         <description>Описание</description>
-        <image>1527090175281.png</image>
+        <image>1529958918657.png</image>
     </item>
     <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="infoModel">
         <title>П-244И</title>
         <type>ATZU</type>
-        <description>&lt;html dir="ltr"&gt;&lt;head&gt;&lt;/head&gt;&lt;body contenteditable="true"&gt;Описание&lt;/body&gt;&lt;/html&gt;</description>
-        <image>1527090175306.png</image>
+        <description>&lt;html dir=&quot;ltr&quot;&gt;&lt;head&gt;&lt;/head&gt;&lt;body contenteditable=&quot;true&quot;&gt;Описание&lt;/body&gt;&lt;/html&gt;</description>
+        <image>1529958918730.png</image>
         <data>ТА-57:2;ТА-88:1;</data>
         <cables>П-274М:1;П-269 4х2+2х4:4;</cables>
     </item>
     <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="infoModel">
         <title>П-244И-4</title>
         <type>ATZU</type>
-        <description>&lt;html dir="ltr"&gt;&lt;head&gt;&lt;/head&gt;&lt;body contenteditable="true"&gt;Описание&lt;/body&gt;&lt;/html&gt;</description>
-        <image>1527090175336.png</image>
+        <description>&lt;html dir=&quot;ltr&quot;&gt;&lt;head&gt;&lt;/head&gt;&lt;body contenteditable=&quot;true&quot;&gt;Описание&lt;/body&gt;&lt;/html&gt;</description>
+        <image>1529958918805.png</image>
         <data>ТА-57:1;</data>
         <cables>ВП:1;ПРК 5х2:2;</cables>
     </item>

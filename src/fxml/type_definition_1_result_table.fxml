@@ -16,19 +16,19 @@
                <children>
                   <Label fx:id="labelUpOnPage" text="Промежуточная сводная таблица" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1">
                      <font>
-                        <Font name="Times New Roman Bold" size="24.0" />
+                        <Font/>
                      </font>
                   </Label>
                   <VBox alignment="CENTER" prefHeight="74.0" prefWidth="860.0" GridPane.columnSpan="3" GridPane.rowIndex="2">
                      <children>
                         <Label text="В данном разделе программы приведена промежуточная сводная таблица" wrapText="true">
                            <VBox.margin>
-                              <Insets />
+                              <Insets/>
                            </VBox.margin>
                         </Label>
                      </children>
                      <GridPane.margin>
-                        <Insets left="50.0" right="50.0" />
+                        <Insets/>
                      </GridPane.margin>
                   </VBox>
                   <Button alignment="CENTER" mnemonicParsing="false" onAction="#theNext" prefWidth="150.0" text="ДАЛЕЕ" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="1" />
@@ -48,20 +48,20 @@
                            <children>
                               <WebView fx:id="_table_view" minHeight="-1.0" minWidth="-1.0" prefHeight="435.0" prefWidth="757.0">
                                  <HBox.margin>
-                                    <Insets left="50.0" />
+                                    <Insets/>
                                  </HBox.margin>
                                  <VBox.margin>
-                                    <Insets bottom="8.0" />
+                                    <Insets/>
                                  </VBox.margin>
                               </WebView>
                               <WebView fx:id="_table_view_abons" minHeight="-1.0" minWidth="-1.0" prefHeight="150.0" prefWidth="700.0">
                                  <VBox.margin>
-                                    <Insets />
+                                    <Insets/>
                                  </VBox.margin>
                               </WebView>
                            </children>
                            <HBox.margin>
-                              <Insets left="25.0" right="25.0" />
+                              <Insets/>
                            </HBox.margin>
                         </VBox>
                      </children>

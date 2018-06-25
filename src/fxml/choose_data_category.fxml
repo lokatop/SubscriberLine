@@ -14,26 +14,26 @@
                <children>
                   <Label lineSpacing="6.0" prefHeight="200.0" prefWidth="445.0" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
                      <font>
-                        <Font name="Arial Bold" size="36.0" />
+                        <Font/>
                      </font>
                   </Label>
                   <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="1">
                      <children>
                         <Label text="Выбор категории раздела для изменения" textFill="RED">
                            <font>
-                              <Font size="14.0" />
+                              <Font/>
                            </font>
                         </Label>
                         <ComboBox fx:id="comboChooseDate" onAction="#comboChooseAction" prefWidth="250.0">
                            <VBox.margin>
-                              <Insets top="20.0" />
+                              <Insets/>
                            </VBox.margin>
                         </ComboBox>
                      </children>
                   </VBox>
                   <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2" GridPane.rowIndex="3">
                      <GridPane.margin>
-                        <Insets top="10.0" />
+                        <Insets/>
                      </GridPane.margin>
                   </VBox>
                   <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
@@ -43,17 +43,17 @@
                            <children>
                               <Button minWidth="70.0" mnemonicParsing="false" onAction="#AddData" text="Добавить">
                                  <HBox.margin>
-                                    <Insets right="5.0" top="5.0" />
+                                    <Insets/>
                                  </HBox.margin>
                               </Button>
                               <Button minWidth="75.0" mnemonicParsing="false" onAction="#DeleteData" text="Удалить">
                                  <HBox.margin>
-                                    <Insets top="5.0" />
+                                    <Insets/>
                                  </HBox.margin>
                               </Button>
                            </children>
                            <VBox.margin>
-                              <Insets />
+                              <Insets/>
                            </VBox.margin>
                         </HBox>
                         <Button mnemonicParsing="false" onAction="#buttonApply" prefWidth="150.0" text="Применить изменения" />
@@ -68,15 +68,15 @@
                      <children>
                         <Label alignment="CENTER" maxHeight="100.0" maxWidth="760.0" prefHeight="58.0" prefWidth="760.0" text="Изменения данных в разделе " textAlignment="CENTER" textFill="RED" wrapText="true">
                            <font>
-                              <Font size="15.0" />
+                              <Font/>
                            </font>
                         </Label>
                         <Label text="&quot;Определние отребности кабельного имущества и абнонетского оборудования при развертывании абонентской сети на пукте управления &quot;" textAlignment="JUSTIFY" wrapText="true">
                            <VBox.margin>
-                              <Insets left="16.0" right="16.0" />
+                              <Insets/>
                            </VBox.margin>
                            <font>
-                              <Font size="14.0" />
+                              <Font/>
                            </font>
                         </Label>
                      </children>

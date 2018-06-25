@@ -14,19 +14,19 @@
                <children>
                   <Label fx:id="labelUpOnPage" text="Определение типа полевого кабеля, который имеется в комплекте аппаратных" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1">
                      <font>
-                        <Font name="Times New Roman Bold" size="24.0" />
+                        <Font/>
                      </font>
                   </Label>
                   <VBox alignment="CENTER" prefHeight="194.0" prefWidth="440.0" GridPane.columnSpan="3" GridPane.rowIndex="3">
                      <children>
                         <Label text="В данном разделе программы необходимо выбрать тип оконечного устройства который будет размещен на рабочем месте должностного лица пункта управления" wrapText="true">
                            <VBox.margin>
-                              <Insets />
+                              <Insets/>
                            </VBox.margin>
                         </Label>
                      </children>
                      <GridPane.margin>
-                        <Insets left="50.0" right="50.0" />
+                        <Insets/>
                      </GridPane.margin>
                   </VBox>
                   <Pane prefHeight="200.0" prefWidth="200.0">
@@ -46,29 +46,29 @@
                               <ListView fx:id="listViewOfficial" maxWidth="1.7976931348623157E308" prefWidth="270.0" />
                            </children>
                            <HBox.margin>
-                              <Insets left="50.0" />
+                              <Insets/>
                            </HBox.margin>
                         </VBox>
                         <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" HBox.hgrow="SOMETIMES">
                            <HBox.margin>
-                              <Insets left="50.0" right="50.0" />
+                              <Insets/>
                            </HBox.margin>
                            <children>
                               <ListView fx:id="listViewEquipment" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
                                  <VBox.margin>
-                                    <Insets top="20.0" />
+                                    <Insets/>
                                  </VBox.margin>
                               </ListView>
                               <Button alignment="CENTER" mnemonicParsing="false" onAction="#theNext" prefWidth="150.0" text="ДАЛЕЕ" textAlignment="CENTER">
                                  <VBox.margin>
-                                    <Insets top="20.0" />
+                                    <Insets/>
                                  </VBox.margin>
                               </Button>
                            </children>
                         </VBox>
                         <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="407.0" prefWidth="246.0" HBox.hgrow="SOMETIMES">
                            <HBox.margin>
-                              <Insets right="50.0" />
+                              <Insets/>
                            </HBox.margin>
                            <children>
                               <ListView fx:id="listViewChoose" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" />
