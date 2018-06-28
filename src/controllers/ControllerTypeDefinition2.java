@@ -65,7 +65,6 @@ public class ControllerTypeDefinition2 implements Initializable {
     private void theNext() throws IOException{
         VBox vBox = FXMLLoader.load(getClass().getResource("/fxml/type_definition_3.fxml"));
         typeDefinition.getChildren().setAll(vBox);
-
     }
 
     public void readData(){
