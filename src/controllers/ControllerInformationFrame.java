@@ -11,6 +11,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import model.Catalog;
 import model.DB;
 import model.InfoModel;
 import model.XMLsaver;
@@ -20,8 +21,7 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-import static model.InfoModel.CATEGORIES_DESC;
-import static model.InfoModel.filterInfoModelByType;
+import static model.Catalog.CATEGORIES_DESC;
 
 public class ControllerInformationFrame implements Initializable {
 
@@ -56,14 +56,14 @@ public class ControllerInformationFrame implements Initializable {
         Button b = (Button) actionEvent.getTarget();
         HBox vb = (HBox) b.getParent();
         ComboBox cb = (ComboBox) vb.getChildren().get(0);
-        InfoModel model = (InfoModel) cb.getSelectionModel().getSelectedItem();
+        Integer catalogItemId = ((Catalog) cb.getSelectionModel().getSelectedItem()).getId();
 
         try {
             VBox vBox = (VBox) loader.load();
 
             // Передаём выбранную модель в контроллер фрейма Описание
             ControllerInformationDescription controller = loader.getController();
-            controller.setModel(model);
+            controller.setModel(catalogItemId);
 
             // Оотображаем
             Vbox.getChildren().setAll(vBox);

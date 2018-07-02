@@ -9,11 +9,14 @@ import javafx.scene.control.TreeView;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.scene.web.WebView;
+import model.Catalog;
+import model.DB;
 import model.InfoModel;
 
 import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 import java.util.Set;
 import java.util.TreeSet;
@@ -26,17 +29,21 @@ public class ControllerInformationDescription {
     public ImageView imageDescr;
     public WebView lblDesc;
 
-    private InfoModel infoModel;
+    private Catalog catalogItem;
 
-    public void setModel(InfoModel model){
-        this.infoModel = model;
+    public void setModel(Integer id){
+        try {
+            this.catalogItem = DB.getCatalogById(id);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
         // Заголовок
-        lblLabel.setText(infoModel.getTitle());
+        lblLabel.setText(catalogItem.getTitle());
         // Описание
-        lblDesc.getEngine().loadContent(infoModel.getDescription());
+        lblDesc.getEngine().loadContent(catalogItem.getDescription());
         // Изображение
-        imageDescr.setImage(infoModel.getImage());
+        imageDescr.setImage(catalogItem.getImage());
     }
 
     @FXML

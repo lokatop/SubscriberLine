@@ -124,14 +124,24 @@ public class DB {
         return result;
     }
 
-    static public ResultSet getCatalogById(Integer id) throws SQLException {
+    static public Catalog getCatalogById(Integer id) throws SQLException {
+
+        Catalog result = null;
 
         Connection connection = getConnect();
 
-        PreparedStatement pstat = connection.prepareStatement("SELECT id, title FROM catalog WHERE id = ?");
+        PreparedStatement pstat = connection.prepareStatement("SELECT * FROM catalog WHERE id = ?");
         pstat.setInt(1, id);
 
-        ResultSet result = pstat.executeQuery();
+        ResultSet rs = pstat.executeQuery();
+
+        result = new Catalog(
+                rs.getInt("id"),
+                rs.getString("title"),
+                rs.getString("type"),
+                rs.getString("description"),
+                rs.getString("image")
+        );
 
         return result;
     }
