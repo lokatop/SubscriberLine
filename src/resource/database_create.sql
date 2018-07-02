@@ -9,14 +9,14 @@ CREATE TABLE if not exists 'catalog' (
   'data' TEXT
 );
 
-CREATE TABLE if not exists 'user_cable' (
-  'user_id' INTEGER NOT NULL,
+CREATE TABLE if not exists 'ta_app_to_cable' (
+  'ta_app_id' INTEGER NOT NULL,
   'cable_id' INTEGER NOT NULL,
-  FOREIGN KEY (user_id) REFERENCES catalog(id),
+  FOREIGN KEY (ta_app_id) REFERENCES catalog(id),
   FOREIGN KEY (cable_id) REFERENCES catalog(id)
 );
 
-CREATE TABLE if not exists 'apparatus_ta' (
+CREATE TABLE if not exists 'apparatus_to_ta' (
   'apparatus_id' INTEGER NOT NULL,
   'ta_id' INTEGER NOT NULL,
   FOREIGN KEY (apparatus_id) REFERENCES catalog(id),

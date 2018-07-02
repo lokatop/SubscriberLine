@@ -1,19 +1,19 @@
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
-import model.DB;
 
 public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
 
-        DB.createDB();
-
-//        Stage window = primaryStage;
-//        Parent root = FXMLLoader.load(getClass().getResource("fxml/first_frame.fxml"));
-//        primaryStage.setTitle("Расчёт абонентской сети на пункте управления");
-//        primaryStage.setScene(new Scene(root));
-//        primaryStage.show();
+        Stage window = primaryStage;
+        Parent root = FXMLLoader.load(getClass().getResource("fxml/first_frame.fxml"));
+        primaryStage.setTitle("Расчёт абонентской сети на пункте управления");
+        primaryStage.setScene(new Scene(root));
+        primaryStage.show();
     }
 
 
