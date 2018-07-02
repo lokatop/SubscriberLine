@@ -13,48 +13,52 @@ import java.sql.*;
 
 public class DB {
 
+    static public Connection connection = null;
+
     // JDBC driver name and database URL
     static final String JDBC_DRIVER = "org.sqlite.JDBC";
     static final String DB_URL = "jdbc:sqlite:database.db";
 
     static public Connection getConnect() {
-        Connection conn = null;
-        Statement stmt = null;
+        if (connection == null) {
 
-        try {
-            Class.forName(JDBC_DRIVER);
+            Statement stmt = null;
 
-            // Проверка на существование файла БД
-            File DBfile = new File("database.db");
-            if (!DBfile.exists()) {
-                // Создание БД
+            try {
+                Class.forName(JDBC_DRIVER);
 
-                conn = DriverManager.getConnection(DB_URL);
-                stmt = conn.createStatement();
+                // Проверка на существование файла БД
+                File DBfile = new File("database.db");
+                if (!DBfile.exists()) {
+                    // Создание БД
 
-                Path database_create_file_path = Paths.get("src/resource/database_create.sql");
-                String sql_create_db = new String(Files.readAllBytes(database_create_file_path));
-                stmt.executeUpdate(sql_create_db);
+                    connection = DriverManager.getConnection(DB_URL);
+                    stmt = connection.createStatement();
 
-                //Наполнение БД
-                Path database_filling_file_path = Paths.get("src/resource/database_filling.sql");
-                String sql_fill_db = new String(Files.readAllBytes(database_filling_file_path));
-                stmt.executeUpdate(sql_fill_db);
+                    Path database_create_file_path = Paths.get("src/resource/database_create.sql");
+                    String sql_create_db = new String(Files.readAllBytes(database_create_file_path));
+                    stmt.executeUpdate(sql_create_db);
 
-                stmt.close();
+                    //Наполнение БД
+                    Path database_filling_file_path = Paths.get("src/resource/database_filling.sql");
+                    String sql_fill_db = new String(Files.readAllBytes(database_filling_file_path));
+                    stmt.executeUpdate(sql_fill_db);
+
+                    stmt.close();
+                }
+
+                connection = DriverManager.getConnection(DB_URL);
+
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-
-            conn = DriverManager.getConnection(DB_URL);
-
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
         }
 
-        return conn;
+        return connection;
     }
 
     static public ObservableList<InfoModel> getCatalog() throws SQLException {
@@ -132,18 +136,8 @@ public class DB {
         return result;
     }
 
-
-    static private Image readPhoto(String filename) {
-        if (filename == null || filename.isEmpty()) {
-            return null;
-        } else {
-            Image img;
-            try {
-                img = new Image("file:" + "resource" + "/images" + "/" + filename);
-            } catch (Exception e) {
-                img = new Image("resource/noimage.png");
-            }
-            return img;
-        }
+    static public void closeConnection() throws SQLException {
+        if (connection != null)
+            connection.close();
     }
 }
