@@ -47,7 +47,7 @@
                         </Label>
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                            <children>
-                              <ComboBox fx:id="__list_of_categories" onHidden="#updateLists" prefWidth="250.0">
+                              <ComboBox fx:id="__list_of_categories" onHidden="#updateListsAfterChange" prefWidth="250.0">
                                  <HBox.margin>
                                     <Insets/>
                                  </HBox.margin>

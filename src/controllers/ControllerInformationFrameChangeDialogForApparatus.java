@@ -23,12 +23,15 @@ import javafx.scene.web.HTMLEditor;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.converter.IntegerStringConverter;
+import model.Catalog;
+import model.DB;
 import model.InfoModel;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.*;
 
 public class ControllerInformationFrameChangeDialogForApparatus implements Initializable {
@@ -75,21 +78,24 @@ public class ControllerInformationFrameChangeDialogForApparatus implements Initi
         this.dialogStage = dialogStage;
     }
 
-    public void setInfoModel(InfoModel infoModel) {
-        this.infoModel = infoModel;
+    public void setId(Integer id) {
+        try {
+            Catalog item = DB.getCatalogById(id);
 
-        if (infoModel != null) {
             // Заполняем
-            __title.setText(infoModel.getTitle());
-            __description.setHtmlText(infoModel.getDescription());
-            __image.setImage(infoModel.getImage());
+            __title.setText(item.getTitle());
+            __description.setHtmlText(item.getDescription());
+            __image.setImage(item.getImage());
+
+            // Читаем данные
+            readData();
+
+            // Заполняем таблицу
+            fillTaTable();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-
-        // Читаем данные
-        readData();
-
-        // Заполняем таблицу
-        fillTaTable();
     }
 
     public void setTAList(ObservableList<InfoModel> TA) {

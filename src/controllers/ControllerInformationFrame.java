@@ -8,13 +8,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import model.Catalog;
 import model.DB;
 import model.InfoModel;
-import model.XMLsaver;
 
 import java.io.IOException;
 import java.net.URL;
@@ -83,7 +81,7 @@ public class ControllerInformationFrame implements Initializable {
 
             // Передаём выбранный тип, список типов и список моделей в контроллер фрейма Описание
             ControllerInformationChange controller = loader.getController();
-            controller.setChangingTypeAndInfoData(typeId, infoData);
+            controller.setChangingType(typeId);
 
             // Оотображаем
             Vbox.getChildren().setAll(vBox);

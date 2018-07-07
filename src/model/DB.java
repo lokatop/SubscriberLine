@@ -2,7 +2,6 @@ package model;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.image.Image;
 
 import java.io.File;
 import java.io.IOException;
@@ -19,7 +18,7 @@ public class DB {
     static final String JDBC_DRIVER = "org.sqlite.JDBC";
     static final String DB_URL = "jdbc:sqlite:database.db";
 
-    static public Connection getConnect() {
+    static public Connection getConnection() {
         if (connection == null) {
 
             Statement stmt = null;
@@ -64,7 +63,7 @@ public class DB {
     static public ObservableList<InfoModel> getCatalog() throws SQLException {
         ObservableList<InfoModel> result = FXCollections.observableArrayList();
 
-        Connection connection = getConnect();
+        Connection connection = getConnection();
 
         String query = "SELECT * FROM catalog";
 
@@ -87,7 +86,7 @@ public class DB {
 
     static public ResultSet getCatalogTitles() throws SQLException {
 
-        Connection connection = getConnect();
+        Connection connection = getConnection();
 
         String query = "SELECT id, title FROM catalog";
 
@@ -102,7 +101,7 @@ public class DB {
         ObservableList<Catalog> result = FXCollections.observableArrayList();
 
         try {
-            Connection connection = getConnect();
+            Connection connection = getConnection();
 
             PreparedStatement pstat = null;
 
@@ -128,7 +127,7 @@ public class DB {
 
         Catalog result = null;
 
-        Connection connection = getConnect();
+        Connection connection = getConnection();
 
         PreparedStatement pstat = connection.prepareStatement("SELECT * FROM catalog WHERE id = ?");
         pstat.setInt(1, id);

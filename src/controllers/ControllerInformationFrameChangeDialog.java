@@ -12,11 +12,14 @@ import javafx.scene.input.TransferMode;
 import javafx.scene.web.HTMLEditor;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import model.Catalog;
+import model.DB;
 import model.InfoModel;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.sql.SQLException;
 import java.util.List;
 
 //import javafx.scene.control.Alert;
@@ -51,14 +54,17 @@ public class ControllerInformationFrameChangeDialog {
         this.dialogStage = dialogStage;
     }
 
-    public void setInfoModel(InfoModel infoModel) {
-        this.infoModel = infoModel;
+    public void setId(Integer id) {
 
-        if (infoModel != null) {
+        try {
+            Catalog item = DB.getCatalogById(id);
+
             // Заполняем
-            __title.setText(infoModel.getTitle());
-            __description.setHtmlText(infoModel.getDescription());
-            __image.setImage(infoModel.getImage());
+            __title.setText(item.getTitle());
+            __description.setHtmlText(item.getDescription());
+            __image.setImage(item.getImage());
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 

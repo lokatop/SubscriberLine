@@ -16,6 +16,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import model.Catalog;
+import model.DB;
 import model.InfoModel;
 import model.XMLsaver;
 
@@ -60,18 +62,17 @@ public class ControllerInformationChange {
         VboxInfFrame.getChildren().setAll(vBox);
     }
 
-    public void setChangingTypeAndInfoData(Integer changingTypeId, ObservableList<InfoModel> infoData) {
+    public void setChangingType(Integer changingTypeId) {
         this.changingTypeId = changingTypeId;
 
         this.infoData.clear();
-        this.infoData = infoData;
 
         // Заполняем категорию изменяемых моделей
         __list_of_categories.getItems().clear();
         __list_of_categories.getItems().addAll(CATEGORIES_DESC);
         __list_of_categories.getSelectionModel().select(CATEGORIES_DESC[changingTypeId]);
 
-        updateLists();
+        updateListsAfterChange();
 
         __list_of_items.getItems().addListener(new ListChangeListener() {
             @Override
@@ -90,7 +91,7 @@ public class ControllerInformationChange {
             showAddDialogForApparatus();
         else
             showAddDialog();
-        updateLists();
+        updateListsAfterChange();
     }
 
     public void info_model_save(ActionEvent actionEvent) throws IOException {
@@ -108,7 +109,7 @@ public class ControllerInformationChange {
             showEditDialogForApparatus();
         else
             showEditDialog();
-        updateLists();
+        updateListsAfterChange();
     }
 
     public void enable_btns(MouseEvent mouseEvent) {
@@ -152,9 +153,9 @@ public class ControllerInformationChange {
             ControllerInformationFrameChangeDialog controller = loader.getController();
             controller.setDialogStage(dialogStage);
 
-            // Отправляем модель
-            InfoModel model = changingList.get(__list_of_items.getSelectionModel().getSelectedIndex());
-            controller.setInfoModel(model);
+            // Отправляем id
+            Catalog catalog = (Catalog)__list_of_items.getSelectionModel().getSelectedItem();
+            controller.setId(catalog.getId());
 
             // Отображаем диалоговое окно и ждём, пока пользователь его не закроет
             dialogStage.showAndWait();
@@ -189,9 +190,9 @@ public class ControllerInformationChange {
             ControllerInformationFrameChangeDialogForApparatus controller = loader.getController();
             controller.setDialogStage(dialogStage);
 
-            // Отправляем модель
-            InfoModel model = changingList.get(__list_of_items.getSelectionModel().getSelectedIndex());
-            controller.setInfoModel(model);
+            // Отправляем id
+            Catalog catalog = (Catalog)__list_of_items.getSelectionModel().getSelectedItem();
+            controller.setId(catalog.getId());
 
             // Отправляем список ТА для аппаратных
             ObservableList<InfoModel> TaTemp = FXCollections.observableArrayList();
@@ -235,17 +236,13 @@ public class ControllerInformationChange {
             ControllerInformationFrameChangeDialog controller = loader.getController();
             controller.setDialogStage(dialogStage);
 
-            // Отправляем модель
-            InfoModel model = new InfoModel("", CATEGORIES[changingTypeId], "", new Image("resource/noimage.png"));
-
-            controller.setInfoModel(model);
-
             // Отображаем диалоговое окно и ждём, пока пользователь его не закроет
             dialogStage.showAndWait();
 
             // Добавляем новую модель
             if (controller.isOkClicked()) {
-                infoData.add(controller.getInfoModel());
+                // Сохраняем в БД
+//                infoData.add(controller.getInfoModel());
             }
 
             return controller.isOkClicked();
@@ -277,9 +274,9 @@ public class ControllerInformationChange {
             ControllerInformationFrameChangeDialogForApparatus controller = loader.getController();
             controller.setDialogStage(dialogStage);
 
-            // Отправляем модель
-            InfoModel model = new InfoModel("", CATEGORIES[changingTypeId], "", new Image("resource/noimage.png"));
-            controller.setInfoModel(model);
+            // Отправляем тип
+//            InfoModel model = new InfoModel("", CATEGORIES[changingTypeId], "", new Image("resource/noimage.png"));
+//            controller.setInfoModel(model);
 
             // Отправляем список ТА для аппаратных
             ObservableList<InfoModel> TaTemp = FXCollections.observableArrayList();
@@ -296,7 +293,8 @@ public class ControllerInformationChange {
 
             // Добавляем новую модель
             if (controller.isOkClicked()) {
-                infoData.add(controller.getInfoModel());
+                // Сохраняем в БД
+//                infoData.add(controller.getInfoModel());
             }
 
             return controller.isOkClicked();
@@ -307,28 +305,26 @@ public class ControllerInformationChange {
     }
 
     @FXML
-    private void updateLists() {
+    private void updateListsAfterChange() {
 
         // Меняем id категории
         changingTypeId = __list_of_categories.getSelectionModel().getSelectedIndex();
 
         // Фильтруем по типу
-        changingList = null;
-        changingList = filterInfoModelByType(CATEGORIES[changingTypeId], infoData);
 
         // Выбираем категорию изменяемых моделей
         __list_of_categories.getSelectionModel().select(CATEGORIES_DESC[changingTypeId]);
 
         // Заполняем список изменяемых моделей
         __list_of_items.getItems().clear();
-        __list_of_items.getItems().addAll(changingList);
+        __list_of_items.getItems().addAll(DB.getCatalogTitlesByType(CATEGORIES[changingTypeId]));
     }
 
     public void info_model_delete(ActionEvent actionEvent) {
         int id = __list_of_items.getSelectionModel().getSelectedIndex();
         infoData.remove(changingList.get(id));
 
-        updateLists();
+        updateListsAfterChange();
     }
 
     public void info_model_copy_past(ActionEvent actionEvent) {
@@ -345,7 +341,7 @@ public class ControllerInformationChange {
             modelCopyPastID = null;
             __btn_copy_past_cancel.setDisable(true);
             __btn_copy_past.setText("Копировать");
-            updateLists();
+            updateListsAfterChange();
         }
     }
 
