@@ -80,7 +80,7 @@ public class ControllerInformationFrameChangeDialogForApparatus implements Initi
 
     public void setId(Integer id) {
         try {
-            Catalog item = DB.getCatalogById(id);
+            Catalog item = DB.getCatalogItemById(id);
 
             // Заполняем
             __title.setText(item.getTitle());

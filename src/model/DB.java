@@ -2,6 +2,7 @@ package model;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.image.Image;
 
 import java.io.File;
 import java.io.IOException;
@@ -60,39 +61,56 @@ public class DB {
         return connection;
     }
 
-    static public ObservableList<InfoModel> getCatalog() throws SQLException {
-        ObservableList<InfoModel> result = FXCollections.observableArrayList();
+    static public ObservableList<Catalog> getCatalog() {
+        ObservableList<Catalog> result = FXCollections.observableArrayList();
 
-        Connection connection = getConnection();
+        try {
+            Connection connection = getConnection();
 
-        String query = "SELECT * FROM catalog";
+            PreparedStatement pstat = null;
 
-        Statement stat = connection.createStatement();
+            pstat = connection.prepareStatement("SELECT * FROM catalog");
 
-        ResultSet rs = stat.executeQuery(query);
+            ResultSet rs = pstat.executeQuery();
 
-        while (rs.next()) {
-//            result.add(new InfoModel(
-//                    rs.getInt("id"),
-//                    rs.getString("title"),
-//                    rs.getString("type"),
-//                    rs.getString("description"),
-//                    readPhoto(rs.getString("image"))
-//            ));
+            while (rs.next()){
+                result.add(new Catalog(
+                        rs.getInt("id"),
+                        rs.getString("title"),
+                        rs.getString("type"),
+                        rs.getString("description"),
+                        rs.getString("image")
+                ));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
 
         return result;
     }
 
-    static public ResultSet getCatalogTitles() throws SQLException {
 
-        Connection connection = getConnection();
+    static public ObservableList<Catalog> getCatalogTitles() {
+        ObservableList<Catalog> result = FXCollections.observableArrayList();
 
-        String query = "SELECT id, title FROM catalog";
+        try {
+            Connection connection = getConnection();
 
-        Statement stat = connection.createStatement();
+            PreparedStatement pstat = null;
 
-        ResultSet result = stat.executeQuery(query);
+            pstat = connection.prepareStatement("SELECT id, title FROM catalog");
+
+            ResultSet rs = pstat.executeQuery();
+
+            while (rs.next()){
+                result.add(new Catalog(
+                        rs.getInt("id"),
+                        rs.getString("title")
+                ));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
         return result;
     }
@@ -123,7 +141,29 @@ public class DB {
         return result;
     }
 
-    static public Catalog getCatalogById(Integer id) throws SQLException {
+    static public Catalog getCatalogItemById(Integer id) throws SQLException {
+
+        Catalog result = null;
+
+        Connection connection = getConnection();
+
+        PreparedStatement pstat = connection.prepareStatement("SELECT * FROM catalog WHERE id = ?");
+        pstat.setInt(1, id);
+
+        ResultSet rs = pstat.executeQuery();
+
+        result = new Catalog(
+                rs.getInt("id"),
+                rs.getString("title"),
+                rs.getString("type"),
+                rs.getString("description"),
+                rs.getString("image")
+        );
+
+        return result;
+    }
+
+    static public boolean saveCatalogItemById(Integer id, String title, String type, String description, Image image) {
 
         Catalog result = null;
 

@@ -2,24 +2,15 @@ package controllers;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TreeView;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.scene.web.WebView;
 import model.Catalog;
 import model.DB;
-import model.InfoModel;
 
-import java.awt.*;
 import java.io.IOException;
-import java.net.URL;
 import java.sql.SQLException;
-import java.util.ResourceBundle;
-import java.util.Set;
-import java.util.TreeSet;
 
 public class ControllerInformationDescription {
     @FXML
@@ -33,7 +24,7 @@ public class ControllerInformationDescription {
 
     public void setModel(Integer id){
         try {
-            this.catalogItem = DB.getCatalogById(id);
+            this.catalogItem = DB.getCatalogItemById(id);
         } catch (SQLException e) {
             e.printStackTrace();
         }

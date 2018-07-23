@@ -57,12 +57,12 @@ public class ControllerInformationFrameChangeDialog {
     public void setId(Integer id) {
 
         try {
-            Catalog item = DB.getCatalogById(id);
+            Catalog catalogItem = DB.getCatalogItemById(id);
 
             // Заполняем
-            __title.setText(item.getTitle());
-            __description.setHtmlText(item.getDescription());
-            __image.setImage(item.getImage());
+            __title.setText(catalogItem.getTitle());
+            __description.setHtmlText(catalogItem.getDescription());
+            __image.setImage(catalogItem.getImage());
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -119,12 +119,17 @@ public class ControllerInformationFrameChangeDialog {
     @FXML
     public void __save(ActionEvent actionEvent) {
         if (isInputValid()) {
+
+
+
             infoModel.setTitle(__title.getText());
             infoModel.setDescription(__description.getHtmlText());
             infoModel.setImage(__image.getImage());
 
             okClicked = true;
             dialogStage.close();
+        } else {
+            // TODO: Ошибка ввода
         }
     }
 
