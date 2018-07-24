@@ -35,6 +35,8 @@ public class ControllerInformationFrameChangeDialog {
 
     private Stage dialogStage;
     private InfoModel infoModel = null;
+    private Integer itemId;
+    private String itemType;
     private boolean okClicked = false;
 
     /**
@@ -59,7 +61,10 @@ public class ControllerInformationFrameChangeDialog {
         try {
             Catalog catalogItem = DB.getCatalogItemById(id);
 
-            // Заполняем
+            itemId = id;
+            itemType = catalogItem.getType();
+
+                    // Заполняем
             __title.setText(catalogItem.getTitle());
             __description.setHtmlText(catalogItem.getDescription());
             __image.setImage(catalogItem.getImage());
@@ -120,14 +125,18 @@ public class ControllerInformationFrameChangeDialog {
     public void __save(ActionEvent actionEvent) {
         if (isInputValid()) {
 
-
-
-            infoModel.setTitle(__title.getText());
-            infoModel.setDescription(__description.getHtmlText());
-            infoModel.setImage(__image.getImage());
-
-            okClicked = true;
-            dialogStage.close();
+            if (DB.saveCatalogItemById(
+                    itemId,
+                    __title.getText(),
+                    itemType,
+                    __description.getHtmlText(),
+                    __image.getImage()
+            )) {
+                okClicked = true;
+                dialogStage.close();
+            } else {
+                // TODO: Ошибка сохранения
+            }
         } else {
             // TODO: Ошибка ввода
         }

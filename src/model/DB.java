@@ -2,8 +2,11 @@ package model;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -12,6 +15,9 @@ import java.nio.file.Paths;
 import java.sql.*;
 
 public class DB {
+
+    private static String PATH_RESOURCE = "resource";
+    private static String PATH_IMAGES = "/images";
 
     static public Connection connection = null;
 
@@ -73,7 +79,7 @@ public class DB {
 
             ResultSet rs = pstat.executeQuery();
 
-            while (rs.next()){
+            while (rs.next()) {
                 result.add(new Catalog(
                         rs.getInt("id"),
                         rs.getString("title"),
@@ -102,7 +108,7 @@ public class DB {
 
             ResultSet rs = pstat.executeQuery();
 
-            while (rs.next()){
+            while (rs.next()) {
                 result.add(new Catalog(
                         rs.getInt("id"),
                         rs.getString("title")
@@ -128,11 +134,11 @@ public class DB {
 
             ResultSet rs = pstat.executeQuery();
 
-            while (rs.next()){
+            while (rs.next()) {
                 result.add(new Catalog(
-                                rs.getInt("id"),
-                                rs.getString("title")
-                        ));
+                        rs.getInt("id"),
+                        rs.getString("title")
+                ));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -165,28 +171,54 @@ public class DB {
 
     static public boolean saveCatalogItemById(Integer id, String title, String type, String description, Image image) {
 
-        Catalog result = null;
-
+        boolean result = false;
         Connection connection = getConnection();
 
-        PreparedStatement pstat = connection.prepareStatement("SELECT * FROM catalog WHERE id = ?");
-        pstat.setInt(1, id);
+        try {
+            PreparedStatement pstat = null;
+            pstat = connection.prepareStatement("UPDATE catalog SET title=?, type=?, description=?, image=? WHERE id=?");
 
-        ResultSet rs = pstat.executeQuery();
+            pstat.setString(1, title);
+            pstat.setString(2, type);
+            pstat.setString(3, description);
+            pstat.setString(4, saveImage(image));
 
-        result = new Catalog(
-                rs.getInt("id"),
-                rs.getString("title"),
-                rs.getString("type"),
-                rs.getString("description"),
-                rs.getString("image")
-        );
+            pstat.setInt(5, id);
 
+            pstat.execute();
+            result = true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return result;
     }
 
     static public void closeConnection() throws SQLException {
         if (connection != null)
             connection.close();
+    }
+
+    static private String saveImage(Image image) {
+        File folder = new File(PATH_RESOURCE + PATH_IMAGES);
+        String filename = System.currentTimeMillis() + ".png";
+        File outputFile = new File(folder.toString() + "/" + filename);
+        BufferedImage bImage = SwingFXUtils.fromFXImage(image, null);
+        try {
+            outputFile.createNewFile();
+            ImageIO.write(bImage, "png", outputFile);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        return filename;
+    }
+
+    static private Image loadImage(String filename) {
+        Image img;
+        try {
+            img = new Image("file:" + PATH_RESOURCE + PATH_IMAGES + "/" + filename);
+        } catch (Exception e) {
+            img = new Image(PATH_RESOURCE + "/noimage.png");
+        }
+        return img;
     }
 }
