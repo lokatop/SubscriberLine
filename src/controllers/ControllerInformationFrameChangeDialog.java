@@ -35,7 +35,7 @@ public class ControllerInformationFrameChangeDialog {
 
     private Stage dialogStage;
     private InfoModel infoModel = null;
-    private Integer itemId;
+    private Integer itemId = null;
     private String itemType;
     private boolean okClicked = false;
 
@@ -64,13 +64,17 @@ public class ControllerInformationFrameChangeDialog {
             itemId = id;
             itemType = catalogItem.getType();
 
-                    // Заполняем
+            // Заполняем
             __title.setText(catalogItem.getTitle());
             __description.setHtmlText(catalogItem.getDescription());
             __image.setImage(catalogItem.getImage());
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public void setType(String type) {
+        itemType = type;
     }
 
     public InfoModel getInfoModel() {
@@ -124,9 +128,20 @@ public class ControllerInformationFrameChangeDialog {
     @FXML
     public void __save(ActionEvent actionEvent) {
         if (isInputValid()) {
-
-            if (DB.saveCatalogItemById(
-                    itemId,
+            if (itemId != null)
+                if (DB.saveCatalogItemById(
+                        itemId,
+                        __title.getText(),
+                        itemType,
+                        __description.getHtmlText(),
+                        __image.getImage()
+                )) {
+                    okClicked = true;
+                    dialogStage.close();
+                } else {
+                    // TODO: Ошибка сохранения
+                }
+            else if (DB.saveNewCatalogItem(
                     __title.getText(),
                     itemType,
                     __description.getHtmlText(),
@@ -208,6 +223,7 @@ public class ControllerInformationFrameChangeDialog {
         dropIconTemp = __image.getImage();
         __image.setImage(new Image("resource/dropimage.jpg"));
     }
+
     @FXML
     public void __drag_exit(DragEvent dragEvent) {
         __image.setImage(dropIconTemp);

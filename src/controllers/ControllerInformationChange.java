@@ -158,6 +158,8 @@ public class ControllerInformationChange {
             controller.setId(catalog.getId());
 
             // Отображаем диалоговое окно и ждём, пока пользователь его не закроет
+            dialogStage.setWidth(800);
+            dialogStage.setHeight(600);
             dialogStage.showAndWait();
 
             return controller.isOkClicked();
@@ -205,6 +207,8 @@ public class ControllerInformationChange {
             controller.setCableList(CableTemp);
 
             // Отображаем диалоговое окно и ждём, пока пользователь его не закроет
+            dialogStage.setWidth(800);
+            dialogStage.setHeight(600);
             dialogStage.showAndWait();
 
             return controller.isOkClicked();
@@ -235,8 +239,11 @@ public class ControllerInformationChange {
             // Передаём адресата в контроллер.
             ControllerInformationFrameChangeDialog controller = loader.getController();
             controller.setDialogStage(dialogStage);
+            controller.setType(CATEGORIES[changingTypeId]);
 
             // Отображаем диалоговое окно и ждём, пока пользователь его не закроет
+            dialogStage.setWidth(800);
+            dialogStage.setHeight(600);
             dialogStage.showAndWait();
 
             // Добавляем новую модель
@@ -289,6 +296,8 @@ public class ControllerInformationChange {
             controller.setCableList(CableTemp);
 
             // Отображаем диалоговое окно и ждём, пока пользователь его не закроет
+            dialogStage.setWidth(800);
+            dialogStage.setHeight(600);
             dialogStage.showAndWait();
 
             // Добавляем новую модель
@@ -315,14 +324,17 @@ public class ControllerInformationChange {
         // Выбираем категорию изменяемых моделей
         __list_of_categories.getSelectionModel().select(CATEGORIES_DESC[changingTypeId]);
 
+
         // Заполняем список изменяемых моделей
         __list_of_items.getItems().clear();
         __list_of_items.getItems().addAll(DB.getCatalogTitlesByType(CATEGORIES[changingTypeId]));
     }
 
     public void info_model_delete(ActionEvent actionEvent) {
-        int id = __list_of_items.getSelectionModel().getSelectedIndex();
-        infoData.remove(changingList.get(id));
+
+        // Отправляем id
+        Catalog catalog = (Catalog)__list_of_items.getSelectionModel().getSelectedItem();
+        DB.deleteCatalogItemById(catalog.getId());
 
         updateListsAfterChange();
     }

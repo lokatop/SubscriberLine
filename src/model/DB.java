@@ -181,7 +181,12 @@ public class DB {
             pstat.setString(1, title);
             pstat.setString(2, type);
             pstat.setString(3, description);
-            pstat.setString(4, saveImage(image));
+
+            String imageFilename = saveImage(image);
+            if (imageFilename == null)
+                pstat.setNull(4,Types.NULL);
+            else
+                pstat.setString(4, imageFilename);
 
             pstat.setInt(5, id);
 
@@ -193,12 +198,61 @@ public class DB {
         return result;
     }
 
+    static public boolean saveNewCatalogItem(String title, String type, String description, Image image) {
+
+        boolean result = false;
+        Connection connection = getConnection();
+
+        try {
+            PreparedStatement pstat = null;
+            pstat = connection.prepareStatement("INSERT INTO catalog (title,type,description,image) VALUES (?,?,?,?);");
+
+            pstat.setString(1, title);
+            pstat.setString(2, type);
+            pstat.setString(3, description);
+
+            String imageFilename = saveImage(image);
+            if (imageFilename == null)
+                pstat.setNull(4,Types.NULL);
+            else
+                pstat.setString(4, imageFilename);
+
+            pstat.execute();
+            result = true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    static public boolean deleteCatalogItemById(Integer id) {
+
+        boolean result = false;
+        Connection connection = getConnection();
+
+        try {
+            PreparedStatement pstat = null;
+            pstat = connection.prepareStatement("DELETE FROM catalog WHERE id=?");
+
+            pstat.setInt(1, id);
+
+            pstat.execute();
+            result = true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+
     static public void closeConnection() throws SQLException {
         if (connection != null)
             connection.close();
     }
 
     static private String saveImage(Image image) {
+        if (image == null || image.isError()) return null;
+
         File folder = new File(PATH_RESOURCE + PATH_IMAGES);
         String filename = System.currentTimeMillis() + ".png";
         File outputFile = new File(folder.toString() + "/" + filename);
