@@ -244,6 +244,26 @@ public class DB {
         return result;
     }
 
+    static public boolean udateTypeById(String type, Integer id) {
+
+        boolean result = false;
+        Connection connection = getConnection();
+
+        try {
+            PreparedStatement pstat = null;
+            pstat = connection.prepareStatement("UPDATE catalog SET type=? WHERE id=?");
+
+            pstat.setString(1, type);
+            pstat.setInt(2, id);
+
+            pstat.execute();
+            result = true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
 
     static public void closeConnection() throws SQLException {
         if (connection != null)

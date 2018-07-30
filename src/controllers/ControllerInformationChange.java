@@ -340,20 +340,24 @@ public class ControllerInformationChange {
     }
 
     public void info_model_copy_past(ActionEvent actionEvent) {
-        int id = __list_of_items.getSelectionModel().getSelectedIndex();
+        Catalog selectedCatalogItem = (Catalog)__list_of_items.getSelectionModel().getSelectedItem();
 
         // Если буфер пуст - копируем, если нет - вставляем
         if (modelCopyPastID == null) {
-            modelCopyPastID = id;
+            modelCopyPastID = selectedCatalogItem.getId();
             __btn_copy_past_cancel.setDisable(false);
             __btn_copy_past.setText("Вставить");
         } else {
-            // Модифицируем тип модели
-            infoData.get(modelCopyPastID).setType(infoData.get(modelCopyPastID).getType() + "," + InfoModel.CATEGORIES[changingTypeId]);
-            modelCopyPastID = null;
-            __btn_copy_past_cancel.setDisable(true);
-            __btn_copy_past.setText("Копировать");
-            updateListsAfterChange();
+
+            if(DB.udateTypeById(InfoModel.CATEGORIES[changingTypeId],modelCopyPastID)){
+                modelCopyPastID = null;
+                __btn_copy_past_cancel.setDisable(true);
+                __btn_copy_past.setText("Копировать");
+                updateListsAfterChange();
+            } else {
+                // Ошибка БД
+            }
+
         }
     }
 
