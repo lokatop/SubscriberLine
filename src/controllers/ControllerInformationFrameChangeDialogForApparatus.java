@@ -305,7 +305,6 @@ public class ControllerInformationFrameChangeDialogForApparatus implements Initi
 
         ObservableList<Catalog> Cables = DB.getApparatousCableById(itemId);
 
-        _cable_table.getItems().clear();
         _cable_table.setItems(Cables);
     }
 
@@ -314,7 +313,6 @@ public class ControllerInformationFrameChangeDialogForApparatus implements Initi
         Ta.addAll(DB.getCatalogTitlesByType("ZAS"));
         Ta.addAll(DB.getCatalogTitlesByType("ARM"));
 
-        _ta_list.getItems().clear();
         _ta_list.setItems(Ta);
 
         if (_ta_list.getItems().size() != 0)
