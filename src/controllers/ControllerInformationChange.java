@@ -10,7 +10,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
-import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
@@ -25,7 +24,6 @@ import java.io.IOException;
 
 import static model.InfoModel.CATEGORIES;
 import static model.InfoModel.CATEGORIES_DESC;
-import static model.InfoModel.filterInfoModelByType;
 
 public class ControllerInformationChange {
     @FXML
@@ -158,8 +156,6 @@ public class ControllerInformationChange {
             controller.setId(catalog.getId());
 
             // Отображаем диалоговое окно и ждём, пока пользователь его не закроет
-            dialogStage.setWidth(800);
-            dialogStage.setHeight(600);
             dialogStage.showAndWait();
 
             return controller.isOkClicked();
@@ -196,19 +192,7 @@ public class ControllerInformationChange {
             Catalog catalog = (Catalog)__list_of_items.getSelectionModel().getSelectedItem();
             controller.setId(catalog.getId());
 
-            // Отправляем список ТА для аппаратных
-            ObservableList<InfoModel> TaTemp = FXCollections.observableArrayList();
-            ObservableList<InfoModel> CableTemp = FXCollections.observableArrayList();
-            TaTemp.addAll(filterInfoModelByType("DS", infoData));
-            TaTemp.addAll(filterInfoModelByType("ZAS", infoData));
-            TaTemp.addAll(filterInfoModelByType("ARM", infoData));
-            CableTemp.addAll(filterInfoModelByType("CableAndOther", infoData));
-            controller.setTAList(TaTemp);
-            controller.setCableList(CableTemp);
-
             // Отображаем диалоговое окно и ждём, пока пользователь его не закроет
-            dialogStage.setWidth(800);
-            dialogStage.setHeight(600);
             dialogStage.showAndWait();
 
             return controller.isOkClicked();
@@ -242,8 +226,6 @@ public class ControllerInformationChange {
             controller.setType(CATEGORIES[changingTypeId]);
 
             // Отображаем диалоговое окно и ждём, пока пользователь его не закроет
-            dialogStage.setWidth(800);
-            dialogStage.setHeight(600);
             dialogStage.showAndWait();
 
             // Добавляем новую модель
@@ -286,18 +268,16 @@ public class ControllerInformationChange {
 //            controller.setInfoModel(model);
 
             // Отправляем список ТА для аппаратных
-            ObservableList<InfoModel> TaTemp = FXCollections.observableArrayList();
-            ObservableList<InfoModel> CableTemp = FXCollections.observableArrayList();
-            TaTemp.addAll(filterInfoModelByType("DS", infoData));
-            TaTemp.addAll(filterInfoModelByType("ZAS", infoData));
-            TaTemp.addAll(filterInfoModelByType("ARM", infoData));
-            CableTemp.addAll(filterInfoModelByType("CableAndOther", infoData));
-            controller.setTAList(TaTemp);
-            controller.setCableList(CableTemp);
+//            ObservableList<InfoModel> TaTemp = FXCollections.observableArrayList();
+//            ObservableList<InfoModel> CableTemp = FXCollections.observableArrayList();
+//            TaTemp.addAll(filterInfoModelByType("DS", infoData));
+//            TaTemp.addAll(filterInfoModelByType("ZAS", infoData));
+//            TaTemp.addAll(filterInfoModelByType("ARM", infoData));
+//            CableTemp.addAll(filterInfoModelByType("CableAndOther", infoData));
+//            controller.setTAList(TaTemp);
+//            controller.setCableList(CableTemp);
 
             // Отображаем диалоговое окно и ждём, пока пользователь его не закроет
-            dialogStage.setWidth(800);
-            dialogStage.setHeight(600);
             dialogStage.showAndWait();
 
             // Добавляем новую модель
@@ -349,7 +329,7 @@ public class ControllerInformationChange {
             __btn_copy_past.setText("Вставить");
         } else {
 
-            if(DB.udateTypeById(InfoModel.CATEGORIES[changingTypeId],modelCopyPastID)){
+            if(DB.updateTypeById(InfoModel.CATEGORIES[changingTypeId],modelCopyPastID)){
                 modelCopyPastID = null;
                 __btn_copy_past_cancel.setDisable(true);
                 __btn_copy_past.setText("Копировать");

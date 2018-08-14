@@ -14,6 +14,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.*;
 
+import static javax.swing.UIManager.getInt;
+
 public class DB {
 
     private static String PATH_RESOURCE = "resource";
@@ -244,7 +246,7 @@ public class DB {
         return result;
     }
 
-    static public boolean udateTypeById(String type, Integer id) {
+    static public boolean updateTypeById(String type, Integer id) {
 
         boolean result = false;
         Connection connection = getConnection();
@@ -255,6 +257,81 @@ public class DB {
 
             pstat.setString(1, type);
             pstat.setInt(2, id);
+
+            pstat.execute();
+            result = true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    static public ObservableList<Catalog> getApparatousCableById(Integer id) {
+        ObservableList<Catalog> result = FXCollections.observableArrayList();
+
+        try {
+            Connection connection = getConnection();
+
+            PreparedStatement pstat = null;
+
+            pstat = connection.prepareStatement("SELECT * FROM catalog LEFT JOIN apparatus_to_cable a on catalog.id = a.cable_id WHERE a.apparatus_id = ?");
+            pstat.setInt(1, id);
+
+            ResultSet rs = pstat.executeQuery();
+
+            while (rs.next()) {
+                result.add(new Catalog(
+                        rs.getInt("id"),
+                        rs.getString("title")
+                ));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return result;
+    }
+
+    static public ObservableList<Catalog> getApparatousTAById(Integer id) {
+        ObservableList<Catalog> result = FXCollections.observableArrayList();
+
+        try {
+            Connection connection = getConnection();
+
+            PreparedStatement pstat = null;
+
+            pstat = connection.prepareStatement("SELECT *, a.ta_count FROM catalog LEFT JOIN apparatus_to_ta a on catalog.id = a.ta_id WHERE a.apparatus_id = ?");
+            pstat.setInt(1, id);
+
+            ResultSet rs = pstat.executeQuery();
+
+            while (rs.next()) {
+                Catalog item = new Catalog(
+                        rs.getInt("id"),
+                        rs.getString("title")
+                );
+                item.setCount(rs.getInt("ta_count"));
+                result.add(item);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return result;
+    }
+
+    static public boolean updateCountApparatousTAById(Integer apparatousId, Integer taId, Integer count) {
+
+        boolean result = false;
+        Connection connection = getConnection();
+
+        try {
+            PreparedStatement pstat = null;
+            pstat = connection.prepareStatement("UPDATE apparatus_to_ta SET ta_count=? WHERE apparatus_id=? AND ta_id=?");
+
+            pstat.setInt(1, count);
+            pstat.setInt(2, apparatousId);
+            pstat.setInt(3, taId);
 
             pstat.execute();
             result = true;

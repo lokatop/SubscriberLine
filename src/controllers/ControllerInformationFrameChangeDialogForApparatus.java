@@ -45,17 +45,17 @@ public class ControllerInformationFrameChangeDialogForApparatus implements Initi
     @FXML
     public TableView _ta_table;
     @FXML
-    public ComboBox<InfoModel> _ta_list;
+    public ComboBox<Catalog> _ta_list;
     @FXML
     public TextField _ta_count;
     @FXML
-    public TableColumn<TableTAModel, String> _ta_column_1;
+    public TableColumn<Catalog, String> _ta_column_1;
     @FXML
-    public TableColumn<TableTAModel, Integer> _ta_column_2;
+    public TableColumn<Catalog, Integer> _ta_column_2;
     public TableView _cable_table;
-    public ComboBox<InfoModel> _cable_list;
+    public ComboBox<Catalog> _cable_list;
     public TextField _cable_count;
-    public TableColumn<TableCableModel, String> _cable_column_1;
+    public TableColumn<Catalog, String> _cable_column_1;
     public TableColumn<TableCableModel, Integer> _cable_column_2;
 
     // Для свременного сохранения изображения и отображения иконки DragAndDrop
@@ -65,9 +65,12 @@ public class ControllerInformationFrameChangeDialogForApparatus implements Initi
     private InfoModel infoModel = null;
     private boolean okClicked = false;
     private ObservableList<InfoModel> TA = FXCollections.observableArrayList();
-    private ObservableList<InfoModel> Cables = FXCollections.observableArrayList();
     private ObservableList<TableTAModel> TATable = FXCollections.observableArrayList();
     private ArrayList<TableCableModel> CableTable = new ArrayList<>();
+
+
+    private Integer itemId = null;
+    private String itemType;
 
     /**
      * Устанавливает сцену для этого окна.
@@ -78,38 +81,30 @@ public class ControllerInformationFrameChangeDialogForApparatus implements Initi
         this.dialogStage = dialogStage;
     }
 
+
+    public void setType(String type) {
+        itemType = type;
+    }
+
+
     public void setId(Integer id) {
         try {
             Catalog item = DB.getCatalogItemById(id);
+            itemId = id;
 
             // Заполняем
             __title.setText(item.getTitle());
             __description.setHtmlText(item.getDescription());
             __image.setImage(item.getImage());
 
-            // Читаем данные
-            readData();
-
-            // Заполняем таблицу
+            fillCableTable();
             fillTaTable();
+            fillTAList();
+            fillCableList();
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    }
-
-    public void setTAList(ObservableList<InfoModel> TA) {
-        this.TA = TA;
-
-        // Настройка выпадающего списка
-        setupTAList();
-    }
-
-    public void setCableList(ObservableList<InfoModel> Cables) {
-        this.Cables = Cables;
-
-        // Настройка выпадающего списка
-        setupCableList();
     }
 
     public InfoModel getInfoModel() {
@@ -267,14 +262,14 @@ public class ControllerInformationFrameChangeDialogForApparatus implements Initi
         _ta_table.getItems().clear();
 
         // Настройка
-        _ta_column_1.setCellValueFactory(new PropertyValueFactory<TableTAModel, String>("name"));
-        _ta_column_2.setCellValueFactory(new PropertyValueFactory<TableTAModel, Integer>("count"));
-        _ta_column_2.setCellFactory(TextFieldTableCell.<TableTAModel, Integer>forTableColumn(new IntegerStringConverter()));
+        _ta_column_1.setCellValueFactory(new PropertyValueFactory<Catalog, String>("title"));
+        _ta_column_2.setCellValueFactory(new PropertyValueFactory<Catalog, Integer>("count"));
+        _ta_column_2.setCellFactory(TextFieldTableCell.<Catalog, Integer>forTableColumn(new IntegerStringConverter()));
         _ta_column_2.setMinWidth(10);
-        _ta_column_2.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<TableTAModel, Integer>>() {
+        _ta_column_2.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Catalog, Integer>>() {
             @Override
-            public void handle(TableColumn.CellEditEvent<TableTAModel, Integer> event) {
-                TablePosition<TableTAModel, Integer> pos = event.getTablePosition();
+            public void handle(TableColumn.CellEditEvent<Catalog, Integer> event) {
+                TablePosition<Catalog, Integer> pos = event.getTablePosition();
 
                 Integer newCount = event.getNewValue();
 
@@ -282,9 +277,11 @@ public class ControllerInformationFrameChangeDialogForApparatus implements Initi
                 if (newCount < 1) newCount = 1;
 
                 int rowId = pos.getRow();
-                TableTAModel row = event.getTableView().getItems().get(rowId);
+                Catalog row = event.getTableView().getItems().get(rowId);
 
-                row.setCount(newCount);
+                DB.updateCountApparatousTAById(itemId, row.getId(), newCount);
+
+                fillTaTable();
             }
         });
     }
@@ -294,74 +291,43 @@ public class ControllerInformationFrameChangeDialogForApparatus implements Initi
         _cable_table.getItems().clear();
 
         // Настройка
-        _cable_column_1.setCellValueFactory(new PropertyValueFactory<TableCableModel, String>("name"));
-        _cable_column_2.setCellValueFactory(new PropertyValueFactory<TableCableModel, Integer>("count"));
-        _cable_column_2.setCellFactory(TextFieldTableCell.<TableCableModel, Integer>forTableColumn(new IntegerStringConverter()));
-        _cable_column_2.setMinWidth(10);
-        _cable_column_2.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<TableCableModel, Integer>>() {
-            @Override
-            public void handle(TableColumn.CellEditEvent<TableCableModel, Integer> event) {
-                TablePosition<TableCableModel, Integer> pos = event.getTablePosition();
-
-                Integer newCount = event.getNewValue();
-
-                // Делаем кол-во положительным
-                if (newCount < 1) newCount = 1;
-
-                int rowId = pos.getRow();
-                TableCableModel row = event.getTableView().getItems().get(rowId);
-
-                row.setCount(newCount);
-            }
-        });
+        _cable_column_1.setCellValueFactory(new PropertyValueFactory<Catalog, String>("title"));
     }
 
     private void fillTaTable() {
-        _ta_table.setItems(TATable);
+        ObservableList<Catalog> Ta = DB.getApparatousTAById(itemId);
+
+        _ta_table.getItems().clear();;
+        _ta_table.setItems(Ta);
     }
 
     private void fillCableTable() {
+
+        ObservableList<Catalog> Cables = DB.getApparatousCableById(itemId);
+
         _cable_table.getItems().clear();
-        _cable_table.setItems(FXCollections.observableArrayList(CableTable));
+        _cable_table.setItems(Cables);
     }
 
-    private void readData() {
-        if (infoModel.getCables() != null) {
-            CableTable.clear();
+    private void fillTAList() {
+        ObservableList<Catalog> Ta = DB.getCatalogTitlesByType("DS");
+        Ta.addAll(DB.getCatalogTitlesByType("ZAS"));
+        Ta.addAll(DB.getCatalogTitlesByType("ARM"));
 
-            String[] substrs;
-            substrs = infoModel.getCables().split(";");
-            for (String substr : substrs) {
-                if (substr.contains(":")) {
-                    String strTA[] = substr.split(":");
-                    CableTable.add(new TableCableModel(strTA[0], Integer.parseInt(strTA[1])));
-                }
-            }
-            fillCableTable();
-        }
+        _ta_list.getItems().clear();
+        _ta_list.setItems(Ta);
 
-        if (infoModel.getData() != null) {
-            TATable.clear();
-
-            String[] substrs;
-            substrs = infoModel.getData().split(";");
-            for (String substr : substrs) {
-                if (substr.contains(":")) {
-                    String strTA[] = substr.split(":");
-                    TATable.add(new TableTAModel(strTA[0], Integer.parseInt(strTA[1])));
-                }
-            }
-        }
-    }
-
-    private void setupTAList() {
-        _ta_list.setItems(TA);
         if (_ta_list.getItems().size() != 0)
             _ta_list.getSelectionModel().select(0);
     }
 
-    private void setupCableList() {
+    private void fillCableList() {
+
+        ObservableList<Catalog> Cables = DB.getCatalogTitlesByType("CableAndOther");
+
+        _cable_list.getItems().clear();
         _cable_list.setItems(Cables);
+
         if (_cable_list.getItems().size() != 0)
             _cable_list.getSelectionModel().select(0);
     }

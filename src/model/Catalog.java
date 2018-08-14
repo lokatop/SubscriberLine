@@ -1,14 +1,16 @@
 package model;
 
+import javafx.beans.property.*;
 import javafx.scene.image.Image;
 
 public class Catalog {
 
-    private final Integer id;
-    private final String title;
-    private final String type;
-    private final String description;
-    private final Image image;
+    private IntegerProperty id;
+    private StringProperty title;
+    private StringProperty type;
+    private StringProperty description;
+    private ObjectProperty<Image> image;
+    private IntegerProperty count = null;
 
     /**
      * Список сокращений категоий
@@ -34,10 +36,11 @@ public class Catalog {
      * Конструктор с некоторыми начальными данными.
      */
     public Catalog(Integer id, String title, String type, String description, String image_filename) {
-        this.id = id;
-        this.title = title;
-        this.type = type;
-        this.description = description;
+        this.id = new SimpleIntegerProperty(id);
+        this.title = new SimpleStringProperty(title);
+        this.type = new SimpleStringProperty(type);
+        this.description = new SimpleStringProperty(description);
+        this.count = new SimpleIntegerProperty(0);
 
         Image img;
         if (image_filename != null && !image_filename.isEmpty()) {
@@ -49,9 +52,18 @@ public class Catalog {
         } else {
             img = new Image("resource/noimage.png");
         }
-        this.image = img;
+        this.image = new SimpleObjectProperty<Image>(img);
 
     }
+
+    public Integer getCount() {
+        return count.get();
+    }
+
+    public void setCount(Integer value) {
+        count.setValue(value);
+    }
+
 
     // Для ComboBox'ов (Добавляем список моделей, получаем список заголовков)
     @Override
@@ -60,23 +72,23 @@ public class Catalog {
     }
 
     public Integer getId() {
-        return id;
+        return id.get();
     }
 
     public String getTitle() {
-        return title;
+        return title.get();
     }
 
     public String getType() {
-        return type;
+        return type.get();
     }
 
     public String getDescription() {
-        return description;
+        return description.get();
     }
 
     public Image getImage() {
-        return image;
+        return image.get();
     }
 
 //    @Override
