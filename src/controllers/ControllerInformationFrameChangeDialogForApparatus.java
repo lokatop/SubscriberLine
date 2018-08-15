@@ -279,7 +279,7 @@ public class ControllerInformationFrameChangeDialogForApparatus implements Initi
                 int rowId = pos.getRow();
                 Catalog row = event.getTableView().getItems().get(rowId);
 
-                DB.updateCountApparatousTAById(itemId, row.getId(), newCount);
+                DB.updateCountTaInApparatousById(itemId, row.getId(), newCount);
 
                 fillTaTable();
             }
@@ -295,23 +295,22 @@ public class ControllerInformationFrameChangeDialogForApparatus implements Initi
     }
 
     private void fillTaTable() {
-        ObservableList<Catalog> Ta = DB.getApparatousTAById(itemId);
+        ObservableList<Catalog> Ta = DB.getTaInApparatousById(itemId);
 
-        _ta_table.getItems().clear();;
+        _ta_table.getItems().clear();
+        ;
         _ta_table.setItems(Ta);
     }
 
     private void fillCableTable() {
 
-        ObservableList<Catalog> Cables = DB.getApparatousCableById(itemId);
+        ObservableList<Catalog> Cables = DB.getCablesInApparatousById(itemId);
 
         _cable_table.setItems(Cables);
     }
 
     private void fillTAList() {
-        ObservableList<Catalog> Ta = DB.getCatalogTitlesByType("DS");
-        Ta.addAll(DB.getCatalogTitlesByType("ZAS"));
-        Ta.addAll(DB.getCatalogTitlesByType("ARM"));
+        ObservableList<Catalog> Ta = DB.getTaNotInApparatousById(itemId);
 
         _ta_list.setItems(Ta);
 
@@ -321,7 +320,7 @@ public class ControllerInformationFrameChangeDialogForApparatus implements Initi
 
     private void fillCableList() {
 
-        ObservableList<Catalog> Cables = DB.getCatalogTitlesByType("CableAndOther");
+        ObservableList<Catalog> Cables = DB.getCablesNotInApparatousById(itemId);
 
         _cable_list.getItems().clear();
         _cable_list.setItems(Cables);
@@ -331,59 +330,37 @@ public class ControllerInformationFrameChangeDialogForApparatus implements Initi
     }
 
     public void _ta_add(ActionEvent actionEvent) {
-        String name;
-        String count;
-
-        name = _ta_list.getSelectionModel().getSelectedItem().getTitle();
-        count = _ta_count.getText();
+        Integer count;
+        Integer ta_id;
 
         try {
-            if (!name.isEmpty() && !count.isEmpty()) {
-                TableTAModel newTableTAModel = new TableTAModel(name, Integer.parseInt(count));
-                if (TATable.size() != 0) {
-                    boolean isset = false;
-                    for (TableTAModel taModel : TATable)
-                        if (taModel.getName().equals(newTableTAModel.getName()))
-                            isset = true;
-                    if (!isset) {
-                        TATable.add(newTableTAModel);
-                        fillTaTable();
-                    }
-                } else {
-                    TATable.add(newTableTAModel);
-                    fillTaTable();
-                }
-            }
+            count = Integer.parseInt(_ta_count.getText());
+            ta_id = _ta_list.getSelectionModel().getSelectedItem().getId();
+
+            if (count <= 0) count = 1;
+
+            DB.addTaInApparatous(itemId, ta_id, count);
+
+            fillTaTable();
+            fillTAList();
+
         } catch (Exception e) {
 
         }
     }
 
     public void _cable_add(ActionEvent actionEvent) {
-        String name;
-        String count;
+        Integer cable_id;
 
-        name = _cable_list.getSelectionModel().getSelectedItem().getTitle();
-        count = _cable_count.getText();
+        cable_id = _cable_list.getSelectionModel().getSelectedItem().getId();
 
         try {
-            if (!name.isEmpty() && !count.isEmpty()) {
-                TableCableModel newCable = new TableCableModel(name, Integer.parseInt(count));
 
-                if (CableTable.size() != 0) {
-                    boolean isset = false;
-                    for (TableCableModel c : CableTable)
-                        if (c.getName().equals(newCable.getName()))
-                            isset = true;
-                    if (!isset) {
-                        CableTable.add(newCable);
-                        fillCableTable();
-                    }
-                } else {
-                    CableTable.add(newCable);
-                    fillCableTable();
-                }
-            }
+            DB.addCableInApparatous(itemId, cable_id);
+
+            fillCableTable();
+            fillCableList();
+
         } catch (Exception e) {
 
         }
@@ -481,9 +458,9 @@ public class ControllerInformationFrameChangeDialogForApparatus implements Initi
             boolean condition_1 = false;
             boolean condition_2 = false;
 
-            if (this.getName().equals(((TableCableModel)obj).getName()))
+            if (this.getName().equals(((TableCableModel) obj).getName()))
                 condition_1 = true;
-            if (this.getCount() == ((TableCableModel)obj).getCount())
+            if (this.getCount() == ((TableCableModel) obj).getCount())
                 condition_2 = true;
 
             return condition_1 && condition_2;

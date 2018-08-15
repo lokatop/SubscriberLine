@@ -266,7 +266,7 @@ public class DB {
         return result;
     }
 
-    static public ObservableList<Catalog> getApparatousCableById(Integer id) {
+    static public ObservableList<Catalog> getCablesInApparatousById(Integer id) {
         ObservableList<Catalog> result = FXCollections.observableArrayList();
 
         try {
@@ -292,7 +292,7 @@ public class DB {
         return result;
     }
 
-    static public ObservableList<Catalog> getApparatousTAById(Integer id) {
+    static public ObservableList<Catalog> getTaInApparatousById(Integer id) {
         ObservableList<Catalog> result = FXCollections.observableArrayList();
 
         try {
@@ -320,7 +320,60 @@ public class DB {
         return result;
     }
 
-    static public boolean updateCountApparatousTAById(Integer apparatousId, Integer taId, Integer count) {
+    static public ObservableList<Catalog> getCablesNotInApparatousById(Integer id) {
+        ObservableList<Catalog> result = FXCollections.observableArrayList();
+
+        try {
+            Connection connection = getConnection();
+
+            PreparedStatement pstat = null;
+
+            pstat = connection.prepareStatement("SELECT * FROM catalog WHERE id NOT IN (SELECT cable_id FROM apparatus_to_cable WHERE apparatus_id=?) AND catalog.type=\"CableAndOther\"");
+            pstat.setInt(1, id);
+
+            ResultSet rs = pstat.executeQuery();
+
+            while (rs.next()) {
+                result.add(new Catalog(
+                        rs.getInt("id"),
+                        rs.getString("title")
+                ));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return result;
+    }
+
+    static public ObservableList<Catalog> getTaNotInApparatousById(Integer id) {
+        ObservableList<Catalog> result = FXCollections.observableArrayList();
+
+        try {
+            Connection connection = getConnection();
+
+            PreparedStatement pstat = null;
+
+            pstat = connection.prepareStatement("SELECT * FROM catalog WHERE id NOT IN (SELECT ta_id FROM apparatus_to_ta WHERE apparatus_id=?) AND (catalog.type=\"DS\" OR catalog.type=\"ZAS\" OR catalog.type=\"ARM\")");
+            pstat.setInt(1, id);
+
+            ResultSet rs = pstat.executeQuery();
+
+            while (rs.next()) {
+                Catalog item = new Catalog(
+                        rs.getInt("id"),
+                        rs.getString("title")
+                );
+                result.add(item);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return result;
+    }
+
+    static public boolean updateCountTaInApparatousById(Integer apparatousId, Integer taId, Integer count) {
 
         boolean result = false;
         Connection connection = getConnection();
@@ -341,6 +394,46 @@ public class DB {
         return result;
     }
 
+    static public boolean addTaInApparatous(Integer apparatousId, Integer taId, Integer count) {
+
+        boolean result = false;
+        Connection connection = getConnection();
+
+        try {
+            PreparedStatement pstat = null;
+            pstat = connection.prepareStatement("INSERT OR IGNORE INTO apparatus_to_ta (apparatus_id, ta_id, ta_count) VALUES (?,?,?)");
+
+            pstat.setInt(1, apparatousId);
+            pstat.setInt(2, taId);
+            pstat.setInt(3, count);
+
+            pstat.execute();
+            result = true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    static public boolean addCableInApparatous(Integer apparatousId, Integer cableId) {
+
+        boolean result = false;
+        Connection connection = getConnection();
+
+        try {
+            PreparedStatement pstat = null;
+            pstat = connection.prepareStatement("INSERT OR IGNORE INTO apparatus_to_cable (apparatus_id, cable_id) VALUES (?,?)");
+
+            pstat.setInt(1, apparatousId);
+            pstat.setInt(2, cableId);
+
+            pstat.execute();
+            result = true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
 
     static public void closeConnection() throws SQLException {
         if (connection != null)
