@@ -415,6 +415,26 @@ public class DB {
         return result;
     }
 
+    static public boolean deleteTaInApparatous(Integer apparatousId, Integer taId) {
+
+        boolean result = false;
+        Connection connection = getConnection();
+
+        try {
+            PreparedStatement pstat = null;
+            pstat = connection.prepareStatement("DELETE FROM apparatus_to_ta WHERE apparatus_id=? AND ta_id=?");
+
+            pstat.setInt(1, apparatousId);
+            pstat.setInt(2, taId);
+
+            pstat.execute();
+            result = true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
     static public boolean addCableInApparatous(Integer apparatousId, Integer cableId) {
 
         boolean result = false;
@@ -423,6 +443,26 @@ public class DB {
         try {
             PreparedStatement pstat = null;
             pstat = connection.prepareStatement("INSERT OR IGNORE INTO apparatus_to_cable (apparatus_id, cable_id) VALUES (?,?)");
+
+            pstat.setInt(1, apparatousId);
+            pstat.setInt(2, cableId);
+
+            pstat.execute();
+            result = true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    static public boolean deleteCableInApparatous(Integer apparatousId, Integer cableId) {
+
+        boolean result = false;
+        Connection connection = getConnection();
+
+        try {
+            PreparedStatement pstat = null;
+            pstat = connection.prepareStatement("DELETE FROM apparatus_to_cable WHERE apparatus_id=? AND cable_id=?");
 
             pstat.setInt(1, apparatousId);
             pstat.setInt(2, cableId);

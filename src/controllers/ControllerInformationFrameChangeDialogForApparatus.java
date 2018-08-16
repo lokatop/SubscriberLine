@@ -43,7 +43,7 @@ public class ControllerInformationFrameChangeDialogForApparatus implements Initi
     @FXML
     public HTMLEditor __description;
     @FXML
-    public TableView _ta_table;
+    public TableView<Catalog> _ta_table;
     @FXML
     public ComboBox<Catalog> _ta_list;
     @FXML
@@ -52,7 +52,7 @@ public class ControllerInformationFrameChangeDialogForApparatus implements Initi
     public TableColumn<Catalog, String> _ta_column_1;
     @FXML
     public TableColumn<Catalog, Integer> _ta_column_2;
-    public TableView _cable_table;
+    public TableView<Catalog> _cable_table;
     public ComboBox<Catalog> _cable_list;
     public TextField _cable_count;
     public TableColumn<Catalog, String> _cable_column_1;
@@ -69,7 +69,7 @@ public class ControllerInformationFrameChangeDialogForApparatus implements Initi
     private ArrayList<TableCableModel> CableTable = new ArrayList<>();
 
 
-    private Integer itemId = null;
+    private Integer aparatousId = null;
     private String itemType;
 
     /**
@@ -90,7 +90,7 @@ public class ControllerInformationFrameChangeDialogForApparatus implements Initi
     public void setId(Integer id) {
         try {
             Catalog item = DB.getCatalogItemById(id);
-            itemId = id;
+            aparatousId = id;
 
             // Заполняем
             __title.setText(item.getTitle());
@@ -279,7 +279,7 @@ public class ControllerInformationFrameChangeDialogForApparatus implements Initi
                 int rowId = pos.getRow();
                 Catalog row = event.getTableView().getItems().get(rowId);
 
-                DB.updateCountTaInApparatousById(itemId, row.getId(), newCount);
+                DB.updateCountTaInApparatousById(aparatousId, row.getId(), newCount);
 
                 fillTaTable();
             }
@@ -295,7 +295,7 @@ public class ControllerInformationFrameChangeDialogForApparatus implements Initi
     }
 
     private void fillTaTable() {
-        ObservableList<Catalog> Ta = DB.getTaInApparatousById(itemId);
+        ObservableList<Catalog> Ta = DB.getTaInApparatousById(aparatousId);
 
         _ta_table.getItems().clear();
         ;
@@ -304,13 +304,13 @@ public class ControllerInformationFrameChangeDialogForApparatus implements Initi
 
     private void fillCableTable() {
 
-        ObservableList<Catalog> Cables = DB.getCablesInApparatousById(itemId);
+        ObservableList<Catalog> Cables = DB.getCablesInApparatousById(aparatousId);
 
         _cable_table.setItems(Cables);
     }
 
     private void fillTAList() {
-        ObservableList<Catalog> Ta = DB.getTaNotInApparatousById(itemId);
+        ObservableList<Catalog> Ta = DB.getTaNotInApparatousById(aparatousId);
 
         _ta_list.setItems(Ta);
 
@@ -320,7 +320,7 @@ public class ControllerInformationFrameChangeDialogForApparatus implements Initi
 
     private void fillCableList() {
 
-        ObservableList<Catalog> Cables = DB.getCablesNotInApparatousById(itemId);
+        ObservableList<Catalog> Cables = DB.getCablesNotInApparatousById(aparatousId);
 
         _cable_list.getItems().clear();
         _cable_list.setItems(Cables);
@@ -339,7 +339,7 @@ public class ControllerInformationFrameChangeDialogForApparatus implements Initi
 
             if (count <= 0) count = 1;
 
-            DB.addTaInApparatous(itemId, ta_id, count);
+            DB.addTaInApparatous(aparatousId, ta_id, count);
 
             fillTaTable();
             fillTAList();
@@ -356,7 +356,7 @@ public class ControllerInformationFrameChangeDialogForApparatus implements Initi
 
         try {
 
-            DB.addCableInApparatous(itemId, cable_id);
+            DB.addCableInApparatous(aparatousId, cable_id);
 
             fillCableTable();
             fillCableList();
@@ -375,15 +375,22 @@ public class ControllerInformationFrameChangeDialogForApparatus implements Initi
 
     public void _ta_del(ActionEvent actionEvent) {
         try {
-            TATable.remove(_ta_table.getSelectionModel().getSelectedItem());
+            Integer taId = _ta_table.getSelectionModel().getSelectedItem().getId();
+            DB.deleteTaInApparatous(aparatousId, taId);
+
+            fillTaTable();
+            fillTAList();
         } catch (Exception e) {
         }
     }
 
     public void _cable_del(ActionEvent actionEvent) {
         try {
-            CableTable.remove(_cable_table.getSelectionModel().getSelectedItem());
+            Integer cableId = _cable_table.getSelectionModel().getSelectedItem().getId();
+            DB.deleteCableInApparatous(aparatousId, cableId);
+
             fillCableTable();
+            fillCableList();
         } catch (Exception e) {
         }
     }
