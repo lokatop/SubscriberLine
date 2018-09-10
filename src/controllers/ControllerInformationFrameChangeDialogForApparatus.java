@@ -91,6 +91,7 @@ public class ControllerInformationFrameChangeDialogForApparatus implements Initi
         try {
             CatalogItem item = DB.getCatalogItemById(id);
             aparatousId = id;
+            itemType = item.getType();
 
             // Заполняем
             __title.setText(item.getTitle());
