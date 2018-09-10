@@ -12,7 +12,7 @@ import javafx.scene.input.TransferMode;
 import javafx.scene.web.HTMLEditor;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import model.Catalog;
+import model.CatalogItem;
 import model.DB;
 import model.InfoModel;
 
@@ -59,15 +59,15 @@ public class ControllerInformationFrameChangeDialog {
     public void setId(Integer id) {
 
         try {
-            Catalog catalogItem = DB.getCatalogItemById(id);
+            CatalogItem catalogItemItem = DB.getCatalogItemById(id);
 
             itemId = id;
-            itemType = catalogItem.getType();
+            itemType = catalogItemItem.getType();
 
             // Заполняем
-            __title.setText(catalogItem.getTitle());
-            __description.setHtmlText(catalogItem.getDescription());
-            __image.setImage(catalogItem.getImage());
+            __title.setText(catalogItemItem.getTitle());
+            __description.setHtmlText(catalogItemItem.getDescription());
+            __image.setImage(catalogItemItem.getImage());
         } catch (SQLException e) {
             e.printStackTrace();
         }

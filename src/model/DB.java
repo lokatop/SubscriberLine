@@ -69,8 +69,8 @@ public class DB {
         return connection;
     }
 
-    static public ObservableList<Catalog> getCatalog() {
-        ObservableList<Catalog> result = FXCollections.observableArrayList();
+    static public ObservableList<CatalogItem> getCatalog() {
+        ObservableList<CatalogItem> result = FXCollections.observableArrayList();
 
         try {
             Connection connection = getConnection();
@@ -82,7 +82,7 @@ public class DB {
             ResultSet rs = pstat.executeQuery();
 
             while (rs.next()) {
-                result.add(new Catalog(
+                result.add(new CatalogItem(
                         rs.getInt("id"),
                         rs.getString("title"),
                         rs.getString("type"),
@@ -98,8 +98,8 @@ public class DB {
     }
 
 
-    static public ObservableList<Catalog> getCatalogTitles() {
-        ObservableList<Catalog> result = FXCollections.observableArrayList();
+    static public ObservableList<CatalogItem> getCatalogTitles() {
+        ObservableList<CatalogItem> result = FXCollections.observableArrayList();
 
         try {
             Connection connection = getConnection();
@@ -111,7 +111,7 @@ public class DB {
             ResultSet rs = pstat.executeQuery();
 
             while (rs.next()) {
-                result.add(new Catalog(
+                result.add(new CatalogItem(
                         rs.getInt("id"),
                         rs.getString("title")
                 ));
@@ -123,8 +123,8 @@ public class DB {
         return result;
     }
 
-    static public ObservableList<Catalog> getCatalogTitlesByType(String type) {
-        ObservableList<Catalog> result = FXCollections.observableArrayList();
+    static public ObservableList<CatalogItem> getCatalogTitlesByType(String type) {
+        ObservableList<CatalogItem> result = FXCollections.observableArrayList();
 
         try {
             Connection connection = getConnection();
@@ -137,7 +137,7 @@ public class DB {
             ResultSet rs = pstat.executeQuery();
 
             while (rs.next()) {
-                result.add(new Catalog(
+                result.add(new CatalogItem(
                         rs.getInt("id"),
                         rs.getString("title")
                 ));
@@ -149,9 +149,9 @@ public class DB {
         return result;
     }
 
-    static public Catalog getCatalogItemById(Integer id) throws SQLException {
+    static public CatalogItem getCatalogItemById(Integer id) throws SQLException {
 
-        Catalog result = null;
+        CatalogItem result = null;
 
         Connection connection = getConnection();
 
@@ -160,7 +160,7 @@ public class DB {
 
         ResultSet rs = pstat.executeQuery();
 
-        result = new Catalog(
+        result = new CatalogItem(
                 rs.getInt("id"),
                 rs.getString("title"),
                 rs.getString("type"),
@@ -266,8 +266,8 @@ public class DB {
         return result;
     }
 
-    static public ObservableList<Catalog> getCablesInApparatousById(Integer id) {
-        ObservableList<Catalog> result = FXCollections.observableArrayList();
+    static public ObservableList<CatalogItem> getCablesInApparatousById(Integer id) {
+        ObservableList<CatalogItem> result = FXCollections.observableArrayList();
 
         try {
             Connection connection = getConnection();
@@ -280,7 +280,7 @@ public class DB {
             ResultSet rs = pstat.executeQuery();
 
             while (rs.next()) {
-                result.add(new Catalog(
+                result.add(new CatalogItem(
                         rs.getInt("id"),
                         rs.getString("title")
                 ));
@@ -292,8 +292,8 @@ public class DB {
         return result;
     }
 
-    static public ObservableList<Catalog> getTaInApparatousById(Integer id) {
-        ObservableList<Catalog> result = FXCollections.observableArrayList();
+    static public ObservableList<CatalogItem> getTaInApparatousById(Integer id) {
+        ObservableList<CatalogItem> result = FXCollections.observableArrayList();
 
         try {
             Connection connection = getConnection();
@@ -306,7 +306,7 @@ public class DB {
             ResultSet rs = pstat.executeQuery();
 
             while (rs.next()) {
-                Catalog item = new Catalog(
+                CatalogItem item = new CatalogItem(
                         rs.getInt("id"),
                         rs.getString("title")
                 );
@@ -320,8 +320,8 @@ public class DB {
         return result;
     }
 
-    static public ObservableList<Catalog> getCablesNotInApparatousById(Integer id) {
-        ObservableList<Catalog> result = FXCollections.observableArrayList();
+    static public ObservableList<CatalogItem> getCablesNotInApparatousById(Integer id) {
+        ObservableList<CatalogItem> result = FXCollections.observableArrayList();
 
         try {
             Connection connection = getConnection();
@@ -334,7 +334,7 @@ public class DB {
             ResultSet rs = pstat.executeQuery();
 
             while (rs.next()) {
-                result.add(new Catalog(
+                result.add(new CatalogItem(
                         rs.getInt("id"),
                         rs.getString("title")
                 ));
@@ -346,8 +346,8 @@ public class DB {
         return result;
     }
 
-    static public ObservableList<Catalog> getTaNotInApparatousById(Integer id) {
-        ObservableList<Catalog> result = FXCollections.observableArrayList();
+    static public ObservableList<CatalogItem> getTaNotInApparatousById(Integer id) {
+        ObservableList<CatalogItem> result = FXCollections.observableArrayList();
 
         try {
             Connection connection = getConnection();
@@ -360,7 +360,7 @@ public class DB {
             ResultSet rs = pstat.executeQuery();
 
             while (rs.next()) {
-                Catalog item = new Catalog(
+                CatalogItem item = new CatalogItem(
                         rs.getInt("id"),
                         rs.getString("title")
                 );

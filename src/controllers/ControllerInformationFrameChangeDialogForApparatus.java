@@ -23,7 +23,7 @@ import javafx.scene.web.HTMLEditor;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.converter.IntegerStringConverter;
-import model.Catalog;
+import model.CatalogItem;
 import model.DB;
 import model.InfoModel;
 
@@ -43,19 +43,19 @@ public class ControllerInformationFrameChangeDialogForApparatus implements Initi
     @FXML
     public HTMLEditor __description;
     @FXML
-    public TableView<Catalog> _ta_table;
+    public TableView<CatalogItem> _ta_table;
     @FXML
-    public ComboBox<Catalog> _ta_list;
+    public ComboBox<CatalogItem> _ta_list;
     @FXML
     public TextField _ta_count;
     @FXML
-    public TableColumn<Catalog, String> _ta_column_1;
+    public TableColumn<CatalogItem, String> _ta_column_1;
     @FXML
-    public TableColumn<Catalog, Integer> _ta_column_2;
-    public TableView<Catalog> _cable_table;
-    public ComboBox<Catalog> _cable_list;
+    public TableColumn<CatalogItem, Integer> _ta_column_2;
+    public TableView<CatalogItem> _cable_table;
+    public ComboBox<CatalogItem> _cable_list;
     public TextField _cable_count;
-    public TableColumn<Catalog, String> _cable_column_1;
+    public TableColumn<CatalogItem, String> _cable_column_1;
     public TableColumn<TableCableModel, Integer> _cable_column_2;
 
     // Для свременного сохранения изображения и отображения иконки DragAndDrop
@@ -89,7 +89,7 @@ public class ControllerInformationFrameChangeDialogForApparatus implements Initi
 
     public void setId(Integer id) {
         try {
-            Catalog item = DB.getCatalogItemById(id);
+            CatalogItem item = DB.getCatalogItemById(id);
             aparatousId = id;
 
             // Заполняем
@@ -158,26 +158,32 @@ public class ControllerInformationFrameChangeDialogForApparatus implements Initi
     @FXML
     public void __save(ActionEvent actionEvent) {
         if (isInputValid()) {
-            infoModel.setTitle(__title.getText());
-            infoModel.setDescription(__description.getHtmlText());
-            infoModel.setImage(__image.getImage());
-
-            // Записываем доп информацию в data
-            String data = "";
-            for (TableTAModel ta : TATable) {
-                data += ta.getName() + ":" + ta.getCount() + ";";
+            if (aparatousId != null)
+                if (DB.saveCatalogItemById(
+                        aparatousId,
+                        __title.getText(),
+                        itemType,
+                        __description.getHtmlText(),
+                        __image.getImage()
+                )) {
+                    okClicked = true;
+                    dialogStage.close();
+                } else {
+                    // TODO: Ошибка сохранения
+                }
+            else if (DB.saveNewCatalogItem(
+                    __title.getText(),
+                    itemType,
+                    __description.getHtmlText(),
+                    __image.getImage()
+            )) {
+                okClicked = true;
+                dialogStage.close();
+            } else {
+                // TODO: Ошибка сохранения
             }
-            infoModel.setData(data);
-
-            // Записываем доп информацию в cables
-            String cables = "";
-            for (TableCableModel cm : CableTable) {
-                cables += cm.getName() + ":" + cm.getCount() + ";";
-            }
-            infoModel.setCables(cables);
-
-            okClicked = true;
-            dialogStage.close();
+        } else {
+            // TODO: Ошибка ввода
         }
     }
 
@@ -262,14 +268,14 @@ public class ControllerInformationFrameChangeDialogForApparatus implements Initi
         _ta_table.getItems().clear();
 
         // Настройка
-        _ta_column_1.setCellValueFactory(new PropertyValueFactory<Catalog, String>("title"));
-        _ta_column_2.setCellValueFactory(new PropertyValueFactory<Catalog, Integer>("count"));
-        _ta_column_2.setCellFactory(TextFieldTableCell.<Catalog, Integer>forTableColumn(new IntegerStringConverter()));
+        _ta_column_1.setCellValueFactory(new PropertyValueFactory<CatalogItem, String>("title"));
+        _ta_column_2.setCellValueFactory(new PropertyValueFactory<CatalogItem, Integer>("count"));
+        _ta_column_2.setCellFactory(TextFieldTableCell.<CatalogItem, Integer>forTableColumn(new IntegerStringConverter()));
         _ta_column_2.setMinWidth(10);
-        _ta_column_2.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Catalog, Integer>>() {
+        _ta_column_2.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<CatalogItem, Integer>>() {
             @Override
-            public void handle(TableColumn.CellEditEvent<Catalog, Integer> event) {
-                TablePosition<Catalog, Integer> pos = event.getTablePosition();
+            public void handle(TableColumn.CellEditEvent<CatalogItem, Integer> event) {
+                TablePosition<CatalogItem, Integer> pos = event.getTablePosition();
 
                 Integer newCount = event.getNewValue();
 
@@ -277,7 +283,7 @@ public class ControllerInformationFrameChangeDialogForApparatus implements Initi
                 if (newCount < 1) newCount = 1;
 
                 int rowId = pos.getRow();
-                Catalog row = event.getTableView().getItems().get(rowId);
+                CatalogItem row = event.getTableView().getItems().get(rowId);
 
                 DB.updateCountTaInApparatousById(aparatousId, row.getId(), newCount);
 
@@ -291,11 +297,11 @@ public class ControllerInformationFrameChangeDialogForApparatus implements Initi
         _cable_table.getItems().clear();
 
         // Настройка
-        _cable_column_1.setCellValueFactory(new PropertyValueFactory<Catalog, String>("title"));
+        _cable_column_1.setCellValueFactory(new PropertyValueFactory<CatalogItem, String>("title"));
     }
 
     private void fillTaTable() {
-        ObservableList<Catalog> Ta = DB.getTaInApparatousById(aparatousId);
+        ObservableList<CatalogItem> Ta = DB.getTaInApparatousById(aparatousId);
 
         _ta_table.getItems().clear();
         ;
@@ -304,13 +310,13 @@ public class ControllerInformationFrameChangeDialogForApparatus implements Initi
 
     private void fillCableTable() {
 
-        ObservableList<Catalog> Cables = DB.getCablesInApparatousById(aparatousId);
+        ObservableList<CatalogItem> Cables = DB.getCablesInApparatousById(aparatousId);
 
         _cable_table.setItems(Cables);
     }
 
     private void fillTAList() {
-        ObservableList<Catalog> Ta = DB.getTaNotInApparatousById(aparatousId);
+        ObservableList<CatalogItem> Ta = DB.getTaNotInApparatousById(aparatousId);
 
         _ta_list.setItems(Ta);
 
@@ -320,7 +326,7 @@ public class ControllerInformationFrameChangeDialogForApparatus implements Initi
 
     private void fillCableList() {
 
-        ObservableList<Catalog> Cables = DB.getCablesNotInApparatousById(aparatousId);
+        ObservableList<CatalogItem> Cables = DB.getCablesNotInApparatousById(aparatousId);
 
         _cable_list.getItems().clear();
         _cable_list.setItems(Cables);

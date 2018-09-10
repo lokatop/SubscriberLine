@@ -3,7 +3,7 @@ package model;
 import javafx.beans.property.*;
 import javafx.scene.image.Image;
 
-public class Catalog {
+public class CatalogItem {
 
     private IntegerProperty id;
     private StringProperty title;
@@ -24,18 +24,18 @@ public class Catalog {
     /**
      * Конструктор по умолчанию.
      */
-    public Catalog() {
+    public CatalogItem() {
         this(null, null, null, null, null);
     }
 
-    public Catalog(Integer id, String title) {
+    public CatalogItem(Integer id, String title) {
         this(id, title, null, null, null);
     }
 
     /**
      * Конструктор с некоторыми начальными данными.
      */
-    public Catalog(Integer id, String title, String type, String description, String image_filename) {
+    public CatalogItem(Integer id, String title, String type, String description, String image_filename) {
         this.id = new SimpleIntegerProperty(id);
         this.title = new SimpleStringProperty(title);
         this.type = new SimpleStringProperty(type);
@@ -93,7 +93,7 @@ public class Catalog {
 
 //    @Override
 //    public boolean equals(Object obj) {
-//        if (((Catalog)obj).getId() == this.getId())
+//        if (((CatalogItem)obj).getId() == this.getId())
 //            return true;
 //        else
 //            return false;

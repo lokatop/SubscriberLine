@@ -15,7 +15,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import model.Catalog;
+import model.CatalogItem;
 import model.DB;
 import model.InfoModel;
 import model.XMLsaver;
@@ -152,8 +152,8 @@ public class ControllerInformationChange {
             controller.setDialogStage(dialogStage);
 
             // Отправляем id
-            Catalog catalog = (Catalog)__list_of_items.getSelectionModel().getSelectedItem();
-            controller.setId(catalog.getId());
+            CatalogItem catalogItem = (CatalogItem)__list_of_items.getSelectionModel().getSelectedItem();
+            controller.setId(catalogItem.getId());
 
             // Отображаем диалоговое окно и ждём, пока пользователь его не закроет
             dialogStage.showAndWait();
@@ -189,8 +189,8 @@ public class ControllerInformationChange {
             controller.setDialogStage(dialogStage);
 
             // Отправляем id
-            Catalog catalog = (Catalog)__list_of_items.getSelectionModel().getSelectedItem();
-            controller.setId(catalog.getId());
+            CatalogItem catalogItem = (CatalogItem)__list_of_items.getSelectionModel().getSelectedItem();
+            controller.setId(catalogItem.getId());
 
             // Отображаем диалоговое окно и ждём, пока пользователь его не закроет
             dialogStage.showAndWait();
@@ -313,14 +313,14 @@ public class ControllerInformationChange {
     public void info_model_delete(ActionEvent actionEvent) {
 
         // Отправляем id
-        Catalog catalog = (Catalog)__list_of_items.getSelectionModel().getSelectedItem();
-        DB.deleteCatalogItemById(catalog.getId());
+        CatalogItem catalogItem = (CatalogItem)__list_of_items.getSelectionModel().getSelectedItem();
+        DB.deleteCatalogItemById(catalogItem.getId());
 
         updateListsAfterChange();
     }
 
     public void info_model_copy_past(ActionEvent actionEvent) {
-        Catalog selectedCatalogItem = (Catalog)__list_of_items.getSelectionModel().getSelectedItem();
+        CatalogItem selectedCatalogItem = (CatalogItem)__list_of_items.getSelectionModel().getSelectedItem();
 
         // Если буфер пуст - копируем, если нет - вставляем
         if (modelCopyPastID == null) {

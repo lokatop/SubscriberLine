@@ -6,7 +6,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.scene.web.WebView;
-import model.Catalog;
+import model.CatalogItem;
 import model.DB;
 
 import java.io.IOException;
@@ -20,7 +20,7 @@ public class ControllerInformationDescription {
     public ImageView imageDescr;
     public WebView lblDesc;
 
-    private Catalog catalogItem;
+    private CatalogItem catalogItem;
 
     public void setModel(Integer id){
         try {

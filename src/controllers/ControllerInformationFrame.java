@@ -10,7 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import model.Catalog;
+import model.CatalogItem;
 import model.DB;
 import model.InfoModel;
 
@@ -19,7 +19,7 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-import static model.Catalog.CATEGORIES_DESC;
+import static model.CatalogItem.CATEGORIES_DESC;
 
 public class ControllerInformationFrame implements Initializable {
 
@@ -54,7 +54,7 @@ public class ControllerInformationFrame implements Initializable {
         Button b = (Button) actionEvent.getTarget();
         HBox vb = (HBox) b.getParent();
         ComboBox cb = (ComboBox) vb.getChildren().get(0);
-        Integer catalogItemId = ((Catalog) cb.getSelectionModel().getSelectedItem()).getId();
+        Integer catalogItemId = ((CatalogItem) cb.getSelectionModel().getSelectedItem()).getId();
 
         try {
             VBox vBox = (VBox) loader.load();
