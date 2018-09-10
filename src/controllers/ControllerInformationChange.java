@@ -262,6 +262,7 @@ public class ControllerInformationChange {
             // Передаём адресата в контроллер.
             ControllerInformationFrameChangeDialogForApparatus controller = loader.getController();
             controller.setDialogStage(dialogStage);
+            controller.setType(CATEGORIES[changingTypeId]);
 
             // Отправляем тип
 //            InfoModel model = new InfoModel("", CATEGORIES[changingTypeId], "", new Image("resource/noimage.png"));
