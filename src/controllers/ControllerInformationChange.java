@@ -10,12 +10,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
-import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import model.CatalogItem;
+import model.DB;
 import model.InfoModel;
 import model.XMLsaver;
 
@@ -23,7 +24,6 @@ import java.io.IOException;
 
 import static model.InfoModel.CATEGORIES;
 import static model.InfoModel.CATEGORIES_DESC;
-import static model.InfoModel.filterInfoModelByType;
 
 public class ControllerInformationChange {
     @FXML
@@ -60,18 +60,17 @@ public class ControllerInformationChange {
         VboxInfFrame.getChildren().setAll(vBox);
     }
 
-    public void setChangingTypeAndInfoData(Integer changingTypeId, ObservableList<InfoModel> infoData) {
+    public void setChangingType(Integer changingTypeId) {
         this.changingTypeId = changingTypeId;
 
         this.infoData.clear();
-        this.infoData = infoData;
 
         // Заполняем категорию изменяемых моделей
         __list_of_categories.getItems().clear();
         __list_of_categories.getItems().addAll(CATEGORIES_DESC);
         __list_of_categories.getSelectionModel().select(CATEGORIES_DESC[changingTypeId]);
 
-        updateLists();
+        updateListsAfterChange();
 
         __list_of_items.getItems().addListener(new ListChangeListener() {
             @Override
@@ -90,7 +89,7 @@ public class ControllerInformationChange {
             showAddDialogForApparatus();
         else
             showAddDialog();
-        updateLists();
+        updateListsAfterChange();
     }
 
     public void info_model_save(ActionEvent actionEvent) throws IOException {
@@ -108,7 +107,7 @@ public class ControllerInformationChange {
             showEditDialogForApparatus();
         else
             showEditDialog();
-        updateLists();
+        updateListsAfterChange();
     }
 
     public void enable_btns(MouseEvent mouseEvent) {
@@ -152,9 +151,9 @@ public class ControllerInformationChange {
             ControllerInformationFrameChangeDialog controller = loader.getController();
             controller.setDialogStage(dialogStage);
 
-            // Отправляем модель
-            InfoModel model = changingList.get(__list_of_items.getSelectionModel().getSelectedIndex());
-            controller.setInfoModel(model);
+            // Отправляем id
+            CatalogItem catalogItem = (CatalogItem)__list_of_items.getSelectionModel().getSelectedItem();
+            controller.setId(catalogItem.getId());
 
             // Отображаем диалоговое окно и ждём, пока пользователь его не закроет
             dialogStage.showAndWait();
@@ -189,19 +188,9 @@ public class ControllerInformationChange {
             ControllerInformationFrameChangeDialogForApparatus controller = loader.getController();
             controller.setDialogStage(dialogStage);
 
-            // Отправляем модель
-            InfoModel model = changingList.get(__list_of_items.getSelectionModel().getSelectedIndex());
-            controller.setInfoModel(model);
-
-            // Отправляем список ТА для аппаратных
-            ObservableList<InfoModel> TaTemp = FXCollections.observableArrayList();
-            ObservableList<InfoModel> CableTemp = FXCollections.observableArrayList();
-            TaTemp.addAll(filterInfoModelByType("DS", infoData));
-            TaTemp.addAll(filterInfoModelByType("ZAS", infoData));
-            TaTemp.addAll(filterInfoModelByType("ARM", infoData));
-            CableTemp.addAll(filterInfoModelByType("CableAndOther", infoData));
-            controller.setTAList(TaTemp);
-            controller.setCableList(CableTemp);
+            // Отправляем id
+            CatalogItem catalogItem = (CatalogItem)__list_of_items.getSelectionModel().getSelectedItem();
+            controller.setId(catalogItem.getId());
 
             // Отображаем диалоговое окно и ждём, пока пользователь его не закроет
             dialogStage.showAndWait();
@@ -234,18 +223,15 @@ public class ControllerInformationChange {
             // Передаём адресата в контроллер.
             ControllerInformationFrameChangeDialog controller = loader.getController();
             controller.setDialogStage(dialogStage);
-
-            // Отправляем модель
-            InfoModel model = new InfoModel("", CATEGORIES[changingTypeId], "", new Image("resource/noimage.png"));
-
-            controller.setInfoModel(model);
+            controller.setType(CATEGORIES[changingTypeId]);
 
             // Отображаем диалоговое окно и ждём, пока пользователь его не закроет
             dialogStage.showAndWait();
 
             // Добавляем новую модель
             if (controller.isOkClicked()) {
-                infoData.add(controller.getInfoModel());
+                // Сохраняем в БД
+//                infoData.add(controller.getInfoModel());
             }
 
             return controller.isOkClicked();
@@ -277,26 +263,27 @@ public class ControllerInformationChange {
             ControllerInformationFrameChangeDialogForApparatus controller = loader.getController();
             controller.setDialogStage(dialogStage);
 
-            // Отправляем модель
-            InfoModel model = new InfoModel("", CATEGORIES[changingTypeId], "", new Image("resource/noimage.png"));
-            controller.setInfoModel(model);
+            // Отправляем тип
+//            InfoModel model = new InfoModel("", CATEGORIES[changingTypeId], "", new Image("resource/noimage.png"));
+//            controller.setInfoModel(model);
 
             // Отправляем список ТА для аппаратных
-            ObservableList<InfoModel> TaTemp = FXCollections.observableArrayList();
-            ObservableList<InfoModel> CableTemp = FXCollections.observableArrayList();
-            TaTemp.addAll(filterInfoModelByType("DS", infoData));
-            TaTemp.addAll(filterInfoModelByType("ZAS", infoData));
-            TaTemp.addAll(filterInfoModelByType("ARM", infoData));
-            CableTemp.addAll(filterInfoModelByType("CableAndOther", infoData));
-            controller.setTAList(TaTemp);
-            controller.setCableList(CableTemp);
+//            ObservableList<InfoModel> TaTemp = FXCollections.observableArrayList();
+//            ObservableList<InfoModel> CableTemp = FXCollections.observableArrayList();
+//            TaTemp.addAll(filterInfoModelByType("DS", infoData));
+//            TaTemp.addAll(filterInfoModelByType("ZAS", infoData));
+//            TaTemp.addAll(filterInfoModelByType("ARM", infoData));
+//            CableTemp.addAll(filterInfoModelByType("CableAndOther", infoData));
+//            controller.setTAList(TaTemp);
+//            controller.setCableList(CableTemp);
 
             // Отображаем диалоговое окно и ждём, пока пользователь его не закроет
             dialogStage.showAndWait();
 
             // Добавляем новую модель
             if (controller.isOkClicked()) {
-                infoData.add(controller.getInfoModel());
+                // Сохраняем в БД
+//                infoData.add(controller.getInfoModel());
             }
 
             return controller.isOkClicked();
@@ -307,45 +294,50 @@ public class ControllerInformationChange {
     }
 
     @FXML
-    private void updateLists() {
+    private void updateListsAfterChange() {
 
         // Меняем id категории
         changingTypeId = __list_of_categories.getSelectionModel().getSelectedIndex();
 
         // Фильтруем по типу
-        changingList = null;
-        changingList = filterInfoModelByType(CATEGORIES[changingTypeId], infoData);
 
         // Выбираем категорию изменяемых моделей
         __list_of_categories.getSelectionModel().select(CATEGORIES_DESC[changingTypeId]);
 
+
         // Заполняем список изменяемых моделей
         __list_of_items.getItems().clear();
-        __list_of_items.getItems().addAll(changingList);
+        __list_of_items.getItems().addAll(DB.getCatalogTitlesByType(CATEGORIES[changingTypeId]));
     }
 
     public void info_model_delete(ActionEvent actionEvent) {
-        int id = __list_of_items.getSelectionModel().getSelectedIndex();
-        infoData.remove(changingList.get(id));
 
-        updateLists();
+        // Отправляем id
+        CatalogItem catalogItem = (CatalogItem)__list_of_items.getSelectionModel().getSelectedItem();
+        DB.deleteCatalogItemById(catalogItem.getId());
+
+        updateListsAfterChange();
     }
 
     public void info_model_copy_past(ActionEvent actionEvent) {
-        int id = __list_of_items.getSelectionModel().getSelectedIndex();
+        CatalogItem selectedCatalogItem = (CatalogItem)__list_of_items.getSelectionModel().getSelectedItem();
 
         // Если буфер пуст - копируем, если нет - вставляем
         if (modelCopyPastID == null) {
-            modelCopyPastID = id;
+            modelCopyPastID = selectedCatalogItem.getId();
             __btn_copy_past_cancel.setDisable(false);
             __btn_copy_past.setText("Вставить");
         } else {
-            // Модифицируем тип модели
-            infoData.get(modelCopyPastID).setType(infoData.get(modelCopyPastID).getType() + "," + InfoModel.CATEGORIES[changingTypeId]);
-            modelCopyPastID = null;
-            __btn_copy_past_cancel.setDisable(true);
-            __btn_copy_past.setText("Копировать");
-            updateLists();
+
+            if(DB.updateTypeById(InfoModel.CATEGORIES[changingTypeId],modelCopyPastID)){
+                modelCopyPastID = null;
+                __btn_copy_past_cancel.setDisable(true);
+                __btn_copy_past.setText("Копировать");
+                updateListsAfterChange();
+            } else {
+                // Ошибка БД
+            }
+
         }
     }
 

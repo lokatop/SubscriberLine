@@ -2,21 +2,15 @@ package controllers;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TreeView;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.scene.web.WebView;
-import model.InfoModel;
+import model.CatalogItem;
+import model.DB;
 
-import java.awt.*;
 import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
-import java.util.Set;
-import java.util.TreeSet;
+import java.sql.SQLException;
 
 public class ControllerInformationDescription {
     @FXML
@@ -26,17 +20,21 @@ public class ControllerInformationDescription {
     public ImageView imageDescr;
     public WebView lblDesc;
 
-    private InfoModel infoModel;
+    private CatalogItem catalogItem;
 
-    public void setModel(InfoModel model){
-        this.infoModel = model;
+    public void setModel(Integer id){
+        try {
+            this.catalogItem = DB.getCatalogItemById(id);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
         // Заголовок
-        lblLabel.setText(infoModel.getTitle());
+        lblLabel.setText(catalogItem.getTitle());
         // Описание
-        lblDesc.getEngine().loadContent(infoModel.getDescription());
+        lblDesc.getEngine().loadContent(catalogItem.getDescription());
         // Изображение
-        imageDescr.setImage(infoModel.getImage());
+        imageDescr.setImage(catalogItem.getImage());
     }
 
     @FXML

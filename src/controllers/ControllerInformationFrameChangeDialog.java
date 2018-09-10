@@ -12,11 +12,14 @@ import javafx.scene.input.TransferMode;
 import javafx.scene.web.HTMLEditor;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import model.CatalogItem;
+import model.DB;
 import model.InfoModel;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.sql.SQLException;
 import java.util.List;
 
 //import javafx.scene.control.Alert;
@@ -32,6 +35,8 @@ public class ControllerInformationFrameChangeDialog {
 
     private Stage dialogStage;
     private InfoModel infoModel = null;
+    private Integer itemId = null;
+    private String itemType;
     private boolean okClicked = false;
 
     /**
@@ -51,15 +56,25 @@ public class ControllerInformationFrameChangeDialog {
         this.dialogStage = dialogStage;
     }
 
-    public void setInfoModel(InfoModel infoModel) {
-        this.infoModel = infoModel;
+    public void setId(Integer id) {
 
-        if (infoModel != null) {
+        try {
+            CatalogItem catalogItemItem = DB.getCatalogItemById(id);
+
+            itemId = id;
+            itemType = catalogItemItem.getType();
+
             // Заполняем
-            __title.setText(infoModel.getTitle());
-            __description.setHtmlText(infoModel.getDescription());
-            __image.setImage(infoModel.getImage());
+            __title.setText(catalogItemItem.getTitle());
+            __description.setHtmlText(catalogItemItem.getDescription());
+            __image.setImage(catalogItemItem.getImage());
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
+    }
+
+    public void setType(String type) {
+        itemType = type;
     }
 
     public InfoModel getInfoModel() {
@@ -113,12 +128,32 @@ public class ControllerInformationFrameChangeDialog {
     @FXML
     public void __save(ActionEvent actionEvent) {
         if (isInputValid()) {
-            infoModel.setTitle(__title.getText());
-            infoModel.setDescription(__description.getHtmlText());
-            infoModel.setImage(__image.getImage());
-
-            okClicked = true;
-            dialogStage.close();
+            if (itemId != null)
+                if (DB.saveCatalogItemById(
+                        itemId,
+                        __title.getText(),
+                        itemType,
+                        __description.getHtmlText(),
+                        __image.getImage()
+                )) {
+                    okClicked = true;
+                    dialogStage.close();
+                } else {
+                    // TODO: Ошибка сохранения
+                }
+            else if (DB.saveNewCatalogItem(
+                    __title.getText(),
+                    itemType,
+                    __description.getHtmlText(),
+                    __image.getImage()
+            )) {
+                okClicked = true;
+                dialogStage.close();
+            } else {
+                // TODO: Ошибка сохранения
+            }
+        } else {
+            // TODO: Ошибка ввода
         }
     }
 
@@ -188,6 +223,7 @@ public class ControllerInformationFrameChangeDialog {
         dropIconTemp = __image.getImage();
         __image.setImage(new Image("resource/dropimage.jpg"));
     }
+
     @FXML
     public void __drag_exit(DragEvent dragEvent) {
         __image.setImage(dropIconTemp);

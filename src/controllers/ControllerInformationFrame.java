@@ -8,18 +8,18 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import model.CatalogItem;
+import model.DB;
 import model.InfoModel;
-import model.XMLsaver;
 
-import java.io.*;
+import java.io.IOException;
 import java.net.URL;
-import java.util.*;
+import java.sql.SQLException;
+import java.util.ResourceBundle;
 
-import static model.InfoModel.CATEGORIES_DESC;
-import static model.InfoModel.filterInfoModelByType;
+import static model.CatalogItem.CATEGORIES_DESC;
 
 public class ControllerInformationFrame implements Initializable {
 
@@ -54,14 +54,14 @@ public class ControllerInformationFrame implements Initializable {
         Button b = (Button) actionEvent.getTarget();
         HBox vb = (HBox) b.getParent();
         ComboBox cb = (ComboBox) vb.getChildren().get(0);
-        InfoModel model = (InfoModel) cb.getSelectionModel().getSelectedItem();
+        Integer catalogItemId = ((CatalogItem) cb.getSelectionModel().getSelectedItem()).getId();
 
         try {
             VBox vBox = (VBox) loader.load();
 
             // Передаём выбранную модель в контроллер фрейма Описание
             ControllerInformationDescription controller = loader.getController();
-            controller.setModel(model);
+            controller.setModel(catalogItemId);
 
             // Оотображаем
             Vbox.getChildren().setAll(vBox);
@@ -81,7 +81,7 @@ public class ControllerInformationFrame implements Initializable {
 
             // Передаём выбранный тип, список типов и список моделей в контроллер фрейма Описание
             ControllerInformationChange controller = loader.getController();
-            controller.setChangingTypeAndInfoData(typeId, infoData);
+            controller.setChangingType(typeId);
 
             // Оотображаем
             Vbox.getChildren().setAll(vBox);
@@ -93,7 +93,11 @@ public class ControllerInformationFrame implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        addTele();
+        try {
+            addTele();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
         // Заполняем список редактирования категорий
         list_for_edit.getItems().clear();
@@ -101,60 +105,21 @@ public class ControllerInformationFrame implements Initializable {
         list_for_edit.getSelectionModel().select(0);
     }
 
-    private void addTele() {
-
-        //Пробуем сохранить  в xml
-//        XMLsaver.saveToXML(infoData, "InfoModels.xml");
-        infoData.clear();
-        infoData.addAll(XMLsaver.loadFromXML(InfoModel.FILENAME_INFOMODELS));
-        System.out.println(infoData);
-
-        if (infoData.isEmpty()) {
-            // В качестве образца добавляем некоторые данные
-            Image noImage = new Image("resource/noimage.png");
-            infoData.add(new InfoModel("ТА-57", "DS", "Описание", noImage));
-            infoData.add(new InfoModel("ТА-88", "DS", "Описание", noImage));
-            infoData.add(new InfoModel("П-380 ТА", "DS", "Описание", noImage));
-            infoData.add(new InfoModel("Селенит", "DS,ZAS", "Описание", noImage));
-
-            infoData.add(new InfoModel("П-170", "ZAS", "Описание", noImage));
-            infoData.add(new InfoModel("П-171Д", "ZAS", "Описание", noImage));
-            infoData.add(new InfoModel("АТ-3031", "ZAS", "Описание", noImage));
-
-            infoData.add(new InfoModel("Рамек-2", "ARM", "Описание", noImage));
-
-            infoData.add(new InfoModel("П-274М", "CableAndOther", "Описание", noImage));
-            infoData.add(new InfoModel("П-269 4х2+2х4", "CableAndOther", "Описание", noImage));
-            infoData.add(new InfoModel("ПРК 5х2", "CableAndOther", "Описание", noImage));
-            infoData.add(new InfoModel("ПТРК 5х2", "CableAndOther", "Описание", noImage));
-            infoData.add(new InfoModel("Витая пара", "CableAndOther", "Описание", noImage));
-            infoData.add(new InfoModel("ВП", "CableAndOther", "Описание", noImage));
-            infoData.add(new InfoModel("РМ2", "CableAndOther", "Описание", noImage));
-
-            infoData.add(new InfoModel("П-240И", "AOZU", "Описание", noImage));
-            infoData.add(new InfoModel("МП-1И", "AOZU", "Описание", noImage));
-            infoData.add(new InfoModel("МП-2И", "AOZU", "Описание", noImage));
-
-            infoData.add(new InfoModel("П-260-О", "ATZU", "Описание", noImage));
-            infoData.add(new InfoModel("П-260-У", "ATZU", "Описание", noImage));
-            infoData.add(new InfoModel("П-260-Т", "ATZU", "Описание", noImage));
-            infoData.add(new InfoModel("П-244И", "ATZU", "Описание", noImage));
-            infoData.add(new InfoModel("П-244И-4", "ATZU", "Описание", noImage));
-        }
+    private void addTele() throws SQLException {
 
         // Добавляем фильтрованный по "типу" список в ComboBox
-        DC.getItems().addAll(filterInfoModelByType("DS", infoData));
+        DC.getItems().addAll(DB.getCatalogTitlesByType("DS"));
         // Выбираем первый эл-т для отображения
         DC.getSelectionModel().select(0);
-        ZAS.getItems().addAll(filterInfoModelByType("ZAS", infoData));
+        ZAS.getItems().addAll(DB.getCatalogTitlesByType("ZAS"));
         ZAS.getSelectionModel().select(0);
-        ARM.getItems().addAll(filterInfoModelByType("ARM", infoData));
+        ARM.getItems().addAll(DB.getCatalogTitlesByType("ARM"));
         ARM.getSelectionModel().select(0);
-        telCable.getItems().addAll(filterInfoModelByType("CableAndOther", infoData));
+        telCable.getItems().addAll(DB.getCatalogTitlesByType("CableAndOther"));
         telCable.getSelectionModel().select(0);
-        AOZU.getItems().addAll(filterInfoModelByType("AOZU", infoData));
+        AOZU.getItems().addAll(DB.getCatalogTitlesByType("AOZU"));
         AOZU.getSelectionModel().select(0);
-        ATZU.getItems().addAll(filterInfoModelByType("ATZU", infoData));
+        ATZU.getItems().addAll(DB.getCatalogTitlesByType("ATZU"));
         ATZU.getSelectionModel().select(0);
     }
 
