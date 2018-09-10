@@ -1,9 +1,13 @@
 package controllers;
 
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
+import javafx.scene.control.TreeItem;
+import javafx.scene.control.TreeView;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.web.WebView;
 import model.CatalogItem;
@@ -19,6 +23,7 @@ public class ControllerInformationDescription {
     public Label lblLabel;
     public ImageView imageDescr;
     public WebView lblDesc;
+    public TreeView<String> _additional_data;
 
     private CatalogItem catalogItem;
 
@@ -35,6 +40,57 @@ public class ControllerInformationDescription {
         lblDesc.getEngine().loadContent(catalogItem.getDescription());
         // Изображение
         imageDescr.setImage(catalogItem.getImage());
+
+        fillAdditionalData();
+    }
+
+    private void fillAdditionalData(){
+
+        TreeItem<String> treeItemRoot = new TreeItem<String>("Дополнительная информация");
+
+        switch (catalogItem.getType()){
+            case "AOZU":
+            case "ATZU":
+
+                // Получаем кабели в аппаратной
+                ObservableList<CatalogItem> appCalbes = DB.getCablesInApparatousById(catalogItem.getId());
+                // Получаем та в аппаратной
+                ObservableList<CatalogItem> appTa = DB.getTaInApparatousById(catalogItem.getId());
+
+                // Заполняем древо кабелями
+                if(appCalbes.size() != 0){
+                    TreeItem<String> treeItemCables = new TreeItem<String>("Кабели");
+
+                    for (int i = 0; i < appCalbes.size(); i++) {
+                        treeItemCables.getChildren().add(new TreeItem<String>(
+                                appCalbes.get(i).getTitle()
+                        ));
+                    }
+
+                    treeItemRoot.getChildren().add(treeItemCables);
+                }
+
+                // Заполняем древо та
+                if(appTa.size() != 0){
+                    TreeItem<String> treeItemTa = new TreeItem<String>("Аппаратура");
+
+                    for (int i = 0; i < appTa.size(); i++) {
+                        treeItemTa.getChildren().add(new TreeItem<String>(
+                                appTa.get(i).getTitle()
+                        ));
+                    }
+
+                    treeItemRoot.getChildren().add(treeItemTa);
+                }
+
+                break;
+        }
+
+        // Отображаем древо, если оно не пустое
+        if (treeItemRoot.getChildren().size() != 0)
+            _additional_data.setVisible(true);
+
+        _additional_data.setRoot(treeItemRoot);
     }
 
     @FXML
