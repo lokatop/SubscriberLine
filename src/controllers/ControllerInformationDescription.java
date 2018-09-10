@@ -27,7 +27,7 @@ public class ControllerInformationDescription {
 
     private CatalogItem catalogItem;
 
-    public void setModel(Integer id){
+    public void setModel(Integer id) {
         try {
             this.catalogItem = DB.getCatalogItemById(id);
         } catch (SQLException e) {
@@ -44,11 +44,12 @@ public class ControllerInformationDescription {
         fillAdditionalData();
     }
 
-    private void fillAdditionalData(){
+    private void fillAdditionalData() {
 
         TreeItem<String> treeItemRoot = new TreeItem<String>("Дополнительная информация");
+        treeItemRoot.setExpanded(true);
 
-        switch (catalogItem.getType()){
+        switch (catalogItem.getType()) {
             case "AOZU":
             case "ATZU":
 
@@ -58,8 +59,9 @@ public class ControllerInformationDescription {
                 ObservableList<CatalogItem> appTa = DB.getTaInApparatousById(catalogItem.getId());
 
                 // Заполняем древо кабелями
-                if(appCalbes.size() != 0){
+                if (appCalbes.size() != 0) {
                     TreeItem<String> treeItemCables = new TreeItem<String>("Кабели");
+                    treeItemCables.setExpanded(true);
 
                     for (int i = 0; i < appCalbes.size(); i++) {
                         treeItemCables.getChildren().add(new TreeItem<String>(
@@ -71,8 +73,9 @@ public class ControllerInformationDescription {
                 }
 
                 // Заполняем древо та
-                if(appTa.size() != 0){
+                if (appTa.size() != 0) {
                     TreeItem<String> treeItemTa = new TreeItem<String>("Аппаратура");
+                    treeItemTa.setExpanded(true);
 
                     for (int i = 0; i < appTa.size(); i++) {
                         treeItemTa.getChildren().add(new TreeItem<String>(
@@ -82,6 +85,25 @@ public class ControllerInformationDescription {
 
                     treeItemRoot.getChildren().add(treeItemTa);
                 }
+
+                break;
+            case "CableAndOther":
+                CatalogItem cableItem = null;
+                try {
+                    cableItem = DB.getCableById(catalogItem.getId());
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+
+                TreeItem<String> treeItemMass = new TreeItem<String>("Масса в катушке");
+                treeItemMass.setExpanded(true);
+                treeItemMass.getChildren().add(new TreeItem<String>(Float.toString(cableItem.getMass()) + " кг"));
+                TreeItem<String> treeItemLength = new TreeItem<String>("Длина");
+                treeItemLength.setExpanded(true);
+                treeItemLength.getChildren().add(new TreeItem<String>(Float.toString(cableItem.getCable_length()) + " м"));
+
+                treeItemRoot.getChildren().add(treeItemMass);
+                treeItemRoot.getChildren().add(treeItemLength);
 
                 break;
         }
