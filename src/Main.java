@@ -5,6 +5,8 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import model.DB;
 
+import java.util.List;
+
 public class Main extends Application {
 
     @Override
@@ -19,6 +21,14 @@ public class Main extends Application {
         primaryStage.show();
     }
 
+    @Override
+    public void stop() throws Exception {
+
+        // Удаляем лишние изображения
+        DB.clearImagesFolder();
+
+        super.stop();
+    }
 
     public static void main(String[] args) {
         launch(args);

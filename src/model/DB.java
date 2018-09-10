@@ -13,6 +13,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import static javax.swing.UIManager.getInt;
 
@@ -186,7 +188,7 @@ public class DB {
 
             String imageFilename = saveImage(image);
             if (imageFilename == null)
-                pstat.setNull(4,Types.NULL);
+                pstat.setNull(4, Types.NULL);
             else
                 pstat.setString(4, imageFilename);
 
@@ -215,7 +217,7 @@ public class DB {
 
             String imageFilename = saveImage(image);
             if (imageFilename == null)
-                pstat.setNull(4,Types.NULL);
+                pstat.setNull(4, Types.NULL);
             else
                 pstat.setString(4, imageFilename);
 
@@ -504,5 +506,44 @@ public class DB {
             img = new Image(PATH_RESOURCE + "/noimage.png");
         }
         return img;
+    }
+
+    private static List<String> getImagesList() {
+
+        List<String> result = new ArrayList<String>();
+
+        try {
+            Connection connection = getConnection();
+
+            PreparedStatement pstat = null;
+            pstat = connection.prepareStatement("SELECT image FROM catalog WHERE image NOT NULL");
+            ResultSet rs = pstat.executeQuery();
+
+            while (rs.next()) {
+                result.add(rs.getString("image"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return result;
+    }
+
+    public static boolean clearImagesFolder() {
+
+        File resourceFolder = new File(PATH_RESOURCE);
+        File imagesFolder = new File(PATH_RESOURCE + PATH_IMAGES);
+
+        List<String> imageFilenameList = DB.getImagesList();
+
+//            if (!resourceFolder.exists()) resourceFolder.mkdir();
+//            if (!imagesFolder.exists()) imagesFolder.mkdir();
+
+        if (imagesFolder.exists())
+            if (imagesFolder.listFiles().length != 0)
+                for (File f : imagesFolder.listFiles())
+                    if (f.isFile() && !imageFilenameList.contains(f.getName())) f.delete();
+
+        return true;
     }
 }
