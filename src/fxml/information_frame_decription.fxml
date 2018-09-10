@@ -27,7 +27,10 @@
                   <content>
                     <ScrollPane id="ScrollPane" prefViewportHeight="140.0" prefViewportWidth="400.0">
                       <content>
-                        <AnchorPane id="Content" fx:id="_additional_data" disable="false" minHeight="0.0" minWidth="0.0" prefHeight="130.0" prefWidth="400.0">
+                        <AnchorPane id="Content" disable="false" minHeight="0.0" minWidth="0.0" prefHeight="130.0" prefWidth="400.0">
+                          <children>
+                            <TreeView fx:id="_additional_data" layoutX="0.0" layoutY="-4.0" prefHeight="140.0" prefWidth="400.0" />
+                          </children>
                           <padding>
                             <Insets bottom="8.0" left="16.0" right="16.0" top="8.0" />
                           </padding>
