@@ -6,7 +6,8 @@ CREATE TABLE if not exists 'catalog' (
   'type' TEXT NOT NULL,
   'description' TEXT,
   'image' TEXT,
-  'data' TEXT
+  'mass' FLOAT DEFAULT NULL,
+  'cable_length' FLOAT DEFAULT NULL
 );
 
 CREATE TABLE if not exists 'apparatus_to_cable' (

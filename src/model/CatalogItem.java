@@ -11,6 +11,8 @@ public class CatalogItem {
     private StringProperty description;
     private ObjectProperty<Image> image;
     private IntegerProperty count = null;
+    private FloatProperty mass = null;
+    private FloatProperty cable_length = null;
 
     /**
      * Список сокращений категоий
@@ -24,18 +26,19 @@ public class CatalogItem {
     /**
      * Конструктор по умолчанию.
      */
-    public CatalogItem() {
-        this(null, null, null, null, null);
-    }
 
     public CatalogItem(Integer id, String title) {
-        this(id, title, null, null, null);
+        this(id, title, null, null, null, null, null);
+    }
+
+    public CatalogItem(Integer id, String title, String type, String description, String image_filename) {
+        this(id, title, type, description, image_filename, null, null);
     }
 
     /**
      * Конструктор с некоторыми начальными данными.
      */
-    public CatalogItem(Integer id, String title, String type, String description, String image_filename) {
+    public CatalogItem(Integer id, String title, String type, String description, String image_filename, Float mass, Float cable_length) {
         this.id = new SimpleIntegerProperty(id);
         this.title = new SimpleStringProperty(title);
         this.type = new SimpleStringProperty(type);
@@ -54,6 +57,15 @@ public class CatalogItem {
         }
         this.image = new SimpleObjectProperty<Image>(img);
 
+        if (mass != null)
+            this.mass = new SimpleFloatProperty(mass);
+        else
+            this.mass = new SimpleFloatProperty(0);
+
+        if (cable_length != null)
+            this.cable_length = new SimpleFloatProperty(cable_length);
+        else
+            this.cable_length = new SimpleFloatProperty(0);
     }
 
     public Integer getCount() {
@@ -89,6 +101,30 @@ public class CatalogItem {
 
     public Image getImage() {
         return image.get();
+    }
+
+    public float getMass() {
+        return mass.get();
+    }
+
+    public FloatProperty massProperty() {
+        return mass;
+    }
+
+    public void setMass(float mass) {
+        this.mass.set(mass);
+    }
+
+    public float getCable_length() {
+        return cable_length.get();
+    }
+
+    public FloatProperty cable_lengthProperty() {
+        return cable_length;
+    }
+
+    public void setCable_length(float cable_length) {
+        this.cable_length.set(cable_length);
     }
 
 //    @Override

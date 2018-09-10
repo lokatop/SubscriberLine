@@ -81,9 +81,9 @@
                     <VBox GridPane.columnIndex="3" GridPane.rowIndex="0">
                       <children>
                         <Label text="Масса в катушке" />
-                        <TextField id="_mass" fx:id="_cable_mass" prefWidth="200.0" />
+                        <TextField fx:id="__cable_mass" prefWidth="200.0" />
                         <Label text="Длина" />
-                        <TextField fx:id="_cable_length" prefWidth="200.0" />
+                        <TextField fx:id="__cable_length" prefWidth="200.0" />
                       </children>
                     </VBox>
                   </children>

@@ -1,10 +1,7 @@
 package controllers;
 
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
-import javafx.collections.FXCollections;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -32,7 +29,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -54,6 +50,8 @@ public class ControllerInformationFrameChangeDialogForCables implements Initiali
     public TableColumn<CatalogItem.Wire, String> _wire_column_1;
     @FXML
     public TableColumn<CatalogItem.Wire, Integer> _wire_column_2;
+    public TextField __cable_mass;
+    public TextField __cable_length;
 
     // Для свременного сохранения изображения и отображения иконки DragAndDrop
     private Image dropIconTemp;
@@ -61,9 +59,6 @@ public class ControllerInformationFrameChangeDialogForCables implements Initiali
     private Stage dialogStage;
     private InfoModel infoModel = null;
     private boolean okClicked = false;
-    private ObservableList<InfoModel> TA = FXCollections.observableArrayList();
-    private ObservableList<TableTAModel> TATable = FXCollections.observableArrayList();
-    private ArrayList<TableCableModel> CableTable = new ArrayList<>();
 
 
     private Integer cableId = null;
@@ -86,7 +81,7 @@ public class ControllerInformationFrameChangeDialogForCables implements Initiali
 
     public void setId(Integer id) {
         try {
-            CatalogItem item = DB.getCatalogItemById(id);
+            CatalogItem item = DB.getCableById(id);
             cableId = id;
             itemType = item.getType();
 
@@ -94,6 +89,8 @@ public class ControllerInformationFrameChangeDialogForCables implements Initiali
             __title.setText(item.getTitle());
             __description.setHtmlText(item.getDescription());
             __image.setImage(item.getImage());
+            __cable_mass.setText(Float.toString(item.getMass()));
+            __cable_length.setText(Float.toString(item.getCable_length()));
 
             fillWireTable();
             fillWireList();
@@ -130,6 +127,13 @@ public class ControllerInformationFrameChangeDialogForCables implements Initiali
         if (__description.getHtmlText().equals("<html dir=\"ltr\"><head></head><body contenteditable=\"true\"></body></html>")) {
             errorMessage += "Пустое описание!\n";
         }
+        try {
+            Float.parseFloat(__cable_mass.getText());
+            Float.parseFloat(__cable_length.getText());
+        } catch (Exception e) {
+            errorMessage += "Введено неправильное число\n";
+        }
+
 
         if (errorMessage.length() == 0) {
             return true;
@@ -155,23 +159,27 @@ public class ControllerInformationFrameChangeDialogForCables implements Initiali
     public void __save(ActionEvent actionEvent) {
         if (isInputValid()) {
             if (cableId != null)
-                if (DB.saveCatalogItemById(
+                if (DB.saveCableById(
                         cableId,
                         __title.getText(),
                         itemType,
                         __description.getHtmlText(),
-                        __image.getImage()
+                        __image.getImage(),
+                        Float.parseFloat(__cable_mass.getText()),
+                        Float.parseFloat(__cable_length.getText())
                 )) {
                     okClicked = true;
                     dialogStage.close();
                 } else {
                     // TODO: Ошибка сохранения
                 }
-            else if (DB.saveNewCatalogItem(
+            else if (DB.saveNewCableItem(
                     __title.getText(),
                     itemType,
                     __description.getHtmlText(),
-                    __image.getImage()
+                    __image.getImage(),
+                    Float.parseFloat(__cable_mass.getText()),
+                    Float.parseFloat(__cable_length.getText())
             )) {
                 okClicked = true;
                 dialogStage.close();
@@ -259,7 +267,7 @@ public class ControllerInformationFrameChangeDialogForCables implements Initiali
     public void __drag_done(DragEvent dragEvent) {
     }
 
-    private void setupTaTable() {
+    private void setupWireTable() {
         // Очищение
         _wire_table.getItems().clear();
 
@@ -325,10 +333,31 @@ public class ControllerInformationFrameChangeDialogForCables implements Initiali
         }
     }
 
+    private void setupMassLengthTextFields() {
+        // Установка ввода только десятичных
+        __cable_mass.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                if (!newValue.matches("\\d{0,7}([\\.]\\d{0,4})?")) {
+                    __cable_mass.setText(oldValue);
+                }
+            }
+        });
+        __cable_length.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                if (!newValue.matches("\\d{0,7}([\\.]\\d{0,4})?")) {
+                    __cable_length.setText(oldValue);
+                }
+            }
+        });
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         // Настройка таблицы
-        setupTaTable();
+        setupWireTable();
+        setupMassLengthTextFields();
     }
 
     public void _material_del(ActionEvent actionEvent) {
@@ -338,86 +367,8 @@ public class ControllerInformationFrameChangeDialogForCables implements Initiali
 
             fillWireTable();
             fillWireList();
+
         } catch (Exception e) {
-        }
-    }
-
-    public class TableTAModel {
-
-        private SimpleStringProperty name;
-        private SimpleIntegerProperty count;
-
-        public TableTAModel(String name, Integer count) {
-            this.name = new SimpleStringProperty(name);
-            this.count = new SimpleIntegerProperty(count);
-        }
-
-        public String getName() {
-            return name.get();
-        }
-
-        public SimpleStringProperty nameProperty() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name.set(name);
-        }
-
-        public int getCount() {
-            return count.get();
-        }
-
-        public SimpleIntegerProperty countProperty() {
-            return count;
-        }
-
-        public void setCount(int count) {
-            this.count.set(count);
-        }
-    }
-
-    public class TableCableModel {
-        private final StringProperty name;
-        private final IntegerProperty count;
-
-        public TableCableModel(String name, Integer count) {
-            this.name = new SimpleStringProperty(name);
-            this.count = new SimpleIntegerProperty(count);
-        }
-
-        public String getName() {
-            return name.get();
-        }
-
-        public StringProperty nameProperty() {
-            return name;
-        }
-
-        public int getCount() {
-            return count.get();
-        }
-
-        public void setCount(Integer count) {
-            this.count.set(count);
-        }
-
-        public IntegerProperty countProperty() {
-            return count;
-        }
-
-        @Override
-        public boolean equals(Object obj) {
-
-            boolean condition_1 = false;
-            boolean condition_2 = false;
-
-            if (this.getName().equals(((TableCableModel) obj).getName()))
-                condition_1 = true;
-            if (this.getCount() == ((TableCableModel) obj).getCount())
-                condition_2 = true;
-
-            return condition_1 && condition_2;
         }
     }
 }

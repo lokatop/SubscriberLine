@@ -71,7 +71,7 @@ public class DB {
         return connection;
     }
 
-    static public ObservableList<CatalogItem> getCatalog() {
+    static public ObservableList<CatalogItem> getCatalogItems() {
         ObservableList<CatalogItem> result = FXCollections.observableArrayList();
 
         try {
@@ -173,6 +173,61 @@ public class DB {
         return result;
     }
 
+    static public CatalogItem getCableById(Integer id) throws SQLException {
+
+        CatalogItem result = null;
+
+        Connection connection = getConnection();
+
+        PreparedStatement pstat = connection.prepareStatement("SELECT * FROM catalog WHERE id = ?");
+        pstat.setInt(1, id);
+
+        ResultSet rs = pstat.executeQuery();
+
+        result = new CatalogItem(
+                rs.getInt("id"),
+                rs.getString("title"),
+                rs.getString("type"),
+                rs.getString("description"),
+                rs.getString("image"),
+                rs.getFloat("mass"),
+                rs.getFloat("cable_length")
+        );
+
+        return result;
+    }
+
+    static public boolean saveCableById(Integer id, String title, String type, String description, Image image, Float mass, Float cable_length) {
+
+        boolean result = false;
+        Connection connection = getConnection();
+
+        try {
+            PreparedStatement pstat = null;
+            pstat = connection.prepareStatement("UPDATE catalog SET title=?, type=?, description=?, mass=?, cable_length=?, image=? WHERE id=?");
+
+            pstat.setString(1, title);
+            pstat.setString(2, type);
+            pstat.setString(3, description);
+            pstat.setFloat(4, mass);
+            pstat.setFloat(5, cable_length);
+
+            String imageFilename = saveImage(image);
+            if (imageFilename == null)
+                pstat.setNull(6, Types.NULL);
+            else
+                pstat.setString(6, imageFilename);
+
+            pstat.setInt(7, id);
+
+            pstat.execute();
+            result = true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
     static public boolean saveCatalogItemById(Integer id, String title, String type, String description, Image image) {
 
         boolean result = false;
@@ -220,6 +275,35 @@ public class DB {
                 pstat.setNull(4, Types.NULL);
             else
                 pstat.setString(4, imageFilename);
+
+            pstat.execute();
+            result = true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    static public boolean saveNewCableItem(String title, String type, String description, Image image, Float mass, Float cableLength) {
+
+        boolean result = false;
+        Connection connection = getConnection();
+
+        try {
+            PreparedStatement pstat = null;
+            pstat = connection.prepareStatement("INSERT INTO catalog (title,type,description,image,mass,cable_length) VALUES (?,?,?,?,?,?)");
+
+            pstat.setString(1, title);
+            pstat.setString(2, type);
+            pstat.setString(3, description);
+            pstat.setFloat(4, mass);
+            pstat.setFloat(5, cableLength);
+
+            String imageFilename = saveImage(image);
+            if (imageFilename == null)
+                pstat.setNull(6, Types.NULL);
+            else
+                pstat.setString(6, imageFilename);
 
             pstat.execute();
             result = true;
