@@ -477,6 +477,94 @@ public class DB {
         return result;
     }
 
+    static public ObservableList<CatalogItem.Wire> getWiresFromCableById(Integer id) {
+        ObservableList<CatalogItem.Wire> result = FXCollections.observableArrayList();
+
+        try {
+            Connection connection = getConnection();
+
+            PreparedStatement pstat = null;
+
+            pstat = connection.prepareStatement("SELECT * FROM cable_wires WHERE cable_id = ?");
+            pstat.setInt(1, id);
+
+            ResultSet rs = pstat.executeQuery();
+
+            while (rs.next()) {
+                result.add(new CatalogItem.Wire(
+                        rs.getString("wire_material"),
+                        rs.getInt("wire_count")
+                ));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return result;
+    }
+
+    static public boolean updateCountWiresInCableById(Integer cableId, String material, Integer count) {
+
+        boolean result = false;
+        Connection connection = getConnection();
+
+        try {
+            PreparedStatement pstat = null;
+            pstat = connection.prepareStatement("UPDATE cable_wires SET wire_count=? WHERE cable_id=? AND wire_material=?");
+
+            pstat.setInt(1, count);
+            pstat.setInt(2, cableId);
+            pstat.setString(3, material);
+
+            pstat.execute();
+            result = true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    static public boolean deleteWireInCable(Integer cableId, String material) {
+
+        boolean result = false;
+        Connection connection = getConnection();
+
+        try {
+            PreparedStatement pstat = null;
+            pstat = connection.prepareStatement("DELETE FROM cable_wires WHERE cable_id=? AND wire_material=?");
+
+            pstat.setInt(1, cableId);
+            pstat.setString(2, material);
+
+            pstat.execute();
+            result = true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    static public boolean addWireToCable(Integer cableId, String material, Integer count) {
+
+        boolean result = false;
+        Connection connection = getConnection();
+
+        try {
+            PreparedStatement pstat = null;
+            pstat = connection.prepareStatement("INSERT OR IGNORE INTO cable_wires (cable_id, wire_material, wire_count) VALUES (?,?, ?)");
+
+            pstat.setInt(1, cableId);
+            pstat.setString(2, material);
+            pstat.setInt(3, count);
+
+            pstat.execute();
+            result = true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
     static public void closeConnection() throws SQLException {
         if (connection != null)
             connection.close();

@@ -98,4 +98,38 @@ public class CatalogItem {
 //        else
 //            return false;
 //    }
+
+    public static class Wire {
+        private StringProperty material;
+        private IntegerProperty count;
+
+        public Wire (String mareial, Integer count){
+            this.material = new SimpleStringProperty(mareial);
+            this.count = new SimpleIntegerProperty(count);
+        }
+
+        public String getMaterial() {
+            return material.get();
+        }
+
+        public StringProperty materialProperty() {
+            return material;
+        }
+
+        public void setMaterial(String material) {
+            this.material.set(material);
+        }
+
+        public int getCount() {
+            return count.get();
+        }
+
+        public IntegerProperty countProperty() {
+            return count;
+        }
+
+        public void setCount(int count) {
+            this.count.set(count);
+        }
+    }
 }

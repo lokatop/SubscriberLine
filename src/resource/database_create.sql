@@ -26,6 +26,14 @@ CREATE TABLE if not exists 'apparatus_to_ta' (
   PRIMARY KEY (apparatus_id,ta_id)
 );
 
+CREATE TABLE if not exists 'cable_wires' (
+  'cable_id' INTEGER NOT NULL,
+  'wire_material' TEXT NOT NULL,
+  'wire_count' INTEGER NOT NULL,
+  FOREIGN KEY (cable_id) REFERENCES catalog(id),
+  PRIMARY KEY (cable_id,wire_material)
+);
+
 -- CREATE TABLE if not exists 'ParentContent' (
 --   'parent_id' INTEGER NOT NULL,
 --   'child_id' INTEGER NOT NULL,

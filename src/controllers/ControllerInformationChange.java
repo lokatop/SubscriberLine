@@ -85,10 +85,19 @@ public class ControllerInformationChange {
 
     public void info_model_add(ActionEvent actionEvent) {
 
-        if (changingTypeId == 4 || changingTypeId == 5)
-            showAddDialogForApparatus();
-        else
-            showAddDialog();
+        switch (changingTypeId) {
+            case 3:
+                showAddDialogForCables();
+                break;
+            case 4:
+            case 5:
+                showAddDialogForApparatus();
+                break;
+            default:
+                showAddDialog();
+                break;
+
+        }
         updateListsAfterChange();
     }
 
@@ -103,10 +112,19 @@ public class ControllerInformationChange {
     }
 
     public void info_model_edit(ActionEvent actionEvent) {
-        if (changingTypeId == 4 || changingTypeId == 5)
-            showEditDialogForApparatus();
-        else
-            showEditDialog();
+        switch (changingTypeId) {
+            case 3:
+                showEditDialogForCables();
+                break;
+            case 4:
+            case 5:
+                showEditDialogForApparatus();
+                break;
+            default:
+                showEditDialog();
+                break;
+
+        }
         updateListsAfterChange();
     }
 
@@ -152,7 +170,7 @@ public class ControllerInformationChange {
             controller.setDialogStage(dialogStage);
 
             // Отправляем id
-            CatalogItem catalogItem = (CatalogItem)__list_of_items.getSelectionModel().getSelectedItem();
+            CatalogItem catalogItem = (CatalogItem) __list_of_items.getSelectionModel().getSelectedItem();
             controller.setId(catalogItem.getId());
 
             // Отображаем диалоговое окно и ждём, пока пользователь его не закроет
@@ -189,7 +207,44 @@ public class ControllerInformationChange {
             controller.setDialogStage(dialogStage);
 
             // Отправляем id
-            CatalogItem catalogItem = (CatalogItem)__list_of_items.getSelectionModel().getSelectedItem();
+            CatalogItem catalogItem = (CatalogItem) __list_of_items.getSelectionModel().getSelectedItem();
+            controller.setId(catalogItem.getId());
+
+            // Отображаем диалоговое окно и ждём, пока пользователь его не закроет
+            dialogStage.showAndWait();
+
+            return controller.isOkClicked();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean showEditDialogForCables() {
+        try {
+            // Загружаем fxml-файл и создаём новую сцену
+            // для всплывающего диалогового окна.
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/fxml/information_frame_change_dialog_for_cables.fxml"));
+            AnchorPane page = (AnchorPane) loader.load();
+
+            // Создаём диалоговое окно Stage.
+            Stage dialogStage = new Stage();
+
+            // Заголовок окна
+            dialogStage.setTitle("Редактирование");
+
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner(VboxInfFrame.getParent().getScene().getWindow());
+            Scene scene = new Scene(page);
+            dialogStage.setScene(scene);
+
+            // Передаём адресата в контроллер.
+            ControllerInformationFrameChangeDialogForCables controller = loader.getController();
+            controller.setDialogStage(dialogStage);
+
+            // Отправляем id
+            CatalogItem catalogItem = (CatalogItem) __list_of_items.getSelectionModel().getSelectedItem();
             controller.setId(catalogItem.getId());
 
             // Отображаем диалоговое окно и ждём, пока пользователь его не закроет
@@ -294,6 +349,59 @@ public class ControllerInformationChange {
         }
     }
 
+    public boolean showAddDialogForCables() {
+        try {
+            // Загружаем fxml-файл и создаём новую сцену
+            // для всплывающего диалогового окна.
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/fxml/information_frame_change_dialog_for_cables.fxml"));
+            AnchorPane page = (AnchorPane) loader.load();
+
+            // Создаём диалоговое окно Stage.
+            Stage dialogStage = new Stage();
+
+            // Заголовок окна
+            dialogStage.setTitle("Добавление");
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner(VboxInfFrame.getParent().getScene().getWindow());
+            Scene scene = new Scene(page);
+            dialogStage.setScene(scene);
+
+            // Передаём адресата в контроллер.
+            ControllerInformationFrameChangeDialogForCables controller = loader.getController();
+            controller.setDialogStage(dialogStage);
+            controller.setType(CATEGORIES[changingTypeId]);
+
+            // Отправляем тип
+//            InfoModel model = new InfoModel("", CATEGORIES[changingTypeId], "", new Image("resource/noimage.png"));
+//            controller.setInfoModel(model);
+
+            // Отправляем список ТА для аппаратных
+//            ObservableList<InfoModel> TaTemp = FXCollections.observableArrayList();
+//            ObservableList<InfoModel> CableTemp = FXCollections.observableArrayList();
+//            TaTemp.addAll(filterInfoModelByType("DS", infoData));
+//            TaTemp.addAll(filterInfoModelByType("ZAS", infoData));
+//            TaTemp.addAll(filterInfoModelByType("ARM", infoData));
+//            CableTemp.addAll(filterInfoModelByType("CableAndOther", infoData));
+//            controller.setTAList(TaTemp);
+//            controller.setCableList(CableTemp);
+
+            // Отображаем диалоговое окно и ждём, пока пользователь его не закроет
+            dialogStage.showAndWait();
+
+            // Добавляем новую модель
+            if (controller.isOkClicked()) {
+                // Сохраняем в БД
+//                infoData.add(controller.getInfoModel());
+            }
+
+            return controller.isOkClicked();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
     @FXML
     private void updateListsAfterChange() {
 
@@ -314,14 +422,14 @@ public class ControllerInformationChange {
     public void info_model_delete(ActionEvent actionEvent) {
 
         // Отправляем id
-        CatalogItem catalogItem = (CatalogItem)__list_of_items.getSelectionModel().getSelectedItem();
+        CatalogItem catalogItem = (CatalogItem) __list_of_items.getSelectionModel().getSelectedItem();
         DB.deleteCatalogItemById(catalogItem.getId());
 
         updateListsAfterChange();
     }
 
     public void info_model_copy_past(ActionEvent actionEvent) {
-        CatalogItem selectedCatalogItem = (CatalogItem)__list_of_items.getSelectionModel().getSelectedItem();
+        CatalogItem selectedCatalogItem = (CatalogItem) __list_of_items.getSelectionModel().getSelectedItem();
 
         // Если буфер пуст - копируем, если нет - вставляем
         if (modelCopyPastID == null) {
@@ -330,7 +438,7 @@ public class ControllerInformationChange {
             __btn_copy_past.setText("Вставить");
         } else {
 
-            if(DB.updateTypeById(InfoModel.CATEGORIES[changingTypeId],modelCopyPastID)){
+            if (DB.updateTypeById(InfoModel.CATEGORIES[changingTypeId], modelCopyPastID)) {
                 modelCopyPastID = null;
                 __btn_copy_past_cancel.setDisable(true);
                 __btn_copy_past.setText("Копировать");

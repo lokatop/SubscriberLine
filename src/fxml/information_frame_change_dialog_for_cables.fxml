@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.web.*?>
 
-<AnchorPane prefHeight="600.0" prefWidth="1000.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="controllers.ControllerInformationFrameChangeDialogForApparatus">
+<AnchorPane prefHeight="600.0" prefWidth="1000.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="controllers.ControllerInformationFrameChangeDialogForCables">
   <children>
     <VBox layoutX="1.0" prefHeight="600.0" prefWidth="970.0">
       <children>
@@ -52,16 +52,16 @@
                     <VBox GridPane.columnIndex="1" GridPane.rowIndex="0">
                       <children>
                         <Label text="Жилы" />
-                        <TableView fx:id="_ta_table" editable="true" prefHeight="240.0" prefWidth="150.0">
+                        <TableView fx:id="_wire_table" editable="true" prefHeight="240.0" prefWidth="150.0">
                           <columns>
                             <TableColumn editable="false" prefWidth="75.0" text="Материал" fx:id="_wire_column_1" />
                             <TableColumn prefWidth="75.0" text="Количество" fx:id="_wire_column_2" />
                           </columns>
                         </TableView>
                         <Label text="Материал" />
-                        <ComboBox id="_ta_list" fx:id="_material_list" prefWidth="150.0" />
+                        <ComboBox fx:id="_material_list" prefWidth="150.0" />
                         <Label text="Количество" />
-                        <TextField id="_ta_count" fx:id="_material_count" />
+                        <TextField fx:id="_material_count" />
                         <HBox>
                           <children>
                             <Button mnemonicParsing="false" onAction="#_material_add" text="Добавить">
