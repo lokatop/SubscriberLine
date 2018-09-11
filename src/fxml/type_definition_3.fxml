@@ -6,101 +6,127 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox fx:id="typeDefinition" prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ControllerTypeDefinition3">
-   <children>
-      <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
-         <children>
-            <GridPane alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="720.0" minWidth="960.0" prefHeight="720.0" prefWidth="960.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-               <children>
-                  <Label prefHeight="86.0" prefWidth="498.0" text="Определения типа и количества абонентского оборудования аппаратных" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1">
-                     <font>
-                        <Font/>
-                     </font>
-                  </Label>
-                  <VBox alignment="CENTER" prefHeight="194.0" prefWidth="440.0" GridPane.columnSpan="3" GridPane.rowIndex="2">
-                     <children>
-                        <Label text="В данном разделе необходимо выбрать тип и количество абонентских устройств, которые будут использованы при развёртывании абонентской линии" wrapText="true">
-                           <VBox.margin>
-                              <Insets/>
-                           </VBox.margin>
-                        </Label>
-                        <Label text="Изменение количества подтверждается надатием кнопки Ввод (Enter)" textFill="RED" wrapText="true">
-                           <font>
-                              <Font/>
-                           </font>
-                        </Label>
-                     </children>
-                     <GridPane.margin>
-                        <Insets/>
-                     </GridPane.margin>
-                  </VBox>
-                  <Button alignment="CENTER" mnemonicParsing="false" onAction="#theNext" prefWidth="150.0" text="ДАЛЕЕ" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                  <Pane prefHeight="200.0" prefWidth="200.0">
-                     <children>
-                        <Button alignment="CENTER" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#btnBackClick" text="Назад" />
-                     </children>
-                  </Pane>
-                  <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2">
-                     <children>
-                        <Button contentDisplay="RIGHT" layoutX="141.0" layoutY="14.0" mnemonicParsing="false" onAction="#btnToMenuClick" text="В главное меню" />
-                     </children>
-                  </Pane>
-                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnSpan="3" GridPane.rowIndex="1">
-                     <children>
-                        <VBox alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="426.0" prefWidth="370.0" HBox.hgrow="NEVER">
-                           <HBox.margin>
-                              <Insets/>
-                           </HBox.margin>
-                           <children>
-                              <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="318.0" text="Наименование аппаратных" />
-                              <ListView fx:id="_apparatus_list" onMouseClicked="#_list_clicked" prefHeight="439.0" prefWidth="305.0" />
-                           </children>
-                        </VBox>
-                        <VBox alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="570.0">
-                           <HBox.margin>
-                              <Insets/>
-                           </HBox.margin>
-                           <children>
-                              <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="507.0" text="Тип и количество абонентского оборудования" />
-                              <TableView fx:id="_abonent_tableView" editable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="300.0" prefWidth="505.0">
-                                 <columnResizePolicy>
-                                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                                 </columnResizePolicy>
-                                 <columns>
-                                    <TableColumn fx:id="_tableColumn1" maxWidth="230.0" minWidth="230.0" prefWidth="230.0" text="Абонентское оборудование" />
-                                    <TableColumn maxWidth="Infinity" minWidth="200.0" prefWidth="230.0" text="Количество">
-                                       <columns>
-                                          <TableColumn fx:id="_tableColumn2" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="100.0" text="в комплекте" />
-                                          <TableColumn fx:id="_tableColumn3" maxWidth="1.7976931348623157E308" minWidth="130.0" prefWidth="100.0" text="при развёртывании" />
-                                       </columns>
-                                    </TableColumn>
-                                    <TableColumn fx:id="_tableColumn4" maxWidth="1.7976931348623157E308" minWidth="42.0" prefWidth="42.0" text="Вкл." />
-                                 </columns>
-                              </TableView>
-                              <Label text="Список оборудования, которое не было использовано:" />
-                              <ScrollPane prefHeight="89.0" prefViewportHeight="17.0" prefViewportWidth="20.0" prefWidth="505.0">
-                                 <content>
-                                    <Label fx:id="_unused_list" text="Нет" />
-                                 </content>
-                              </ScrollPane>
-                           </children>
-                        </VBox>
-                     </children>
-                  </HBox>
-               </children>
-               <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="260.0" minWidth="10.0" prefWidth="260.0" />
-                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="440.0" minWidth="440.0" prefWidth="440.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="260.0" minWidth="10.0" prefWidth="260.0" />
-               </columnConstraints>
-               <rowConstraints>
-                  <RowConstraints maxHeight="150.0" minHeight="10.0" prefHeight="150.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="435.0" minHeight="10.0" prefHeight="414.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="179.0" minHeight="0.0" prefHeight="62.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="179.0" minHeight="10.0" prefHeight="58.0" vgrow="SOMETIMES" />
-               </rowConstraints>
-            </GridPane>
-         </children>
-      </AnchorPane>
-   </children>
+<VBox fx:id="typeDefinition" prefHeight="400.0" prefWidth="640.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="controllers.ControllerTypeDefinition3">
+  <children>
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+      <children>
+        <GridPane alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="720.0" minWidth="960.0" prefHeight="720.0" prefWidth="960.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+          <children>
+            <VBox alignment="CENTER" prefHeight="194.0" prefWidth="440.0" GridPane.columnSpan="3" GridPane.rowIndex="2">
+              <children>
+                <Label text="В данном разделе необходимо выбрать тип и количество абонентских устройств, которые будут использованы при развёртывании абонентской линии" wrapText="true">
+                  <font>
+                    <Font name="Times New Roman" size="14.0" fx:id="x1" />
+                  </font>
+                  <VBox.margin>
+                    <Insets />
+                  </VBox.margin>
+                </Label>
+                <Label text="Изменение количества подтверждается надатием кнопки Ввод (Enter)" textFill="RED" wrapText="true">
+                  <font>
+                    <Font name="Times New Roman Bold" size="14.0" />
+                  </font>
+                </Label>
+              </children>
+              <GridPane.margin>
+                <Insets />
+              </GridPane.margin>
+            </VBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnSpan="3" GridPane.rowIndex="1">
+              <children>
+                <VBox alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="426.0" prefWidth="370.0" HBox.hgrow="NEVER">
+                  <children>
+                    <Label alignment="CENTER" contentDisplay="CENTER" font="$x1" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefHeight="17.0" prefWidth="-1.0" text="Наименование аппаратных" />
+                    <ListView fx:id="_apparatus_list" onMouseClicked="#_list_clicked" prefHeight="439.0" prefWidth="305.0" />
+                  </children>
+                  <HBox.margin>
+                    <Insets />
+                  </HBox.margin>
+                </VBox>
+                <VBox alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="570.0">
+                  <children>
+                    <Label alignment="CENTER" contentDisplay="CENTER" font="$x1" maxWidth="1.7976931348623157E308" prefHeight="17.0" prefWidth="-1.0" text="Тип и количество абонентского оборудования" />
+                    <TableView fx:id="_abonent_tableView" editable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="300.0" prefWidth="505.0">
+                      <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                      </columnResizePolicy>
+                      <columns>
+                        <TableColumn maxWidth="230.0" minWidth="230.0" prefWidth="230.0" text="Абонентское оборудование" fx:id="_tableColumn1" />
+                        <TableColumn maxWidth="+Infinity" minWidth="200.0" prefWidth="230.0" text="Количество">
+                          <columns>
+                            <TableColumn maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="100.0" text="в комплекте" fx:id="_tableColumn2" />
+                            <TableColumn maxWidth="1.7976931348623157E308" minWidth="130.0" prefWidth="100.0" text="при развёртывании" fx:id="_tableColumn3" />
+                          </columns>
+                        </TableColumn>
+                        <TableColumn maxWidth="1.7976931348623157E308" minWidth="42.0" prefWidth="42.0" text="Вкл." fx:id="_tableColumn4" />
+                      </columns>
+                    </TableView>
+                    <Label alignment="CENTER" contentDisplay="CENTER" font="$x1" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="-1.0" text="Список оборудования, которое не было использовано:" textAlignment="CENTER" />
+                    <ScrollPane prefHeight="97.0" prefViewportHeight="17.0" prefViewportWidth="20.0" prefWidth="570.0">
+                      <content>
+                        <Label fx:id="_unused_list" text="Нет" />
+                      </content>
+                    </ScrollPane>
+                  </children>
+                  <HBox.margin>
+                    <Insets />
+                  </HBox.margin>
+                </VBox>
+              </children>
+            </HBox>
+            <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="0" GridPane.rowIndex="0">
+              <children>
+                <Button alignment="CENTER" minHeight="25.0" minWidth="110.0" mnemonicParsing="false" onAction="#btnBackClick" text="Назад">
+                  <VBox.margin>
+                    <Insets left="16.0" top="16.0" />
+                  </VBox.margin>
+                </Button>
+              </children>
+            </VBox>
+            <VBox alignment="TOP_RIGHT" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2" GridPane.rowIndex="0">
+              <children>
+                <Button contentDisplay="RIGHT" minHeight="25.0" minWidth="110.0" mnemonicParsing="false" onAction="#btnToMenuClick" text="В главное меню">
+                  <VBox.margin>
+                    <Insets right="16.0" top="16.0" />
+                  </VBox.margin>
+                </Button>
+              </children>
+            </VBox>
+            <VBox alignment="BOTTOM_RIGHT" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2" GridPane.rowIndex="3">
+              <children>
+                <Button alignment="CENTER" minHeight="25.0" minWidth="110.0" mnemonicParsing="false" onAction="#theNext" prefWidth="110.0" text="Далее" textAlignment="CENTER">
+                  <VBox.margin>
+                    <Insets bottom="30.0" right="30.0" />
+                  </VBox.margin>
+                </Button>
+              </children>
+            </VBox>
+            <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="0">
+              <children>
+                <Label prefHeight="-1.0" prefWidth="-1.0" text="Определения типа и количества абонентского оборудования аппаратных" textAlignment="CENTER" wrapText="true">
+                  <font>
+                    <Font name="Times New Roman Bold" size="16.0" />
+                  </font>
+                  <VBox.margin>
+                    <Insets top="16.0" />
+                  </VBox.margin>
+                </Label>
+              </children>
+            </VBox>
+          </children>
+          <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="260.0" minWidth="10.0" prefWidth="260.0" />
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="440.0" minWidth="440.0" prefWidth="440.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="260.0" minWidth="10.0" prefWidth="260.0" />
+          </columnConstraints>
+          <rowConstraints>
+            <RowConstraints maxHeight="1.7976931348623157E308" minHeight="25.0" prefHeight="100.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="600.0" minHeight="10.0" prefHeight="414.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="50.0" minHeight="0.0" prefHeight="62.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="1.7976931348623157E308" minHeight="25.0" prefHeight="58.0" vgrow="SOMETIMES" />
+          </rowConstraints>
+        </GridPane>
+      </children>
+    </AnchorPane>
+  </children>
 </VBox>

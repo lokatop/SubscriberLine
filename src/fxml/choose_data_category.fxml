@@ -6,106 +6,120 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox fx:id="VboxChooseData" prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ControllerDataCategory">
-   <children>
-      <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
-         <children>
-            <GridPane alignment="CENTER" layoutX="-8.0" minHeight="720.0" minWidth="960.0" prefHeight="720.0" prefWidth="960.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-               <children>
-                  <Label lineSpacing="6.0" prefHeight="200.0" prefWidth="445.0" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
-                     <font>
-                        <Font/>
-                     </font>
-                  </Label>
-                  <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="1">
-                     <children>
-                        <Label text="Выбор категории раздела для изменения" textFill="RED">
-                           <font>
-                              <Font/>
-                           </font>
-                        </Label>
-                        <ComboBox fx:id="comboChooseDate" onAction="#comboChooseAction" prefWidth="250.0">
-                           <VBox.margin>
-                              <Insets/>
-                           </VBox.margin>
-                        </ComboBox>
-                     </children>
-                  </VBox>
-                  <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2" GridPane.rowIndex="3">
-                     <GridPane.margin>
-                        <Insets/>
-                     </GridPane.margin>
-                  </VBox>
-                  <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
-                     <children>
-                        <TextField fx:id="textField" maxWidth="300.0" />
-                        <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0">
-                           <children>
-                              <Button minWidth="70.0" mnemonicParsing="false" onAction="#AddData" text="Добавить">
-                                 <HBox.margin>
-                                    <Insets/>
-                                 </HBox.margin>
-                              </Button>
-                              <Button minWidth="75.0" mnemonicParsing="false" onAction="#DeleteData" text="Удалить">
-                                 <HBox.margin>
-                                    <Insets/>
-                                 </HBox.margin>
-                              </Button>
-                           </children>
-                           <VBox.margin>
-                              <Insets/>
-                           </VBox.margin>
-                        </HBox>
-                        <Button mnemonicParsing="false" onAction="#buttonApply" prefWidth="150.0" text="Применить изменения" />
-                     </children>
-                  </VBox>
-                  <VBox alignment="TOP_RIGHT" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                     <children>
-                        <ListView fx:id="listViewChooseDate" maxHeight="1.7976931348623157E308" maxWidth="500.0" prefWidth="350.0" />
-                     </children>
-                  </VBox>
-                  <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.columnSpan="2">
-                     <children>
-                        <Label alignment="CENTER" maxHeight="100.0" maxWidth="760.0" prefHeight="58.0" prefWidth="760.0" text="Изменения данных в разделе " textAlignment="CENTER" textFill="RED" wrapText="true">
-                           <font>
-                              <Font/>
-                           </font>
-                        </Label>
-                        <Label text="&quot;Определние отребности кабельного имущества и абнонетского оборудования при развертывании абонентской сети на пукте управления &quot;" textAlignment="JUSTIFY" wrapText="true">
-                           <VBox.margin>
-                              <Insets/>
-                           </VBox.margin>
-                           <font>
-                              <Font/>
-                           </font>
-                        </Label>
-                     </children>
-                  </VBox>
-                  <Pane prefHeight="200.0" prefWidth="200.0">
-                     <children>
-                        <Button fx:id="btnBackClick" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#btnBackClick" text="Назад" />
-                     </children>
-                  </Pane>
-                  <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3">
-                     <children>
-                        <Button fx:id="btnToMenuClick" layoutX="13.0" layoutY="14.0" mnemonicParsing="false" onAction="#btnToMenuClick" text="В главное меню" />
-                     </children>
-                  </Pane>
-               </children>
-               <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="130.0" minWidth="10.0" prefWidth="150.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="331.0" />
-                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="308.0" prefWidth="308.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="130.0" minWidth="10.0" prefWidth="130.0" />
-               </columnConstraints>
-               <rowConstraints>
-                  <RowConstraints maxHeight="157.0" minHeight="10.0" prefHeight="157.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="200.0" minHeight="10.0" prefHeight="87.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="409.0" minHeight="10.0" prefHeight="392.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="175.0" minHeight="10.0" prefHeight="70.0" vgrow="SOMETIMES" />
-               </rowConstraints>
-            </GridPane>
-         </children>
-      </AnchorPane>
-   </children>
+<VBox fx:id="VboxChooseData" prefHeight="400.0" prefWidth="640.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="controllers.ControllerDataCategory">
+  <children>
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+      <children>
+        <GridPane alignment="CENTER" minHeight="720.0" minWidth="960.0" prefHeight="720.0" prefWidth="960.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+          <children>
+            <Label prefHeight="200.0" prefWidth="445.0" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
+              <font>
+                <Font size="12.0" />
+              </font>
+            </Label>
+            <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="1">
+              <children>
+                <Label text="Выбор категории раздела для изменения" textFill="BLACK" VBox.vgrow="ALWAYS">
+                  <font>
+                    <Font name="Times New Roman Bold" size="14.0" />
+                  </font>
+                  <VBox.margin>
+                    <Insets bottom="10.0" />
+                  </VBox.margin>
+                </Label>
+                <ComboBox fx:id="comboChooseDate" minHeight="25.0" onAction="#comboChooseAction" prefWidth="250.0">
+                  <VBox.margin>
+                    <Insets />
+                  </VBox.margin>
+                </ComboBox>
+              </children>
+            </VBox>
+            <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2" GridPane.rowIndex="3">
+              <GridPane.margin>
+                <Insets />
+              </GridPane.margin>
+            </VBox>
+            <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
+              <children>
+                <TextField fx:id="textField" maxWidth="300.0" minHeight="25.0" />
+                <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0">
+                  <children>
+                    <Button minHeight="25.0" minWidth="70.0" mnemonicParsing="false" onAction="#AddData" text="Добавить">
+                      <HBox.margin>
+                        <Insets />
+                      </HBox.margin>
+                    </Button>
+                    <Button minHeight="25.0" minWidth="75.0" mnemonicParsing="false" onAction="#DeleteData" text="Удалить">
+                      <HBox.margin>
+                        <Insets />
+                      </HBox.margin>
+                    </Button>
+                  </children>
+                  <VBox.margin>
+                    <Insets />
+                  </VBox.margin>
+                </HBox>
+                <Button minHeight="25.0" mnemonicParsing="false" onAction="#buttonApply" prefWidth="150.0" text="Применить изменения" />
+              </children>
+            </VBox>
+            <VBox alignment="TOP_RIGHT" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+              <children>
+                <ListView fx:id="listViewChooseDate" maxHeight="1.7976931348623157E308" maxWidth="500.0" prefWidth="350.0" />
+              </children>
+            </VBox>
+            <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.columnSpan="2">
+              <children>
+                <Label alignment="CENTER" maxHeight="100.0" maxWidth="760.0" prefHeight="-1.0" prefWidth="760.0" text="Изменения данных в разделе " textAlignment="CENTER" textFill="BLACK" wrapText="true">
+                  <font>
+                    <Font name="Times New Roman Bold" size="16.0" />
+                  </font>
+                  <VBox.margin>
+                    <Insets top="16.0" />
+                  </VBox.margin>
+                </Label>
+                <Label text="&quot;Определние отребности кабельного имущества и абнонетского оборудования при развертывании абонентской сети на пукте управления &quot;" textAlignment="JUSTIFY" wrapText="true">
+                  <font>
+                    <Font name="Times New Roman" size="14.0" fx:id="x1" />
+                  </font>
+                  <VBox.margin>
+                    <Insets top="10.0" />
+                  </VBox.margin>
+                </Label>
+              </children>
+            </VBox>
+            <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="0" GridPane.rowIndex="0">
+              <children>
+                <Button fx:id="btnBackClick" minHeight="25.0" mnemonicParsing="false" onAction="#btnBackClick" text="Назад" textAlignment="CENTER">
+                  <VBox.margin>
+                    <Insets left="16.0" top="16.0" />
+                  </VBox.margin>
+                </Button>
+              </children>
+            </VBox>
+            <VBox alignment="TOP_RIGHT" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="3" GridPane.rowIndex="0">
+              <children>
+                <Button fx:id="btnToMenuClick" minHeight="25.0" mnemonicParsing="false" onAction="#btnToMenuClick" text="В главное меню" textAlignment="CENTER">
+                  <VBox.margin>
+                    <Insets right="16.0" top="16.0" />
+                  </VBox.margin>
+                </Button>
+              </children>
+            </VBox>
+          </children>
+          <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="130.0" minWidth="10.0" prefWidth="150.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="331.0" />
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="308.0" prefWidth="308.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="130.0" minWidth="10.0" prefWidth="130.0" />
+          </columnConstraints>
+          <rowConstraints>
+            <RowConstraints maxHeight="157.0" minHeight="10.0" prefHeight="157.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="200.0" minHeight="10.0" prefHeight="87.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="409.0" minHeight="10.0" prefHeight="392.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="175.0" minHeight="10.0" prefHeight="70.0" vgrow="SOMETIMES" />
+          </rowConstraints>
+        </GridPane>
+      </children>
+    </AnchorPane>
+  </children>
 </VBox>

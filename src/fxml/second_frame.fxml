@@ -1,69 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<VBox fx:id="VBoxRoot" prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ControllerSecondFrame">
+<VBox fx:id="VBoxRoot" prefHeight="400.0" prefWidth="640.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="controllers.ControllerSecondFrame">
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
-         <children>
-            <Label maxHeight="100.0" maxWidth="760.0" prefHeight="58.0" prefWidth="760.0" text="Данная программа предназначена определения поттребности кабельного имущества и абонентского оборудования при развертывании абонентской сети на пункте управления. Автоматизированного формирования графического документа &quot;Схема абнентской сети пункта управления&quot;" wrapText="true" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="16.0" />
-            <GridPane alignment="CENTER" minHeight="720.0" minWidth="960.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-               <children>
-                  <Label prefHeight="200.0" prefWidth="445.0" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                     <font>
-                        <Font/>
-                     </font>
-                  </Label>
-                  <Label prefHeight="64.0" prefWidth="199.0" text="Санкт-Петербург 2018" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="4">
-                     <font>
-                        <Font/>
-                     </font>
-                  </Label>
-                  <Label text="Разделы программы" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                     <font>
-                        <Font/>
-                     </font>
-                  </Label>
-                  <Label text="Для дальнейшей работы с программой перейдите в нужный раздел путем нажатия на название раздела" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="3">
-                     <GridPane.margin>
-                        <Insets/>
-                     </GridPane.margin>
-                  </Label>
-                  <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                     <children>
-                        <Button alignment="CENTER" maxWidth="1.7976931348623157E308" minHeight="50.0" mnemonicParsing="false" onAction="#buttonInformation" text="Информационно-справочный" textAlignment="CENTER" underline="true">
-                           <VBox.margin>
-                              <Insets/>
-                           </VBox.margin>
-                        </Button>
-                        <Button alignment="CENTER" maxWidth="1.7976931348623157E308" minHeight="50.0" mnemonicParsing="false" onAction="#FormingADocument" text="Формирование графического документа&lt;Схема абонентской сети пункта управления&gt;" textAlignment="CENTER" underline="true" wrapText="true">
-                           <VBox.margin>
-                              <Insets/>
-                           </VBox.margin>
-                        </Button>
-                     </children>
-                  </VBox>
-               </children>
-               <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="260.0" minWidth="10.0" prefWidth="260.0" />
-                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="440.0" minWidth="440.0" prefWidth="440.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="260.0" minWidth="10.0" prefWidth="260.0" />
-               </columnConstraints>
-               <rowConstraints>
-                  <RowConstraints maxHeight="100.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="50.0" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="200.0" minHeight="10.0" prefHeight="200.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-               </rowConstraints>
-            </GridPane>
-         </children>
+      <children>
+        <Label maxHeight="100.0" maxWidth="760.0" prefHeight="58.0" prefWidth="760.0" text="Данная программа предназначена определения поттребности кабельного имущества и абонентского оборудования при развертывании абонентской сети на пункте управления. Автоматизированного формирования графического документа &quot;Схема абнентской сети пункта управления&quot;" textAlignment="CENTER" wrapText="true" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="16.0">
+          <font>
+            <Font name="Times New Roman" size="14.0" fx:id="x1" />
+          </font>
+        </Label>
+        <GridPane alignment="CENTER" minHeight="720.0" minWidth="960.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+          <children>
+            <Label prefHeight="200.0" prefWidth="445.0" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="2">
+              <font>
+                <Font size="12.0" />
+              </font>
+            </Label>
+            <Label text="Разделы программы" GridPane.columnIndex="1" GridPane.rowIndex="1">
+              <font>
+                <Font name="System Bold" size="14.0" />
+              </font>
+            </Label>
+            <Label font="$x1" text="Для дальнейшей работы с программой перейдите в нужный раздел путем нажатия на название раздела" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="3">
+              <GridPane.margin>
+                <Insets bottom="10.0" right="10.0" />
+              </GridPane.margin>
+            </Label>
+            <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+              <children>
+                <Button alignment="CENTER" maxWidth="1.7976931348623157E308" minHeight="50.0" mnemonicParsing="false" onAction="#buttonInformation" text="Информационно-справочный" textAlignment="CENTER" underline="true">
+                  <VBox.margin>
+                    <Insets />
+                  </VBox.margin>
+                </Button>
+                <Button alignment="CENTER" maxWidth="1.7976931348623157E308" minHeight="50.0" mnemonicParsing="false" onAction="#FormingADocument" text="Формирование графического документа&lt;Схема абонентской сети пункта управления&gt;" textAlignment="CENTER" underline="true" wrapText="true">
+                  <VBox.margin>
+                    <Insets />
+                  </VBox.margin>
+                </Button>
+              </children>
+            </VBox>
+          </children>
+          <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="260.0" minWidth="10.0" prefWidth="260.0" />
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="440.0" minWidth="440.0" prefWidth="440.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="260.0" minWidth="10.0" prefWidth="260.0" />
+          </columnConstraints>
+          <rowConstraints>
+            <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="50.0" minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="200.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="-Infinity" minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          </rowConstraints>
+        </GridPane>
+      </children>
     </AnchorPane>
   </children>
 </VBox>

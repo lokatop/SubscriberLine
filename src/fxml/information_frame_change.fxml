@@ -1,85 +1,107 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<VBox fx:id="VboxInfFrame" prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ControllerInformationChange">
-   <children>
-      <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
-         <children>
-            <Label alignment="CENTER" maxHeight="100.0" maxWidth="760.0" prefHeight="58.0" prefWidth="760.0" text="Информационно справочный раздел" textAlignment="CENTER" wrapText="true" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="16.0">
-               <font>
-                  <Font/>
-               </font>
-            </Label>
-            <GridPane alignment="CENTER" layoutX="48.0" layoutY="14.0" minHeight="720.0" minWidth="960.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-               <children>
-                  <VBox alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" prefHeight="420.0" prefWidth="338.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                  <VBox alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                     <children>
-                        <Button mnemonicParsing="false" onAction="#info_model_add" text="Добавить" />
-                        <Button fx:id="__btn_edit" disable="true" layoutX="10.0" layoutY="195.0" mnemonicParsing="false" onAction="#info_model_edit" text="Изменить" />
-                        <HBox prefHeight="100.0" prefWidth="200.0">
-                           <children>
-                              <Button fx:id="__btn_copy_past" disable="true" mnemonicParsing="false" onAction="#info_model_copy_past" text="Копировать" />
-                              <Button fx:id="__btn_copy_past_cancel" disable="true" mnemonicParsing="false" onAction="#info_model_copy_past_cancel" text="Отменить" />
-                           </children>
-                        </HBox>
-                        <Button fx:id="__btn_delete" disable="true" mnemonicParsing="false" onAction="#info_model_delete" text="Удалить" />
-                        <Button mnemonicParsing="false" onAction="#info_model_save" text="Применить изменения" />
-                     </children>
-                  </VBox>
-                  <ListView fx:id="__list_of_items" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onMouseClicked="#enable_btns" GridPane.rowIndex="2">
-                     <GridPane.margin>
-                        <Insets/>
-                     </GridPane.margin></ListView>
-                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnSpan="3" GridPane.rowIndex="1">
-                     <children>
-                        <Label text="Внести изменения в раздел" textAlignment="CENTER">
-                           <font>
-                              <Font/>
-                           </font>
-                        </Label>
-                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                           <children>
-                              <ComboBox fx:id="__list_of_categories" onHidden="#updateListsAfterChange" prefWidth="250.0">
-                                 <HBox.margin>
-                                    <Insets/>
-                                 </HBox.margin>
-                              </ComboBox>
-                           </children>
-                        </HBox>
-                     </children>
-                  </VBox>
-                  <VBox prefHeight="200.0" prefWidth="100.0">
-                     <children>
-                        <Button mnemonicParsing="false" onAction="#btnBackClick" text="Назад">
-                           <VBox.margin>
-                              <Insets/>
-                           </VBox.margin>
-                        </Button>
-                     </children>
-                  </VBox>
-                  <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2" />
-               </children>
-               <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="416.0" minWidth="10.0" prefWidth="397.0" />
-                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="440.0" minWidth="113.0" prefWidth="285.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="431.0" minWidth="10.0" prefWidth="278.0" />
-               </columnConstraints>
-               <rowConstraints>
-                  <RowConstraints maxHeight="110.0" minHeight="10.0" prefHeight="110.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="128.0" minHeight="10.0" prefHeight="100.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="441.0" minHeight="10.0" prefHeight="420.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="315.0" minHeight="10.0" prefHeight="89.0" vgrow="SOMETIMES" />
-               </rowConstraints>
-            </GridPane>
-         </children>
-      </AnchorPane>
-   </children>
+<VBox fx:id="VboxInfFrame" prefHeight="400.0" prefWidth="640.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="controllers.ControllerInformationChange">
+  <children>
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+      <children>
+        <GridPane alignment="CENTER" minHeight="720.0" minWidth="960.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+          <children>
+            <VBox alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" prefHeight="420.0" prefWidth="338.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
+              <children>
+                <VBox alignment="TOP_LEFT" maxHeight="1.7976931348623157E308" minHeight="-1.0" prefHeight="-1.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
+                  <children>
+                    <Button minHeight="25.0" mnemonicParsing="false" onAction="#info_model_add" text="Добавить">
+                      <VBox.margin>
+                        <Insets bottom="10.0" fx:id="x1" />
+                      </VBox.margin>
+                    </Button>
+                    <Button fx:id="__btn_edit" disable="true" minHeight="25.0" mnemonicParsing="false" onAction="#info_model_edit" text="Изменить" VBox.margin="$x1" />
+                    <HBox prefHeight="100.0" prefWidth="200.0">
+                      <children>
+                        <Button fx:id="__btn_copy_past" disable="true" minHeight="25.0" mnemonicParsing="false" onAction="#info_model_copy_past" text="Копировать" />
+                        <Button fx:id="__btn_copy_past_cancel" disable="true" minHeight="25.0" mnemonicParsing="false" onAction="#info_model_copy_past_cancel" text="Отменить" />
+                      </children>
+                    </HBox>
+                    <Button fx:id="__btn_delete" disable="true" minHeight="25.0" mnemonicParsing="false" onAction="#info_model_delete" text="Удалить" />
+                    <Button minHeight="2.0" mnemonicParsing="false" onAction="#info_model_save" text="Применить изменения">
+                      <VBox.margin>
+                        <Insets top="10.0" />
+                      </VBox.margin>
+                    </Button>
+                  </children>
+                </VBox>
+              </children>
+            </VBox>
+            <VBox prefHeight="200.0" prefWidth="100.0">
+              <children>
+                <Button minHeight="25.0" mnemonicParsing="false" onAction="#btnBackClick" text="Назад">
+                  <VBox.margin>
+                    <Insets left="16.0" top="16.0" />
+                  </VBox.margin>
+                </Button>
+              </children>
+            </VBox>
+            <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2" />
+            <VBox prefHeight="110.0" prefWidth="374.0" GridPane.columnIndex="1" GridPane.rowIndex="0">
+              <children>
+                <Label alignment="CENTER" maxHeight="100.0" maxWidth="760.0" prefHeight="-1.0" prefWidth="760.0" text="Информационно справочный раздел" textAlignment="CENTER" wrapText="true">
+                  <font>
+                    <Font name="Times New Roman Bold" size="16.0" />
+                  </font>
+                  <VBox.margin>
+                    <Insets top="16.0" />
+                  </VBox.margin>
+                </Label>
+              </children>
+            </VBox>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+              <children>
+                <Label text="Внести изменения в раздел" textAlignment="CENTER">
+                  <font>
+                    <Font name="Times New Roman Bold" size="14.0" />
+                  </font>
+                </Label>
+                <HBox alignment="CENTER" prefHeight="-1.0" prefWidth="200.0">
+                  <children>
+                    <ComboBox fx:id="__list_of_categories" onHidden="#updateListsAfterChange" prefWidth="250.0">
+                      <HBox.margin>
+                        <Insets />
+                      </HBox.margin>
+                    </ComboBox>
+                  </children>
+                  <VBox.margin>
+                    <Insets />
+                  </VBox.margin>
+                </HBox>
+              </children>
+            </VBox>
+            <ListView fx:id="__list_of_items" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onMouseClicked="#enable_btns" GridPane.columnIndex="1" GridPane.rowIndex="2">
+              <GridPane.margin>
+                <Insets />
+              </GridPane.margin>
+            </ListView>
+          </children>
+          <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="278.0" minWidth="10.0" prefWidth="278.0" />
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="440.0" minWidth="113.0" prefWidth="285.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="431.0" minWidth="10.0" prefWidth="278.0" />
+          </columnConstraints>
+          <rowConstraints>
+            <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="110.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="128.0" minHeight="10.0" prefHeight="100.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="500.0" minHeight="10.0" prefHeight="420.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="89.0" vgrow="SOMETIMES" />
+          </rowConstraints>
+        </GridPane>
+      </children>
+    </AnchorPane>
+  </children>
 </VBox>
