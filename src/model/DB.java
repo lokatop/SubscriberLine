@@ -710,9 +710,14 @@ public class DB {
     static private String saveImage(Image image) {
         if (image == null || image.isError()) return null;
 
-        File folder = new File(PATH_RESOURCE + PATH_IMAGES);
+        File resourceFolder = new File( PATH_RESOURCE);
+        File imagesFolder = new File( PATH_RESOURCE + PATH_IMAGES);
+
+        if (!resourceFolder.exists()) resourceFolder.mkdir();
+        if (!imagesFolder.exists()) imagesFolder.mkdir();
+
         String filename = System.currentTimeMillis() + ".png";
-        File outputFile = new File(folder.toString() + "/" + filename);
+        File outputFile = new File(imagesFolder.toString() + "/" + filename);
         BufferedImage bImage = SwingFXUtils.fromFXImage(image, null);
         try {
             outputFile.createNewFile();
