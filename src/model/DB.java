@@ -45,13 +45,68 @@ public class DB {
                     connection = DriverManager.getConnection(DB_URL);
                     stmt = connection.createStatement();
 
-                    Path database_create_file_path = Paths.get("src/resource/database_create.sql");
-                    String sql_create_db = new String(Files.readAllBytes(database_create_file_path));
+//                    Path database_create_file_path = Paths.get("src/resource/database_create.sql");
+//                    String sql_create_db = new String(Files.readAllBytes(database_create_file_path));
+                    String sql_create_db = "PRAGMA foreign_keys=on;\n" +
+                            "\n" +
+                            "CREATE TABLE if not exists 'catalog' (\n" +
+                            "  'id' INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
+                            "  'title' TEXT NOT NULL,\n" +
+                            "  'type' TEXT NOT NULL,\n" +
+                            "  'description' TEXT,\n" +
+                            "  'image' TEXT,\n" +
+                            "  'mass' FLOAT DEFAULT NULL,\n" +
+                            "  'cable_length' FLOAT DEFAULT NULL\n" +
+                            ");\n" +
+                            "\n" +
+                            "CREATE TABLE if not exists 'apparatus_to_cable' (\n" +
+                            "  'apparatus_id' INTEGER NOT NULL,\n" +
+                            "  'cable_id' INTEGER NOT NULL,\n" +
+                            "  FOREIGN KEY (apparatus_id) REFERENCES catalog(id),\n" +
+                            "  FOREIGN KEY (cable_id) REFERENCES catalog(id),\n" +
+                            "  PRIMARY KEY (apparatus_id,cable_id)\n" +
+                            ");\n" +
+                            "\n" +
+                            "CREATE TABLE if not exists 'apparatus_to_ta' (\n" +
+                            "  'apparatus_id' INTEGER NOT NULL,\n" +
+                            "  'ta_id' INTEGER NOT NULL,\n" +
+                            "  'ta_count' INTEGER NOT NULL,\n" +
+                            "  FOREIGN KEY (apparatus_id) REFERENCES catalog(id),\n" +
+                            "  FOREIGN KEY (ta_id) REFERENCES catalog(id),\n" +
+                            "  PRIMARY KEY (apparatus_id,ta_id)\n" +
+                            ");\n" +
+                            "\n" +
+                            "CREATE TABLE if not exists 'cable_wires' (\n" +
+                            "  'cable_id' INTEGER NOT NULL,\n" +
+                            "  'wire_material' TEXT NOT NULL,\n" +
+                            "  'wire_count' INTEGER NOT NULL,\n" +
+                            "  FOREIGN KEY (cable_id) REFERENCES catalog(id),\n" +
+                            "  PRIMARY KEY (cable_id,wire_material)\n" +
+                            ");\n" +
+                            "\n" +
+                            "-- CREATE TABLE if not exists 'ParentContent' (\n" +
+                            "--   'parent_id' INTEGER NOT NULL,\n" +
+                            "--   'child_id' INTEGER NOT NULL,\n" +
+                            "--   'child_count' INTEGER NOT NULL,\n" +
+                            "--   FOREIGN KEY (apparatus_id) REFERENCES catalog(id),\n" +
+                            "--   FOREIGN KEY (ta_id) REFERENCES catalog(id),\n" +
+                            "--   PRIMARY KEY (apparatus_id,ta_id)\n" +
+                            "-- );\n" +
+                            "-- create view apparatus_to_cable\n" +
+                            "--   as\n" +
+                            "--   select parent_id as apparatus_id,\n" +
+                            "--     child_id as cable_id\n" +
+                            "--   from ParentContent pc join catalog c on pc.child_id=c.id\n" +
+                            "--   where c.type='CableAndOther'";
                     stmt.executeUpdate(sql_create_db);
 
                     //Наполнение БД
-                    Path database_filling_file_path = Paths.get("src/resource/database_filling.sql");
-                    String sql_fill_db = new String(Files.readAllBytes(database_filling_file_path));
+//                    Path database_filling_file_path = Paths.get("src/resource/database_filling.sql");
+//                    String sql_fill_db = new String(Files.readAllBytes(database_filling_file_path));
+                    String sql_fill_db = "INSERT INTO catalog\n" +
+                            "(title, type)\n" +
+                            "VALUES\n" +
+                            "(\"ТА-57\", \"DS\"),(\"ТА-88\", \"DS\"),(\"П-380 ТА\", \"DS\"),(\"Селенит\", \"DS\"),(\"П-170\", \"ZAS\"),(\"П-171Д\", \"ZAS\"),(\"АТ-3031\", \"ZAS\"),(\"Рамек-2\", \"ARM\"),(\"П-274М\", \"CableAndOther\"),(\"П-269 4х2+2х4\", \"CableAndOther\"),(\"ПРК 5х2\", \"CableAndOther\"),(\"ПТРК 5х2\", \"CableAndOther\"),(\"Витая пара\", \"CableAndOther\"),(\"ВП\", \"CableAndOther\"),(\"РМ2\", \"CableAndOther\"),(\"П-240И\", \"AOZU\"),(\"МП-1И\", \"AOZU\"),(\"МП-2И\", \"AOZU\"),(\"П-260-О\", \"ATZU\"),(\"П-260-У\", \"ATZU\"),(\"П-260-Т\", \"ATZU\"),(\"П-244И\", \"ATZU\"),(\"П-244И-4\", \"ATZU\")";
                     stmt.executeUpdate(sql_fill_db);
 
                     stmt.close();
@@ -62,8 +117,6 @@ public class DB {
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
             } catch (SQLException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
                 e.printStackTrace();
             }
         }
