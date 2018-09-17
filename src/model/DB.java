@@ -1,19 +1,14 @@
 package model;
 
-import com.sun.corba.se.spi.orbutil.fsm.Input;
 import controllers.ControllerFirstFrame;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
-import sun.applet.Main;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -720,6 +715,61 @@ public class DB {
         return result;
     }
 
+    /*
+        ВТОРАЯ ЧАТЬ ПРОГРАММЫ
+     */
+    static public ObservableList<CategoryOfManagePoint> getManagePoints() {
+        ObservableList<CategoryOfManagePoint> result = FXCollections.observableArrayList();
+
+        try {
+            Connection connection = getConnection();
+
+            PreparedStatement pstat = null;
+
+            pstat = connection.prepareStatement("SELECT * FROM category_of_manage_point");
+
+            ResultSet rs = pstat.executeQuery();
+
+            while (rs.next()) {
+                result.add(new CategoryOfManagePoint(
+                        rs.getInt("id"),
+                        rs.getString("title"),
+                        rs.getInt("military_part")
+                ));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return result;
+    }
+
+    static public ObservableList<MilitaryPart> getMilitaryParts() {
+        ObservableList<MilitaryPart> result = FXCollections.observableArrayList();
+
+        try {
+            Connection connection = getConnection();
+
+            PreparedStatement pstat = null;
+
+            pstat = connection.prepareStatement("SELECT * FROM type_of_military_part");
+
+            ResultSet rs = pstat.executeQuery();
+
+            while (rs.next()) {
+                result.add(new MilitaryPart(
+                        rs.getInt("id"),
+                        rs.getString("title")
+                ));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return result;
+    }
+
+
     public static boolean clearImagesFolder() {
 
         File resourceFolder = new File(PATH_RESOURCE);
@@ -749,7 +799,7 @@ public class DB {
         return result.toString("UTF-8");
     }
 
-    private static void deleteDBFile(){
+    private static void deleteDBFile() {
         File DBFile = new File("database.db");
 
         try {
