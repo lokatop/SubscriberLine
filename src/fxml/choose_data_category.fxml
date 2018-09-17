@@ -89,7 +89,7 @@
             </VBox>
             <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="0" GridPane.rowIndex="0">
               <children>
-                <Button fx:id="btnBackClick" minHeight="25.0" mnemonicParsing="false" onAction="#btnBackClick" text="Назад" textAlignment="CENTER">
+                <Button fx:id="btnBackClick" minHeight="25.0" minWidth="100.0" mnemonicParsing="false" onAction="#btnBackClick" text="Назад" textAlignment="CENTER">
                   <VBox.margin>
                     <Insets left="16.0" top="16.0" />
                   </VBox.margin>

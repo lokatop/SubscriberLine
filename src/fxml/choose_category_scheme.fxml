@@ -78,12 +78,12 @@
                     <Insets right="16.0" />
                   </VBox.margin>
                 </Label>
-                <ComboBox fx:id="ComboBoxPart" minHeight="25.0" prefWidth="150.0">
+                <ComboBox fx:id="ComboBoxPart" minHeight="25.0" prefWidth="176.0">
                   <VBox.margin>
                     <Insets />
                   </VBox.margin>
                 </ComboBox>
-                <Button mnemonicParsing="false" text="Button" visible="false">
+                <Button focusTraversable="false" minHeight="25.0" mnemonicParsing="false" onAction="#changeData" text="Изменить исходные данные" visible="true">
                   <VBox.margin>
                     <Insets />
                   </VBox.margin>
@@ -92,7 +92,7 @@
             </VBox>
             <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="0" GridPane.rowIndex="0">
               <children>
-                <Button minHeight="25.0" mnemonicParsing="false" onAction="#btnBackClick" text="Назад">
+                <Button minHeight="25.0" minWidth="100.0" mnemonicParsing="false" onAction="#btnBackClick" text="Назад">
                   <VBox.margin>
                     <Insets left="16.0" top="16.0" />
                   </VBox.margin>
@@ -101,7 +101,7 @@
             </VBox>
             <VBox alignment="TOP_RIGHT" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2" GridPane.rowIndex="0">
               <children>
-                <Button minHeight="25.0" mnemonicParsing="false" onAction="#btnToMenuClick" text="В главное меню">
+                <Button minHeight="25.0" minWidth="110.0" mnemonicParsing="false" onAction="#btnToMenuClick" text="В главное меню">
                   <VBox.margin>
                     <Insets right="16.0" top="16.0" />
                   </VBox.margin>

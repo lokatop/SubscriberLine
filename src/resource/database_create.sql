@@ -35,6 +35,18 @@ CREATE TABLE if not exists 'cable_wires' (
   PRIMARY KEY (cable_id,wire_material)
 );
 
+CREATE TABLE if not exists 'type_of_military_part' (
+  'id' INTEGER PRIMARY KEY AUTOINCREMENT,
+  'title' TEXT NOT NULL
+);
+
+CREATE TABLE if not exists 'category_of_manage_point' (
+  'id' INTEGER PRIMARY KEY AUTOINCREMENT,
+  'title' TEXT NOT NULL,
+  'military_part' INTEGER NOT NULL,
+  FOREIGN KEY (military_part) REFERENCES type_of_military_part(id)
+);
+
 -- CREATE TABLE if not exists 'ParentContent' (
 --   'parent_id' INTEGER NOT NULL,
 --   'child_id' INTEGER NOT NULL,
