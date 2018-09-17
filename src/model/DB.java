@@ -790,7 +790,7 @@ public class DB {
         }
         return result;
     }
-    static public boolean saveNewCategoryOfManagePointById(Integer id, String title, Integer militaryPartId) {
+    static public boolean saveNewCategoryOfManagePoint(Integer id, String title, Integer militaryPartId) {
 
         boolean result = false;
         Connection connection = getConnection();
@@ -832,6 +832,43 @@ public class DB {
             e.printStackTrace();
         }
 
+        return result;
+    }
+    static public boolean saveMilitaryPartById(Integer id, String title) {
+
+        boolean result = false;
+        Connection connection = getConnection();
+
+        try {
+            PreparedStatement pstat = null;
+            pstat = connection.prepareStatement("UPDATE type_of_military_part SET title=?, WHERE id=?");
+
+            pstat.setString(1, title);
+            pstat.setInt(2, id);
+
+            pstat.execute();
+            result = true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+    static public boolean saveNewMilitaryPart(Integer id, String title) {
+
+        boolean result = false;
+        Connection connection = getConnection();
+
+        try {
+            PreparedStatement pstat = null;
+            pstat = connection.prepareStatement("INSERT INTO type_of_military_part (title) VALUES (?);");
+
+            pstat.setString(1, title);
+
+            pstat.execute();
+            result = true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return result;
     }
 
