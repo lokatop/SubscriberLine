@@ -48,12 +48,16 @@ public class DB {
                     stmt = connection.createStatement();
 
                     InputStream inputStreamCreateFile = ControllerFirstFrame.class.getClassLoader().getResourceAsStream("resource/database_create.sql");
+                    if (inputStreamCreateFile == null) throw new FileNotFoundException();
+
                     String sql_create_db = convertSrtingFromStream(inputStreamCreateFile);
 
                     stmt.executeUpdate(sql_create_db);
 
                     //Наполнение БД
                     InputStream inputStreamFillFile = ControllerFirstFrame.class.getClassLoader().getResourceAsStream("resource/database_filling.sql");
+                    if (inputStreamFillFile == null) throw new FileNotFoundException();
+
                     String sql_fill_db = convertSrtingFromStream(inputStreamFillFile);
 
                     stmt.executeUpdate(sql_fill_db);
@@ -64,12 +68,16 @@ public class DB {
                 connection = DriverManager.getConnection(DB_URL);
 
             } catch (ClassNotFoundException e) {
+                deleteDBFile();
                 e.printStackTrace();
             } catch (SQLException e) {
+                deleteDBFile();
                 e.printStackTrace();
             } catch (UnsupportedEncodingException e) {
+                deleteDBFile();
                 e.printStackTrace();
             } catch (IOException e) {
+                deleteDBFile();
                 e.printStackTrace();
             }
         }
@@ -739,5 +747,18 @@ public class DB {
         }
 
         return result.toString("UTF-8");
+    }
+
+    private static void deleteDBFile(){
+        File DBFile = new File("database.db");
+
+        try {
+            DB.getConnection().close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        if (DBFile.exists())
+            DBFile.delete();
     }
 }
