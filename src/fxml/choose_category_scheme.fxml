@@ -39,7 +39,7 @@
                     <Insets />
                   </VBox.margin>
                 </ComboBox>
-                <Button alignment="CENTER" minHeight="25.0" mnemonicParsing="false" onAction="#changeData" prefWidth="250.0" text="Изменить исходные данные" textAlignment="CENTER" wrapText="true">
+                <Button fx:id="category_of_manage_point" alignment="CENTER" minHeight="25.0" mnemonicParsing="false" onAction="#changeData" prefWidth="250.0" text="Изменить исходные данные" textAlignment="CENTER" wrapText="true">
                   <VBox.margin>
                     <Insets />
                   </VBox.margin>
@@ -83,7 +83,7 @@
                     <Insets />
                   </VBox.margin>
                 </ComboBox>
-                <Button focusTraversable="false" minHeight="25.0" mnemonicParsing="false" onAction="#changeData" text="Изменить исходные данные" visible="true">
+                <Button fx:id="type_of_military_part" focusTraversable="false" minHeight="25.0" mnemonicParsing="false" onAction="#changeData" text="Изменить исходные данные" visible="true">
                   <VBox.margin>
                     <Insets />
                   </VBox.margin>

@@ -23,7 +23,7 @@
                 <Insets left="1.0" right="1.0" />
               </GridPane.margin>
             </Label>
-            <Label alignment="CENTER" contentDisplay="CENTER" text="Военная академия связи" GridPane.columnIndex="1">
+            <Label alignment="CENTER" contentDisplay="CENTER" text="Санкт-Петербургский политехнический университет Петра Великого    Факультет военного обучения    Военная кафедры связи" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1">
               <font>
                 <Font name="Times New Roman Bold" size="24.0" />
               </font>
