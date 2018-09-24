@@ -47,6 +47,13 @@ CREATE TABLE if not exists 'category_of_manage_point' (
   FOREIGN KEY (military_part) REFERENCES type_of_military_part(id)
 );
 
+CREATE TABLE if not exists 'officials' (
+  'id' INTEGER PRIMARY KEY AUTOINCREMENT,
+  'title' TEXT NOT NULL,
+  'military_part' INTEGER NOT NULL,
+  FOREIGN KEY (military_part) REFERENCES type_of_military_part(id)
+);
+
 -- CREATE TABLE if not exists 'ParentContent' (
 --   'parent_id' INTEGER NOT NULL,
 --   'child_id' INTEGER NOT NULL,

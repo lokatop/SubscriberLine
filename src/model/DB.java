@@ -768,6 +768,7 @@ public class DB {
 
         return result;
     }
+
     static public boolean saveCategoryOfManagePointById(Integer id, String title, Integer militaryPartId) {
 
         boolean result = false;
@@ -788,6 +789,7 @@ public class DB {
         }
         return result;
     }
+
     static public boolean saveNewCategoryOfManagePoint(String title, Integer militaryPartId) {
 
         boolean result = false;
@@ -807,6 +809,7 @@ public class DB {
         }
         return result;
     }
+
     static public boolean deleteCategoryOfManagePointById(Integer id) {
 
         boolean result = false;
@@ -815,6 +818,149 @@ public class DB {
         try {
             PreparedStatement pstat = null;
             pstat = connection.prepareStatement("DELETE FROM category_of_manage_point WHERE id=?");
+
+            pstat.setInt(1, id);
+
+            pstat.execute();
+            result = true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+
+    static public ObservableList<Official> getOfficials() {
+        ObservableList<Official> result = FXCollections.observableArrayList();
+
+        try {
+            Connection connection = getConnection();
+
+            PreparedStatement pstat = null;
+
+            pstat = connection.prepareStatement("SELECT * FROM officials");
+
+            ResultSet rs = pstat.executeQuery();
+
+            while (rs.next()) {
+                result.add(new Official(
+                        rs.getInt("id"),
+                        rs.getString("title"),
+                        rs.getInt("military_part")
+                ));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return result;
+    }
+
+
+    static public Official getOfficialById(Integer id) {
+        Official result = null;
+
+        try {
+            Connection connection = getConnection();
+
+            PreparedStatement pstat = null;
+
+            pstat = connection.prepareStatement("SELECT * FROM officials WHERE id=?");
+
+            pstat.setInt(1, id);
+
+            ResultSet rs = pstat.executeQuery();
+
+            result = new Official(
+                    rs.getInt("id"),
+                    rs.getString("title"),
+                    rs.getInt("military_part")
+            );
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return result;
+    }
+
+    static public ObservableList<Official> getOfficialsFromMilitaryPartById(Integer id) {
+        ObservableList<Official> result = FXCollections.observableArrayList();
+
+        try {
+            Connection connection = getConnection();
+
+            PreparedStatement pstat = null;
+
+            pstat = connection.prepareStatement("SELECT * FROM officials WHERE military_part = ?");
+
+            pstat.setInt(1, id);
+
+            ResultSet rs = pstat.executeQuery();
+
+            while (rs.next()) {
+                result.add(new Official(
+                        rs.getInt("id"),
+                        rs.getString("title"),
+                        rs.getInt("military_part")
+                ));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return result;
+    }
+
+    static public boolean saveOfficialById(Integer id, String title, Integer militaryPartId) {
+
+        boolean result = false;
+        Connection connection = getConnection();
+
+        try {
+            PreparedStatement pstat = null;
+            pstat = connection.prepareStatement("UPDATE officials SET title=?, military_part=? WHERE id=?");
+
+            pstat.setString(1, title);
+            pstat.setInt(2, militaryPartId);
+            pstat.setInt(3, id);
+
+            pstat.execute();
+            result = true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    static public boolean saveNewOfficial(String title, Integer militaryPartId) {
+
+        boolean result = false;
+        Connection connection = getConnection();
+
+        try {
+            PreparedStatement pstat = null;
+            pstat = connection.prepareStatement("INSERT INTO officials (title,military_part) VALUES (?,?);");
+
+            pstat.setString(1, title);
+            pstat.setInt(2, militaryPartId);
+
+            pstat.execute();
+            result = true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    static public boolean deleteOfficialById(Integer id) {
+
+        boolean result = false;
+        Connection connection = getConnection();
+
+        try {
+            PreparedStatement pstat = null;
+            pstat = connection.prepareStatement("DELETE FROM officials WHERE id=?");
 
             pstat.setInt(1, id);
 
@@ -869,6 +1015,7 @@ public class DB {
         }
         return result;
     }
+
     static public boolean saveNewMilitaryPart(String title) {
 
         boolean result = false;
@@ -887,6 +1034,7 @@ public class DB {
         }
         return result;
     }
+
     static public boolean deleteMilitaryPartById(Integer id) {
 
         boolean result = false;
@@ -905,8 +1053,6 @@ public class DB {
         }
         return result;
     }
-
-
 
 
     public static boolean clearImagesFolder() {
