@@ -5,14 +5,12 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableCell;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
@@ -91,7 +89,7 @@ public class ControllerChooseCategoryOfOfficial implements Initializable{
     }
 
     @FXML
-    private void EditOriginalData() throws IOException{
+    private void EditOriginalData(ActionEvent actionEvent) throws IOException{
         FXMLLoader loader = new FXMLLoader(getClass()
                 .getResource("/fxml/choose_data_category.fxml"));
         try{
@@ -99,7 +97,7 @@ public class ControllerChooseCategoryOfOfficial implements Initializable{
 
             // Передаём выбранную модель в контроллер фрейма Описание
             ControllerDataCategory controller = loader.getController();
-            controller.setSelectToComboBox(viewForFindFromXml);
+            controller.setData(((Button) actionEvent.getSource()).getId());
 
             // Оотображаем
             selectionOfOfficials.getChildren().setAll(vBox);
@@ -183,7 +181,4 @@ public class ControllerChooseCategoryOfOfficial implements Initializable{
 //        }
         return list;
     }
-
-
-
 }

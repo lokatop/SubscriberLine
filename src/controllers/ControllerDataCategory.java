@@ -9,10 +9,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
-import model.CategoryOfManagePoint;
-import model.DB;
-import model.MilitaryPart;
-import model.XMLsaver;
+import model.*;
 
 import java.io.IOException;
 import java.net.URL;
@@ -74,6 +71,9 @@ public class ControllerDataCategory implements Initializable {
                     DB.saveNewCategoryOfManagePoint(textField.getText(),((MilitaryPart) comboChooseDate.getSelectionModel().getSelectedItem()).getId());
                     break;
 
+                case "Official":
+                    DB.saveNewOfficial(textField.getText(),((MilitaryPart) comboChooseDate.getSelectionModel().getSelectedItem()).getId());
+                    break;
                 default:
                     break;
             }
@@ -99,6 +99,9 @@ public class ControllerDataCategory implements Initializable {
                 case "category_of_manage_point":
                     DB.deleteCategoryOfManagePointById(((CategoryOfManagePoint) selectedObj).getId());
                     break;
+                case "Official":
+                    DB.deleteOfficialById(((Official) selectedObj).getId());
+                    break;
 
                 default:
                     break;
@@ -116,12 +119,6 @@ public class ControllerDataCategory implements Initializable {
         listViewChooseDate.setItems(filterChooseModelByType(comboChooseDate.getSelectionModel().getSelectedItem().toString()));
     }
 
-    public void setSelectToComboBox(String s) {
-        comboChooseDate.getSelectionModel().select(1);
-        listViewChooseDate.setItems(filterChooseModelByType(comboChooseDate.getSelectionModel().getSelectedItem().toString()));
-        this.description = s;
-    }
-
     public void setData(String s) {
         buttonId = s;
 
@@ -134,21 +131,25 @@ public class ControllerDataCategory implements Initializable {
                 comboChooseDate.getItems().addAll(DB.getMilitaryParts());
                 comboChooseDate.getSelectionModel().select(0);
                 comboChooseDate.setVisible(true);
-
-                comboChooseDate.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
-                    @Override
-                    public void changed(ObservableValue observableValue, Object o, Object t1) {
-                        updateList();
-                    }
-                });
-
-                updateList();
-
                 break;
 
+            case "Official":
+                comboChooseDate.getItems().addAll(DB.getMilitaryParts());
+                comboChooseDate.getSelectionModel().select(0);
+                comboChooseDate.setVisible(true);
+                break;
             default:
                 break;
         }
+
+        comboChooseDate.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
+            @Override
+            public void changed(ObservableValue observableValue, Object o, Object t1) {
+                updateList();
+            }
+        });
+
+        updateList();
 
     }
 
@@ -159,6 +160,12 @@ public class ControllerDataCategory implements Initializable {
                 break;
             case "category_of_manage_point":
                 listViewChooseDate.setItems(DB.getManagePointsFromMilitaryPartById(
+                        ((MilitaryPart) comboChooseDate.getSelectionModel().getSelectedItem()).getId()
+                ));
+
+                break;
+            case "Official":
+                listViewChooseDate.setItems(DB.getOfficialsFromMilitaryPartById(
                         ((MilitaryPart) comboChooseDate.getSelectionModel().getSelectedItem()).getId()
                 ));
 
