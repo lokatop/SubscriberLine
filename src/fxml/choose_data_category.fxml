@@ -27,7 +27,7 @@
                     <Insets bottom="10.0" />
                   </VBox.margin>
                 </Label>
-                <ComboBox fx:id="comboChooseDate" minHeight="25.0" onAction="#comboChooseAction" prefWidth="250.0">
+                <ComboBox fx:id="comboChooseDate" minHeight="25.0" onAction="#comboChooseAction" prefWidth="250.0" visible="true">
                   <VBox.margin>
                     <Insets />
                   </VBox.margin>
@@ -59,7 +59,6 @@
                     <Insets />
                   </VBox.margin>
                 </HBox>
-                <Button minHeight="25.0" mnemonicParsing="false" onAction="#buttonApply" prefWidth="150.0" text="Применить изменения" />
               </children>
             </VBox>
             <VBox alignment="TOP_RIGHT" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="2">

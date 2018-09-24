@@ -9,6 +9,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
+import model.CategoryOfManagePoint;
 import model.DB;
 import model.MilitaryPart;
 import model.XMLsaver;
@@ -87,19 +88,23 @@ public class ControllerDataCategory implements Initializable {
     private void DeleteData() {
         //chooseData.remove(listViewChooseDate.getSelectionModel().getSelectedItem());
 
+        if (listViewChooseDate.getSelectionModel().getSelectedItem() != null) {
 
-        switch (buttonId) {
-            case "type_of_military_part":
-                DB.saveNewMilitaryPart(textField.getText());
-                break;
-            case "category_of_manage_point":
-                DB.saveNewCategoryOfManagePoint(textField.getText(),((MilitaryPart) comboChooseDate.getSelectionModel().getSelectedItem()).getId());
-                break;
+            Object selectedObj = listViewChooseDate.getSelectionModel().getSelectedItem();
 
-            default:
-                break;
+            switch (buttonId) {
+                case "type_of_military_part":
+                    DB.deleteMilitaryPartById(((MilitaryPart) selectedObj).getId());
+                    break;
+                case "category_of_manage_point":
+                    DB.deleteCategoryOfManagePointById(((CategoryOfManagePoint) selectedObj).getId());
+                    break;
+
+                default:
+                    break;
+            }
+            updateList();
         }
-        updateList();
     }
 
     @Override
