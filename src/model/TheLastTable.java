@@ -201,54 +201,58 @@ public class TheLastTable {
     @Override
     public boolean equals(Object obj) {
 
-        boolean is_equal = false;
+        if (obj != null) {
+            boolean is_equal = false;
 
-        boolean condition_1 = false;
-        boolean condition_2 = false;
-        boolean condition_3 = false;
-        boolean condition_4 = false;
-        boolean condition_5 = false;
+            boolean condition_1 = false;
+            boolean condition_2 = false;
+            boolean condition_3 = false;
+            boolean condition_4 = false;
+            boolean condition_5 = false;
 
-        if (obj.getClass().equals(this.getClass())) {
-            if (this.getOfficialPerson() != null && ((TheLastTable) obj).getOfficialPerson() != null)
-                if (this.getOfficialPerson().equals(((TheLastTable) obj).getOfficialPerson()))
+            if (obj.getClass().equals(this.getClass())) {
+                if (this.getOfficialPerson() != null && ((TheLastTable) obj).getOfficialPerson() != null)
+                    if (this.getOfficialPerson().equals(((TheLastTable) obj).getOfficialPerson()))
+                        condition_1 = true;
+                    else
+                        condition_1 = false;
+                else if (this.getOfficialPerson() == null && ((TheLastTable) obj).getOfficialPerson() == null)
                     condition_1 = true;
-                else
-                    condition_1 = false;
-            else if (this.getOfficialPerson() == null && ((TheLastTable) obj).getOfficialPerson() == null)
-                condition_1 = true;
 
-            if (this.getAppFrom1() != null && ((TheLastTable) obj).getAppFrom1() != null)
-                if (this.getAppFrom1().equals(((TheLastTable) obj).getAppFrom1()))
+                if (this.getAppFrom1() != null && ((TheLastTable) obj).getAppFrom1() != null)
+                    if (this.getAppFrom1().equals(((TheLastTable) obj).getAppFrom1()))
+                        condition_2 = true;
+                    else
+                        condition_2 = false;
+                else if (this.getAppFrom1() == null && ((TheLastTable) obj).getAppFrom1() == null)
                     condition_2 = true;
-                else
-                    condition_2 = false;
-            else if (this.getAppFrom1() == null && ((TheLastTable) obj).getAppFrom1() == null)
-                condition_2 = true;
 
-            if (this.getTypeAbon() != null && ((TheLastTable) obj).getTypeAbon() != null)
-                if (this.getTypeAbon().equals(((TheLastTable) obj).getTypeAbon()))
+                if (this.getTypeAbon() != null && ((TheLastTable) obj).getTypeAbon() != null)
+                    if (this.getTypeAbon().equals(((TheLastTable) obj).getTypeAbon()))
+                        condition_3 = true;
+                    else
+                        condition_3 = false;
+                else if (this.getTypeAbon() == null && ((TheLastTable) obj).getTypeAbon() == null)
                     condition_3 = true;
-                else
-                    condition_3 = false;
-            else if (this.getTypeAbon() == null && ((TheLastTable) obj).getTypeAbon() == null)
-                condition_3 = true;
 
-            if (this.getTypeCable() != null && ((TheLastTable) obj).getTypeCable() != null)
-                if (this.getTypeCable().equals(((TheLastTable) obj).getTypeCable()))
+                if (this.getTypeCable() != null && ((TheLastTable) obj).getTypeCable() != null)
+                    if (this.getTypeCable().equals(((TheLastTable) obj).getTypeCable()))
+                        condition_4 = true;
+                    else
+                        condition_4 = false;
+                else if (this.getTypeCable() == null && ((TheLastTable) obj).getTypeCable() == null)
                     condition_4 = true;
-                else
-                    condition_4 = false;
-            else if (this.getTypeCable() == null && ((TheLastTable) obj).getTypeCable() == null)
-                condition_4 = true;
 
-            if (this.getLengthCable() == ((TheLastTable) obj).getLengthCable())
-                condition_5 = true;
+                if (this.getLengthCable() == ((TheLastTable) obj).getLengthCable())
+                    condition_5 = true;
 
+            }
+
+            is_equal = condition_1 && condition_2 && condition_3 && condition_4 && condition_5;
+
+            return is_equal;
+        } else {
+            return false;
         }
-
-        is_equal = condition_1 && condition_2 && condition_3 && condition_4 && condition_5;
-
-        return is_equal;
     }
 }

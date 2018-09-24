@@ -135,43 +135,48 @@ public class TableViewAbonent {
     @Override
     public boolean equals(Object obj) {
 
-        boolean is_equal = false;
+        if (obj != null) {
 
-        boolean coudition_1 = false;
-        boolean coudition_2 = false;
-        boolean coudition_3 = false;
-        boolean coudition_4 = false;
-        boolean coudition_5 = false;
+            boolean is_equal = false;
 
-        if (obj.getClass().equals(this.getClass())){
-            if (this.getFullName() != null && ((TableViewAbonent) obj).getFullName() != null)
-                if (this.getFullName().equals(((TableViewAbonent) obj).getFullName()))
+            boolean coudition_1 = false;
+            boolean coudition_2 = false;
+            boolean coudition_3 = false;
+            boolean coudition_4 = false;
+            boolean coudition_5 = false;
+
+            if (obj.getClass().equals(this.getClass())) {
+                if (this.getFullName() != null && ((TableViewAbonent) obj).getFullName() != null)
+                    if (this.getFullName().equals(((TableViewAbonent) obj).getFullName()))
+                        coudition_1 = true;
+                    else
+                        coudition_1 = false;
+                else if (this.getFullName() == null && ((TableViewAbonent) obj).getFullName() == null)
                     coudition_1 = true;
-                else
-                    coudition_1 = false;
-            else if (this.getFullName() == null && ((TableViewAbonent) obj).getFullName() == null)
-                coudition_1 = true;
 
-            if (this.getParentApparatus() != null && ((TableViewAbonent) obj).getParentApparatus() != null)
-                if (this.getParentApparatus().equals(((TableViewAbonent) obj).getParentApparatus()))
+                if (this.getParentApparatus() != null && ((TableViewAbonent) obj).getParentApparatus() != null)
+                    if (this.getParentApparatus().equals(((TableViewAbonent) obj).getParentApparatus()))
+                        coudition_2 = true;
+                    else
+                        coudition_2 = false;
+                else if (this.getParentApparatus() == null && ((TableViewAbonent) obj).getParentApparatus() == null)
                     coudition_2 = true;
-                else
-                    coudition_2 = false;
-            else if (this.getParentApparatus() == null && ((TableViewAbonent) obj).getParentApparatus() == null)
-                coudition_2 = true;
 
-            if (this.getCount() == ((TableViewAbonent) obj).getCount())
-                coudition_3 = true;
+                if (this.getCount() == ((TableViewAbonent) obj).getCount())
+                    coudition_3 = true;
 
-            if (this.getCount_used() == ((TableViewAbonent) obj).getCount_used())
-                coudition_4 = true;
+                if (this.getCount_used() == ((TableViewAbonent) obj).getCount_used())
+                    coudition_4 = true;
 
-            if (this.isChoose() == ((TableViewAbonent) obj).isChoose())
-                coudition_5 = true;
+                if (this.isChoose() == ((TableViewAbonent) obj).isChoose())
+                    coudition_5 = true;
+            }
+
+            is_equal = coudition_1 && coudition_2 && coudition_3 && coudition_4 && coudition_5;
+
+            return is_equal;
+        } else {
+            return false;
         }
-
-        is_equal = coudition_1 && coudition_2 && coudition_3 && coudition_4 && coudition_5;
-
-        return is_equal;
     }
 }

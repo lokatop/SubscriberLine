@@ -18,9 +18,7 @@ import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.VBox;
 import javafx.util.Callback;
 import javafx.util.converter.IntegerStringConverter;
-import model.InfoModel;
-import model.TableViewApparatus;
-import model.XMLsaver;
+import model.*;
 
 import java.io.IOException;
 import java.net.URL;
@@ -43,7 +41,7 @@ public class ControllerTypeDefinition2 implements Initializable {
     private Label label;
 
     //TODO Статическая переменная ниже передается и используется далее(чтобы изменения там сразу отражались и здесь)
-    public static ObservableList<InfoModel> apparatusData = FXCollections.observableArrayList();
+    public static ObservableList<CatalogItem> apparatusData = FXCollections.observableArrayList();
     public static ObservableList<TableViewApparatus> choosedApparatus = FXCollections.observableArrayList();
 
 //    private static ObservableList<TableViewApparatus> tableData = FXCollections.observableArrayList();
@@ -71,14 +69,8 @@ public class ControllerTypeDefinition2 implements Initializable {
         apparatusData.clear();
         choosedApparatus.clear();
 
-        ObservableList unfilterred = FXCollections.observableArrayList();
-        unfilterred.addAll(XMLsaver.loadFromXML(InfoModel.FILENAME_INFOMODELS));
-
-        if (!unfilterred.isEmpty()) {
-
-            apparatusData.addAll(InfoModel.filterInfoModelByType("AOZU", unfilterred));
-            apparatusData.addAll(InfoModel.filterInfoModelByType("ATZU", unfilterred));
-        }
+        apparatusData.addAll(DB.getCatalogTitlesByType("AOZU"));
+        apparatusData.addAll(DB.getCatalogTitlesByType("ATZU"));
     }
 
     private void setupTable(){
@@ -178,8 +170,8 @@ public class ControllerTypeDefinition2 implements Initializable {
         for (int i = 0; i<apparatusData.size(); i++){
 
             tableData.add( new TableViewApparatus(
-                    apparatusData.get(i).getTitle(),
-                    apparatusData.get(i).getData()
+                    apparatusData.get(i).getId(),
+                    apparatusData.get(i).getTitle()
             ));
         }
         return tableData;

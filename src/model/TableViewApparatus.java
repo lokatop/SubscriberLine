@@ -11,29 +11,24 @@ import java.util.Map;
 
 public class TableViewApparatus {
 
+    private SimpleIntegerProperty id;
     private SimpleStringProperty fullName;
     private SimpleIntegerProperty count;
     private SimpleBooleanProperty choose;
-    private SimpleStringProperty data;
+//    private SimpleStringProperty data;
 
-    public TableViewApparatus(String fullName, Integer count, boolean choose, String data) {
+    public TableViewApparatus(Integer id, String fullName, Integer count, boolean choose) {
+        this.id = new SimpleIntegerProperty(id);
         this.fullName = new SimpleStringProperty(fullName);
         this.count = new SimpleIntegerProperty(count);
         this.choose = new SimpleBooleanProperty(choose);
-        this.data = new SimpleStringProperty(data);
     }
 
-    public TableViewApparatus(String fullName) {
+    public TableViewApparatus(Integer id, String fullName) {
+        this.id = new SimpleIntegerProperty(id);
         this.fullName = new SimpleStringProperty(fullName);
         this.count = new SimpleIntegerProperty(1);
         this.choose = new SimpleBooleanProperty(false);
-        this.data = new SimpleStringProperty("");
-    }
-    public TableViewApparatus(String fullName, String data) {
-        this.fullName = new SimpleStringProperty(fullName);
-        this.count = new SimpleIntegerProperty(1);
-        this.choose = new SimpleBooleanProperty(false);
-        this.data = new SimpleStringProperty(data);
     }
 
     public String getFullName() {
@@ -77,17 +72,6 @@ public class TableViewApparatus {
         return getFullName();
     }
 
-    public String getData() {
-        return data.get();
-    }
-
-    public SimpleStringProperty dataProperty() {
-        return data;
-    }
-
-    public void setData(String data) {
-        this.data.set(data);
-    }
 
     /**
      * Результат в виде<br>
@@ -96,20 +80,32 @@ public class TableViewApparatus {
      *     data.get(0).get("count"); // Это строка! Для перевода в число: Integer.parseInt(data.get(0).get("count"));
      * @return
      */
-    public List<Map< String, String >> getDataApparatus(){
-        List<Map< String, String >> result = new ArrayList<>();
-            if (this.getData() != null) {
-                String[] substrs;
-                substrs = this.getData().split(";");
-                for (String substr : substrs) {
+//    public List<Map< String, String >> getDataApparatus(){
+//        List<Map< String, String >> result = new ArrayList<>();
+//            if (this.getData() != null) {
+//                String[] substrs;
+//                substrs = this.getData().split(";");
+//                for (String substr : substrs) {
+//
+//                    String strTA[] = substr.split(":");
+//                    Map<String, String> toAdd = new HashMap<String, String>();
+//                    toAdd.put("name", strTA[0]);
+//                    toAdd.put("count", strTA[1]);
+//                    result.add(toAdd);
+//                }
+//            }
+//        return result;
+//    }
 
-                    String strTA[] = substr.split(":");
-                    Map<String, String> toAdd = new HashMap<String, String>();
-                    toAdd.put("name", strTA[0]);
-                    toAdd.put("count", strTA[1]);
-                    result.add(toAdd);
-                }
-            }
-        return result;
+    public int getId() {
+        return id.get();
+    }
+
+    public SimpleIntegerProperty idProperty() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id.set(id);
     }
 }

@@ -16,9 +16,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.util.Callback;
-import model.TableViewAbonent;
-import model.TableViewApparatus;
-import model.TheLastTable;
+import model.*;
 
 import java.io.IOException;
 import java.net.URL;
@@ -89,25 +87,25 @@ public class ControllerTypeDefinition3 implements Initializable {
 
         for (TableViewApparatus app : apparatusChoosedData) {
 
-            List<Map<String, String>> data = app.getDataApparatus();
+            ObservableList<CatalogItem> abonList = DB.getTaInApparatousById(app.getId());
 
-            for (Map<String, String> abon : data) {
+            for (CatalogItem abon : abonList) {
 
-                for (TheLastTable item : ControllerTypeDefinition1.theLastTableList) {
+                for (TheLastTable lastTableRow : ControllerTypeDefinition1.theLastTableList) {
                     // TODO: учесть количество КШМ. Можно попробовать через for
 
                     // Проверка на наличие в аппаратной абон. обор., выбранного должн. лицом
                     // Если в строке из финалной таблицы такое же название абон. устр., как в текущем цикле
-                    if (item.getTypeAbon().equals(abon.get("name"))) {
-                        TheLastTable tlt = new TheLastTable(item);
+                    if (lastTableRow.getTypeAbon().equals(abon.getTitle())) {
+                        TheLastTable tlt = new TheLastTable(lastTableRow);
                         tlt.setAppFrom1(app.getFullName());
 
                         // Добавляем в временный список строку, если такой ещё не было
                         if (!theLastTableListUpdatedD3.contains(tlt)) {
 
                             // Добавляем абонентское устройство или увеличиваем количество "при развёртывании"
-                            Integer count = Integer.parseInt(abon.get("count"));
-                            TableViewAbonent tva_new = new TableViewAbonent(item.getTypeAbon(), count, 1, app.getFullName(), true);
+                            Integer count = abon.getCount();
+                            TableViewAbonent tva_new = new TableViewAbonent(lastTableRow.getTypeAbon(), count, 1, app.getFullName(), true);
                             TableViewAbonent tva_existed = null;
 
                             for (TableViewAbonent t : abonentsData)
@@ -116,24 +114,24 @@ public class ControllerTypeDefinition3 implements Initializable {
 
                             if (tva_existed == null) {
                                 abonentsData.add(tva_new);
-                                theLastTableListUpdatedD3.add(tlt);
-                                unused.remove(item);
+                                theLastTableListUpdatedD3.add(tlt); //TODO: странно, но ту тпонятно, зачем добавлять
+                                unused.remove(lastTableRow);
                             } else {
                                 if (tva_existed.getCount_used() < tva_existed.getCount()) {
                                     tva_existed.increaseCount_used();
-                                    theLastTableListUpdatedD3.add(tlt);
-                                    unused.remove(item);
+                                    theLastTableListUpdatedD3.add(tlt); //TODO: странно
+                                    unused.remove(lastTableRow);
                                 }
 //                              else {
 //                                    // Добавляем в список того, что не вошло в таблицу, либо увеличиваем количество
-//                                    if (!outOfRange.containsKey(item.getOfficialPerson()))
-//                                        outOfRange.put(item.getOfficialPerson(), new HashMap<>());
-//                                    if (!outOfRange.get(item.getOfficialPerson()).containsKey(tva_existed.getFullName()))
-//                                        outOfRange.get(item.getOfficialPerson()).put(tva_existed.getFullName(), 1);
+//                                    if (!outOfRange.containsKey(lastLableRow.getOfficialPerson()))
+//                                        outOfRange.put(lastLableRow.getOfficialPerson(), new HashMap<>());
+//                                    if (!outOfRange.get(lastLableRow.getOfficialPerson()).containsKey(tva_existed.getFullName()))
+//                                        outOfRange.get(lastLableRow.getOfficialPerson()).put(tva_existed.getFullName(), 1);
 //                                    else {
-//                                        outOfRange.get(item.getOfficialPerson()).replace(
+//                                        outOfRange.get(lastLableRow.getOfficialPerson()).replace(
 //                                                tva_existed.getFullName(),
-//                                                outOfRange.get(item.getOfficialPerson()).get(tva_existed.getFullName()) + 1);
+//                                                outOfRange.get(lastLableRow.getOfficialPerson()).get(tva_existed.getFullName()) + 1);
 //                                    }
 //                                }
                             }
@@ -142,6 +140,60 @@ public class ControllerTypeDefinition3 implements Initializable {
                     }
                 }
             }
+
+//            List<Map<String, String>> data = app.getDataApparatus();
+//
+//            for (Map<String, String> abon : data) {
+//
+//                for (TheLastTable item : ControllerTypeDefinition1.theLastTableList) {
+//                    // TODO: учесть количество КШМ. Можно попробовать через for
+//
+//                    // Проверка на наличие в аппаратной абон. обор., выбранного должн. лицом
+//                    // Если в строке из финалной таблицы такое же название абон. устр., как в текущем цикле
+//                    if (item.getTypeAbon().equals(abon.get("name"))) {
+//                        TheLastTable tlt = new TheLastTable(item);
+//                        tlt.setAppFrom1(app.getFullName());
+//
+//                        // Добавляем в временный список строку, если такой ещё не было
+//                        if (!theLastTableListUpdatedD3.contains(tlt)) {
+//
+//                            // Добавляем абонентское устройство или увеличиваем количество "при развёртывании"
+//                            Integer count = Integer.parseInt(abon.get("count"));
+//                            TableViewAbonent tva_new = new TableViewAbonent(item.getTypeAbon(), count, 1, app.getFullName(), true);
+//                            TableViewAbonent tva_existed = null;
+//
+//                            for (TableViewAbonent t : abonentsData)
+//                                if (t.getFullName().equals(tva_new.getFullName()) && t.getParentApparatus().equals(tva_new.getParentApparatus()))
+//                                    tva_existed = t;
+//
+//                            if (tva_existed == null) {
+//                                abonentsData.add(tva_new);
+//                                theLastTableListUpdatedD3.add(tlt);
+//                                unused.remove(item);
+//                            } else {
+//                                if (tva_existed.getCount_used() < tva_existed.getCount()) {
+//                                    tva_existed.increaseCount_used();
+//                                    theLastTableListUpdatedD3.add(tlt);
+//                                    unused.remove(item);
+//                                }
+////                              else {
+////                                    // Добавляем в список того, что не вошло в таблицу, либо увеличиваем количество
+////                                    if (!outOfRange.containsKey(item.getOfficialPerson()))
+////                                        outOfRange.put(item.getOfficialPerson(), new HashMap<>());
+////                                    if (!outOfRange.get(item.getOfficialPerson()).containsKey(tva_existed.getFullName()))
+////                                        outOfRange.get(item.getOfficialPerson()).put(tva_existed.getFullName(), 1);
+////                                    else {
+////                                        outOfRange.get(item.getOfficialPerson()).replace(
+////                                                tva_existed.getFullName(),
+////                                                outOfRange.get(item.getOfficialPerson()).get(tva_existed.getFullName()) + 1);
+////                                    }
+////                                }
+//                            }
+//
+//                        }
+//                    }
+//                }
+//            }
         }
 
         // Обновляем список для последней модели
