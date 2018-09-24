@@ -97,9 +97,9 @@ public class ControllerChooseCategoryScheme implements Initializable {
 
     public void addData() {
         chooseData.clear();
-        List pathToXml = XMLsaver.loadFromXML(FILENAME_CHOOSEMODELS);
-        chooseData.addAll(pathToXml);
-        if (!chooseData.isEmpty()) {
+//        List pathToXml = XMLsaver.loadFromXML(FILENAME_CHOOSEMODELS);
+//        chooseData.addAll(pathToXml);
+//        if (!chooseData.isEmpty()) {
             // Добавляем фильтрованный по "типу" список в ComboBox
             //comboChooseCategory.getItems().addAll(filterChooseModelByType("Пункты управления"));
 //            comboChooseCategory.getItems().addAll(DB.getManagePoints());
@@ -119,7 +119,7 @@ public class ControllerChooseCategoryScheme implements Initializable {
                 }
             });
             ComboBoxPart.getSelectionModel().select(0);
-        }
+//        }
     }
 
     /**
