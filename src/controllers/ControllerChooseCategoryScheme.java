@@ -53,26 +53,28 @@ public class ControllerChooseCategoryScheme implements Initializable {
 
     public void theNext(ActionEvent actionEvent) throws IOException {
 
-        FXMLLoader loader = new FXMLLoader(getClass()
-                .getResource("/fxml/choose_category_of_official_1.fxml"));
-        try {
-            VBox vBox = (VBox) loader.load();
+        if (!comboChooseCategory.getSelectionModel().isEmpty() && !ComboBoxPart.getSelectionModel().isEmpty()) {
+            FXMLLoader loader = new FXMLLoader(getClass()
+                    .getResource("/fxml/choose_category_of_official_1.fxml"));
+            try {
+                VBox vBox = (VBox) loader.load();
 
-            // Передаём выбранную модель в контроллер фрейма Описание
-            ControllerChooseCategoryOfOfficial controller = loader.getController();
-            controller.setChooseCategory(comboChooseCategory.getSelectionModel()
-                    .getSelectedItem().toString(), ComboBoxPart
-                    .getSelectionModel().getSelectedItem().toString(),
-                    ((CategoryOfManagePoint)comboChooseCategory.getSelectionModel()
-                            .getSelectedItem()).getId(),
-                    ((MilitaryPart)ComboBoxPart.getSelectionModel()
-                            .getSelectedItem()).getId()
-                    );
+                // Передаём выбранную модель в контроллер фрейма Описание
+                ControllerChooseCategoryOfOfficial controller = loader.getController();
+                controller.setChooseCategory(comboChooseCategory.getSelectionModel()
+                                .getSelectedItem().toString(), ComboBoxPart
+                                .getSelectionModel().getSelectedItem().toString(),
+                        ((CategoryOfManagePoint) comboChooseCategory.getSelectionModel()
+                                .getSelectedItem()).getId(),
+                        ((MilitaryPart) ComboBoxPart.getSelectionModel()
+                                .getSelectedItem()).getId()
+                );
 
-            // Оотображаем
-            VboxChooseSheme.getChildren().setAll(vBox);
-        } catch (Exception e) {
-            e.printStackTrace();
+                // Оотображаем
+                VboxChooseSheme.getChildren().setAll(vBox);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 
