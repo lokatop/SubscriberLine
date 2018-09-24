@@ -809,6 +809,24 @@ public class DB {
         }
         return result;
     }
+    static public boolean deleteCategoryOfManagePointById(Integer id) {
+
+        boolean result = false;
+        Connection connection = getConnection();
+
+        try {
+            PreparedStatement pstat = null;
+            pstat = connection.prepareStatement("DELETE FROM category_of_manage_point WHERE id=?");
+
+            pstat.setInt(1, id);
+
+            pstat.execute();
+            result = true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
 
     static public ObservableList<MilitaryPart> getMilitaryParts() {
         ObservableList<MilitaryPart> result = FXCollections.observableArrayList();
@@ -863,6 +881,24 @@ public class DB {
             pstat = connection.prepareStatement("INSERT INTO type_of_military_part (title) VALUES (?);");
 
             pstat.setString(1, title);
+
+            pstat.execute();
+            result = true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+    static public boolean deleteMilitaryPartById(Integer id) {
+
+        boolean result = false;
+        Connection connection = getConnection();
+
+        try {
+            PreparedStatement pstat = null;
+            pstat = connection.prepareStatement("DELETE FROM type_of_military_part WHERE id=?");
+
+            pstat.setInt(1, id);
 
             pstat.execute();
             result = true;
