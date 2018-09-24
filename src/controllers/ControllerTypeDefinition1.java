@@ -18,10 +18,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
 import javafx.scene.web.WebView;
 import javafx.util.Callback;
-import model.InfoModel;
-import model.TableViewTypeDef1;
-import model.TheLastTable;
-import model.XMLsaver;
+import model.*;
 
 import java.io.IOException;
 import java.net.URL;
@@ -59,6 +56,7 @@ public class ControllerTypeDefinition1 implements Initializable {
      * Список всех ТА для должностей
      */
     private ObservableList<InfoModel> infoModelsList = FXCollections.observableArrayList();
+    private ObservableList<CatalogItem> catalogItems = FXCollections.observableArrayList();
 
     /**
      * Список строк таблицы с чекбоксами
@@ -94,23 +92,30 @@ public class ControllerTypeDefinition1 implements Initializable {
     }
 
     private void readData() {
-        infoModelsList.clear();
+//        infoModelsList.clear();
+        catalogItems.clear();
+
+        catalogItems.addAll(DB.getCatalogTitlesByType("DS"));
+        catalogItems.addAll(DB.getCatalogTitlesByType("ZAS"));
+        catalogItems.addAll(DB.getCatalogTitlesByType("ARM"));
+
+
 
         // Чтение из файла
-        ObservableList unfilterred = FXCollections.observableArrayList();
-        unfilterred.addAll(XMLsaver.loadFromXML(InfoModel.FILENAME_INFOMODELS));
-
-        infoModelsList.addAll(filterInfoModelByType("DS", unfilterred));
-        infoModelsList.addAll(filterInfoModelByType("ZAS", unfilterred));
-        infoModelsList.addAll(filterInfoModelByType("ARM", unfilterred));
+//        ObservableList unfilterred = FXCollections.observableArrayList();
+//        unfilterred.addAll(XMLsaver.loadFromXML(InfoModel.FILENAME_INFOMODELS));
+//
+//        infoModelsList.addAll(filterInfoModelByType("DS", unfilterred));
+//        infoModelsList.addAll(filterInfoModelByType("ZAS", unfilterred));
+//        infoModelsList.addAll(filterInfoModelByType("ARM", unfilterred));
 
         // Генерация объектов для таблицы
         for (int officialIndex = 0; officialIndex < choosedOfficialList.size(); officialIndex++) {
-            for (int infoModelIndex = 0; infoModelIndex < infoModelsList.size(); infoModelIndex++) {
+            for (int catalogItemIndex = 0; catalogItemIndex < catalogItems.size(); catalogItemIndex++) {
                 tableViewTypeDef1s.add(
                         new TableViewTypeDef1(
                                 choosedOfficialList.get(officialIndex),
-                                infoModelsList.get(infoModelIndex).getTitle()
+                                catalogItems.get(catalogItemIndex).getTitle()
                         )
                 );
             }
