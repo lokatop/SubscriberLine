@@ -790,7 +790,7 @@ public class DB {
         }
         return result;
     }
-    static public boolean saveNewCategoryOfManagePoint(Integer id, String title, Integer militaryPartId) {
+    static public boolean saveNewCategoryOfManagePoint(String title, Integer militaryPartId) {
 
         boolean result = false;
         Connection connection = getConnection();
@@ -853,7 +853,7 @@ public class DB {
         }
         return result;
     }
-    static public boolean saveNewMilitaryPart(Integer id, String title) {
+    static public boolean saveNewMilitaryPart(String title) {
 
         boolean result = false;
         Connection connection = getConnection();
