@@ -741,6 +741,34 @@ public class DB {
 
         return result;
     }
+
+    static public CategoryOfManagePoint getManagePointById(Integer id) {
+        CategoryOfManagePoint result = null;
+
+        try {
+            Connection connection = getConnection();
+
+            PreparedStatement pstat = null;
+
+            pstat = connection.prepareStatement("SELECT * FROM category_of_manage_point WHERE id=?");
+
+            pstat.setInt(1, id);
+
+            ResultSet rs = pstat.executeQuery();
+
+            result = new CategoryOfManagePoint(
+                    rs.getInt("id"),
+                    rs.getString("title"),
+                    rs.getInt("military_part")
+            );
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return result;
+    }
+
     static public ObservableList<CategoryOfManagePoint> getManagePointsFromMilitaryPartById(Integer id) {
         ObservableList<CategoryOfManagePoint> result = FXCollections.observableArrayList();
 
@@ -996,6 +1024,33 @@ public class DB {
 
         return result;
     }
+
+    static public MilitaryPart getMilitaryPartById(Integer id) {
+        MilitaryPart result = null;
+
+        try {
+            Connection connection = getConnection();
+
+            PreparedStatement pstat = null;
+
+            pstat = connection.prepareStatement("SELECT * FROM type_of_military_part WHERE id=?");
+
+            pstat.setInt(1, id);
+
+            ResultSet rs = pstat.executeQuery();
+
+            result = new MilitaryPart(
+                    rs.getInt("id"),
+                    rs.getString("title")
+            );
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return result;
+    }
+
     static public boolean saveMilitaryPartById(Integer id, String title) {
 
         boolean result = false;
