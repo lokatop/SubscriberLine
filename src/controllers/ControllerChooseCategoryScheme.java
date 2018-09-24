@@ -1,16 +1,17 @@
 package controllers;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.VBox;
-import model.InfoModel;
-import model.XMLsaver;
-import model.ChooseModel;
+import model.*;
 
 import java.io.IOException;
 import java.net.URL;
@@ -20,7 +21,7 @@ import java.util.ResourceBundle;
 import static controllers.ControllerInformationFrame.infoData;
 import static model.ChooseModel.FILENAME_CHOOSEMODELS;
 
-public class ControllerChooseCategoryScheme implements Initializable{
+public class ControllerChooseCategoryScheme implements Initializable {
 
     @FXML
     public VBox VboxChooseSheme;
@@ -33,27 +34,38 @@ public class ControllerChooseCategoryScheme implements Initializable{
 
     public void changeData(ActionEvent actionEvent) throws IOException {
 
-        VBox vBox = FXMLLoader.load(getClass()
+        FXMLLoader loader = new FXMLLoader(getClass()
                 .getResource("/fxml/choose_data_category.fxml"));
-        VboxChooseSheme.getChildren().setAll(vBox);
+        try {
+            VBox vBox = (VBox) loader.load();
+
+            // Передаём выбранную модель в контроллер фрейма Описание
+            ControllerDataCategory controller = loader.getController();
+            controller.setData(((Button) actionEvent.getSource()).getId());
+
+            // Оотображаем
+            VboxChooseSheme.getChildren().setAll(vBox);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void theNext(ActionEvent actionEvent) throws IOException {
 
         FXMLLoader loader = new FXMLLoader(getClass()
                 .getResource("/fxml/choose_category_of_official_1.fxml"));
-        try{
-            VBox vBox = (VBox)loader.load();
+        try {
+            VBox vBox = (VBox) loader.load();
 
             // Передаём выбранную модель в контроллер фрейма Описание
             ControllerChooseCategoryOfOfficial controller = loader.getController();
             controller.setChooseCategory(comboChooseCategory.getSelectionModel()
-                    .getSelectedItem().toString(),ComboBoxPart
+                    .getSelectedItem().toString(), ComboBoxPart
                     .getSelectionModel().getSelectedItem().toString());
 
             // Оотображаем
             VboxChooseSheme.getChildren().setAll(vBox);
-        } catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -75,29 +87,42 @@ public class ControllerChooseCategoryScheme implements Initializable{
         addData();
     }
 
-        public void addData(){
+    public void addData() {
         chooseData.clear();
         List pathToXml = XMLsaver.loadFromXML(FILENAME_CHOOSEMODELS);
         chooseData.addAll(pathToXml);
         if (!chooseData.isEmpty()) {
             // Добавляем фильтрованный по "типу" список в ComboBox
-            comboChooseCategory.getItems().addAll(filterChooseModelByType("Пункты управления"));
-            // Выбираем первый эл-т для отображения
-            comboChooseCategory.getSelectionModel().select(0);
+            //comboChooseCategory.getItems().addAll(filterChooseModelByType("Пункты управления"));
+//            comboChooseCategory.getItems().addAll(DB.getManagePoints());
+//            // Выбираем первый эл-т для отображения
+//            comboChooseCategory.getSelectionModel().select(0);
 
-            ComboBoxPart.getItems().addAll(filterChooseModelByType("Вид воинской части"));
+            //ComboBoxPart.getItems().addAll(filterChooseModelByType("Вид воинской части"));
+            ComboBoxPart.getItems().addAll(DB.getMilitaryParts());
+            ComboBoxPart.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
+                @Override
+                public void changed(ObservableValue observableValue, Object o, Object t1) {
+                    comboChooseCategory.getItems().clear();
+                    comboChooseCategory.getItems().addAll(DB.getManagePointsFromMilitaryPartById(
+                            ((MilitaryPart) t1).getId()
+                    ));
+                    comboChooseCategory.getSelectionModel().select(0);
+                }
+            });
             ComboBoxPart.getSelectionModel().select(0);
         }
     }
 
     /**
      * Фильтрует модели по типу
+     *
      * @param type
      * @return FilteredList<ChooseModel>
      */
 
 
-    public static ObservableList<ChooseModel> filterChooseModelByType( String type){
+    public static ObservableList<ChooseModel> filterChooseModelByType(String type) {
 
         ObservableList<ChooseModel> result = FXCollections.observableArrayList();
 
@@ -122,10 +147,11 @@ public class ControllerChooseCategoryScheme implements Initializable{
 
     /**
      * Фильтрует модели по типу
+     *
      * @param description
      * @return FilteredList<ChooseModel>
      */
-    public static ObservableList<ChooseModel> filterChooseModelByDescription( String description){
+    public static ObservableList<ChooseModel> filterChooseModelByDescription(String description) {
 
         ObservableList<ChooseModel> result = FXCollections.observableArrayList();
 
@@ -147,7 +173,8 @@ public class ControllerChooseCategoryScheme implements Initializable{
 //            }
 //        });
     }
-    public static ObservableList<InfoModel> filterInfoModelByTypeSecond( String type){
+
+    public static ObservableList<InfoModel> filterInfoModelByTypeSecond(String type) {
         ObservableList<InfoModel> result = FXCollections.observableArrayList();
 
         for (InfoModel infoModel : infoData) {
