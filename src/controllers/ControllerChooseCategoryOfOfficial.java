@@ -18,14 +18,14 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
 import javafx.util.Callback;
 import model.ChooseModel;
+import model.DB;
+import model.Official;
 import model.TableViewChooseCategory;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.LinkedHashSet;
 import java.util.ResourceBundle;
-
-import static controllers.ControllerChooseCategoryScheme.filterChooseModelByDescription;
 
 public class ControllerChooseCategoryOfOfficial implements Initializable{
     @FXML
@@ -42,10 +42,18 @@ public class ControllerChooseCategoryOfOfficial implements Initializable{
 
     private static String nameForFindFromXml;
     private static String viewForFindFromXml;
+
+    private int idMilitaryPart;
+    private int idCategoryOfManagePoint;
+
     private ObservableList<ChooseModel> list2;
+
+    private ObservableList<Official> listOfficial;
+
     private static ObservableList<TableViewChooseCategory> listSetTable;
 
     public static LinkedHashSet arraySetOfficial = new LinkedHashSet();
+    public static LinkedHashSet arrayOfficialsId = new LinkedHashSet();
 
     private static ObservableList<TableViewChooseCategory> observableList = FXCollections.observableArrayList();
 
@@ -100,20 +108,25 @@ public class ControllerChooseCategoryOfOfficial implements Initializable{
         }
     }
 
-    public void setChooseCategory(String s, String a){
+    public void setChooseCategory(String s, String a, int ss, int aa){
         this.nameForFindFromXml = s;
         this.viewForFindFromXml = a;
+
+        this.idCategoryOfManagePoint = ss;
+        this.idMilitaryPart = aa;
 
         listSetTable = getTableViewChooseCategoryList();
         tableView.setItems(listSetTable);
 
-        label.setText(nameForFindFromXml);
+//        label.setText(nameForFindFromXml);
+        label.setText(DB.getMilitaryPartById(idMilitaryPart).getTitle());
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
         arraySetOfficial.clear();
+        arrayOfficialsId.clear();
         tableColumn1.setCellValueFactory(new PropertyValueFactory<TableViewChooseCategory, String>("fullName"));
         tableColumn2.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<TableViewChooseCategory, Boolean>, ObservableValue<Boolean>>() {
             @Override
@@ -128,6 +141,7 @@ public class ControllerChooseCategoryOfOfficial implements Initializable{
                         tableViewChooseCategory.setChoose(newValue);
                         //observableList.add(new TableViewChooseCategory(tableViewChooseCategory.getFullName(),newValue));
                         arraySetOfficial.add(tableViewChooseCategory.getFullName());
+                        arrayOfficialsId.add(tableViewChooseCategory.getId());
                     }
                 });
                 return booleanProperty;
@@ -152,13 +166,21 @@ public class ControllerChooseCategoryOfOfficial implements Initializable{
 
         ObservableList<TableViewChooseCategory> list = FXCollections.observableArrayList();
 
-        list2 = filterChooseModelByDescription(viewForFindFromXml);
-        for (int i = 0; i<list2.size();i++){
+        listOfficial = DB.getOfficialsFromMilitaryPartById(idMilitaryPart);
 
-         list.add( new TableViewChooseCategory(
-                 list2.get(i).getTitle()
-         ));
+        for (Official official : listOfficial) {
+            list.add( new TableViewChooseCategory(
+                    official.getTitle()
+            ));
         }
+
+//        list2 = filterChooseModelByDescription(viewForFindFromXml);
+//        for (int i = 0; i<list2.size();i++){
+//
+//         list.add( new TableViewChooseCategory(
+//                 list2.get(i).getTitle()
+//         ));
+//        }
         return list;
     }
 

@@ -1,5 +1,6 @@
 package controllers;
 
+import com.sun.org.apache.xml.internal.resolver.CatalogManager;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -61,7 +62,12 @@ public class ControllerChooseCategoryScheme implements Initializable {
             ControllerChooseCategoryOfOfficial controller = loader.getController();
             controller.setChooseCategory(comboChooseCategory.getSelectionModel()
                     .getSelectedItem().toString(), ComboBoxPart
-                    .getSelectionModel().getSelectedItem().toString());
+                    .getSelectionModel().getSelectedItem().toString(),
+                    ((CategoryOfManagePoint)comboChooseCategory.getSelectionModel()
+                            .getSelectedItem()).getId(),
+                    ((MilitaryPart)ComboBoxPart.getSelectionModel()
+                            .getSelectedItem()).getId()
+                    );
 
             // Оотображаем
             VboxChooseSheme.getChildren().setAll(vBox);
