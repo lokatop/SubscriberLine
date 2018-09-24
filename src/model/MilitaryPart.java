@@ -16,4 +16,33 @@ public class MilitaryPart {
         this.id = new SimpleIntegerProperty(id);
         this.title = new SimpleStringProperty(title);
     }
+
+    @Override
+    public String toString() {
+        return title.get();
+    }
+
+    public int getId() {
+        return id.get();
+    }
+
+    public IntegerProperty idProperty() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id.set(id);
+    }
+
+    public String getTitle() {
+        return title.get();
+    }
+
+    public StringProperty titleProperty() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title.set(title);
+    }
 }
