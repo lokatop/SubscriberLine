@@ -13,8 +13,6 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import static javax.swing.UIManager.getInt;
-
 public class DB {
 
     private static String PATH_RESOURCE = "resource";

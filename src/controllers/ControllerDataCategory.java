@@ -9,7 +9,6 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
-import model.ChooseModel;
 import model.DB;
 import model.MilitaryPart;
 import model.XMLsaver;
@@ -63,15 +62,44 @@ public class ControllerDataCategory implements Initializable {
 
     @FXML
     private void AddData() {
-        if (textField.getText() != null) {
-            chooseData.add(new ChooseModel(textField.getText(), comboChooseDate.getSelectionModel().getSelectedItem().toString(), description));
-            textField.setText("");
+
+        if (textField.getText() != null && !textField.getText().isEmpty()) {
+
+            switch (buttonId) {
+                case "type_of_military_part":
+                    DB.saveNewMilitaryPart(textField.getText());
+                    break;
+                case "category_of_manage_point":
+                    DB.saveNewCategoryOfManagePoint(textField.getText(),((MilitaryPart) comboChooseDate.getSelectionModel().getSelectedItem()).getId());
+                    break;
+
+                default:
+                    break;
+            }
+            updateList();
+            textField.clear();
         }
+
+
     }
 
     @FXML
     private void DeleteData() {
-        chooseData.remove(listViewChooseDate.getSelectionModel().getSelectedItem());
+        //chooseData.remove(listViewChooseDate.getSelectionModel().getSelectedItem());
+
+
+        switch (buttonId) {
+            case "type_of_military_part":
+                DB.saveNewMilitaryPart(textField.getText());
+                break;
+            case "category_of_manage_point":
+                DB.saveNewCategoryOfManagePoint(textField.getText(),((MilitaryPart) comboChooseDate.getSelectionModel().getSelectedItem()).getId());
+                break;
+
+            default:
+                break;
+        }
+        updateList();
     }
 
     @Override
@@ -105,12 +133,26 @@ public class ControllerDataCategory implements Initializable {
                 comboChooseDate.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
                     @Override
                     public void changed(ObservableValue observableValue, Object o, Object t1) {
-                        listViewChooseDate.setItems(DB.getManagePointsFromMilitaryPartById(
-                                ((MilitaryPart) t1).getId()
-                        ));
+                        updateList();
                     }
                 });
 
+                updateList();
+
+                break;
+
+            default:
+                break;
+        }
+
+    }
+
+    private void updateList(){
+        switch (buttonId) {
+            case "type_of_military_part":
+                listViewChooseDate.setItems(DB.getMilitaryParts());
+                break;
+            case "category_of_manage_point":
                 listViewChooseDate.setItems(DB.getManagePointsFromMilitaryPartById(
                         ((MilitaryPart) comboChooseDate.getSelectionModel().getSelectedItem()).getId()
                 ));
@@ -120,7 +162,6 @@ public class ControllerDataCategory implements Initializable {
             default:
                 break;
         }
-
     }
 
 }
