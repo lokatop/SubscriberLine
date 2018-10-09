@@ -33,7 +33,8 @@ public class ControllerCalculate implements Initializable{
     @FXML
     public VBox vbox;
     @FXML
-    private TableView tableView;
+    private TableView tableView,tableViewAbon,tableViewCable,tableViewApp;
+
     @FXML
     private TableColumn<TheLastTable,String> officialPerson,
             typeAbon,appFrom1;

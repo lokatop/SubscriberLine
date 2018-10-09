@@ -49,27 +49,67 @@
               <children>
                 <Button fx:id="buttonCalculate" maxWidth="1.7976931348623157E308" minHeight="50.0" mnemonicParsing="false" onAction="#calculate" styleClass="buttonCalculate" text="Создать файл">
                   <font>
-                    <Font name="Times New Roman" size="14.0" />
+                    <Font name="Times New Roman" size="14.0" fx:id="x2" />
                   </font>
                   <VBox.margin>
                     <Insets bottom="10.0" />
                   </VBox.margin>
                 </Button>
-                <TableView fx:id="tableView" editable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" tableMenuButtonVisible="false" VBox.vgrow="SOMETIMES">
+                <TableView fx:id="tableView" editable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="700.0" tableMenuButtonVisible="false" VBox.vgrow="SOMETIMES">
                   <columnResizePolicy>
                     <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                   </columnResizePolicy>
                   <columns>
-                    <TableColumn prefWidth="75.0" text="Должностные лица" fx:id="officialPerson" />
-                    <TableColumn prefWidth="75.0" text="Тип абон. устройства" fx:id="typeAbon" />
-                    <TableColumn minWidth="10.0" prefWidth="75.0" sortType="ASCENDING" text="Аппаратная" fx:id="appFrom1" />
+                    <TableColumn minWidth="50.0" prefWidth="75.0" text="Должностные лица" fx:id="officialPerson" />
+                    <TableColumn minWidth="50.0" prefWidth="75.0" text="Тип абон. устройства" fx:id="typeAbon" />
+                    <TableColumn minWidth="50.0" prefWidth="75.0" sortType="ASCENDING" text="Аппаратная" fx:id="appFrom1" />
                     <TableColumn prefWidth="75.0" text="Тип кабеля" fx:id="typeCable" />
-                    <TableColumn prefWidth="75.0" text="Длина кабеля" fx:id="lengthCable" />
+                    <TableColumn minWidth="20.0" prefWidth="75.0" text="Длина кабеля" fx:id="lengthCable" />
                   </columns>
                   <VBox.margin>
                     <Insets />
                   </VBox.margin>
                 </TableView>
+                <HBox minHeight="200.0" prefHeight="200.0" prefWidth="200.0">
+                  <children>
+                    <TableView fx:id="tableViewAbon" editable="true" prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
+                      <columns>
+                        <TableColumn minWidth="155.0" prefWidth="155.0" sortType="ASCENDING" text="Тип абон. устройства" fx:id="typeAbon2" />
+                        <TableColumn minWidth="75.0" prefWidth="75.0" text="Количество" />
+                      </columns>
+                    </TableView>
+                    <TableView fx:id="tableViewCable" editable="true" prefHeight="200.0" prefWidth="200.0" tableMenuButtonVisible="false" HBox.hgrow="ALWAYS">
+                      <columns>
+                        <TableColumn minWidth="155.0" prefWidth="155.0" text="Тип кабеля" fx:id="typeCable2" />
+                        <TableColumn minWidth="75.0" prefWidth="75.0" text="Длина" />
+                      </columns>
+                    </TableView>
+                    <TableView fx:id="tableViewApp" disable="false" editable="true" prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
+                      <columns>
+                        <TableColumn minWidth="155.0" prefWidth="155.0" text="Тип аппаратной" fx:id="appFrom12" />
+                        <TableColumn minWidth="75.0" prefWidth="75.0" text="Количество" />
+                      </columns>
+                    </TableView>
+                  </children>
+                </HBox>
+                <HBox minHeight="40.0" prefHeight="100.0" prefWidth="200.0">
+                  <children>
+                    <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="320.0" text="Время развертывания (в минутах):" textAlignment="LEFT" HBox.hgrow="SOMETIMES">
+                      <font>
+                        <Font name="Times New Roman Bold" size="14.0" fx:id="x1" />
+                      </font>
+                      <HBox.margin>
+                        <Insets left="16.0" right="16.0" />
+                      </HBox.margin>
+                    </Label>
+                    <Label font="$x1" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" text="Label" HBox.hgrow="ALWAYS" />
+                    <Button font="$x2" maxHeight="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefWidth="150.0" text="Рассчитать" HBox.hgrow="ALWAYS">
+                      <HBox.margin>
+                        <Insets />
+                      </HBox.margin>
+                    </Button>
+                  </children>
+                </HBox>
               </children>
             </VBox>
           </children>
@@ -79,9 +119,9 @@
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" prefWidth="130.0" />
           </columnConstraints>
           <rowConstraints>
-            <RowConstraints maxHeight="1.7976931348623157E308" minHeight="75.0" prefHeight="75.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="450.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="1.7976931348623157E308" minHeight="20.0" prefHeight="0.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="1.7976931348623157E308" minHeight="75.0" prefHeight="10.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="-1.0" vgrow="ALWAYS" />
+            <RowConstraints maxHeight="1.7976931348623157E308" minHeight="50.0" prefHeight="0.0" vgrow="SOMETIMES" />
           </rowConstraints>
         </GridPane>
       </children>

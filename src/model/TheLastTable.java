@@ -115,19 +115,7 @@ public class TheLastTable {
                 result.add(item);
             }
         }
-
         return result;
-
-//        return data.filtered(new Predicate<TheLastTable>() {
-//            @Override
-//            public boolean test(TheLastTable item) {
-//                if (item.getOfficialPerson().equals(officialPerson)) {
-//                    return true;
-//                } else {
-//                    return false;
-//                }
-//            }
-//        });
     }
     public static ObservableList<TheLastTable> filterFromApp(String appFrom, ObservableList<TheLastTable> data) {
         ObservableList<TheLastTable> result = FXCollections.observableArrayList();
@@ -137,19 +125,7 @@ public class TheLastTable {
                 result.add(item);
             }
         }
-
         return result;
-
-//        return data.filtered(new Predicate<TheLastTable>() {
-//            @Override
-//            public boolean test(TheLastTable item) {
-//                if (item.getAppFrom1().equals(appFrom)) {
-//                    return true;
-//                } else {
-//                    return false;
-//                }
-//            }
-//        });
     }
 
     public static ObservableList<TheLastTable> filterByTypeAbon(String typeAbon, ObservableList<TheLastTable> data) {
@@ -160,18 +136,7 @@ public class TheLastTable {
                 result.add(item);
             }
         }
-
         return result;
-//        return data.filtered(new Predicate<TheLastTable>() {
-//            @Override
-//            public boolean test(TheLastTable item) {
-//                if (item.getTypeAbon().equals(typeAbon)) {
-//                    return true;
-//                } else {
-//                    return false;
-//                }
-//            }
-//        });
     }
 
     public static ArrayList<String> getAllOfficialPerson(ObservableList<TheLastTable> data) {
@@ -245,7 +210,6 @@ public class TheLastTable {
 
                 if (this.getLengthCable() == ((TheLastTable) obj).getLengthCable())
                     condition_5 = true;
-
             }
 
             is_equal = condition_1 && condition_2 && condition_3 && condition_4 && condition_5;
