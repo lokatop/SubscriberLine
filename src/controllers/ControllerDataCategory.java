@@ -9,14 +9,16 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
-import model.*;
+import model.CategoryOfManagePoint;
+import model.DB;
+import model.MilitaryPart;
+import model.Official;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-import static controllers.ControllerChooseCategoryScheme.chooseData;
 import static controllers.ControllerChooseCategoryScheme.filterChooseModelByType;
 
 public class ControllerDataCategory implements Initializable {
@@ -39,8 +41,6 @@ public class ControllerDataCategory implements Initializable {
     private ArrayList arrayOfList;
 
     public void buttonApply() throws IOException {
-
-        XMLsaver.saveToXML(chooseData, "ChooseModels.xml");
 
         VBox vBox = FXMLLoader.load(getClass().getResource("/fxml/choose_category_scheme.fxml"));
         VboxChooseData.getChildren().setAll(vBox);

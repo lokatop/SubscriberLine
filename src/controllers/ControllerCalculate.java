@@ -39,7 +39,11 @@ public class ControllerCalculate implements Initializable{
     private TableColumn<TheLastTable,String> officialPerson,
             typeAbon,appFrom1;
     @FXML
+    private TableColumn<TheLastTable,String> typeAbon2,typeCable2,appFrom12;
+    @FXML
     private TableColumn<TheLastTable, Integer> lengthCable;
+    @FXML
+    private TableColumn<TheLastTable, Integer> amounfOfAbon,lengthOfCable,amountOfApp;
     @FXML
     private TableColumn<TheLastTable, String> typeCable;
 
@@ -102,28 +106,9 @@ public class ControllerCalculate implements Initializable{
 
                 int row = pos.getRow();
                 TheLastTable lastTable = event.getTableView().getItems().get(row);
-/*
-                if (unfilterred.isEmpty()){
-                    // Чтение из файла
-                    unfilterred.addAll(XMLsaver.loadFromXML(InfoModel.FILENAME_INFOMODELS));
-                }
-                infoModelsList.clear();
-                infoModelsListForListView.clear();
-                infoModelsList.addAll(filterInfoModelByTitle(lastTable.getAppFrom1(), unfilterred));
-
-                for (InfoModel infoModel : infoModelsList) {
-                    List<Map<String, String>> data = infoModel.parseCables();
-                    for (Map<String,String> cable:data){
-                        infoModelsListForListView.add(cable.get("name"));
-                    }
-                }
-*/
 
             }
         });
-        //tableView.requestFocus();
-        //tableView.getFocusModel().focus(0);
-        //tableView.getSelectionModel().selectFirst();
 
 
         typeCable.setCellValueFactory(     new PropertyValueFactory<TheLastTable, String>("typeCable"       ));
@@ -165,12 +150,67 @@ public class ControllerCalculate implements Initializable{
         });
     }
 
+    private void setupTableAbon(){
+        typeAbon2.setCellValueFactory(      new PropertyValueFactory<TheLastTable,String>("typeAbon"        ));
+        amounfOfAbon.setCellValueFactory(   new PropertyValueFactory<TheLastTable, Integer>("lengthCable"     ));
+        amounfOfAbon.setCellFactory(TextFieldTableCell.<TheLastTable, Integer>forTableColumn(new IntegerStringConverter()));
+        amounfOfAbon.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<TheLastTable, Integer>>() {
+            @Override
+            public void handle(TableColumn.CellEditEvent<TheLastTable, Integer> event) {
+                TablePosition<TheLastTable, Integer> pos = event.getTablePosition();
+                Integer newLength= event.getNewValue();
+                // Делаем кол-во положительным
+                if (newLength<=0) newLength = 1;
+                int row = pos.getRow();
+                TheLastTable lastTable = event.getTableView().getItems().get(row);
+                lastTable.setLengthCable(newLength);
+            }
+        });
+    }
+    private void setupTableCable(){
+        typeCable2.setCellValueFactory(      new PropertyValueFactory<TheLastTable,String>("typeCable"        ));
+        lengthOfCable.setCellValueFactory(   new PropertyValueFactory<TheLastTable, Integer>("lengthCable"     ));
+        lengthOfCable.setCellFactory(TextFieldTableCell.<TheLastTable, Integer>forTableColumn(new IntegerStringConverter()));
+        lengthOfCable.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<TheLastTable, Integer>>() {
+            @Override
+            public void handle(TableColumn.CellEditEvent<TheLastTable, Integer> event) {
+                TablePosition<TheLastTable, Integer> pos = event.getTablePosition();
+                Integer newLength= event.getNewValue();
+                // Делаем кол-во положительным
+                if (newLength<=0) newLength = 1;
+                int row = pos.getRow();
+                TheLastTable lastTable = event.getTableView().getItems().get(row);
+                lastTable.setLengthCable(newLength);
+            }
+        });
+    }
+    private void setupTableApp(){
+        appFrom12.setCellValueFactory(      new PropertyValueFactory<TheLastTable,String>("appFrom1"        ));
+        amountOfApp.setCellValueFactory(   new PropertyValueFactory<TheLastTable, Integer>("lengthCable"     ));
+        amountOfApp.setCellFactory(TextFieldTableCell.<TheLastTable, Integer>forTableColumn(new IntegerStringConverter()));
+        amountOfApp.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<TheLastTable, Integer>>() {
+            @Override
+            public void handle(TableColumn.CellEditEvent<TheLastTable, Integer> event) {
+                TablePosition<TheLastTable, Integer> pos = event.getTablePosition();
+                Integer newLength= event.getNewValue();
+                // Делаем кол-во положительным
+                if (newLength<=0) newLength = 1;
+                int row = pos.getRow();
+                TheLastTable lastTable = event.getTableView().getItems().get(row);
+                lastTable.setLengthCable(newLength);
+            }
+        });
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        setupTable();
+        setupTable();setupTableAbon();setupTableCable();setupTableApp();
 
         tableView.setItems(ControllerTypeDefinition3.theLastTableListUpdatedD3);
+        tableViewAbon.setItems(ControllerTypeDefinition3.theLastTableListUpdatedD3);
+        tableViewCable.setItems(ControllerTypeDefinition3.theLastTableListUpdatedD3);
+        tableViewApp.setItems(ControllerTypeDefinition3.theLastTableListUpdatedD3);
     }
 
     public void createWordTable() throws IOException {

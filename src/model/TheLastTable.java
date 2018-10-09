@@ -13,14 +13,17 @@ public class TheLastTable {
     private SimpleStringProperty appFrom1;
     private SimpleStringProperty typeCable;
     private SimpleIntegerProperty lengthCable;
+    private SimpleIntegerProperty amountApp;
+    private SimpleIntegerProperty amountAbon;
 
-    public TheLastTable(String officialPerson, String typeAbon, String appFrom1, String typeCable,
-                        String appFrom2, int lengthCable) {
+    public TheLastTable(String officialPerson, String typeAbon, String appFrom1, String typeCable, int lengthCable, int amountApp, int amountAbon) {
         this.officialPerson = new SimpleStringProperty(officialPerson);
         this.typeAbon = new SimpleStringProperty(typeAbon);
         this.appFrom1 = new SimpleStringProperty(appFrom1);
         this.typeCable = new SimpleStringProperty(typeCable);
         this.lengthCable = new SimpleIntegerProperty(lengthCable);
+        this.amountApp = new SimpleIntegerProperty(amountApp);
+        this.amountAbon = new SimpleIntegerProperty(amountAbon);
     }
 
     public TheLastTable(String officialPerson, String typeAbon) {
@@ -218,5 +221,29 @@ public class TheLastTable {
         } else {
             return false;
         }
+    }
+
+    public int getAmountAbon() {
+        return amountAbon.get();
+    }
+
+    public SimpleIntegerProperty amountAbonProperty() {
+        return amountAbon;
+    }
+
+    public void setAmountAbon(int amountAbon) {
+        this.amountAbon.set(amountAbon);
+    }
+
+    public int getAmountApp() {
+        return amountApp.get();
+    }
+
+    public SimpleIntegerProperty amountAppProperty() {
+        return amountApp;
+    }
+
+    public void setAmountApp(int amountApp) {
+        this.amountApp.set(amountApp);
     }
 }

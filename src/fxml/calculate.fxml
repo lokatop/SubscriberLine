@@ -75,19 +75,19 @@
                     <TableView fx:id="tableViewAbon" editable="true" prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
                       <columns>
                         <TableColumn minWidth="155.0" prefWidth="155.0" sortType="ASCENDING" text="Тип абон. устройства" fx:id="typeAbon2" />
-                        <TableColumn minWidth="75.0" prefWidth="75.0" text="Количество" />
+                        <TableColumn minWidth="75.0" prefWidth="75.0" text="Количество" fx:id="amounfOfAbon" />
                       </columns>
                     </TableView>
                     <TableView fx:id="tableViewCable" editable="true" prefHeight="200.0" prefWidth="200.0" tableMenuButtonVisible="false" HBox.hgrow="ALWAYS">
                       <columns>
                         <TableColumn minWidth="155.0" prefWidth="155.0" text="Тип кабеля" fx:id="typeCable2" />
-                        <TableColumn minWidth="75.0" prefWidth="75.0" text="Длина" />
+                        <TableColumn minWidth="75.0" prefWidth="75.0" text="Длина" fx:id="lengthOfCable" />
                       </columns>
                     </TableView>
                     <TableView fx:id="tableViewApp" disable="false" editable="true" prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
                       <columns>
                         <TableColumn minWidth="155.0" prefWidth="155.0" text="Тип аппаратной" fx:id="appFrom12" />
-                        <TableColumn minWidth="75.0" prefWidth="75.0" text="Количество" />
+                        <TableColumn minWidth="75.0" prefWidth="75.0" text="Количество" fx:id="amountOfApp" />
                       </columns>
                     </TableView>
                   </children>
