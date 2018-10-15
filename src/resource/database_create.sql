@@ -2,7 +2,7 @@ PRAGMA foreign_keys=on;
 
 CREATE TABLE if not exists 'catalog' (
   'id' INTEGER PRIMARY KEY AUTOINCREMENT,
-  'title' TEXT NOT NULL,
+  'title' TEXT NOT NULL UNIQUE,
   'type' TEXT NOT NULL,
   'description' TEXT,
   'image' TEXT,

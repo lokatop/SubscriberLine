@@ -180,6 +180,28 @@ public class DB {
         return result;
     }
 
+    static public CatalogItem getCatalogItemByTitle(String title) throws SQLException {
+
+        CatalogItem result = null;
+
+        Connection connection = getConnection();
+
+        PreparedStatement pstat = connection.prepareStatement("SELECT * FROM catalog WHERE title = ?");
+        pstat.setString(1, title);
+
+        ResultSet rs = pstat.executeQuery();
+
+        result = new CatalogItem(
+                rs.getInt("id"),
+                rs.getString("title"),
+                rs.getString("type"),
+                rs.getString("description"),
+                rs.getString("image")
+        );
+
+        return result;
+    }
+
     static public CatalogItem getCableById(Integer id) throws SQLException {
 
         CatalogItem result = null;
