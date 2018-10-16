@@ -8,6 +8,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TablePosition;
 import javafx.scene.control.TableView;
@@ -16,6 +17,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
+import javafx.util.Callback;
 import javafx.util.converter.DefaultStringConverter;
 import javafx.util.converter.IntegerStringConverter;
 import model.*;
@@ -68,27 +70,6 @@ public class ControllerCalculate implements Initializable {
     }
 
     private void setupTable() {
-        tableView.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                TheLastTable selectedItem = (TheLastTable) tableView.getSelectionModel().getSelectedItem();
-                String appTitle = selectedItem.getAppFrom1();
-
-                try {
-                    CatalogItem app = DB.getCatalogItemByTitle(appTitle);
-
-                    ObservableList<CatalogItem> cableList = DB.getCablesInApparatousById(app.getId());
-
-                    cableListForListView.clear();
-                    for (CatalogItem cable : cableList) {
-                        cableListForListView.add(cable.getTitle());
-                    }
-
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
 
         officialPerson.setCellValueFactory(new PropertyValueFactory<TheLastTable, String>("officialPerson"));
         typeAbon.setCellValueFactory(new PropertyValueFactory<TheLastTable, String>("typeAbon"));
@@ -104,12 +85,47 @@ public class ControllerCalculate implements Initializable {
             }
         });
 
-
         typeCable.setCellValueFactory(new PropertyValueFactory<TheLastTable, String>("typeCable"));
         typeCable.setCellFactory(
-                ComboBoxTableCell.<TheLastTable, String>forTableColumn(
-                        new DefaultStringConverter(), cableListForListView
-                )
+                new Callback<TableColumn<TheLastTable, String>, TableCell<TheLastTable, String>>() {
+                    @Override
+                    public TableCell<TheLastTable, String> call(TableColumn<TheLastTable, String> theLastTableStringTableColumn) {
+                        return new ComboBoxTableCell<TheLastTable, String>(){
+
+                            @Override
+                            public void startEdit() {
+
+                                // При двойном нажатии в область будущего combobox'а
+
+                                // Если в comboBox ещё не загружены данные, то загружаем
+                                if (this.getItems().isEmpty()) {
+                                    TheLastTable selectedItem = (TheLastTable) tableView.getSelectionModel().getSelectedItem();
+                                    String appTitle = selectedItem.getAppFrom1();
+
+                                    // Читаем из БД
+
+                                    try {
+                                        CatalogItem app = DB.getCatalogItemByTitle(appTitle);
+
+                                        ObservableList<CatalogItem> cableList = DB.getCablesInApparatousById(app.getId());
+
+                                        this.getItems().clear();
+                                        for (CatalogItem cable : cableList) {
+
+                                            // Заполняем ComboBox
+                                            this.getItems().add(cable.getTitle());
+                                        }
+
+                                    } catch (SQLException e) {
+                                        e.printStackTrace();
+                                    }
+
+                                    super.startEdit();
+                                }
+                            }
+                        };
+                    }
+                }
         );
         typeCable.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<TheLastTable, String>>() {
             @Override
