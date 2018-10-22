@@ -19,6 +19,7 @@ import javafx.scene.layout.VBox;
 import javafx.util.converter.IntegerStringConverter;
 import model.CatalogItem;
 import model.DB;
+import model.TableViewApparatus;
 import model.TheLastTable;
 import thread.FirstTreadOnCalc_2;
 
@@ -40,11 +41,15 @@ public class ControllerCalculate implements Initializable {
     private TableColumn<TheLastTable, String> officialPerson,
             typeAbon, appFrom1;
     @FXML
-    private TableColumn<TheLastTable, String> typeAbon2, typeCable2, appFrom12;
+    private TableColumn<TheLastTable, String> typeAbon2, typeCable2;
+    @FXML
+    private TableColumn<TableViewApparatus, String> appFrom12;
     @FXML
     private TableColumn<TheLastTable, Integer> lengthCable;
     @FXML
-    private TableColumn<TheLastTable, Integer> amounfOfAbon, lengthOfCable, amountOfApp;
+    private TableColumn<TheLastTable, Integer> amounfOfAbon, lengthOfCable;
+    @FXML
+    private TableColumn<TableViewApparatus, Integer>amountOfApp;
     @FXML
     private TableColumn<TheLastTable, String> typeCable;
 
@@ -130,8 +135,8 @@ public class ControllerCalculate implements Initializable {
     }
 
     private void setupTableAbon() {
-        typeAbon2.setCellValueFactory(new PropertyValueFactory<TheLastTable, String>("typeAbon"));
-        amounfOfAbon.setCellValueFactory(new PropertyValueFactory<TheLastTable, Integer>("amountAbon"));
+        typeAbon2.setCellValueFactory(new PropertyValueFactory<TheLastTable, String>("fullName"));
+        amounfOfAbon.setCellValueFactory(new PropertyValueFactory<TheLastTable, Integer>("count"));
         amounfOfAbon.setCellFactory(TextFieldTableCell.<TheLastTable, Integer>forTableColumn(new IntegerStringConverter()));
     }
 
@@ -154,21 +159,9 @@ public class ControllerCalculate implements Initializable {
     }
 
     private void setupTableApp() {
-        appFrom12.setCellValueFactory(new PropertyValueFactory<TheLastTable, String>("appFrom1"));
-        amountOfApp.setCellValueFactory(new PropertyValueFactory<TheLastTable, Integer>("lengthCable"));
-        amountOfApp.setCellFactory(TextFieldTableCell.<TheLastTable, Integer>forTableColumn(new IntegerStringConverter()));
-        amountOfApp.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<TheLastTable, Integer>>() {
-            @Override
-            public void handle(TableColumn.CellEditEvent<TheLastTable, Integer> event) {
-                TablePosition<TheLastTable, Integer> pos = event.getTablePosition();
-                Integer newLength = event.getNewValue();
-                // Делаем кол-во положительным
-                if (newLength <= 0) newLength = 1;
-                int row = pos.getRow();
-                TheLastTable lastTable = event.getTableView().getItems().get(row);
-                lastTable.setLengthCable(newLength);
-            }
-        });
+        appFrom12.setCellValueFactory(new PropertyValueFactory<TableViewApparatus, String>("appFrom1"));
+        amountOfApp.setCellValueFactory(new PropertyValueFactory<TableViewApparatus, Integer>("lengthCable"));
+        amountOfApp.setCellFactory(TextFieldTableCell.<TableViewApparatus, Integer>forTableColumn(new IntegerStringConverter()));
     }
 
     @Override
@@ -181,9 +174,14 @@ public class ControllerCalculate implements Initializable {
 
         tableView.setItems(ControllerTypeDefinition3.theLastTableListUpdatedD3);
         tableViewCable.setItems(ControllerTypeDefinition3.theLastTableListUpdatedD3);
-        tableViewApp.setItems(ControllerTypeDefinition3.theLastTableListUpdatedD3);
+//        tableViewApp.setItems(ControllerTypeDefinition3.theLastTableListUpdatedD3);
 
         fillTableViewAbon();
+        fillTableViewApp();
+    }
+
+    private void fillTableViewApp(){
+        tableViewApp.setItems(ControllerTypeDefinition2.choosedApparatus);
     }
 
     private void fillTableViewAbon(){
