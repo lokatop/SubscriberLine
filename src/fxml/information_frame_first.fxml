@@ -24,7 +24,7 @@
             </Label>
             <VBox alignment="BOTTOM_CENTER" maxHeight="1.7976931348623157E308" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
               <children>
-                <Label alignment="CENTER" text="Аппаратные тактического звена управления">
+                <Label alignment="CENTER" text="Аппаратные оперативного звена управления">
                   <font>
                     <Font name="Times New Roman" size="14.0" fx:id="x1" />
                   </font>
@@ -41,7 +41,7 @@
                     <Insets />
                   </VBox.margin>
                 </HBox>
-                <Label alignment="CENTER" font="$x1" text="Аппаратные оперативного звена управления">
+                <Label alignment="CENTER" font="$x1" text="Аппаратные тактического звена управления">
                   <VBox.margin>
                     <Insets />
                   </VBox.margin>
