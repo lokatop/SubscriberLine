@@ -32,6 +32,8 @@ public class TheLastTable {
         this.appFrom1 = new SimpleStringProperty();
         this.typeCable = new SimpleStringProperty();
         this.lengthCable = new SimpleIntegerProperty();
+        this.amountApp = new SimpleIntegerProperty();
+        this.amountAbon = new SimpleIntegerProperty();
     }
 
     public TheLastTable(String officialPerson, String typeAbon, String appFrom1) {
@@ -40,6 +42,8 @@ public class TheLastTable {
         this.appFrom1 = new SimpleStringProperty(appFrom1);
         this.typeCable = new SimpleStringProperty();
         this.lengthCable = new SimpleIntegerProperty();
+        this.amountApp = new SimpleIntegerProperty();
+        this.amountAbon = new SimpleIntegerProperty();
     }
 
     public TheLastTable(TheLastTable item) {
@@ -48,6 +52,8 @@ public class TheLastTable {
         this.appFrom1 = new SimpleStringProperty(item.getAppFrom1());
         this.typeCable = new SimpleStringProperty(item.getTypeCable());
         this.lengthCable = new SimpleIntegerProperty(item.getLengthCable());
+        this.amountApp = new SimpleIntegerProperty();
+        this.amountAbon = new SimpleIntegerProperty();
     }
 
     public String getOfficialPerson() {

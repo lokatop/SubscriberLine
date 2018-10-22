@@ -25,6 +25,8 @@ import thread.FirstTreadOnCalc_2;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.Iterator;
+import java.util.ListIterator;
 import java.util.ResourceBundle;
 
 public class ControllerCalculate implements Initializable {
@@ -129,20 +131,8 @@ public class ControllerCalculate implements Initializable {
 
     private void setupTableAbon() {
         typeAbon2.setCellValueFactory(new PropertyValueFactory<TheLastTable, String>("typeAbon"));
-        amounfOfAbon.setCellValueFactory(new PropertyValueFactory<TheLastTable, Integer>("lengthCable"));
+        amounfOfAbon.setCellValueFactory(new PropertyValueFactory<TheLastTable, Integer>("amountAbon"));
         amounfOfAbon.setCellFactory(TextFieldTableCell.<TheLastTable, Integer>forTableColumn(new IntegerStringConverter()));
-        amounfOfAbon.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<TheLastTable, Integer>>() {
-            @Override
-            public void handle(TableColumn.CellEditEvent<TheLastTable, Integer> event) {
-                TablePosition<TheLastTable, Integer> pos = event.getTablePosition();
-                Integer newLength = event.getNewValue();
-                // Делаем кол-во положительным
-                if (newLength <= 0) newLength = 1;
-                int row = pos.getRow();
-                TheLastTable lastTable = event.getTableView().getItems().get(row);
-                lastTable.setLengthCable(newLength);
-            }
-        });
     }
 
     private void setupTableCable() {
@@ -190,9 +180,41 @@ public class ControllerCalculate implements Initializable {
         setupTableApp();
 
         tableView.setItems(ControllerTypeDefinition3.theLastTableListUpdatedD3);
-        tableViewAbon.setItems(ControllerTypeDefinition3.theLastTableListUpdatedD3);
         tableViewCable.setItems(ControllerTypeDefinition3.theLastTableListUpdatedD3);
         tableViewApp.setItems(ControllerTypeDefinition3.theLastTableListUpdatedD3);
+
+        fillTableViewAbon();
+    }
+
+    private void fillTableViewAbon(){
+        ObservableList<TheLastTable> newList = FXCollections.observableArrayList();
+
+        for (TheLastTable theLastTable : ControllerTypeDefinition3.theLastTableListUpdatedD3) {
+
+            theLastTable.setAmountAbon(1);
+
+            if (newList.size() == 0){
+                newList.add(theLastTable);
+                continue;
+            }
+
+            boolean exist = false;
+
+            for (TheLastTable existedItem : newList) {
+                if (existedItem.getTypeAbon().equals(theLastTable.getTypeAbon())){
+                    Integer newCount = existedItem.getAmountAbon() + theLastTable.getAmountAbon();
+
+                    existedItem.setAmountAbon(newCount);
+
+                    exist = true;
+                }
+            }
+
+            if (!exist) newList.add(theLastTable);
+        }
+
+        tableViewAbon.getItems().clear();
+        tableViewAbon.getItems().addAll(newList);
     }
 
     public void createWordTable() throws IOException {
