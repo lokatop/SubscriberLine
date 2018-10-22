@@ -1,40 +1,36 @@
 package controllers;
 
-import com.sun.org.apache.xml.internal.resolver.Catalog;
-import javafx.beans.binding.ListBinding;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.TableCell;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TablePosition;
 import javafx.scene.control.TableView;
-import javafx.scene.control.cell.ComboBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
-import javafx.util.Callback;
-import javafx.util.converter.DefaultStringConverter;
 import javafx.util.converter.IntegerStringConverter;
-import model.*;
+import model.CatalogItem;
+import model.DB;
+import model.TheLastTable;
 import thread.FirstTreadOnCalc_2;
 
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.util.List;
-import java.util.Map;
 import java.util.ResourceBundle;
-
-import static controllers.ControllerTypeCable.filterInfoModelByTitle;
 
 public class ControllerCalculate implements Initializable {
     @FXML
     public VBox vbox;
+    public ListView<CatalogItem> typeCable_choose_list;
     @FXML
     private TableView tableView, tableViewAbon, tableViewCable, tableViewApp;
 
@@ -49,8 +45,6 @@ public class ControllerCalculate implements Initializable {
     private TableColumn<TheLastTable, Integer> amounfOfAbon, lengthOfCable, amountOfApp;
     @FXML
     private TableColumn<TheLastTable, String> typeCable;
-
-    private ObservableList<String> cableListForListView = FXCollections.observableArrayList();
 
     @FXML
     private void btnBackClick() throws IOException {
@@ -71,6 +65,27 @@ public class ControllerCalculate implements Initializable {
 
     private void setupTable() {
 
+        ((TableView<TheLastTable>)tableView).getSelectionModel().selectedItemProperty().addListener(new ChangeListener<TheLastTable>() {
+            @Override
+            public void changed(ObservableValue<? extends TheLastTable> observableValue, TheLastTable theLastTable, TheLastTable t1) {
+                TheLastTable selectedItem = (TheLastTable) tableView.getSelectionModel().getSelectedItem();
+                String appTitle = selectedItem.getAppFrom1();
+
+                // Читаем из БД
+
+                try {
+                    CatalogItem app = DB.getCatalogItemByTitle(appTitle);
+
+                    ObservableList<CatalogItem> cableList = DB.getCablesInApparatousById(app.getId());
+
+                    typeCable_choose_list.getItems().clear();
+                    typeCable_choose_list.getItems().addAll(cableList);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
         officialPerson.setCellValueFactory(new PropertyValueFactory<TheLastTable, String>("officialPerson"));
         typeAbon.setCellValueFactory(new PropertyValueFactory<TheLastTable, String>("typeAbon"));
         appFrom1.setCellValueFactory(new PropertyValueFactory<TheLastTable, String>("appFrom1"));
@@ -86,59 +101,7 @@ public class ControllerCalculate implements Initializable {
         });
 
         typeCable.setCellValueFactory(new PropertyValueFactory<TheLastTable, String>("typeCable"));
-        typeCable.setCellFactory(
-                new Callback<TableColumn<TheLastTable, String>, TableCell<TheLastTable, String>>() {
-                    @Override
-                    public TableCell<TheLastTable, String> call(TableColumn<TheLastTable, String> theLastTableStringTableColumn) {
-                        return new ComboBoxTableCell<TheLastTable, String>(){
 
-                            @Override
-                            public void startEdit() {
-
-                                // При двойном нажатии в область будущего combobox'а
-
-                                // Если в comboBox ещё не загружены данные, то загружаем
-                                if (this.getItems().isEmpty()) {
-                                    TheLastTable selectedItem = (TheLastTable) tableView.getSelectionModel().getSelectedItem();
-                                    String appTitle = selectedItem.getAppFrom1();
-
-                                    // Читаем из БД
-
-                                    try {
-                                        CatalogItem app = DB.getCatalogItemByTitle(appTitle);
-
-                                        ObservableList<CatalogItem> cableList = DB.getCablesInApparatousById(app.getId());
-
-                                        this.getItems().clear();
-                                        for (CatalogItem cable : cableList) {
-
-                                            // Заполняем ComboBox
-                                            this.getItems().add(cable.getTitle());
-                                        }
-
-                                    } catch (SQLException e) {
-                                        e.printStackTrace();
-                                    }
-
-                                    super.startEdit();
-                                }
-                            }
-                        };
-                    }
-                }
-        );
-        typeCable.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<TheLastTable, String>>() {
-            @Override
-            public void handle(TableColumn.CellEditEvent<TheLastTable, String> event) {
-                TablePosition<TheLastTable, String> pos = event.getTablePosition();
-
-                int row = pos.getRow();
-                TheLastTable lastTable = event.getTableView().getItems().get(row);
-
-                lastTable.getAppFrom1();
-                lastTable.setTypeCable(event.getNewValue());
-            }
-        });
         lengthCable.setCellValueFactory(new PropertyValueFactory<TheLastTable, Integer>("lengthCable"));
         lengthCable.setCellFactory(TextFieldTableCell.<TheLastTable, Integer>forTableColumn(new IntegerStringConverter()));
         lengthCable.setMinWidth(10);
@@ -235,5 +198,16 @@ public class ControllerCalculate implements Initializable {
     public void createWordTable() throws IOException {
         FirstTreadOnCalc_2 tread = new FirstTreadOnCalc_2();
         tread.run(ControllerTypeDefinition3.theLastTableListUpdatedD3);
+    }
+
+    public void _typeCable_choose_list_add(ActionEvent actionEvent) {
+        if (!typeCable_choose_list.getItems().isEmpty()){
+            CatalogItem selectedCable = typeCable_choose_list.getSelectionModel().getSelectedItem();
+            TheLastTable selectedTheLastTableItem = (TheLastTable) tableView.getSelectionModel().getSelectedItem();
+
+            if (selectedCable != null){
+                selectedTheLastTableItem.setTypeCable(selectedCable.getTitle());
+            }
+        }
     }
 }
