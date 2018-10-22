@@ -26,8 +26,6 @@ import thread.FirstTreadOnCalc_2;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.util.Iterator;
-import java.util.ListIterator;
 import java.util.ResourceBundle;
 
 public class ControllerCalculate implements Initializable {
@@ -135,8 +133,8 @@ public class ControllerCalculate implements Initializable {
     }
 
     private void setupTableAbon() {
-        typeAbon2.setCellValueFactory(new PropertyValueFactory<TheLastTable, String>("fullName"));
-        amounfOfAbon.setCellValueFactory(new PropertyValueFactory<TheLastTable, Integer>("count"));
+        typeAbon2.setCellValueFactory(new PropertyValueFactory<TheLastTable, String>("typeAbon"));
+        amounfOfAbon.setCellValueFactory(new PropertyValueFactory<TheLastTable, Integer>("amountAbon"));
         amounfOfAbon.setCellFactory(TextFieldTableCell.<TheLastTable, Integer>forTableColumn(new IntegerStringConverter()));
     }
 
@@ -159,8 +157,8 @@ public class ControllerCalculate implements Initializable {
     }
 
     private void setupTableApp() {
-        appFrom12.setCellValueFactory(new PropertyValueFactory<TableViewApparatus, String>("appFrom1"));
-        amountOfApp.setCellValueFactory(new PropertyValueFactory<TableViewApparatus, Integer>("lengthCable"));
+        appFrom12.setCellValueFactory(new PropertyValueFactory<TableViewApparatus, String>("fullName"));
+        amountOfApp.setCellValueFactory(new PropertyValueFactory<TableViewApparatus, Integer>("count"));
         amountOfApp.setCellFactory(TextFieldTableCell.<TableViewApparatus, Integer>forTableColumn(new IntegerStringConverter()));
     }
 
