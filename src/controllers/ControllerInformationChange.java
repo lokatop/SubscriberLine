@@ -11,7 +11,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -152,7 +151,7 @@ public class ControllerInformationChange {
             // для всплывающего диалогового окна.
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("/fxml/information_frame_change_dialog.fxml"));
-            AnchorPane page = (AnchorPane) loader.load();
+            VBox page = (VBox) loader.load();
 
             // Создаём диалоговое окно Stage.
             Stage dialogStage = new Stage();
@@ -189,7 +188,7 @@ public class ControllerInformationChange {
             // для всплывающего диалогового окна.
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("/fxml/information_frame_change_dialog_for_apparatus.fxml"));
-            AnchorPane page = (AnchorPane) loader.load();
+            VBox page = (VBox) loader.load();
 
             // Создаём диалоговое окно Stage.
             Stage dialogStage = new Stage();
@@ -226,7 +225,7 @@ public class ControllerInformationChange {
             // для всплывающего диалогового окна.
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("/fxml/information_frame_change_dialog_for_cables.fxml"));
-            AnchorPane page = (AnchorPane) loader.load();
+            VBox page = (VBox) loader.load();
 
             // Создаём диалоговое окно Stage.
             Stage dialogStage = new Stage();
@@ -263,7 +262,7 @@ public class ControllerInformationChange {
             // для всплывающего диалогового окна.
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("/fxml/information_frame_change_dialog.fxml"));
-            AnchorPane page = (AnchorPane) loader.load();
+            VBox page = (VBox) loader.load();
 
             // Создаём диалоговое окно Stage.
             Stage dialogStage = new Stage();
@@ -302,7 +301,7 @@ public class ControllerInformationChange {
             // для всплывающего диалогового окна.
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("/fxml/information_frame_change_dialog_for_apparatus.fxml"));
-            AnchorPane page = (AnchorPane) loader.load();
+            VBox page = (VBox) loader.load();
 
             // Создаём диалоговое окно Stage.
             Stage dialogStage = new Stage();
@@ -355,7 +354,7 @@ public class ControllerInformationChange {
             // для всплывающего диалогового окна.
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("/fxml/information_frame_change_dialog_for_cables.fxml"));
-            AnchorPane page = (AnchorPane) loader.load();
+            VBox page = (VBox) loader.load();
 
             // Создаём диалоговое окно Stage.
             Stage dialogStage = new Stage();
