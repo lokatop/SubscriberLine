@@ -6,13 +6,13 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox fx:id="Vbox" prefHeight="400.0" prefWidth="640.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="controllers.ControllerInformationFrame">
+<VBox fx:id="Vbox" alignment="CENTER" prefHeight="400.0" prefWidth="640.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="controllers.ControllerInformationFrame">
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
       <children>
         <Label alignment="CENTER" maxHeight="100.0" maxWidth="760.0" prefHeight="-1.0" prefWidth="760.0" text="Информационно справочный раздел" textAlignment="CENTER" wrapText="true" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="16.0">
           <font>
-            <Font name="Times New Roman Bold" size="16.0" fx:id="x2" />
+            <Font name="Times New Roman Bold" size="20.0" />
           </font>
         </Label>
         <GridPane alignment="CENTER" minHeight="720.0" minWidth="960.0" prefHeight="720.0" prefWidth="960.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -22,11 +22,11 @@
                 <Font size="12.0" />
               </font>
             </Label>
-            <VBox alignment="BOTTOM_CENTER" maxHeight="1.7976931348623157E308" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
+            <VBox alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
               <children>
-                <Label alignment="CENTER" text="Аппаратные оперативного звена управления">
+                <Label alignment="CENTER" text="Аппаратные тактического звена управления">
                   <font>
-                    <Font name="Times New Roman" size="14.0" fx:id="x1" />
+                    <Font name="Times New Roman" size="16.0" fx:id="x1" />
                   </font>
                   <VBox.margin>
                     <Insets />
@@ -35,13 +35,14 @@
                 <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0">
                   <children>
                     <ComboBox fx:id="ATZU" prefWidth="240.0" />
+                    <Separator opacity="0.0" prefWidth="8.0" />
                     <Button mnemonicParsing="false" onAction="#toShow" text="Показать" />
                   </children>
                   <VBox.margin>
                     <Insets />
                   </VBox.margin>
                 </HBox>
-                <Label alignment="CENTER" font="$x1" text="Аппаратные тактического звена управления">
+                <Label alignment="CENTER" font="$x1" text="Аппаратные оперативного звена управления">
                   <VBox.margin>
                     <Insets />
                   </VBox.margin>
@@ -49,18 +50,21 @@
                 <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0">
                   <children>
                     <ComboBox fx:id="AOZU" prefWidth="240.0" />
+                    <Separator opacity="0.0" prefWidth="8.0" />
                     <Button mnemonicParsing="false" onAction="#toShow" text="Показать" />
                   </children>
                   <VBox.margin>
                     <Insets />
                   </VBox.margin>
                 </HBox>
-                <VBox alignment="BOTTOM_CENTER" maxHeight="1.7976931348623157E308" prefHeight="200.0" prefWidth="100.0">
+                <Separator opacity="0.0" orientation="VERTICAL" prefHeight="200.0" />
+                <VBox alignment="BOTTOM_CENTER" maxHeight="1.7976931348623157E308" prefHeight="0.0" prefWidth="100.0">
                   <children>
                     <Label alignment="CENTER" font="$x1" text="Внести изменения в раздел" />
                     <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                       <children>
                         <ComboBox fx:id="list_for_edit" prefWidth="230.0" />
+                        <Separator prefWidth="8.0" />
                         <Button mnemonicParsing="false" onAction="#change" text="Изменить" />
                       </children>
                     </HBox>
@@ -68,7 +72,10 @@
                 </VBox>
               </children>
             </VBox>
-            <Label alignment="CENTER" contentDisplay="CENTER" font="$x2" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Абонентское оборудование" textAlignment="CENTER" wrapText="true" GridPane.rowIndex="1">
+            <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Абонентское оборудование" textAlignment="CENTER" wrapText="true" GridPane.rowIndex="1">
+              <font>
+                <Font name="Times New Roman Bold" size="18.0" fx:id="x3" />
+              </font>
               <GridPane.margin>
                 <Insets />
               </GridPane.margin>
@@ -78,7 +85,8 @@
                 <Label alignment="CENTER" font="$x1" text="Телефонные аппараты ДС" />
                 <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0">
                   <children>
-                    <ComboBox fx:id="DC" prefWidth="200.0" />
+                    <ComboBox fx:id="DC" prefWidth="200.0" style="" />
+                    <Separator opacity="0.0" prefWidth="8.0" />
                     <Button mnemonicParsing="false" onAction="#toShow" text="Показать" />
                   </children>
                   <VBox.margin>
@@ -89,6 +97,7 @@
                 <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0">
                   <children>
                     <ComboBox fx:id="ZAS" prefWidth="200.0" />
+                    <Separator opacity="0.0" prefWidth="8.0" />
                     <Button mnemonicParsing="false" onAction="#toShow" text="Показать" />
                   </children>
                   <VBox.margin>
@@ -99,6 +108,7 @@
                 <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0">
                   <children>
                     <ComboBox fx:id="ARM" prefWidth="200.0" />
+                    <Separator opacity="0.0" prefWidth="8.0" />
                     <Button mnemonicParsing="false" onAction="#toShow" text="Показать" />
                   </children>
                   <VBox.margin>
@@ -109,6 +119,7 @@
                 <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0">
                   <children>
                     <ComboBox fx:id="telCable" prefWidth="200.0" />
+                    <Separator opacity="0.0" prefWidth="8.0" />
                     <Button mnemonicParsing="false" onAction="#toShow" text="Показать" />
                   </children>
                   <VBox.margin>
@@ -120,11 +131,7 @@
                 <Insets />
               </padding>
             </VBox>
-            <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Аппаратные связи от которых развертывается абонентская сеть" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
-              <font>
-                <Font name="Times New Roman Bold" size="14.0" />
-              </font>
-            </Label>
+            <Label alignment="CENTER" contentDisplay="CENTER" font="$x3" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Аппаратные связи от которых развертывается абонентская сеть" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="1" />
             <VBox prefHeight="200.0" prefWidth="100.0">
               <children>
                 <Button minHeight="25.0" mnemonicParsing="false" onAction="#btnBackClick" text="Назад">

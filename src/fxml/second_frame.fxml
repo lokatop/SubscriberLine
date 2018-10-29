@@ -8,7 +8,7 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<VBox fx:id="VBoxRoot" prefHeight="400.0" prefWidth="640.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="controllers.ControllerSecondFrame">
+<VBox fx:id="VBoxRoot" alignment="CENTER" prefHeight="400.0" prefWidth="640.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="controllers.ControllerSecondFrame">
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
       <children>
@@ -26,7 +26,7 @@
             </Label>
             <Label text="Разделы программы" GridPane.columnIndex="1" GridPane.rowIndex="1">
               <font>
-                <Font name="System Bold" size="14.0" />
+                <Font name="System Bold" size="22.0" />
               </font>
             </Label>
             <Label font="$x1" text="Для дальнейшей работы с программой перейдите в нужный раздел путем нажатия на название раздела" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="3">
@@ -36,12 +36,16 @@
             </Label>
             <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
               <children>
-                <Button alignment="CENTER" maxWidth="1.7976931348623157E308" minHeight="50.0" mnemonicParsing="false" onAction="#buttonInformation" text="Информационно-справочный" textAlignment="CENTER" underline="true">
+                <Button alignment="CENTER" maxWidth="1.7976931348623157E308" minHeight="50.0" mnemonicParsing="false" onAction="#buttonInformation" text="Информационно-справочный" textAlignment="CENTER" underline="false" wrapText="false">
+                  <font>
+                    <Font size="16.0" fx:id="x2" />
+                  </font>
                   <VBox.margin>
                     <Insets />
                   </VBox.margin>
                 </Button>
-                <Button alignment="CENTER" maxWidth="1.7976931348623157E308" minHeight="50.0" mnemonicParsing="false" onAction="#FormingADocument" text="Формирование графического документа&lt;Схема абонентской сети пункта управления&gt;" textAlignment="CENTER" underline="true" wrapText="true">
+                <Separator orientation="VERTICAL" prefHeight="8.0" />
+                <Button alignment="CENTER" font="$x2" maxWidth="1.7976931348623157E308" minHeight="50.0" mnemonicParsing="false" onAction="#FormingADocument" text="Формирование графического документа &lt;Схема абонентской сети пункта управления&gt;" textAlignment="CENTER" underline="false" wrapText="true">
                   <VBox.margin>
                     <Insets />
                   </VBox.margin>

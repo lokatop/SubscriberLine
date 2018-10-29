@@ -14,10 +14,16 @@
       <children>
         <GridPane alignment="CENTER" gridLinesVisible="false" minHeight="719.9999000000025" minWidth="959.9999000000025" prefHeight="720.0" prefWidth="960.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
           <children>
-            <VBox alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" prefHeight="420.0" prefWidth="338.0" visible="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <VBox alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" minWidth="416.0" prefHeight="582.0" prefWidth="416.0" visible="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
               <children>
+                <Label text="Изображение">
+                  <font>
+                    <Font size="16.0" fx:id="x1" />
+                  </font>
+                </Label>
+                <Separator opacity="0.0" orientation="VERTICAL" prefHeight="16.0" />
                 <ImageView fx:id="imageDescr" fitHeight="400.0" fitWidth="400.0" pickOnBounds="true" preserveRatio="true" />
-                <Separator orientation="VERTICAL" prefHeight="32.0" />
+                <Separator opacity="0.0" orientation="VERTICAL" prefHeight="32.0" />
                 <ScrollPane id="ScrollPane" fitToHeight="true" fitToWidth="true" hbarPolicy="AS_NEEDED" maxWidth="400.0" opacity="1.0" prefHeight="-1.0" prefViewportHeight="140.0" prefViewportWidth="400.0" prefWidth="-1.0" style="-fx-background-color:transparent;" styleClass="null" visible="true" VBox.vgrow="NEVER">
                   <content>
                     <AnchorPane id="Content" disable="false" minHeight="0.0" minWidth="0.0" prefHeight="140.0" prefWidth="400.0" style="-fx-background-color:transparent;" visible="true">
@@ -32,14 +38,16 @@
                 </ScrollPane>
               </children>
             </VBox>
-            <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+            <VBox id="VBox" alignment="CENTER" spacing="5.0" GridPane.columnIndex="0" GridPane.rowIndex="1">
               <children>
-                <WebView fx:id="lblDesc" prefHeight="550.0" prefWidth="448.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                <Label font="$x1" text="Описание" />
+                <AnchorPane prefHeight="582.0" prefWidth="480.0">
+                  <children>
+                    <WebView fx:id="lblDesc" prefHeight="550.0" prefWidth="448.0" AnchorPane.bottomAnchor="16.0" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="8.0" />
+                  </children>
+                </AnchorPane>
               </children>
-              <GridPane.margin>
-                <Insets />
-              </GridPane.margin>
-            </AnchorPane>
+            </VBox>
             <VBox prefHeight="124.0" prefWidth="480.0">
               <children>
                 <Button minHeight="25.0" mnemonicParsing="false" onAction="#btnBackClick" text="Назад">
@@ -70,7 +78,7 @@
         </GridPane>
         <Label fx:id="lblLabel" alignment="CENTER" maxHeight="100.0" maxWidth="760.0" prefHeight="-1.0" prefWidth="760.0" text="fxid : fxLabel(Тут название ТА)" textAlignment="CENTER" wrapText="true" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="16.0">
           <font>
-            <Font name="Times New Roman Bold" size="16.0" />
+            <Font name="Times New Roman Bold" size="20.0" />
           </font>
         </Label>
       </children>
