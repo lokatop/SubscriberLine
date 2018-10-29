@@ -98,6 +98,7 @@ public class ControllerInformationChange {
 
         }
         updateListsAfterChange();
+        disable_buttons();
     }
 
     public void info_model_save(ActionEvent actionEvent) throws IOException {
