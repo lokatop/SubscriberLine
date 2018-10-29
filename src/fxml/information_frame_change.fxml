@@ -26,7 +26,8 @@
                     <Button fx:id="__btn_edit" disable="true" minHeight="25.0" mnemonicParsing="false" onAction="#info_model_edit" text="Изменить" VBox.margin="$x1" />
                     <HBox prefHeight="100.0" prefWidth="200.0">
                       <children>
-                        <Button fx:id="__btn_copy_past" disable="true" minHeight="25.0" mnemonicParsing="false" onAction="#info_model_copy_past" text="Копировать" />
+                        <Button fx:id="__btn_copy_past" disable="true" minHeight="25.0" mnemonicParsing="false" onAction="#info_model_copy_past" text="Вырезать" />
+                        <Separator opacity="0.0" prefWidth="8.0" />
                         <Button fx:id="__btn_copy_past_cancel" disable="true" minHeight="25.0" mnemonicParsing="false" onAction="#info_model_copy_past_cancel" text="Отменить" />
                       </children>
                     </HBox>
