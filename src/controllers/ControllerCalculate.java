@@ -342,7 +342,7 @@ public class ControllerCalculate implements Initializable {
         t_prokl = l/(V * Math.sqrt(n) * Math.sqrt(omega)) * (1 + K_vr);
 
         // длина линии от распределительного (выносного) щита до оконечного терминального оборудования
-        double d = 1;
+        double d = 0; // т.к. выносных щитов у нас нет
 
         // время прокладки кабеля типа П-274М (STP- или UTP-кабеля) от распределительного (выносного) щита до оконечного оборудования длиной более 5 м
         double t_podkl = 2 * (d + K_mestn * d) / V;
@@ -357,10 +357,10 @@ public class ControllerCalculate implements Initializable {
         double t_py = 0.5;
 
         // количество используемых переходных устройств
-        double m = 1; // TODO: ваще хз
+        double m = 0; // TODO: ваще хз
 
         // Расчёт t_перех
-        t_pereh = t_py * m;
+        t_pereh = 3; //t_py * m;
 
         // Расчёт t_разв
         t_razv = t_prokl + t_prov + t_pereh;
