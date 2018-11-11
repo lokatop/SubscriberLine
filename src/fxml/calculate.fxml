@@ -92,6 +92,14 @@
                     </TableView>
                   </children>
                 </HBox>
+                <HBox prefHeight="100.0" prefWidth="200.0">
+                  <children>
+                    <Label text="Скорость прокладки кабеля м/мин" />
+                    <TextField fx:id="_putting_speed" prefHeight="20.0" prefWidth="64.0" />
+                    <Label text="Количество личного состава" />
+                    <TextField fx:id="_people_count" prefHeight="20.0" prefWidth="64.0" />
+                  </children>
+                </HBox>
                 <HBox minHeight="40.0" prefHeight="100.0" prefWidth="200.0">
                   <children>
                     <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="320.0" text="Время развертывания (в минутах):" textAlignment="LEFT" HBox.hgrow="SOMETIMES">

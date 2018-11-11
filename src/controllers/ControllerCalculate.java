@@ -30,6 +30,8 @@ public class ControllerCalculate implements Initializable {
     public VBox vbox;
     public ListView<CatalogItem> typeCable_choose_list;
     public Label calculated_time;
+    public TextField _putting_speed;
+    public TextField _people_count;
     @FXML
     private TableView<TheLastTable> tableView, tableViewAbon, tableViewCable;
     @FXML
@@ -378,6 +380,9 @@ public class ControllerCalculate implements Initializable {
     public void _calc_time(ActionEvent actionEvent) {
         double result = 0;
 
+        // Скорость прокладки
+        double speed = Double.valueOf(_putting_speed.getText());
+
         // Длины кабелей
         ObservableList<Integer> cables_length = FXCollections.observableArrayList();
         for (TheLastTable item : tableViewCable.getItems()) {
@@ -395,7 +400,10 @@ public class ControllerCalculate implements Initializable {
             abonCount += item.getAmountAbon();
         }
 
-        result = time_calculate(10, cables_length, 1, weather, abonCount, 1, 1);
+        // Количество личного состава
+        Integer people_count = Integer.parseInt(_people_count.getText());
+
+        result = time_calculate(speed, cables_length, 1, weather, abonCount, people_count, 1);
 
         calculated_time.setText(Double.toString(result));
     }
