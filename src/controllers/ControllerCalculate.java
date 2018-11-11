@@ -9,10 +9,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TablePosition;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.VBox;
@@ -32,9 +29,11 @@ public class ControllerCalculate implements Initializable {
     @FXML
     public VBox vbox;
     public ListView<CatalogItem> typeCable_choose_list;
+    public Label calculated_time;
     @FXML
-    private TableView tableView, tableViewAbon, tableViewCable, tableViewApp;
-
+    private TableView<TheLastTable> tableView, tableViewAbon, tableViewCable;
+    @FXML
+    private TableView<TableViewApparatus> tableViewApp;
     @FXML
     private TableColumn<TheLastTable, String> officialPerson,
             typeAbon, appFrom1;
@@ -240,18 +239,22 @@ public class ControllerCalculate implements Initializable {
      * @param location      параметры местности <br>
      *                      <table>
      *                      <tr>
+     *                      <th>id</th>
      *                      <th>Характер местности развертывания</th>
      *                      <th>Значения коэффициента k_местн</th>
      *                      </tr>
      *                      <tr>
+     *                      <td>0</td>
      *                      <td>Местность равнинная, мало и среднепересеченная</td>
      *                      <td>0,05</td>
      *                      </tr>
      *                      <tr>
+     *                      <td>1</td>
      *                      <td>Местность холмистая и сильнопересеченная</td>
      *                      <td>0,1</td>
      *                      </tr>
      *                      <tr>
+     *                      <td>2</td>
      *                      <td>Горная и другая труднодоступная для прокладки кабелей, сильнопересеченная (изрезанная) местность</td>
      *                      <td>0,15</td>
      *                      </tr>
@@ -273,43 +276,43 @@ public class ControllerCalculate implements Initializable {
      *                      </tr>
      *                      <tr>
      *                      <td>Равнинная и среднепересеченная</td>
-     *                      <td>(1) 0,0</td>
+     *                      <td>(0) 0,0</td>
+     *                      <td>(1) 0,1</td>
      *                      <td>(2) 0,1</td>
-     *                      <td>(3) 0,1</td>
      *                      <td>(3) 0,2</td>
-     *                      <td>(4) 0,25</td>
-     *                      <td>(6) 0,2</td>
-     *                      <td>(7) 0,3</td>
+     *                      <td>(3) 0,25</td>
+     *                      <td>(4) 0,2</td>
+     *                      <td>(6) 0,3</td>
      *                      </tr>
      *                      <tr>
      *                      <td>Лесисто-болотистая</td>
-     *                      <td>(8) 0,1</td>
+     *                      <td>(7) 0,1</td>
+     *                      <td>(8) 0,2</td>
      *                      <td>(9) 0,2</td>
-     *                      <td>(10) 0,2</td>
-     *                      <td>(11) 0,25</td>
-     *                      <td>(12) 0,3</td>
-     *                      <td>(13) 0,2</td>
-     *                      <td>(14) 0,3</td>
+     *                      <td>(10) 0,25</td>
+     *                      <td>(11) 0,3</td>
+     *                      <td>(12) 0,2</td>
+     *                      <td>(13) 0,3</td>
      *                      </tr>
      *                      <tr>
      *                      <td>Пустынно-песчаная</td>
-     *                      <td>(15) 0,2</td>
-     *                      <td>(16) 0,3</td>
-     *                      <td>(17) 0,2</td>
-     *                      <td>(18) 0,25</td>
-     *                      <td>(19) 0,3</td>
-     *                      <td>(20) 0,25</td>
-     *                      <td>(21) 0,35</td>
+     *                      <td>(14) 0,2</td>
+     *                      <td>(15) 0,3</td>
+     *                      <td>(16) 0,2</td>
+     *                      <td>(17) 0,25</td>
+     *                      <td>(18) 0,3</td>
+     *                      <td>(19) 0,25</td>
+     *                      <td>(20) 0,35</td>
      *                      </tr>
      *                      <tr>
      *                      <td>Гористая</td>
-     *                      <td>(22) 0,3</td>
+     *                      <td>(21) 0,3</td>
+     *                      <td>(22) 0,35</td>
      *                      <td>(23) 0,35</td>
      *                      <td>(24) 0,35</td>
-     *                      <td>(25) 0,35</td>
-     *                      <td>(26) 0,4</td>
-     *                      <td>(27) 0,25</td>
-     *                      <td>(28) 0,35</td>
+     *                      <td>(25) 0,4</td>
+     *                      <td>(26) 0,25</td>
+     *                      <td>(27) 0,35</td>
      *                      </tr>
      *                      </table>
      *                      <br><br>
@@ -370,5 +373,30 @@ public class ControllerCalculate implements Initializable {
         t_razv = t_prokl + t_prov + t_pereh;
 
         return t_razv;
+    }
+
+    public void _calc_time(ActionEvent actionEvent) {
+        double result = 0;
+
+        // Длины кабелей
+        ObservableList<Integer> cables_length = FXCollections.observableArrayList();
+        for (TheLastTable item : tableViewCable.getItems()) {
+            cables_length.add(item.getLengthCable());
+        }
+
+        // Параметры местности/погоды
+        ObservableList<Integer> weather = FXCollections.observableArrayList();
+        weather.add(0);
+        weather.add(4);
+
+        // Количество оконечных устройств
+        Integer abonCount = 0;
+        for (TheLastTable item : tableView.getItems()) {
+            abonCount += item.getAmountAbon();
+        }
+
+        result = time_calculate(10, cables_length, 1, weather, abonCount, 1, 1);
+
+        calculated_time.setText(Double.toString(result));
     }
 }

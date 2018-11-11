@@ -102,8 +102,8 @@
                         <Insets left="16.0" right="16.0" />
                       </HBox.margin>
                     </Label>
-                    <Label font="$x1" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" text="Label" HBox.hgrow="ALWAYS" />
-                    <Button font="$x2" maxHeight="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefWidth="150.0" text="Рассчитать" HBox.hgrow="ALWAYS">
+                    <Label id="culculated_time" fx:id="calculated_time" font="$x1" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" text="Label" HBox.hgrow="ALWAYS" />
+                    <Button id="_culc_time_button" font="$x2" maxHeight="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#_calc_time" prefWidth="150.0" text="Рассчитать" HBox.hgrow="ALWAYS">
                       <HBox.margin>
                         <Insets />
                       </HBox.margin>
