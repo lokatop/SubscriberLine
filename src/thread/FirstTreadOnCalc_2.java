@@ -2,6 +2,7 @@ package thread;
 
 
 import javafx.collections.ObservableList;
+import model.TableViewApparatus;
 import model.TheLastTable;
 import org.apache.poi.xwpf.usermodel.*;
 import org.openxmlformats.schemas.wordprocessingml.x2006.main.*;
@@ -14,7 +15,7 @@ import java.math.BigInteger;
 import java.util.List;
 
 public class FirstTreadOnCalc_2 extends Thread {
-    public void run(ObservableList<TheLastTable> observableList) {
+    public void run(ObservableList<TheLastTable> observableList, ObservableList<TheLastTable> tableAbonList, ObservableList<TheLastTable> tableCableList, ObservableList<TableViewApparatus> tableAppList) {
         //Blank Document
         XWPFDocument document = new XWPFDocument();
 
@@ -63,11 +64,11 @@ public class FirstTreadOnCalc_2 extends Thread {
             //!!!Вот тут первая и основная таблица создается
             CreateTableMain(observableList,document);
             //-----------------------------------------
-            CreateTableAbon(,document);
+            CreateTableAbon(tableAbonList,document);
             //-----------------------------------------
-            CreateTableCable(,document);
+            CreateTableCable(tableCableList,document);
             //-----------------------------------------
-            CreateTableTypeApp(,document);
+            CreateTableTypeApp(tableAppList,document);
             //-----------------------------------------
 
             document.write(out);
@@ -187,7 +188,7 @@ public class FirstTreadOnCalc_2 extends Thread {
         }// for row
 
     }
-    public void CreateTableAbon(, XWPFDocument document){
+    public void CreateTableAbon(ObservableList<TheLastTable> observableList, XWPFDocument document){
 
         // Create a new table with n+1 rows and 2 columns
         int nRows = observableList.size()+1;
@@ -230,10 +231,10 @@ public class FirstTreadOnCalc_2 extends Thread {
                     //----------------------------switch / case-----------
                     switch (colCt) {
                         case 0:
-                            rh.setText(observableList.get(rowCt-1).getOfficialPerson());
+                            rh.setText(observableList.get(rowCt-1).getTypeAbon());
                             break;
                         case 1:
-                            rh.setText(observableList.get(rowCt-1).getTypeAbon());
+                            rh.setText(Integer.toString(observableList.get(rowCt-1).getAmountAbon()));
                             break;
                     }
                     //---------------------------The end of switch------------
@@ -259,7 +260,7 @@ public class FirstTreadOnCalc_2 extends Thread {
             rowCt++;
         }// for row
     }
-    public void CreateTableCable(, XWPFDocument document){
+    public void CreateTableCable(ObservableList<TheLastTable> observableList, XWPFDocument document){
 
         // Create a new table with n+1 rows and 2 columns
         int nRows = observableList.size()+1;
@@ -302,10 +303,10 @@ public class FirstTreadOnCalc_2 extends Thread {
                     //----------------------------switch / case-----------
                     switch (colCt) {
                         case 0:
-                            rh.setText(observableList.get(rowCt-1).getOfficialPerson());
+                            rh.setText(observableList.get(rowCt-1).getTypeCable());
                             break;
                         case 1:
-                            rh.setText(observableList.get(rowCt-1).getTypeAbon());
+                            rh.setText(Integer.toString(observableList.get(rowCt-1).getLengthCable()));
                             break;
                     }
                     //---------------------------The end of switch------------
@@ -331,7 +332,7 @@ public class FirstTreadOnCalc_2 extends Thread {
             rowCt++;
         }// for row
     }
-    public void CreateTableTypeApp(, XWPFDocument document){
+    public void CreateTableTypeApp(ObservableList<TableViewApparatus> observableList, XWPFDocument document){
 
         // Create a new table with n+1 rows and 2 columns
         int nRows = observableList.size()+1;
@@ -374,10 +375,10 @@ public class FirstTreadOnCalc_2 extends Thread {
                     //----------------------------switch / case-----------
                     switch (colCt) {
                         case 0:
-                            rh.setText(observableList.get(rowCt-1).getOfficialPerson());
+                            rh.setText(observableList.get(rowCt-1).getFullName());
                             break;
                         case 1:
-                            rh.setText(observableList.get(rowCt-1).getTypeAbon());
+                            rh.setText(Integer.toString(observableList.get(rowCt-1).getCount()));
                             break;
                     }
                     //---------------------------The end of switch------------

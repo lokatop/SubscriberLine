@@ -215,7 +215,11 @@ public class ControllerCalculate implements Initializable {
 
     public void createWordTable() throws IOException {
         FirstTreadOnCalc_2 tread = new FirstTreadOnCalc_2();
-        tread.run(ControllerTypeDefinition3.theLastTableListUpdatedD3);
+        tread.run(
+                ControllerTypeDefinition3.theLastTableListUpdatedD3,
+                tableViewAbon.getItems(),
+                tableViewCable.getItems(),
+                tableViewApp.getItems());
     }
 
     public void _typeCable_choose_list_add(ActionEvent actionEvent) {
