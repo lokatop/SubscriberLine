@@ -76,6 +76,8 @@ public class FirstTreadOnCalc_2 extends Thread {
             //-----------------------------------------
 
 
+
+
             XWPFParagraph paragraph3 = document.createParagraph();
             XWPFRun run3 = paragraph3.createRun();
             paragraph3.setAlignment(ParagraphAlignment.RIGHT);
