@@ -63,6 +63,10 @@ public class FirstTreadOnCalc_2 extends Thread {
 
             //!!!Вот тут первая и основная таблица создается
             CreateTableMain(observableList,document);
+            //-------------------------------------
+            XWPFParagraph paragraph21 = document.createParagraph();
+            XWPFRun run21 = paragraph21.createRun();run21.addBreak();run21.addBreak();
+
             //-----------------------------------------
             CreateTableAbon(tableAbonList,document);
             //-----------------------------------------
@@ -70,6 +74,21 @@ public class FirstTreadOnCalc_2 extends Thread {
             //-----------------------------------------
             CreateTableTypeApp(tableAppList,document);
             //-----------------------------------------
+
+
+            XWPFParagraph paragraph3 = document.createParagraph();
+            XWPFRun run3 = paragraph3.createRun();
+            paragraph3.setAlignment(ParagraphAlignment.RIGHT);
+            run3.setFontFamily("Times New Roman");
+            run3.setFontSize(14);
+
+            run3.addBreak();
+            run3.setText("(Должность) (Например, Начальник УС «Завес»)");
+            run3.addBreak();
+            run3.setText("(Звание)(Например, Старший Лейтенант)");
+            run3.addBreak();
+            run3.setText("(И. Фамилия)");
+            run3.addBreak();
 
             document.write(out);
             out.close();
@@ -110,22 +129,6 @@ public class FirstTreadOnCalc_2 extends Thread {
                 // set vertical alignment to "center"
                 CTVerticalJc va = tcpr.addNewVAlign();
                 va.setVal(STVerticalJc.CENTER);
-/*
-                    // create cell color element
-                    CTShd ctshd = tcpr.addNewShd();
-                    ctshd.setColor("auto");
-                    ctshd.setVal(STShd.CLEAR);
-                    if (rowCt == 0) {
-                        // header row
-                       // ctshd.setFill("A7BFDE");
-                    } else if (rowCt % 2 == 0) {
-                        // even row
-                        //ctshd.setFill("D3DFEE");
-                    } else {
-                        // odd row
-                        //ctshd.setFill("EDF2F8");
-                    }
-*/
                 // get 1st paragraph in cell's paragraph list
                 XWPFParagraph para = cell.getParagraphs().get(0);
                 // create a run to contain the content
@@ -133,7 +136,7 @@ public class FirstTreadOnCalc_2 extends Thread {
 
 
                 if(rowCt != 0) {
-                    rh.setFontSize(11);
+                    rh.setFontSize(10);
                     rh.setFontFamily("Times New Roman");
                     rh.setBold(false);
                     para.setAlignment(ParagraphAlignment.CENTER);
@@ -158,26 +161,26 @@ public class FirstTreadOnCalc_2 extends Thread {
                     //---------------------------The end of switch------------
                 }else {
 
-                    rh.setFontSize(11);
+                    rh.setFontSize(10);
                     rh.setFontFamily("Times New Roman");
-                    rh.setBold(false);
+                    rh.setBold(true);
                     para.setAlignment(ParagraphAlignment.CENTER);
 
                     switch (colCt) {
                         case 0:
-                            rh.setText("Должностные лица");
+                            rh.setText(" Должностные лица ");
                             break;
                         case 1:
-                            rh.setText("Тип абонентского устройства");
+                            rh.setText(" Тип абонентского устройства ");
                             break;
                         case 2:
-                            rh.setText("Аппаратная");
+                            rh.setText(" Аппаратная ");
                             break;
                         case 3:
-                            rh.setText("Тип кабеля");
+                            rh.setText(" Тип кабеля ");
                             break;
                         case 4:
-                            rh.setText("Длина кабеля");
+                            rh.setText(" Длина кабеля, м ");
                             break;
                     }}
 
@@ -224,7 +227,7 @@ public class FirstTreadOnCalc_2 extends Thread {
 
 
                 if(rowCt != 0) {
-                    rh.setFontSize(11);
+                    rh.setFontSize(10);
                     rh.setFontFamily("Times New Roman");
                     rh.setBold(false);
                     para.setAlignment(ParagraphAlignment.CENTER);
@@ -240,17 +243,17 @@ public class FirstTreadOnCalc_2 extends Thread {
                     //---------------------------The end of switch------------
                 }else {
 
-                    rh.setFontSize(11);
+                    rh.setFontSize(10);
                     rh.setFontFamily("Times New Roman");
                     rh.setBold(true);
                     para.setAlignment(ParagraphAlignment.CENTER);
 
                     switch (colCt) {
                         case 0:
-                            rh.setText("Тип абонентского оборудования");
+                            rh.setText(" Тип абонентского оборудования ");
                             break;
                         case 1:
-                            rh.setText("Количество");
+                            rh.setText(" Количество ");
                             break;
                     }}
 
@@ -296,7 +299,7 @@ public class FirstTreadOnCalc_2 extends Thread {
 
 
                 if(rowCt != 0) {
-                    rh.setFontSize(11);
+                    rh.setFontSize(10);
                     rh.setFontFamily("Times New Roman");
                     rh.setBold(false);
                     para.setAlignment(ParagraphAlignment.CENTER);
@@ -312,17 +315,17 @@ public class FirstTreadOnCalc_2 extends Thread {
                     //---------------------------The end of switch------------
                 }else {
 
-                    rh.setFontSize(11);
+                    rh.setFontSize(10);
                     rh.setFontFamily("Times New Roman");
                     rh.setBold(true);
                     para.setAlignment(ParagraphAlignment.CENTER);
 
                     switch (colCt) {
                         case 0:
-                            rh.setText("Тип кабеля");
+                            rh.setText(" Тип кабеля ");
                             break;
                         case 1:
-                            rh.setText("Длина");
+                            rh.setText(" Длина, м ");
                             break;
                     }}
 
@@ -368,7 +371,7 @@ public class FirstTreadOnCalc_2 extends Thread {
 
 
                 if(rowCt != 0) {
-                    rh.setFontSize(11);
+                    rh.setFontSize(10);
                     rh.setFontFamily("Times New Roman");
                     rh.setBold(false);
                     para.setAlignment(ParagraphAlignment.CENTER);
@@ -384,17 +387,17 @@ public class FirstTreadOnCalc_2 extends Thread {
                     //---------------------------The end of switch------------
                 }else {
 
-                    rh.setFontSize(11);
+                    rh.setFontSize(10);
                     rh.setFontFamily("Times New Roman");
                     rh.setBold(true);
                     para.setAlignment(ParagraphAlignment.CENTER);
 
                     switch (colCt) {
                         case 0:
-                            rh.setText("Тип аппаратной");
+                            rh.setText(" Тип аппаратной ");
                             break;
                         case 1:
-                            rh.setText("Количество");
+                            rh.setText(" Количество ");
                             break;
                     }}
 
