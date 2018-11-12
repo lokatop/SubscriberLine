@@ -16,14 +16,6 @@
       <children>
         <GridPane alignment="CENTER" prefHeight="720.0" prefWidth="960.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
           <children>
-            <Label prefHeight="200.0" prefWidth="445.0" text="РАСЧЕТ   АБОНЕНСКОЙ СЕТИ НА ПУНКТЕ УПРАВЛЕНИЯ" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="2">
-              <font>
-                <Font name="Times New Roman Bold" size="36.0" />
-              </font>
-              <GridPane.margin>
-                <Insets left="1.0" right="1.0" />
-              </GridPane.margin>
-            </Label>
             <Label alignment="CENTER" contentDisplay="CENTER" text="Санкт-Петербургский политехнический университет Петра Великого    Факультет военного обучения    Военная кафедры связи" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1">
               <font>
                 <Font name="Times New Roman Bold" size="24.0" />
@@ -62,6 +54,15 @@
                     <Insets top="16.0" />
                   </VBox.margin>
                 </Button>
+              </children>
+            </VBox>
+            <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+              <children>
+                <Label prefHeight="200.0" prefWidth="445.0" text="Программа по расчёту и оптимизации абонентских сетей на  пунктах управления специального назначения" textAlignment="CENTER" wrapText="true">
+                  <font>
+                    <Font name="Times New Roman Bold" size="32.0" />
+                  </font>
+                </Label>
               </children>
             </VBox>
           </children>
