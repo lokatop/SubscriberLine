@@ -32,6 +32,9 @@ public class ControllerCalculate implements Initializable {
     public Label calculated_time;
     public TextField _putting_speed;
     public TextField _people_count;
+    public RadioButton _rb_1, _rb_2, _rb_3, _rb_w_1, _rb_w_2, _rb_w_3, _rb_w_4;
+    public CheckBox _cb_1, _cb_2, _cb_3, _cb_4, _cb_5, _cb_6, _cb_7;
+    public ToggleGroup locationRadioButtonsGroup, weatherRadioButtonsGroup;
     @FXML
     private TableView<TheLastTable> tableView, tableViewAbon, tableViewCable;
     @FXML
@@ -163,6 +166,19 @@ public class ControllerCalculate implements Initializable {
         amountOfApp.setCellFactory(TextFieldTableCell.<TableViewApparatus, Integer>forTableColumn(new IntegerStringConverter()));
     }
 
+    private void setupRadioButtons(){
+        // userData соосв. индексу в массиве
+        _rb_1.setUserData(0);
+        _rb_2.setUserData(1);
+        _rb_3.setUserData(2);
+
+        // а здесь - просто для индефикациии радиокнопки
+        _rb_w_1.setUserData(1);
+        _rb_w_2.setUserData(2);
+        _rb_w_3.setUserData(3);
+        _rb_w_4.setUserData(4);
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
@@ -170,6 +186,7 @@ public class ControllerCalculate implements Initializable {
         setupTableAbon();
         setupTableCable();
         setupTableApp();
+        setupRadioButtons();
 
         tableView.setItems(ControllerTypeDefinition3.theLastTableListUpdatedD3);
         tableViewCable.setItems(ControllerTypeDefinition3.theLastTableListUpdatedD3);
@@ -272,7 +289,7 @@ public class ControllerCalculate implements Initializable {
      *                      <th>более +35°С</th>
      *                      <th>снег до 30см</th>
      *                      <th>–20 ÷–7°С или снег 30-80 см</th>
-     *                      <th>ниже –20°С или снег более 80 см</th>
+         *                      <th>ниже –20°С или снег более 80 см</th>
      *                      <th>ветер 10-20 м/с</th>
      *                      <th>ветер более20 м/с</th>
      *                      </tr>
@@ -389,10 +406,52 @@ public class ControllerCalculate implements Initializable {
             cables_length.add(item.getLengthCable());
         }
 
+        // Параметры местности
+        Integer location = 0;
+        location = (Integer) locationRadioButtonsGroup.getSelectedToggle().getUserData();
+
+
         // Параметры местности/погоды
         ObservableList<Integer> weather = FXCollections.observableArrayList();
-        weather.add(0);
-        weather.add(4);
+
+        switch ((Integer) weatherRadioButtonsGroup.getSelectedToggle().getUserData()){
+            case 1:
+                if (_cb_1.isSelected()) weather.add(0);
+                if (_cb_2.isSelected()) weather.add(1);
+                if (_cb_3.isSelected()) weather.add(2);
+                if (_cb_4.isSelected()) weather.add(3);
+                if (_cb_5.isSelected()) weather.add(4);
+                if (_cb_6.isSelected()) weather.add(5);
+                if (_cb_7.isSelected()) weather.add(6);
+                break;
+            case 2:
+                if (_cb_1.isSelected()) weather.add(7);
+                if (_cb_2.isSelected()) weather.add(8);
+                if (_cb_3.isSelected()) weather.add(9);
+                if (_cb_4.isSelected()) weather.add(10);
+                if (_cb_5.isSelected()) weather.add(11);
+                if (_cb_6.isSelected()) weather.add(12);
+                if (_cb_7.isSelected()) weather.add(13);
+                break;
+            case 3:
+                if (_cb_1.isSelected()) weather.add(14);
+                if (_cb_2.isSelected()) weather.add(15);
+                if (_cb_3.isSelected()) weather.add(16);
+                if (_cb_4.isSelected()) weather.add(17);
+                if (_cb_5.isSelected()) weather.add(18);
+                if (_cb_6.isSelected()) weather.add(19);
+                if (_cb_7.isSelected()) weather.add(20);
+                break;
+            case 4:
+                if (_cb_1.isSelected()) weather.add(21);
+                if (_cb_2.isSelected()) weather.add(22);
+                if (_cb_3.isSelected()) weather.add(23);
+                if (_cb_4.isSelected()) weather.add(24);
+                if (_cb_5.isSelected()) weather.add(25);
+                if (_cb_6.isSelected()) weather.add(26);
+                if (_cb_7.isSelected()) weather.add(27);
+                break;
+        }
 
         // Количество оконечных устройств
         Integer abonCount = 0;
@@ -403,7 +462,7 @@ public class ControllerCalculate implements Initializable {
         // Количество личного состава
         Integer people_count = Integer.parseInt(_people_count.getText());
 
-        result = time_calculate(speed, cables_length, 1, weather, abonCount, people_count, 1);
+        result = time_calculate(speed, cables_length, location, weather, abonCount, people_count, 1);
 
         calculated_time.setText(Double.toString(result));
     }
