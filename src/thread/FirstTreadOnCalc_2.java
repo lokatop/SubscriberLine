@@ -15,7 +15,7 @@ import java.math.BigInteger;
 import java.util.List;
 
 public class FirstTreadOnCalc_2 extends Thread {
-    public void run(ObservableList<TheLastTable> observableList, ObservableList<TheLastTable> tableAbonList, ObservableList<TheLastTable> tableCableList, ObservableList<TableViewApparatus> tableAppList) {
+    public void run(ObservableList<TheLastTable> observableList, ObservableList<TheLastTable> tableAbonList, ObservableList<TheLastTable> tableCableList, ObservableList<TableViewApparatus> tableAppList,String calculated_time) {
         //Blank Document
         XWPFDocument document = new XWPFDocument();
 
@@ -75,7 +75,14 @@ public class FirstTreadOnCalc_2 extends Thread {
             CreateTableTypeApp(tableAppList,document);
             //-----------------------------------------
 
+            XWPFParagraph paragraph4 = document.createParagraph();
+            XWPFRun run4 = paragraph4.createRun();
+            paragraph4.setAlignment(ParagraphAlignment.LEFT);
+            run4.setFontFamily("Times New Roman");
+            run4.setFontSize(14);
 
+            run4.addBreak();
+            run4.setText("Время развертывания абонентских сетей      "+calculated_time + " м");
 
 
             XWPFParagraph paragraph3 = document.createParagraph();
