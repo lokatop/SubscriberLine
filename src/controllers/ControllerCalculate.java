@@ -237,7 +237,8 @@ public class ControllerCalculate implements Initializable {
                 ControllerTypeDefinition3.theLastTableListUpdatedD3,
                 tableViewAbon.getItems(),
                 tableViewCable.getItems(),
-                tableViewApp.getItems());
+                tableViewApp.getItems(),
+                calculated_time.getText());
     }
 
     public void _typeCable_choose_list_add(ActionEvent actionEvent) {
