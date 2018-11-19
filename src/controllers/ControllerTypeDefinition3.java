@@ -92,7 +92,6 @@ public class ControllerTypeDefinition3 implements Initializable {
             for (CatalogItem abon : abonList) {
 
                 for (TheLastTable lastTableRow : ControllerTypeDefinition1.theLastTableList) {
-                    // TODO: учесть количество КШМ. Можно попробовать через for
 
                     // Проверка на наличие в аппаратной абон. обор., выбранного должн. лицом
                     // Если в строке из финалной таблицы такое же название абон. устр., как в текущем цикле
@@ -117,7 +116,7 @@ public class ControllerTypeDefinition3 implements Initializable {
                                 theLastTableListUpdatedD3.add(tlt); //TODO: странно, но ту тпонятно, зачем добавлять
                                 unused.remove(lastTableRow);
                             } else {
-                                if (tva_existed.getCount_used() < tva_existed.getCount()) {
+                                if (tva_existed.getCount_used() < tva_existed.getCount()*app.getCount()) { // Учитываем количество аппаратных
                                     tva_existed.increaseCount_used();
                                     theLastTableListUpdatedD3.add(tlt); //TODO: странно
                                     unused.remove(lastTableRow);
@@ -203,7 +202,7 @@ public class ControllerTypeDefinition3 implements Initializable {
         showUnusedMessage(unused);
     }
 
-    private void showUnusedMessage(List<TheLastTable> unused){
+    private void showUnusedMessage(List<TheLastTable> unused) {
         String to_show = "";
 
         for (TheLastTable item : unused)
