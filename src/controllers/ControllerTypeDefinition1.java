@@ -9,10 +9,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TableCell;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
@@ -39,6 +36,8 @@ public class ControllerTypeDefinition1 implements Initializable {
     private TableColumn<TableViewTypeDef1, String> tableColumn1;
     @FXML
     private TableColumn<TableViewTypeDef1, Boolean> tableColumn2;
+    @FXML
+    public Button _next_btn;
 
     /**
      * Список коненых данных (Для конечной таблицы)
@@ -139,6 +138,17 @@ public class ControllerTypeDefinition1 implements Initializable {
                     @Override
                     public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
                         tableViewTypeDef1.setChecked(newValue);
+                        if (newValue)
+                            enableNextButton();
+                        else {
+                            boolean hasEnabled = false;
+                            for (TableViewTypeDef1 item : tableViewTypeDef1s) {
+                                if (item.isChecked())
+                                    hasEnabled = true;
+                            }
+                            if (!hasEnabled)
+                                disableNextButton();
+                        }
                     }
                 });
                 return booleanProperty;
@@ -197,6 +207,8 @@ public class ControllerTypeDefinition1 implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+        disableNextButton();
+
         // Получаем ранее выбранные должности
         choosedOfficialList.clear();
         choosedOfficialList.addAll(ControllerChooseCategoryOfOfficial.arraySetOfficial);
@@ -209,5 +221,13 @@ public class ControllerTypeDefinition1 implements Initializable {
 
         // Настройка listView
         setupListView();
+    }
+
+    private void disableNextButton() {
+        _next_btn.setDisable(true);
+    }
+
+    private void enableNextButton() {
+        _next_btn.setDisable(false);
     }
 }
