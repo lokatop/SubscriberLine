@@ -465,6 +465,8 @@ public class ControllerCalculate implements Initializable {
 
         result = time_calculate(speed, cables_length, location, weather, abonCount, people_count, 1);
 
+        result = (double) Math.round(result * 100) / 100;
+
         calculated_time.setText(Double.toString(result));
     }
 }
