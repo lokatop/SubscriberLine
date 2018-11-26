@@ -43,7 +43,7 @@ public class ControllerChooseCategoryOfOfficial implements Initializable {
     private static String nameForFindFromXml;
     private static String viewForFindFromXml;
 
-    private int idMilitaryPart;
+    private static int idMilitaryPart;
     private int idCategoryOfManagePoint;
 
     private ObservableList<ChooseModel> list2;
@@ -125,8 +125,6 @@ public class ControllerChooseCategoryOfOfficial implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        arraySetOfficial.clear();
-        arrayOfficialsId.clear();
         tableColumn1.setCellValueFactory(new PropertyValueFactory<TableViewChooseCategory, String>("fullName"));
         tableColumn2.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<TableViewChooseCategory, Boolean>, ObservableValue<Boolean>>() {
             @Override
@@ -151,7 +149,7 @@ public class ControllerChooseCategoryOfOfficial implements Initializable {
                             arrayOfficialsId.remove(tableViewChooseCategory.getId());
 
                             if (arraySetOfficial.size() == 0 || arrayOfficialsId.size() == 0) {
-                                diableNextButton();
+                                disableNextButton();
                             }
                         }
                     }
@@ -171,10 +169,10 @@ public class ControllerChooseCategoryOfOfficial implements Initializable {
         listSetTable = getTableViewChooseCategoryList();
         tableView.setItems(listSetTable);
 
-        diableNextButton();
+        disableNextButton();
     }
 
-    private void diableNextButton() {
+    private void disableNextButton() {
         _next_btn.setDisable(true);
     }
 
@@ -189,9 +187,20 @@ public class ControllerChooseCategoryOfOfficial implements Initializable {
         listOfficial = DB.getOfficialsFromMilitaryPartById(idMilitaryPart);
 
         for (Official official : listOfficial) {
-            list.add(new TableViewChooseCategory(
-                    official.getTitle()
-            ));
+            if (arrayOfficialsId.contains(official.getId())) {
+                list.add(new TableViewChooseCategory(
+                        official.getId(),
+                        official.getTitle(),
+                        true
+                ));
+                enableNextButton();
+            } else {
+                list.add(new TableViewChooseCategory(
+                        official.getId(),
+                        official.getTitle(),
+                        false
+                ));
+            }
         }
 
 //        list2 = filterChooseModelByDescription(viewForFindFromXml);
