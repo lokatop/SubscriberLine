@@ -166,7 +166,7 @@ public class ControllerCalculate implements Initializable {
         amountOfApp.setCellFactory(TextFieldTableCell.<TableViewApparatus, Integer>forTableColumn(new IntegerStringConverter()));
     }
 
-    private void setupRadioButtons(){
+    private void setupRadioButtons() {
         // userData соосв. индексу в массиве
         _rb_1.setUserData(0);
         _rb_2.setUserData(1);
@@ -280,7 +280,6 @@ public class ControllerCalculate implements Initializable {
      *                      </tr>
      *                      </table>
      *                      <br><br>
-     *
      * @param weather       массив параметров погоды <br>
      *
      *                      <table>
@@ -290,7 +289,7 @@ public class ControllerCalculate implements Initializable {
      *                      <th>более +35°С</th>
      *                      <th>снег до 30см</th>
      *                      <th>–20 ÷–7°С или снег 30-80 см</th>
-         *                      <th>ниже –20°С или снег более 80 см</th>
+     *                      <th>ниже –20°С или снег более 80 см</th>
      *                      <th>ветер 10-20 м/с</th>
      *                      <th>ветер более20 м/с</th>
      *                      </tr>
@@ -336,9 +335,9 @@ public class ControllerCalculate implements Initializable {
      *                      </tr>
      *                      </table>
      *                      <br><br>
-     * @param N количество устанавливаемых (подключаемых) оконечных терминальных устройств (оконечного оборудования) <br><br>
-     * @param n количество личного состава, задействованного для развертывания абонентской сети <br><br>
-     * @param omega коэффициент использования ресурса кабеля абонентских линий (отношение количества задействованных пар кабеля к общему числу пар кабеля);
+     * @param N             количество устанавливаемых (подключаемых) оконечных терминальных устройств (оконечного оборудования) <br><br>
+     * @param n             количество личного состава, задействованного для развертывания абонентской сети <br><br>
+     * @param omega         коэффициент использования ресурса кабеля абонентских линий (отношение количества задействованных пар кабеля к общему числу пар кабеля);
      * @return
      */
     public double time_calculate(double V, ObservableList<Integer> cables_length, Integer location, ObservableList<Integer> weather, Integer N, Integer n, double omega) {
@@ -347,8 +346,8 @@ public class ControllerCalculate implements Initializable {
         double t_prov = 0;
         double t_pereh = 0;
 
-        double[] location_params = {0.05,0.1,0.15};
-        double[] weather_params = {0.0,0.1,0.1,0.2,0.25,0.2,0.3,0.1,0.2,0.2,0.25,0.3,0.2,0.3,0.2,0.3,0.2,0.25,0.3,0.25,0.35,0.3,0.35,0.35,0.35,0.4,0.25,0.35};
+        double[] location_params = {0.05, 0.1, 0.15};
+        double[] weather_params = {0.0, 0.1, 0.1, 0.2, 0.25, 0.2, 0.3, 0.1, 0.2, 0.2, 0.25, 0.3, 0.2, 0.3, 0.2, 0.3, 0.2, 0.25, 0.3, 0.25, 0.35, 0.3, 0.35, 0.35, 0.35, 0.4, 0.25, 0.35};
 
         // Расчёт К_вр (по параметрам погоды)
         double K_vr = 0;
@@ -362,11 +361,11 @@ public class ControllerCalculate implements Initializable {
         // Расчёт общей длины кабелей
         double l = 0;
         for (Integer cable_length : cables_length) {
-            l += cable_length + cable_length*K_mestn;
+            l += cable_length + cable_length * K_mestn;
         }
 
         // Расчёт t_прокл
-        t_prokl = l/(V * Math.sqrt(n) * Math.sqrt(omega)) * (1 + K_vr);
+        t_prokl = l / (V * Math.sqrt(n) * Math.sqrt(omega)) * (1 + K_vr);
 
         // длина линии от распределительного (выносного) щита до оконечного терминального оборудования
         double d = 0; // т.к. выносных щитов у нас нет
@@ -378,7 +377,7 @@ public class ControllerCalculate implements Initializable {
         double t_oo = 1; // TODO: или 2, или 4
 
         // Расчёт t_пров
-        t_prov = N/n + t_oo + t_podkl;
+        t_prov = N / n + t_oo + t_podkl;
 
         // среднее время подключения переходных устройств (разветви тельных муфт, выносных щитков, переходников с одного типа кабеля на другой, автоматических конверторов сигнала и т.п.), при проведении расчётов принимают (t_пу ) ̅ = 0,5 мин
         double t_py = 0.5;
@@ -396,77 +395,88 @@ public class ControllerCalculate implements Initializable {
     }
 
     public void _calc_time(ActionEvent actionEvent) {
-        double result = 0;
+        if (
+                !_putting_speed.getText().isEmpty() &&
+                !tableViewCable.getItems().isEmpty() &&
+                locationRadioButtonsGroup.getSelectedToggle() != null &&
+                !tableView.getItems().isEmpty() &&
+                !_people_count.getText().isEmpty()
+                ) {
 
-        // Скорость прокладки
-        double speed = Double.valueOf(_putting_speed.getText());
+            double result = 0;
 
-        // Длины кабелей
-        ObservableList<Integer> cables_length = FXCollections.observableArrayList();
-        for (TheLastTable item : tableViewCable.getItems()) {
-            cables_length.add(item.getLengthCable());
+            // Скорость прокладки
+            double speed = Double.valueOf(_putting_speed.getText());
+
+            // Длины кабелей
+            ObservableList<Integer> cables_length = FXCollections.observableArrayList();
+            for (TheLastTable item : tableViewCable.getItems()) {
+                cables_length.add(item.getLengthCable());
+            }
+
+            // Параметры местности
+            Integer location = 0;
+            location = (Integer) locationRadioButtonsGroup.getSelectedToggle().getUserData();
+
+
+            // Параметры местности/погоды
+            ObservableList<Integer> weather = FXCollections.observableArrayList();
+
+            switch ((Integer) weatherRadioButtonsGroup.getSelectedToggle().getUserData()) {
+                case 1:
+                    if (_cb_1.isSelected()) weather.add(0);
+                    if (_cb_2.isSelected()) weather.add(1);
+                    if (_cb_3.isSelected()) weather.add(2);
+                    if (_cb_4.isSelected()) weather.add(3);
+                    if (_cb_5.isSelected()) weather.add(4);
+                    if (_cb_6.isSelected()) weather.add(5);
+                    if (_cb_7.isSelected()) weather.add(6);
+                    break;
+                case 2:
+                    if (_cb_1.isSelected()) weather.add(7);
+                    if (_cb_2.isSelected()) weather.add(8);
+                    if (_cb_3.isSelected()) weather.add(9);
+                    if (_cb_4.isSelected()) weather.add(10);
+                    if (_cb_5.isSelected()) weather.add(11);
+                    if (_cb_6.isSelected()) weather.add(12);
+                    if (_cb_7.isSelected()) weather.add(13);
+                    break;
+                case 3:
+                    if (_cb_1.isSelected()) weather.add(14);
+                    if (_cb_2.isSelected()) weather.add(15);
+                    if (_cb_3.isSelected()) weather.add(16);
+                    if (_cb_4.isSelected()) weather.add(17);
+                    if (_cb_5.isSelected()) weather.add(18);
+                    if (_cb_6.isSelected()) weather.add(19);
+                    if (_cb_7.isSelected()) weather.add(20);
+                    break;
+                case 4:
+                    if (_cb_1.isSelected()) weather.add(21);
+                    if (_cb_2.isSelected()) weather.add(22);
+                    if (_cb_3.isSelected()) weather.add(23);
+                    if (_cb_4.isSelected()) weather.add(24);
+                    if (_cb_5.isSelected()) weather.add(25);
+                    if (_cb_6.isSelected()) weather.add(26);
+                    if (_cb_7.isSelected()) weather.add(27);
+                    break;
+            }
+
+            // Количество оконечных устройств
+            Integer abonCount = 0;
+            for (TheLastTable item : tableView.getItems()) {
+                abonCount += item.getAmountAbon();
+            }
+
+            // Количество личного состава
+            Integer people_count = Integer.parseInt(_people_count.getText());
+
+            result = time_calculate(speed, cables_length, location, weather, abonCount, people_count, 1);
+
+            result = (double) Math.round(result * 100) / 100;
+
+            calculated_time.setText(Double.toString(result));
+        } else {
+            calculated_time.setText("Ошибка расчёта");
         }
-
-        // Параметры местности
-        Integer location = 0;
-        location = (Integer) locationRadioButtonsGroup.getSelectedToggle().getUserData();
-
-
-        // Параметры местности/погоды
-        ObservableList<Integer> weather = FXCollections.observableArrayList();
-
-        switch ((Integer) weatherRadioButtonsGroup.getSelectedToggle().getUserData()){
-            case 1:
-                if (_cb_1.isSelected()) weather.add(0);
-                if (_cb_2.isSelected()) weather.add(1);
-                if (_cb_3.isSelected()) weather.add(2);
-                if (_cb_4.isSelected()) weather.add(3);
-                if (_cb_5.isSelected()) weather.add(4);
-                if (_cb_6.isSelected()) weather.add(5);
-                if (_cb_7.isSelected()) weather.add(6);
-                break;
-            case 2:
-                if (_cb_1.isSelected()) weather.add(7);
-                if (_cb_2.isSelected()) weather.add(8);
-                if (_cb_3.isSelected()) weather.add(9);
-                if (_cb_4.isSelected()) weather.add(10);
-                if (_cb_5.isSelected()) weather.add(11);
-                if (_cb_6.isSelected()) weather.add(12);
-                if (_cb_7.isSelected()) weather.add(13);
-                break;
-            case 3:
-                if (_cb_1.isSelected()) weather.add(14);
-                if (_cb_2.isSelected()) weather.add(15);
-                if (_cb_3.isSelected()) weather.add(16);
-                if (_cb_4.isSelected()) weather.add(17);
-                if (_cb_5.isSelected()) weather.add(18);
-                if (_cb_6.isSelected()) weather.add(19);
-                if (_cb_7.isSelected()) weather.add(20);
-                break;
-            case 4:
-                if (_cb_1.isSelected()) weather.add(21);
-                if (_cb_2.isSelected()) weather.add(22);
-                if (_cb_3.isSelected()) weather.add(23);
-                if (_cb_4.isSelected()) weather.add(24);
-                if (_cb_5.isSelected()) weather.add(25);
-                if (_cb_6.isSelected()) weather.add(26);
-                if (_cb_7.isSelected()) weather.add(27);
-                break;
-        }
-
-        // Количество оконечных устройств
-        Integer abonCount = 0;
-        for (TheLastTable item : tableView.getItems()) {
-            abonCount += item.getAmountAbon();
-        }
-
-        // Количество личного состава
-        Integer people_count = Integer.parseInt(_people_count.getText());
-
-        result = time_calculate(speed, cables_length, location, weather, abonCount, people_count, 1);
-
-        result = (double) Math.round(result * 100) / 100;
-
-        calculated_time.setText(Double.toString(result));
     }
 }
