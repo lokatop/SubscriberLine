@@ -67,4 +67,24 @@ public class TableViewTypeDef1 {
 
         return result;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+
+        if (obj == null) return false;
+
+        boolean condition_1 = false;
+        boolean condition_2 = false;
+        boolean condition_3 = false;
+
+        if (this.getNameOfOfficial().equals(((TableViewTypeDef1)obj).getNameOfOfficial()))
+            condition_1 = true;
+        if (this.getEquipment().equals(((TableViewTypeDef1)obj).getEquipment()))
+            condition_2 = true;
+        if (this.isChecked() == ((TableViewTypeDef1)obj).isChecked())
+            condition_3 = true;
+
+
+        return condition_1 && condition_2 && condition_3;
+    }
 }

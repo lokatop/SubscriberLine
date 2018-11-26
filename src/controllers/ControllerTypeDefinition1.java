@@ -82,7 +82,7 @@ public class ControllerTypeDefinition1 implements Initializable {
         //  Создаем объекты и добавляем в них результат из getFinalData()
         theLastTableList.clear();
         for (int i = 0; i < getFinalData().size(); i++) {
-            theLastTableList.add(new TheLastTable(getFinalData().get(i).getNameOfOfficial(),getFinalData().get(i).getEquipment()));
+            theLastTableList.add(new TheLastTable(getFinalData().get(i).getNameOfOfficial(), getFinalData().get(i).getEquipment()));
         }
 
 
@@ -91,7 +91,7 @@ public class ControllerTypeDefinition1 implements Initializable {
     }
 
     private void readData() {
-//        infoModelsList.clear();
+        tableViewTypeDef1s.clear();
         catalogItems.clear();
 
         catalogItems.addAll(DB.getCatalogTitlesByType("DS"));
@@ -99,24 +99,30 @@ public class ControllerTypeDefinition1 implements Initializable {
         catalogItems.addAll(DB.getCatalogTitlesByType("ARM"));
 
 
-
-        // Чтение из файла
-//        ObservableList unfilterred = FXCollections.observableArrayList();
-//        unfilterred.addAll(XMLsaver.loadFromXML(InfoModel.FILENAME_INFOMODELS));
-//
-//        infoModelsList.addAll(filterInfoModelByType("DS", unfilterred));
-//        infoModelsList.addAll(filterInfoModelByType("ZAS", unfilterred));
-//        infoModelsList.addAll(filterInfoModelByType("ARM", unfilterred));
-
         // Генерация объектов для таблицы
         for (int officialIndex = 0; officialIndex < choosedOfficialList.size(); officialIndex++) {
             for (int catalogItemIndex = 0; catalogItemIndex < catalogItems.size(); catalogItemIndex++) {
-                tableViewTypeDef1s.add(
-                        new TableViewTypeDef1(
-                                choosedOfficialList.get(officialIndex),
-                                catalogItems.get(catalogItemIndex).getTitle()
-                        )
-                );
+
+                String officialPerson = choosedOfficialList.get(officialIndex);
+                String catalogItemTitle = catalogItems.get(catalogItemIndex).getTitle();
+
+                if (isTAWasChecked(officialPerson, catalogItemTitle)) {
+                    tableViewTypeDef1s.add(
+                            new TableViewTypeDef1(
+                                    officialPerson,
+                                    catalogItemTitle,
+                                    true
+                            )
+                    );
+                    enableNextButton();
+                }
+                else
+                    tableViewTypeDef1s.add(
+                            new TableViewTypeDef1(
+                                    officialPerson,
+                                    catalogItemTitle
+                            )
+                    );
             }
         }
     }
@@ -192,9 +198,10 @@ public class ControllerTypeDefinition1 implements Initializable {
 
     /**
      * Метод выдаёт данные для финальной таблицы
+     *
      * @return ObservableList<TableViewTypeDef1>
      */
-    private ObservableList<TableViewTypeDef1> getFinalData(){
+    private ObservableList<TableViewTypeDef1> getFinalData() {
         ObservableList<TableViewTypeDef1> result = FXCollections.observableArrayList();
 
         for (TableViewTypeDef1 tableViewTypeDef1 : tableViewTypeDef1s)
@@ -229,5 +236,21 @@ public class ControllerTypeDefinition1 implements Initializable {
 
     private void enableNextButton() {
         _next_btn.setDisable(false);
+    }
+
+    private boolean isTAWasChecked(String officialPerson, String catalogItemTitle) {
+        boolean result = false;
+
+        if (!theLastTableList.isEmpty())
+            for (TheLastTable theLastTable : theLastTableList) {
+                if (theLastTable.getOfficialPerson().equals(officialPerson) &&
+                        theLastTable.getTypeAbon().equals(catalogItemTitle)) {
+                    result = true;
+                    break;
+                }
+
+            }
+
+        return result;
     }
 }
