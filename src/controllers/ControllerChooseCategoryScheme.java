@@ -61,11 +61,7 @@ public class ControllerChooseCategoryScheme implements Initializable {
 
                 // Передаём выбранную модель в контроллер фрейма Описание
                 ControllerChooseCategoryOfOfficial controller = loader.getController();
-                controller.setChooseCategory(comboChooseCategory.getSelectionModel()
-                                .getSelectedItem().toString(), ComboBoxPart
-                                .getSelectionModel().getSelectedItem().toString(),
-                        ((CategoryOfManagePoint) comboChooseCategory.getSelectionModel()
-                                .getSelectedItem()).getId(),
+                controller.setChooseCategory(
                         ((MilitaryPart) ComboBoxPart.getSelectionModel()
                                 .getSelectedItem()).getId()
                 );
