@@ -24,7 +24,7 @@
             </Pane>
             <VBox alignment="BOTTOM_RIGHT" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2" GridPane.rowIndex="4">
               <children>
-                <Button alignment="CENTER" minHeight="25.0" minWidth="110.0" mnemonicParsing="false" onAction="#theNext" prefWidth="110.0" text="Далее" textAlignment="CENTER">
+                <Button fx:id="_next_btn" alignment="CENTER" minHeight="25.0" minWidth="110.0" mnemonicParsing="false" onAction="#theNext" prefWidth="110.0" text="Далее" textAlignment="CENTER">
                   <VBox.margin>
                     <Insets bottom="30.0" right="30.0" />
                   </VBox.margin>

@@ -25,7 +25,7 @@ import java.net.URL;
 import java.util.LinkedHashSet;
 import java.util.ResourceBundle;
 
-public class ControllerChooseCategoryOfOfficial implements Initializable{
+public class ControllerChooseCategoryOfOfficial implements Initializable {
     @FXML
     private VBox selectionOfOfficials;
 
@@ -37,6 +37,8 @@ public class ControllerChooseCategoryOfOfficial implements Initializable{
     private TableColumn<TableViewChooseCategory, Boolean> tableColumn2;
     @FXML
     private Label label;
+    @FXML
+    public Button _next_btn;
 
     private static String nameForFindFromXml;
     private static String viewForFindFromXml;
@@ -71,11 +73,11 @@ public class ControllerChooseCategoryOfOfficial implements Initializable{
     }
 
     @FXML
-    private void theNext() throws IOException{
+    private void theNext() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass()
                 .getResource("/fxml/type_definition_1.fxml"));
-        try{
-            VBox vBox = (VBox)loader.load();
+        try {
+            VBox vBox = (VBox) loader.load();
 
             // Передаём выбранную модель в контроллер фрейма Описание
 //            ControllerTypeDefinition1 controller = loader.getController();
@@ -83,17 +85,17 @@ public class ControllerChooseCategoryOfOfficial implements Initializable{
 
             // Оотображаем
             selectionOfOfficials.getChildren().setAll(vBox);
-        } catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     @FXML
-    private void EditOriginalData(ActionEvent actionEvent) throws IOException{
+    private void EditOriginalData(ActionEvent actionEvent) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass()
                 .getResource("/fxml/choose_data_category.fxml"));
-        try{
-            VBox vBox = (VBox)loader.load();
+        try {
+            VBox vBox = (VBox) loader.load();
 
             // Передаём выбранную модель в контроллер фрейма Описание
             ControllerDataCategory controller = loader.getController();
@@ -101,12 +103,12 @@ public class ControllerChooseCategoryOfOfficial implements Initializable{
 
             // Оотображаем
             selectionOfOfficials.getChildren().setAll(vBox);
-        } catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public void setChooseCategory(String s, String a, int ss, int aa){
+    public void setChooseCategory(String s, String a, int ss, int aa) {
         this.nameForFindFromXml = s;
         this.viewForFindFromXml = a;
 
@@ -137,9 +139,21 @@ public class ControllerChooseCategoryOfOfficial implements Initializable{
                     @Override
                     public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
                         tableViewChooseCategory.setChoose(newValue);
-                        //observableList.add(new TableViewChooseCategory(tableViewChooseCategory.getFullName(),newValue));
-                        arraySetOfficial.add(tableViewChooseCategory.getFullName());
-                        arrayOfficialsId.add(tableViewChooseCategory.getId());
+
+                        if (newValue) {
+                            //observableList.add(new TableViewChooseCategory(tableViewChooseCategory.getFullName(),newValue));
+                            arraySetOfficial.add(tableViewChooseCategory.getFullName());
+                            arrayOfficialsId.add(tableViewChooseCategory.getId());
+
+                            enableNextButton();
+                        } else {
+                            arraySetOfficial.remove(tableViewChooseCategory.getFullName());
+                            arrayOfficialsId.remove(tableViewChooseCategory.getId());
+
+                            if (arraySetOfficial.size() == 0 || arrayOfficialsId.size() == 0) {
+                                diableNextButton();
+                            }
+                        }
                     }
                 });
                 return booleanProperty;
@@ -156,9 +170,17 @@ public class ControllerChooseCategoryOfOfficial implements Initializable{
 
         listSetTable = getTableViewChooseCategoryList();
         tableView.setItems(listSetTable);
+
+        diableNextButton();
     }
 
+    private void diableNextButton() {
+        _next_btn.setDisable(true);
+    }
 
+    private void enableNextButton() {
+        _next_btn.setDisable(false);
+    }
 
     private ObservableList<TableViewChooseCategory> getTableViewChooseCategoryList() {
 
@@ -167,7 +189,7 @@ public class ControllerChooseCategoryOfOfficial implements Initializable{
         listOfficial = DB.getOfficialsFromMilitaryPartById(idMilitaryPart);
 
         for (Official official : listOfficial) {
-            list.add( new TableViewChooseCategory(
+            list.add(new TableViewChooseCategory(
                     official.getTitle()
             ));
         }
