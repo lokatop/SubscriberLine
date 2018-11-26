@@ -125,6 +125,8 @@ public class ControllerChooseCategoryOfOfficial implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+        disableNextButton();
+
         tableColumn1.setCellValueFactory(new PropertyValueFactory<TableViewChooseCategory, String>("fullName"));
         tableColumn2.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<TableViewChooseCategory, Boolean>, ObservableValue<Boolean>>() {
             @Override
@@ -168,8 +170,6 @@ public class ControllerChooseCategoryOfOfficial implements Initializable {
 
         listSetTable = getTableViewChooseCategoryList();
         tableView.setItems(listSetTable);
-
-        disableNextButton();
     }
 
     private void disableNextButton() {
