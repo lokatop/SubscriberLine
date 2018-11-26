@@ -13,7 +13,6 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
-import javafx.scene.web.WebView;
 import javafx.util.Callback;
 import model.*;
 
@@ -21,7 +20,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import static model.InfoModel.filterInfoModelByType;
 import static model.TableViewTypeDef1.filterByNameOfOfficial;
 
 public class ControllerTypeDefinition1 implements Initializable {
@@ -54,7 +52,6 @@ public class ControllerTypeDefinition1 implements Initializable {
     /**
      * Список всех ТА для должностей
      */
-    private ObservableList<InfoModel> infoModelsList = FXCollections.observableArrayList();
     private ObservableList<CatalogItem> catalogItems = FXCollections.observableArrayList();
 
     /**
