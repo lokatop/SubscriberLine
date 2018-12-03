@@ -30,7 +30,7 @@ public class ControllerTypeDefinition2 implements Initializable {
     public Button _btn_next;
 
     @FXML
-    private TableView _tableView;
+    private TableView<TableViewApparatus> _tableView;
     @FXML
     private TableColumn<TableViewApparatus, String> _tableColumn1;
     @FXML
@@ -60,20 +60,19 @@ public class ControllerTypeDefinition2 implements Initializable {
     }
 
     @FXML
-    private void theNext() throws IOException{
+    private void theNext() throws IOException {
         VBox vBox = FXMLLoader.load(getClass().getResource("/fxml/type_definition_3.fxml"));
         typeDefinition.getChildren().setAll(vBox);
     }
 
-    public void readData(){
+    public void readData() {
         apparatusData.clear();
-        choosedApparatus.clear();
 
         apparatusData.addAll(DB.getCatalogTitlesByType("AOZU"));
         apparatusData.addAll(DB.getCatalogTitlesByType("ATZU"));
     }
 
-    private void setupTable(){
+    private void setupTable() {
         // Название
         _tableColumn1.setCellValueFactory(new PropertyValueFactory<TableViewApparatus, String>("fullName"));
 
@@ -86,10 +85,10 @@ public class ControllerTypeDefinition2 implements Initializable {
             public void handle(TableColumn.CellEditEvent<TableViewApparatus, Integer> event) {
                 TablePosition<TableViewApparatus, Integer> pos = event.getTablePosition();
 
-                Integer newCount= event.getNewValue();
+                Integer newCount = event.getNewValue();
 
                 // Делаем кол-во положительным
-                if (newCount<1) newCount = 1;
+                if (newCount < 1) newCount = 1;
 
                 int row = pos.getRow();
                 TableViewApparatus apparatus = event.getTableView().getItems().get(row);
@@ -113,12 +112,12 @@ public class ControllerTypeDefinition2 implements Initializable {
                 booleanProperty.addListener(new ChangeListener<Boolean>() {
                     @Override
                     public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                        if (newValue){
-                            if (!choosedApparatus.contains(tableViewApparatus)){
+                        if (newValue) {
+                            if (!choosedApparatus.contains(tableViewApparatus)) {
                                 choosedApparatus.add(tableViewApparatus);
                             }
                         } else {
-                            if (choosedApparatus.contains(tableViewApparatus)){
+                            if (choosedApparatus.contains(tableViewApparatus)) {
                                 choosedApparatus.remove(tableViewApparatus);
                             }
                         }
@@ -138,42 +137,87 @@ public class ControllerTypeDefinition2 implements Initializable {
             }
         });
     }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         readData();
 
         setupTable();
 
-        if (_tableView.getItems().isEmpty()) {
-            _tableView.setItems(getTableViewApparatusList());
-        }
+        _tableView.getItems().clear();
+
+        _tableView.setItems(getTableViewApparatusList());
 
         choosedApparatus.addListener(new ListChangeListener<TableViewApparatus>() {
             @Override
             public void onChanged(Change<? extends TableViewApparatus> c) {
-                if(choosedApparatus.isEmpty()){
-                    _btn_next.setDisable(true);
+                if (choosedApparatus.isEmpty()) {
+                    disableButton();
                 } else {
-                    _btn_next.setDisable(false);
+                    enableButton();
                 }
             }
         });
     }
 
-    private ObservableList<TableViewApparatus>  getTableViewApparatusList() {
+    private ObservableList<TableViewApparatus> getTableViewApparatusList() {
 
         //TableViewChooseCategory person1 = new TableViewChooseCategory("Susan Smith",  false);
         //TableViewChooseCategory person2 = new TableViewChooseCategory("Anne McNeil",  false);
         //TableViewChooseCategory person3 = new TableViewChooseCategory("Kenvin White", false);
 
         ObservableList<TableViewApparatus> tableData = FXCollections.observableArrayList();
-        for (int i = 0; i<apparatusData.size(); i++){
+        for (int i = 0; i < apparatusData.size(); i++) {
 
-            tableData.add( new TableViewApparatus(
-                    apparatusData.get(i).getId(),
-                    apparatusData.get(i).getTitle()
-            ));
+            Integer apparatusId = apparatusData.get(i).getId();
+            String apparatusTitle = apparatusData.get(i).getTitle();
+
+            if (isApparatusWasChoosed(apparatusTitle)) {
+                tableData.add(new TableViewApparatus(
+                        apparatusId,
+                        apparatusTitle,
+                        getApparatusFromChoosed(apparatusTitle).getCount(),
+                        true
+                ));
+
+                enableButton();
+            }
+            else
+                tableData.add(new TableViewApparatus(
+                        apparatusId,
+                        apparatusTitle
+                ));
         }
         return tableData;
+    }
+
+    private boolean isApparatusWasChoosed(String apparatus_title) {
+        boolean result = false;
+
+        for (TableViewApparatus apparatus : choosedApparatus) {
+            if (apparatus.getFullName().equals(apparatus_title))
+                result = true;
+        }
+
+        return result;
+    }
+
+    private TableViewApparatus getApparatusFromChoosed(String apparatus_title) {
+        TableViewApparatus result = null;
+
+        for (TableViewApparatus apparatus : choosedApparatus) {
+            if (apparatus.getFullName().equals(apparatus_title))
+                result = apparatus;
+        }
+
+        return result;
+    }
+
+    private void enableButton(){
+        _btn_next.setDisable(false);
+    }
+
+    private void disableButton(){
+        _btn_next.setDisable(true);
     }
 }
