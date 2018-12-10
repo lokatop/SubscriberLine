@@ -46,9 +46,9 @@
                 <Insets />
               </HBox.margin>
             </HTMLEditor>
-            <GridPane>
+            <GridPane disable="false">
               <children>
-                <VBox GridPane.columnIndex="1" GridPane.rowIndex="0">
+                <VBox fx:id="_additional_data_block" disable="true" GridPane.columnIndex="1" GridPane.rowIndex="0">
                   <children>
                     <Label text="Жилы" />
                     <TableView fx:id="_wire_table" editable="true" prefHeight="240.0" prefWidth="150.0">

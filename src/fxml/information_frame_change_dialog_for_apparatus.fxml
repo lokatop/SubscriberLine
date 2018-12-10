@@ -49,7 +49,7 @@
                 <Insets />
               </HBox.margin>
             </HTMLEditor>
-            <GridPane>
+            <GridPane fx:id="_additional_data_block" disable="true">
               <children>
                 <VBox GridPane.columnIndex="1" GridPane.rowIndex="0">
                   <children>

@@ -16,6 +16,7 @@ import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
+import javafx.scene.layout.GridPane;
 import javafx.scene.web.HTMLEditor;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -54,6 +55,7 @@ public class ControllerInformationFrameChangeDialogForApparatus implements Initi
     public TextField _cable_count;
     public TableColumn<CatalogItem, String> _cable_column_1;
     public TableColumn<TableCableModel, Integer> _cable_column_2;
+    public GridPane _additional_data_block;
 
     // Для свременного сохранения изображения и отображения иконки DragAndDrop
     private Image dropIconTemp;
@@ -89,6 +91,8 @@ public class ControllerInformationFrameChangeDialogForApparatus implements Initi
             CatalogItem item = DB.getCatalogItemById(id);
             aparatousId = id;
             itemType = item.getType();
+
+            enable_additional_data_block();
 
             // Заполняем
             __title.setText(item.getTitle());
@@ -176,7 +180,13 @@ public class ControllerInformationFrameChangeDialogForApparatus implements Initi
                     __image.getImage()
             )) {
                 okClicked = true;
-                dialogStage.close();
+                try {
+                    aparatousId = DB.getCatalogItemByTitle(__title.getText()).getId();
+                    enable_additional_data_block();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                    dialogStage.close();
+                }
             } else {
                 // TODO: Ошибка сохранения
             }
@@ -314,7 +324,15 @@ public class ControllerInformationFrameChangeDialogForApparatus implements Initi
     }
 
     private void fillTAList() {
-        ObservableList<CatalogItem> Ta = DB.getTaNotInApparatousById(aparatousId);
+        ObservableList<CatalogItem> Ta = FXCollections.observableArrayList();
+
+        if (aparatousId != null)
+            Ta.addAll(DB.getTaNotInApparatousById(aparatousId));
+        else {
+            Ta.addAll(DB.getCatalogTitlesByType("DS"));
+            Ta.addAll(DB.getCatalogTitlesByType("ZAS"));
+            Ta.addAll(DB.getCatalogTitlesByType("ARM"));
+        }
 
         _ta_list.setItems(Ta);
 
@@ -324,7 +342,11 @@ public class ControllerInformationFrameChangeDialogForApparatus implements Initi
 
     private void fillCableList() {
 
-        ObservableList<CatalogItem> Cables = DB.getCablesNotInApparatousById(aparatousId);
+        ObservableList<CatalogItem> Cables = FXCollections.observableArrayList();
+        if (aparatousId != null)
+            Cables.addAll(DB.getCablesNotInApparatousById(aparatousId));
+        else
+            Cables.addAll(DB.getCatalogTitlesByType("CableAndOther"));
 
         _cable_list.getItems().clear();
         _cable_list.setItems(Cables);
@@ -375,6 +397,10 @@ public class ControllerInformationFrameChangeDialogForApparatus implements Initi
         // Настройка таблицы
         setupTaTable();
         setupCableTable();
+
+
+        fillTAList();
+        fillCableList();
     }
 
     public void _ta_del(ActionEvent actionEvent) {
@@ -486,5 +512,9 @@ public class ControllerInformationFrameChangeDialogForApparatus implements Initi
         modded_string = modded_string.replaceAll("a>", "font>");
 
         __description.setHtmlText(modded_string);
+    }
+
+    public void enable_additional_data_block(){
+        _additional_data_block.setDisable(false);
     }
 }

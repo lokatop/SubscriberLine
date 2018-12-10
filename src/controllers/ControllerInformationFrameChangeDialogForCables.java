@@ -13,6 +13,8 @@ import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.web.HTMLEditor;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -49,6 +51,7 @@ public class ControllerInformationFrameChangeDialogForCables implements Initiali
     public TableColumn<CatalogItem.Wire, Integer> _wire_column_2;
     public TextField __cable_mass;
     public TextField __cable_length;
+    public VBox _additional_data_block;
 
     // Для свременного сохранения изображения и отображения иконки DragAndDrop
     private Image dropIconTemp;
@@ -81,6 +84,8 @@ public class ControllerInformationFrameChangeDialogForCables implements Initiali
             CatalogItem item = DB.getCableById(id);
             cableId = id;
             itemType = item.getType();
+
+            enable_additional_data_block();
 
             // Заполняем
             __title.setText(item.getTitle());
@@ -179,7 +184,13 @@ public class ControllerInformationFrameChangeDialogForCables implements Initiali
                     Float.parseFloat(__cable_length.getText())
             )) {
                 okClicked = true;
-                dialogStage.close();
+                try {
+                    cableId = DB.getCatalogItemByTitle(__title.getText()).getId();
+                    enable_additional_data_block();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                    dialogStage.close();
+                }
             } else {
                 // TODO: Ошибка сохранения
             }
@@ -355,6 +366,8 @@ public class ControllerInformationFrameChangeDialogForCables implements Initiali
         // Настройка таблицы
         setupWireTable();
         setupMassLengthTextFields();
+
+        fillWireList();
     }
 
     public void _material_del(ActionEvent actionEvent) {
@@ -377,5 +390,9 @@ public class ControllerInformationFrameChangeDialogForCables implements Initiali
         modded_string = modded_string.replaceAll("a>", "font>");
 
         __description.setHtmlText(modded_string);
+    }
+
+    public void enable_additional_data_block(){
+        _additional_data_block.setDisable(false);
     }
 }
