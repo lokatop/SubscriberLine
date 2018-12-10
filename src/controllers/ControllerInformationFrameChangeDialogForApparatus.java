@@ -15,10 +15,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.DragEvent;
-import javafx.scene.input.Dragboard;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.input.TransferMode;
+import javafx.scene.input.*;
 import javafx.scene.web.HTMLEditor;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -479,5 +476,15 @@ public class ControllerInformationFrameChangeDialogForApparatus implements Initi
 
             return condition_1 && condition_2;
         }
+    }
+
+    public void __desc_text_changed(KeyEvent keyEvent) {
+        String raw_string = __description.getHtmlText();
+
+        String modded_string = raw_string.replaceAll("href", "nohref");
+        modded_string = modded_string.replaceAll("<a", "<font");
+        modded_string = modded_string.replaceAll("a>", "font>");
+
+        __description.setHtmlText(modded_string);
     }
 }

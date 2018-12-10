@@ -39,7 +39,7 @@
             <Button mnemonicParsing="false" onAction="#__cancel" text="Отменить" />
           </children>
         </HBox>
-        <HTMLEditor fx:id="__description" htmlText="&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body contenteditable=&quot;true&quot; align=&quot;justify&quot;&gt;&lt;/body&gt;&lt;/html&gt;" style="" GridPane.columnSpan="2" GridPane.rowIndex="1" />
+        <HTMLEditor fx:id="__description" htmlText="&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body contenteditable=&quot;true&quot; align=&quot;justify&quot;&gt;&lt;/body&gt;&lt;/html&gt;" onKeyReleased="#__desc_text_changed" style="" GridPane.columnSpan="2" GridPane.rowIndex="1" />
       </children>
       <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
