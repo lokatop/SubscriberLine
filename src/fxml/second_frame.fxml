@@ -8,9 +8,9 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<VBox fx:id="VBoxRoot" alignment="CENTER" prefHeight="400.0" prefWidth="640.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="controllers.ControllerSecondFrame">
+<VBox fx:id="VBoxRoot" alignment="TOP_CENTER" fillWidth="false" prefHeight="400.0" prefWidth="640.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="controllers.ControllerSecondFrame">
   <children>
-    <MenuBar minHeight="30.0" style=".menu-bar { &#10;-fx-base: #FFF;&#10;-fx-body-color: #999999;&#10;}">
+    <MenuBar maxWidth="1.7976931348623157E308" minHeight="30.0" prefWidth="960.0" style=".menu-bar { &#10;-fx-base: #FFF;&#10;-fx-body-color: #999999;&#10;}" useSystemMenuBar="false" VBox.vgrow="NEVER">
       <menus>
         <Menu mnemonicParsing="false" text="Помошь">
           <items>
@@ -20,10 +20,13 @@
                 <MenuItem mnemonicParsing="false" text="Методика" fx:id="_menu_methodic" />
               </items>
             </Menu>
-            <MenuItem mnemonicParsing="false" text="Разработчики" fx:id="_deverlopers" />
+            <MenuItem mnemonicParsing="false" text="Разработчики" fx:id="_menu_developers" />
           </items>
         </Menu>
       </menus>
+      <VBox.margin>
+        <Insets top="24.0" />
+      </VBox.margin>
     </MenuBar>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
       <children>

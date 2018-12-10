@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<VBox alignment="CENTER" prefHeight="300.0" prefWidth="400.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
+  <children>
+    <Label text="О программе" textAlignment="LEFT" wrapText="false">
+      <font>
+        <Font name="System Bold" size="15.0" />
+      </font>
+    </Label>
+    <Separator orientation="VERTICAL" prefHeight="16.0" visible="false" />
+    <Label alignment="TOP_LEFT" prefHeight="200.0" prefWidth="350.0" text="Label" />
+  </children>
+</VBox>
