@@ -79,7 +79,7 @@ public class ControllerInformationDescription {
 
                     for (int i = 0; i < appTa.size(); i++) {
                         treeItemTa.getChildren().add(new TreeItem<String>(
-                                appTa.get(i).getTitle()
+                                appTa.get(i).getTitle() + " " + appTa.get(i).getCount() + " шт."
                         ));
                     }
 
