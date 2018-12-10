@@ -82,7 +82,7 @@
             </Label>
             <VBox alignment="TOP_CENTER" prefHeight="401.0" prefWidth="332.0" GridPane.rowIndex="2">
               <children>
-                <Label alignment="CENTER" font="$x1" text="Телефонные аппараты ДС" />
+                <Label alignment="CENTER" font="$x1" text="Телефонные аппараты открытой ДС" />
                 <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0">
                   <children>
                     <ComboBox fx:id="DC" prefWidth="200.0" style="" />
@@ -104,7 +104,7 @@
                     <Insets />
                   </VBox.margin>
                 </HBox>
-                <Label alignment="CENTER" font="$x1" text="Автоматизированные рабочие места" />
+                <Label alignment="CENTER" font="$x1" text="Оборудование терминальное и ЗВКС" />
                 <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0">
                   <children>
                     <ComboBox fx:id="ARM" prefWidth="200.0" />

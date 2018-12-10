@@ -12,7 +12,7 @@
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
       <children>
-        <Label maxHeight="100.0" maxWidth="760.0" prefHeight="58.0" prefWidth="760.0" text="Данная программа предназначена определения потребности кабельного имущества и абонентского оборудования при развертывании абонентской сети на пункте управления. Автоматизированного формирования графического документа &quot;Схема абнентской сети пункта управления&quot;" textAlignment="CENTER" wrapText="true" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="16.0">
+        <Label maxHeight="100.0" maxWidth="760.0" prefHeight="58.0" prefWidth="760.0" text="Данная программа предназначена определения потребности кабельного имущества и абонентского оборудования при развертывании абонентской сети на пункте управления. Автоматизированного проведения расчета и подготовки итоговых текстовых документов" textAlignment="CENTER" wrapText="true" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="16.0">
           <font>
             <Font name="Times New Roman" size="14.0" fx:id="x1" />
           </font>
@@ -45,7 +45,7 @@
                   </VBox.margin>
                 </Button>
                 <Separator orientation="VERTICAL" prefHeight="8.0" />
-                <Button alignment="CENTER" font="$x2" maxWidth="1.7976931348623157E308" minHeight="50.0" mnemonicParsing="false" onAction="#FormingADocument" text="Формирование графического документа &lt;Схема абонентской сети пункта управления&gt;" textAlignment="CENTER" underline="false" wrapText="true">
+                <Button alignment="CENTER" font="$x2" maxWidth="1.7976931348623157E308" minHeight="50.0" mnemonicParsing="false" onAction="#FormingADocument" text="Расчет абонентской сети пункта управления" textAlignment="CENTER" underline="false" wrapText="true">
                   <VBox.margin>
                     <Insets />
                   </VBox.margin>

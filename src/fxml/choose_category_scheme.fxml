@@ -8,7 +8,7 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<VBox fx:id="VboxChooseSheme" prefHeight="400.0" prefWidth="640.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="controllers.ControllerChooseCategoryScheme">
+<VBox fx:id="VboxChooseSheme" alignment="CENTER" prefHeight="400.0" prefWidth="640.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="controllers.ControllerChooseCategoryScheme">
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
       <children>
@@ -29,7 +29,7 @@
             </Label>
             <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
               <children>
-                <Label font="$x1" text="Выбор категории пункта управления">
+                <Label font="$x1" text="Тип пункта управления">
                   <VBox.margin>
                     <Insets />
                   </VBox.margin>
@@ -73,12 +73,12 @@
             </VBox>
             <VBox alignment="CENTER_RIGHT" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="2">
               <children>
-                <Label font="$x1" text="Вид воинской части">
+                <Label font="$x1" text="Тип воинского формирования">
                   <VBox.margin>
                     <Insets right="16.0" />
                   </VBox.margin>
                 </Label>
-                <ComboBox fx:id="ComboBoxPart" minHeight="25.0" prefWidth="176.0">
+                <ComboBox fx:id="ComboBoxPart" minHeight="25.0" prefWidth="220.0">
                   <VBox.margin>
                     <Insets />
                   </VBox.margin>
