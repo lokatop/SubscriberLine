@@ -32,11 +32,6 @@
                       </children>
                     </HBox>
                     <Button fx:id="__btn_delete" disable="true" minHeight="25.0" mnemonicParsing="false" onAction="#info_model_delete" text="Удалить" />
-                    <Button minHeight="2.0" mnemonicParsing="false" onAction="#info_model_save" text="Применить изменения">
-                      <VBox.margin>
-                        <Insets top="10.0" />
-                      </VBox.margin>
-                    </Button>
                   </children>
                 </VBox>
               </children>

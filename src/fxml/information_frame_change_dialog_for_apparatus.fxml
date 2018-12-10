@@ -36,7 +36,7 @@
               </HBox.margin>
             </Button>
             <Separator opacity="0.0" prefWidth="8.0" />
-            <Button mnemonicParsing="false" onAction="#__cancel" text="Отменить" />
+            <Button mnemonicParsing="false" onAction="#__cancel" text="Закрыть" />
           </children>
           <padding>
             <Insets right="16.0" />

@@ -101,16 +101,6 @@ public class ControllerInformationChange {
         disable_buttons();
     }
 
-    public void info_model_save(ActionEvent actionEvent) throws IOException {
-        if (!infoData.isEmpty()) {
-            XMLsaver.saveToXML(infoData, InfoModel.FILENAME_INFOMODELS);
-        } else {
-            // TODO: Удаление файла, если удалили все модели?
-        }
-
-        this.btnBackClick();
-    }
-
     public void info_model_edit(ActionEvent actionEvent) {
         switch (changingTypeId) {
             case 3:
