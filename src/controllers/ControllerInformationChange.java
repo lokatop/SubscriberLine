@@ -21,8 +21,8 @@ import model.XMLsaver;
 
 import java.io.IOException;
 
-import static model.InfoModel.CATEGORIES;
-import static model.InfoModel.CATEGORIES_DESC;
+import static model.CatalogItem.CATEGORIES;
+import static model.CatalogItem.CATEGORIES_DESC;
 
 public class ControllerInformationChange {
     @FXML
