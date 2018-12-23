@@ -8,7 +8,7 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<VBox fx:id="VBoxRoot" alignment="TOP_CENTER" fillWidth="false" prefHeight="400.0" prefWidth="640.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="controllers.ControllerSecondFrame">
+<VBox fx:id="VBoxRoot" alignment="TOP_CENTER" prefHeight="400.0" prefWidth="640.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="controllers.ControllerSecondFrame">
   <children>
     <MenuBar maxWidth="1.7976931348623157E308" minHeight="30.0" prefWidth="960.0" style=".menu-bar { &#10;-fx-base: #FFF;&#10;-fx-body-color: #999999;&#10;}" useSystemMenuBar="false" VBox.vgrow="NEVER">
       <menus>
