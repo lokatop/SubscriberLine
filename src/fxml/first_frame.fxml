@@ -10,61 +10,88 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox fx:id="VBoxRoot1" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="960.0" snapToPixel="true" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="controllers.ControllerFirstFrame">
+<VBox fx:id="VBoxRoot1" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="960.0" snapToPixel="true" style="-fx-background-image: url(&quot;ris4.jpg&quot;);" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="controllers.ControllerFirstFrame">
   <children>
-    <AnchorPane prefHeight="720.0" prefWidth="960.0">
+    <AnchorPane prefHeight="720.0" prefWidth="960.0" style="   &#10;">
       <children>
-        <GridPane alignment="CENTER" prefHeight="720.0" prefWidth="960.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <GridPane alignment="CENTER" prefHeight="720.0" prefWidth="960.0" style="-fx-background-image: url(&quot;resource/ris4.jpg&quot;);" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
           <children>
-            <Label alignment="CENTER" contentDisplay="CENTER" text="Санкт-Петербургский политехнический университет Петра Великого    Факультет военного обучения    Военная кафедры связи" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1">
-              <font>
-                <Font name="Times New Roman Bold" size="24.0" />
-              </font>
-            </Label>
-            <Label prefHeight="64.0" prefWidth="199.0" text="Санкт-Петербург 2018" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="4">
-              <font>
-                <Font name="System Bold" size="16.0" />
-              </font>
-            </Label>
-            <ImageView fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="CENTER">
-              <image>
-                <Image url="@../resource/FirstPageSvyaz.jpg" />
-              </image>
-            </ImageView>
-            <ImageView fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="2" GridPane.valignment="CENTER">
-              <image>
-                <Image url="@../resource/PolytehPetra.jpg" />
-              </image>
-            </ImageView>
             <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
               <children>
-                <ImageView fitHeight="57.0" fitWidth="57.0" pickOnBounds="true" preserveRatio="true">
-                  <image>
-                    <Image url="@../resource/ivtob-logo.jpg" />
-                  </image>
-                  <VBox.margin>
-                    <Insets top="10.0" />
-                  </VBox.margin>
-                </ImageView>
-                <Button mnemonicParsing="false" onAction="#loginToTheProgram" style="-fx-background-color: #c59003;" text="ВХОД В ПРОГРАММУ" textFill="WHITE">
-                  <font>
-                    <Font name="Times New Roman" size="30.0" />
-                  </font>
-                  <VBox.margin>
-                    <Insets top="16.0" />
-                  </VBox.margin>
-                </Button>
+                <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
+                  <children>
+                    <Button mnemonicParsing="false" onAction="#loginToTheProgram" style="-fx-background-color: #c59003;" text=" ВХОД " textFill="WHITE">
+                      <font>
+                        <Font name="Times New Roman" size="32.0" />
+                      </font>
+                      <VBox.margin>
+                        <Insets top="16.0" fx:id="x1" />
+                      </VBox.margin>
+                    </Button>
+                  </children>
+                </VBox>
               </children>
             </VBox>
             <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
               <children>
-                <Label prefHeight="200.0" prefWidth="445.0" text="Программа по расчёту и оптимизации абонентских сетей на  пунктах управления специального назначения" textAlignment="CENTER" wrapText="true">
+                <Label prefHeight="200.0" prefWidth="445.0" text="РАСЧЕТ АБОНЕНТСКОЙ СЕТИ НА ПУНКТЕ УПРАВЛЕНИЯ" textAlignment="CENTER" textFill="#0c9900" wrapText="true">
                   <font>
-                    <Font name="Times New Roman Bold" size="32.0" />
+                    <Font name="Times New Roman Bold" size="34.0" />
                   </font>
                 </Label>
               </children>
             </VBox>
+            <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="0">
+              <children>
+                <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" prefWidth="440.0" text="ВОЕННАЯ АКАДЕМИЯ СВЯЗИ" textAlignment="CENTER" textOverrun="CLIP" underline="true" wrapText="true">
+                  <font>
+                    <Font name="Times New Roman Bold" size="28.0" />
+                  </font>
+                  <VBox.margin>
+                    <Insets top="16.0" fx:id="x1" />
+                  </VBox.margin>
+                </Label>
+                <Label maxWidth="1.7976931348623157E308" text="КАФЕДРА БОЕВОГО ПРИМЕНЕНИЯ ВОЙСК СВЯЗИ" textAlignment="CENTER" textFill="RED" wrapText="true">
+                  <font>
+                    <Font name="Times New Roman" size="26.0" />
+                  </font>
+                </Label>
+              </children>
+            </VBox>
+            <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="0">
+              <children>
+                <ImageView fitHeight="140.00010681152344" fitWidth="140.00010681152344" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                    <Image url="@../resource/ris2.gif" />
+                  </image>
+                  <HBox.margin>
+                    <Insets left="10.0" top="16.0" />
+                  </HBox.margin>
+                </ImageView>
+                <ImageView fitHeight="140.00010681152344" fitWidth="140.00010681152344" pickOnBounds="true" preserveRatio="true" HBox.margin="$x1">
+                  <image>
+                    <Image url="@../resource/ris3.gif" />
+                  </image>
+                </ImageView>
+              </children>
+            </HBox>
+            <VBox alignment="BOTTOM_CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+              <children>
+                <Label contentDisplay="LEFT" maxWidth="-1.0" minWidth="-1.0" text="САНКТ-ПЕТЕРБУРГ" textAlignment="CENTER" textOverrun="ELLIPSIS" wrapText="true">
+                  <font>
+                    <Font name="Times New Roman Bold" size="20.0" />
+                  </font>
+                  <VBox.margin>
+                    <Insets bottom="16.0" />
+                  </VBox.margin>
+                </Label>
+              </children>
+            </VBox>
+            <ImageView fitHeight="236.48170847113826" fitWidth="200.94818115234375" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="4" GridPane.valignment="CENTER">
+              <image>
+                <Image url="@../resource/ris1.gif" />
+              </image>
+            </ImageView>
           </children>
           <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="260.0" minWidth="10.0" prefWidth="260.0" />
@@ -72,11 +99,11 @@
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="260.0" minWidth="10.0" prefWidth="260.0" />
           </columnConstraints>
           <rowConstraints>
-            <RowConstraints maxHeight="1.7976931348623157E308" minHeight="5.0" prefHeight="5.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="1.7976931348623157E308" minHeight="5.0" prefHeight="157.0" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="0.0" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="200.0" minHeight="10.0" prefHeight="200.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="179.0" minHeight="30.0" prefHeight="87.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="276.0" vgrow="SOMETIMES" />
           </rowConstraints>
         </GridPane>
       </children>
