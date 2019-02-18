@@ -505,13 +505,17 @@ public class ControllerInformationFrameChangeDialogForApparatus implements Initi
     }
 
     public void __desc_text_changed(KeyEvent keyEvent) {
-        String raw_string = __description.getHtmlText();
+        if (keyEvent.isControlDown() && (keyEvent.getText().equals("v") || keyEvent.getText().equals("V") || keyEvent.getText().equals("м") || keyEvent.getText().equals("М"))) {
 
-        String modded_string = raw_string.replaceAll("href", "nohref");
-        modded_string = modded_string.replaceAll("<a", "<font");
-        modded_string = modded_string.replaceAll("a>", "font>");
+            String raw_string = __description.getHtmlText();
 
-        __description.setHtmlText(modded_string);
+            String modded_string = raw_string.replaceAll("href", "nohref");
+            modded_string = modded_string.replaceAll("<a", "<font");
+            modded_string = modded_string.replaceAll("a>", "font>");
+
+            __description.setHtmlText(modded_string);
+            __description.requestFocus();
+        }
     }
 
     public void enable_additional_data_block(){
