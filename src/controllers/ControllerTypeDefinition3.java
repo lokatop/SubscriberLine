@@ -79,6 +79,7 @@ public class ControllerTypeDefinition3 implements Initializable {
         theLastTableListUpdatedD3.clear();
 
         List<TheLastTable> unused = new ArrayList<>();
+        List<TheLastTable> theLastTable_temp = new ArrayList<>();
         unused.addAll(ControllerTypeDefinition1.theLastTableList);
 
         // То, что не помещено в таблицу
@@ -91,7 +92,10 @@ public class ControllerTypeDefinition3 implements Initializable {
 
             for (CatalogItem abon : abonList) {
 
-                for (TheLastTable lastTableRow : ControllerTypeDefinition1.theLastTableList) {
+                theLastTable_temp.clear();
+                theLastTable_temp.addAll(unused);
+
+                for (TheLastTable lastTableRow : theLastTable_temp) {
 
                     // Проверка на наличие в аппаратной абон. обор., выбранного должн. лицом
                     // Если в строке из финалной таблицы такое же название абон. устр., как в текущем цикле
