@@ -126,6 +126,14 @@
                     <Insets />
                   </VBox.margin>
                 </HBox>
+                <Label alignment="CENTER" font="$x1" text="Кабельная арматура, применяемая при развертывании абонентской линии" textAlignment="CENTER" wrapText="true" />
+                <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0">
+                  <children>
+                    <ComboBox id="FIT" fx:id="FIT" prefWidth="200.0" />
+                    <Separator opacity="0.0" prefWidth="8.0" />
+                    <Button mnemonicParsing="false" onAction="#toShow" text="Показать" />
+                  </children>
+                </HBox>
               </children>
               <padding>
                 <Insets />

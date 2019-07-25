@@ -35,6 +35,16 @@ CREATE TABLE if not exists 'cable_wires' (
   PRIMARY KEY (cable_id,wire_material)
 );
 
+CREATE TABLE if not exists 'fitting_cables' (
+  'fitting_id' INTEGER NOT NULL,
+  'cable_id' INTEGER NOT NULL,
+  'direct' INTEGER NOT NULL,
+  'cable_count' INTEGER NOT NULL,
+  FOREIGN KEY (fitting_id) REFERENCES catalog(id),
+  FOREIGN KEY (wire_id) REFERENCES catalog(id),
+  PRIMARY KEY (fitting_id,wire_id,direct)
+);
+
 CREATE TABLE if not exists 'type_of_military_part' (
   'id' INTEGER PRIMARY KEY AUTOINCREMENT,
   'title' TEXT NOT NULL

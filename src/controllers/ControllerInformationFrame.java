@@ -39,6 +39,8 @@ public class ControllerInformationFrame implements Initializable {
     @FXML
     public ComboBox ATZU;
     @FXML
+    public ComboBox FIT;
+    @FXML
     public ComboBox list_for_edit;
 
     /**
@@ -119,8 +121,8 @@ public class ControllerInformationFrame implements Initializable {
         telCable.getSelectionModel().select(0);
         AOZU.getItems().addAll(DB.getCatalogTitlesByType("ATZU"));
         AOZU.getSelectionModel().select(0);
-        ATZU.getItems().addAll(DB.getCatalogTitlesByType("AOZU"));
-        ATZU.getSelectionModel().select(0);
+        FIT.getItems().addAll(DB.getCatalogTitlesByType("FIT"));
+        FIT.getSelectionModel().select(0);
     }
 
     @FXML
