@@ -678,6 +678,127 @@ public class DB {
         return result;
     }
 
+    static public ObservableList<CatalogItem> getFittingCableIn(Integer fittingId){
+        ObservableList<CatalogItem> result = FXCollections.observableArrayList();
+
+        try {
+            Connection connection = getConnection();
+
+            PreparedStatement pstat = null;
+
+            pstat = connection.prepareStatement("SELECT title FROM catalog WHERE id IN (SELECT cable_id FROM fitting_cables WHERE fitting_id = ? AND direct = ?)");
+            pstat.setInt(1, fittingId);
+            pstat.setInt(2, 0);
+
+            ResultSet rs = pstat.executeQuery();
+
+            while (rs.next()) {
+                CatalogItem item = new CatalogItem(
+                        rs.getInt("id"),
+                        rs.getString("title")
+                );
+                result.add(item);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return result;
+    }
+
+    static public ObservableList<CatalogItem> getFittingCableOut(Integer fittingId){
+        ObservableList<CatalogItem> result = FXCollections.observableArrayList();
+
+        try {
+            Connection connection = getConnection();
+
+            PreparedStatement pstat = null;
+
+            pstat = connection.prepareStatement("SELECT title FROM catalog WHERE id IN (SELECT cable_id FROM fitting_cables WHERE fitting_id = ? AND direct = ?)");
+            pstat.setInt(1, fittingId);
+            pstat.setInt(2, 1);
+
+            ResultSet rs = pstat.executeQuery();
+
+            while (rs.next()) {
+                CatalogItem item = new CatalogItem(
+                        rs.getInt("id"),
+                        rs.getString("title")
+                );
+                result.add(item);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return result;
+    }
+
+    static public boolean addFittingCable(Integer fittingId, Integer cableId, Integer direct, Integer cableCount){
+
+        boolean result = false;
+        Connection connection = getConnection();
+
+        try {
+            PreparedStatement pstat = null;
+            pstat = connection.prepareStatement("INSERT OR IGNORE INTO fitting_cables (fitting_id, cable_id, direct, cable_count) VALUES (?,?,?,?)");
+
+            pstat.setInt(1, fittingId);
+            pstat.setInt(2, cableId);
+            pstat.setInt(2, direct);
+            pstat.setInt(2, cableCount);
+
+            pstat.execute();
+            result = true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    static public boolean updateFittingCable(Integer fittingId, Integer cableId, Integer direct, Integer cableCount){
+
+        boolean result = false;
+        Connection connection = getConnection();
+
+        try {
+            PreparedStatement pstat = null;
+            pstat = connection.prepareStatement("UPDATE fitting_cables SET cable_count = ? WHERE fitting_id = ? AND cable_id = ? AND direct = ?");
+
+            pstat.setInt(1, cableCount);
+            pstat.setInt(2, fittingId);
+            pstat.setInt(3, cableId);
+            pstat.setInt(4, direct);
+
+            pstat.execute();
+            result = true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    static public boolean deleteFittingCable(Integer fittingId, Integer cableId, Integer direct){
+
+        boolean result = false;
+        Connection connection = getConnection();
+
+        try {
+            PreparedStatement pstat = null;
+            pstat = connection.prepareStatement("DELETE FROM fitting_cables WHERE fitting_id = ? AND cable_id = ? AND direct = ?");
+
+            pstat.setInt(2, fittingId);
+            pstat.setInt(3, cableId);
+            pstat.setInt(4, direct);
+
+            pstat.execute();
+            result = true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
     static public void closeConnection() throws SQLException {
         if (connection != null)
             connection.close();
