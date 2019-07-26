@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.web.*?>
+
+<VBox alignment="CENTER" prefHeight="600.0" prefWidth="970.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="controllers.ControllerInformationFrameChangeDialogForFittings">
+  <children>
+    <GridPane alignment="CENTER" prefHeight="603.0" prefWidth="600.0">
+      <children>
+        <TextField fx:id="__title" alignment="CENTER" prefHeight="25.0" prefWidth="660.0" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+          <GridPane.margin>
+            <Insets left="32.0" right="32.0" fx:id="x1" />
+          </GridPane.margin>
+        </TextField>
+        <FlowPane alignment="CENTER" columnHalignment="CENTER" orientation="VERTICAL" prefHeight="153.0" prefWidth="501.0" GridPane.rowIndex="2">
+          <children>
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="317.0" text="Выбрать изображение" />
+            <ImageView fx:id="__image" fitHeight="118.0" fitWidth="330.0" onDragDone="#__drag_done" onDragDropped="#__drag_dropped" onDragEntered="#__drag_enter" onDragExited="#__drag_exit" onDragOver="#__drag_over" onMouseClicked="#__select_image" pickOnBounds="true" preserveRatio="true">
+              <image>
+                <!--<Image url="@../resource/noimage.png" />-->
+              </image>
+            </ImageView>
+          </children>
+        </FlowPane>
+        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+          <children>
+            <Button mnemonicParsing="false" onAction="#__save" text="Сохранить">
+              <HBox.margin>
+                <Insets />
+              </HBox.margin>
+            </Button>
+            <Separator opacity="0.0" prefWidth="8.0" />
+            <Button mnemonicParsing="false" onAction="#__cancel" text="Закрыть" />
+          </children>
+        </HBox>
+        <HBox padding="$x1" GridPane.columnSpan="2" GridPane.rowIndex="1">
+          <children>
+            <HTMLEditor fx:id="__description" htmlText="&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body contenteditable=&quot;true&quot; align=&quot;justify&quot;&gt;&lt;/body&gt;&lt;/html&gt;" onKeyReleased="#__desc_text_changed" prefHeight="389.0" prefWidth="512.0">
+              <HBox.margin>
+                <Insets />
+              </HBox.margin>
+            </HTMLEditor>
+            <GridPane disable="false">
+              <children>
+                <VBox id="_additional_data_block" fx:id="_additional_data_block_1" disable="true" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                  <children>
+                    <Label text="Вход" />
+                    <TableView id="_wire_table" fx:id="_enter_table" editable="true" prefHeight="240.0" prefWidth="150.0">
+                      <columns>
+                        <TableColumn editable="false" prefWidth="75.0" text="Тип" fx:id="_enter_column_1" />
+                        <TableColumn prefWidth="75.0" text="Количество" fx:id="_enter_column_2" />
+                      </columns>
+                    </TableView>
+                    <Label text="Тип" />
+                    <ComboBox id="_material_list" fx:id="_enter_cable_list" prefWidth="150.0" />
+                    <Label text="Количество" />
+                    <TextField id="_material_count" fx:id="_enter_cable_count" />
+                    <HBox>
+                      <children>
+                        <Button mnemonicParsing="false" onAction="#_enter_cable_add" text="Добавить">
+                          <HBox.margin>
+                            <Insets />
+                          </HBox.margin>
+                        </Button>
+                        <Separator opacity="0.0" prefWidth="8.0" />
+                        <Button mnemonicParsing="false" onAction="#_enter_cable_del" text="Удалить">
+                          <HBox.margin>
+                            <Insets />
+                          </HBox.margin>
+                        </Button>
+                      </children>
+                    </HBox>
+                  </children>
+                </VBox>
+                <VBox id="_additional_data_block" fx:id="_additional_data_block_2" disable="true" GridPane.columnIndex="3" GridPane.rowIndex="0">
+                  <children>
+                    <Label text="Выход" />
+                    <TableView id="_wire_table" fx:id="_exit_table" editable="true" prefHeight="240.0" prefWidth="150.0">
+                      <columns>
+                        <TableColumn editable="false" prefWidth="75.0" text="Тип" fx:id="_exit_column_1" />
+                        <TableColumn prefWidth="75.0" text="Количество" fx:id="_exit_column_2" />
+                      </columns>
+                    </TableView>
+                    <Label text="Тип" />
+                    <ComboBox id="_material_list" fx:id="_exit_cable_list" prefWidth="150.0" />
+                    <Label text="Количество" />
+                    <TextField id="_material_count" fx:id="_exit_cable_count" />
+                    <HBox>
+                      <children>
+                        <Button mnemonicParsing="false" onAction="#_exit_cable_add" text="Добавить">
+                          <HBox.margin>
+                            <Insets />
+                          </HBox.margin>
+                        </Button>
+                        <Separator opacity="0.0" prefWidth="8.0" />
+                        <Button mnemonicParsing="false" onAction="#_exit_cable_del" text="Удалить">
+                          <HBox.margin>
+                            <Insets />
+                          </HBox.margin>
+                        </Button>
+                      </children>
+                    </HBox>
+                  </children>
+                </VBox>
+              </children>
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="100.0" minWidth="30.0" prefWidth="30.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="150.0" minWidth="150.0" prefWidth="150.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="93.0" minWidth="10.0" prefWidth="93.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="150.0" minWidth="150.0" prefWidth="150.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+            </GridPane>
+          </children>
+        </HBox>
+      </children>
+      <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="521.0" minWidth="10.0" prefWidth="511.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="483.0" minWidth="10.0" prefWidth="459.0" />
+      </columnConstraints>
+      <rowConstraints>
+        <RowConstraints maxHeight="195.0" minHeight="10.0" prefHeight="46.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="455.0" minHeight="10.0" prefHeight="377.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="334.0" minHeight="10.0" prefHeight="142.0" vgrow="SOMETIMES" />
+      </rowConstraints>
+    </GridPane>
+  </children>
+</VBox>

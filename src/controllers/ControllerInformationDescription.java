@@ -105,6 +105,41 @@ public class ControllerInformationDescription {
                 treeItemRoot.getChildren().add(treeItemMass);
                 treeItemRoot.getChildren().add(treeItemLength);
 
+
+
+            case "FIT":
+                // Получаем кабели на вход
+                ObservableList<CatalogItem.FittingCable> enterCables = DB.getFittingCableIn(catalogItem.getId());
+                // Получаем кабели на выход
+                ObservableList<CatalogItem.FittingCable> exitCables = DB.getFittingCableOut(catalogItem.getId());
+
+                // Заполняем древо кабелями на вход
+                if (enterCables.size() != 0) {
+                    TreeItem<String> treeItemCables = new TreeItem<String>("Вход");
+                    treeItemCables.setExpanded(true);
+
+                    for (int i = 0; i < enterCables.size(); i++) {
+                        treeItemCables.getChildren().add(new TreeItem<String>(
+                                enterCables.get(i).getTitle() + " - " + enterCables.get(i).getCount() + " шт"
+                        ));
+                    }
+
+                    treeItemRoot.getChildren().add(treeItemCables);
+                }
+                // Заполняем древо кабелями на выход
+                if (exitCables.size() != 0) {
+                    TreeItem<String> treeItemCables = new TreeItem<String>("Выход");
+                    treeItemCables.setExpanded(true);
+
+                    for (int i = 0; i < exitCables.size(); i++) {
+                        treeItemCables.getChildren().add(new TreeItem<String>(
+                                exitCables.get(i).getTitle() + " - " + enterCables.get(i).getCount() + " шт"
+                        ));
+                    }
+
+                    treeItemRoot.getChildren().add(treeItemCables);
+                }
+
                 break;
         }
 

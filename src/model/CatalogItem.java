@@ -168,4 +168,53 @@ public class CatalogItem {
             this.count.set(count);
         }
     }
+
+    public static class FittingCable {
+
+        private IntegerProperty cable_id;
+        private StringProperty title;
+        private IntegerProperty count;
+
+        public FittingCable(Integer cable_id, String title, Integer count){
+            this.cable_id = new SimpleIntegerProperty(cable_id);
+            this.title = new SimpleStringProperty(title);
+            this.count = new SimpleIntegerProperty(count);
+        }
+
+        public String getTitle() {
+            return title.get();
+        }
+
+        public StringProperty titleProperty() {
+            return title;
+        }
+
+        public void setTitle(String title) {
+            this.title.set(title);
+        }
+
+        public int getCount() {
+            return count.get();
+        }
+
+        public IntegerProperty countProperty() {
+            return count;
+        }
+
+        public void setCount(int count) {
+            this.count.set(count);
+        }
+
+        public int getCable_id() {
+            return cable_id.get();
+        }
+
+        public IntegerProperty cable_idProperty() {
+            return cable_id;
+        }
+
+        public void setCable_id(int cable_id) {
+            this.cable_id.set(cable_id);
+        }
+    }
 }

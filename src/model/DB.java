@@ -678,7 +678,7 @@ public class DB {
         return result;
     }
 
-    static public ObservableList<CatalogItem> getFittingCableIn(Integer fittingId){
+    static public ObservableList<CatalogItem> getFittingCableTypesIn(Integer fittingId){
         ObservableList<CatalogItem> result = FXCollections.observableArrayList();
 
         try {
@@ -706,7 +706,7 @@ public class DB {
         return result;
     }
 
-    static public ObservableList<CatalogItem> getFittingCableOut(Integer fittingId){
+    static public ObservableList<CatalogItem> getFittingCableTypesOut(Integer fittingId){
         ObservableList<CatalogItem> result = FXCollections.observableArrayList();
 
         try {
@@ -734,6 +734,91 @@ public class DB {
         return result;
     }
 
+    static public ObservableList<CatalogItem> getCablesNotInFittingById(Integer id, Integer direct) {
+        ObservableList<CatalogItem> result = FXCollections.observableArrayList();
+
+        try {
+            Connection connection = getConnection();
+
+            PreparedStatement pstat = null;
+
+            pstat = connection.prepareStatement("SELECT * FROM catalog WHERE id NOT IN (SELECT cable_id FROM fitting_cables WHERE fitting_id = "+id+" AND direct = "+direct+") AND catalog.type=\"CableAndOther\"");
+//            pstat.setInt(1, id);
+//            pstat.setInt(1, direct);
+
+            ResultSet rs = pstat.executeQuery();
+
+            while (rs.next()) {
+                result.add(new CatalogItem(
+                        rs.getInt("id"),
+                        rs.getString("title")
+                ));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return result;
+    }
+
+    static public ObservableList<CatalogItem.FittingCable> getFittingCableIn(Integer fittingId){
+        ObservableList<CatalogItem.FittingCable> result = FXCollections.observableArrayList();
+
+        try {
+            Connection connection = getConnection();
+
+            PreparedStatement pstat = null;
+
+            pstat = connection.prepareStatement("SELECT C.id, C.title, F.cable_count FROM catalog As C INNER JOIN fitting_cables AS F WHERE C.id = F.cable_id AND F.fitting_id = ? AND F.direct = ?");
+            pstat.setInt(1, fittingId);
+            pstat.setInt(2, 0);
+
+            ResultSet rs = pstat.executeQuery();
+
+            while (rs.next()) {
+                CatalogItem.FittingCable item = new CatalogItem.FittingCable(
+                        rs.getInt("id"),
+                        rs.getString("title"),
+                        rs.getInt("cable_count")
+                );
+                result.add(item);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return result;
+    }
+
+    static public ObservableList<CatalogItem.FittingCable> getFittingCableOut(Integer fittingId){
+        ObservableList<CatalogItem.FittingCable> result = FXCollections.observableArrayList();
+
+        try {
+            Connection connection = getConnection();
+
+            PreparedStatement pstat = null;
+
+            pstat = connection.prepareStatement("SELECT C.id, C.title, F.cable_count FROM catalog As C INNER JOIN fitting_cables AS F WHERE C.id = F.cable_id AND F.fitting_id = "+fittingId+" AND F.direct = 1");
+//            pstat.setInt(1, fittingId);
+//            pstat.setInt(2, 1);
+
+            ResultSet rs = pstat.executeQuery();
+
+            while (rs.next()) {
+                CatalogItem.FittingCable item = new CatalogItem.FittingCable(
+                        rs.getInt("id"),
+                        rs.getString("title"),
+                        rs.getInt("cable_count")
+                );
+                result.add(item);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return result;
+    }
+
     static public boolean addFittingCable(Integer fittingId, Integer cableId, Integer direct, Integer cableCount){
 
         boolean result = false;
@@ -745,8 +830,8 @@ public class DB {
 
             pstat.setInt(1, fittingId);
             pstat.setInt(2, cableId);
-            pstat.setInt(2, direct);
-            pstat.setInt(2, cableCount);
+            pstat.setInt(3, direct);
+            pstat.setInt(4, cableCount);
 
             pstat.execute();
             result = true;
@@ -787,9 +872,9 @@ public class DB {
             PreparedStatement pstat = null;
             pstat = connection.prepareStatement("DELETE FROM fitting_cables WHERE fitting_id = ? AND cable_id = ? AND direct = ?");
 
-            pstat.setInt(2, fittingId);
-            pstat.setInt(3, cableId);
-            pstat.setInt(4, direct);
+            pstat.setInt(1, fittingId);
+            pstat.setInt(2, cableId);
+            pstat.setInt(3, direct);
 
             pstat.execute();
             result = true;

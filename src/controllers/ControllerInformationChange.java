@@ -89,7 +89,10 @@ public class ControllerInformationChange {
                 showAddDialogForCables();
                 break;
             case 4:
+                showAddDialogForFittings();
+                break;
             case 5:
+            case 6:
                 showAddDialogForApparatus();
                 break;
             default:
@@ -107,7 +110,10 @@ public class ControllerInformationChange {
                 showEditDialogForCables();
                 break;
             case 4:
+                showEditDialogForFittings();
+                break;
             case 5:
+            case 6:
                 showEditDialogForApparatus();
                 break;
             default:
@@ -231,6 +237,43 @@ public class ControllerInformationChange {
 
             // Передаём адресата в контроллер.
             ControllerInformationFrameChangeDialogForCables controller = loader.getController();
+            controller.setDialogStage(dialogStage);
+
+            // Отправляем id
+            CatalogItem catalogItem = (CatalogItem) __list_of_items.getSelectionModel().getSelectedItem();
+            controller.setId(catalogItem.getId());
+
+            // Отображаем диалоговое окно и ждём, пока пользователь его не закроет
+            dialogStage.showAndWait();
+
+            return controller.isOkClicked();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean showEditDialogForFittings() {
+        try {
+            // Загружаем fxml-файл и создаём новую сцену
+            // для всплывающего диалогового окна.
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/fxml/information_frame_change_dialog_for_fittings.fxml"));
+            VBox page = (VBox) loader.load();
+
+            // Создаём диалоговое окно Stage.
+            Stage dialogStage = new Stage();
+
+            // Заголовок окна
+            dialogStage.setTitle("Редактирование");
+
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner(VboxInfFrame.getParent().getScene().getWindow());
+            Scene scene = new Scene(page);
+            dialogStage.setScene(scene);
+
+            // Передаём адресата в контроллер.
+            ControllerInformationFrameChangeDialogForFittings controller = loader.getController();
             controller.setDialogStage(dialogStage);
 
             // Отправляем id
@@ -375,6 +418,45 @@ public class ControllerInformationChange {
 //            CableTemp.addAll(filterInfoModelByType("CableAndOther", infoData));
 //            controller.setTAList(TaTemp);
 //            controller.setCableList(CableTemp);
+
+            // Отображаем диалоговое окно и ждём, пока пользователь его не закроет
+            dialogStage.showAndWait();
+
+            // Добавляем новую модель
+            if (controller.isOkClicked()) {
+                // Сохраняем в БД
+//                infoData.add(controller.getInfoModel());
+            }
+
+            return controller.isOkClicked();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean showAddDialogForFittings() {
+        try {
+            // Загружаем fxml-файл и создаём новую сцену
+            // для всплывающего диалогового окна.
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/fxml/information_frame_change_dialog_for_fittings.fxml"));
+            VBox page = (VBox) loader.load();
+
+            // Создаём диалоговое окно Stage.
+            Stage dialogStage = new Stage();
+
+            // Заголовок окна
+            dialogStage.setTitle("Добавление");
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner(VboxInfFrame.getParent().getScene().getWindow());
+            Scene scene = new Scene(page);
+            dialogStage.setScene(scene);
+
+            // Передаём адресата в контроллер.
+            ControllerInformationFrameChangeDialogForFittings controller = loader.getController();
+            controller.setDialogStage(dialogStage);
+            controller.setType(CATEGORIES[changingTypeId]);
 
             // Отображаем диалоговое окно и ждём, пока пользователь его не закроет
             dialogStage.showAndWait();
