@@ -119,8 +119,10 @@ public class ControllerInformationFrame implements Initializable {
         ARM.getSelectionModel().select(0);
         telCable.getItems().addAll(DB.getCatalogTitlesByType("CableAndOther"));
         telCable.getSelectionModel().select(0);
-        AOZU.getItems().addAll(DB.getCatalogTitlesByType("ATZU"));
+        AOZU.getItems().addAll(DB.getCatalogTitlesByType("AOZU"));
         AOZU.getSelectionModel().select(0);
+        ATZU.getItems().addAll(DB.getCatalogTitlesByType("ATZU"));
+        ATZU.getSelectionModel().select(0);
         FIT.getItems().addAll(DB.getCatalogTitlesByType("FIT"));
         FIT.getSelectionModel().select(0);
     }
