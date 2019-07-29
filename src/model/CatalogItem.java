@@ -13,6 +13,7 @@ public class CatalogItem {
     private IntegerProperty count = null;
     private FloatProperty mass = null;
     private FloatProperty cable_length = null;
+    private StringProperty connect_type = null;
 
     /**
      * Список сокращений категоий
@@ -24,21 +25,32 @@ public class CatalogItem {
     public static String[] CATEGORIES_DESC = {"Телефонные аппараты открытой ДС", "Телефонные аппараты ЗАС", "Оборудование терминальное и ЗВКС", "Кабель применяемый для развертывания абонентской сети", "Кабельная арматура, применяемая при развертывании абонентской линии", "Аппаратные тактического звена управления", "Аппаратные оперативного звена управления"};
 
     /**
+     * Список позможных типов подключения
+     */
+    public static String[] CONNECT_TYPES = {"1ПР", "2ПР", "4ПР"};
+
+    /**
      * Конструктор по умолчанию.
      */
 
     public CatalogItem(Integer id, String title) {
-        this(id, title, null, null, null, null, null);
+        this(id, title, null, null, null, null, null, null);
     }
 
     public CatalogItem(Integer id, String title, String type, String description, String image_filename) {
-        this(id, title, type, description, image_filename, null, null);
+        this(id, title, type, description, image_filename, null, null, null);
+    }
+    public CatalogItem(Integer id, String title, String type, String description, String image_filename, String connect_type) {
+        this(id, title, type, description, image_filename, null, null, connect_type);
+    }
+    public CatalogItem(Integer id, String title, String type, String description, String image_filename, Float mass, Float cable_length) {
+        this(id, title, type, description, image_filename, mass, cable_length, null);
     }
 
     /**
      * Конструктор с некоторыми начальными данными.
      */
-    public CatalogItem(Integer id, String title, String type, String description, String image_filename, Float mass, Float cable_length) {
+    public CatalogItem(Integer id, String title, String type, String description, String image_filename, Float mass, Float cable_length, String connect_type) {
         this.id = new SimpleIntegerProperty(id);
         this.title = new SimpleStringProperty(title);
         this.type = new SimpleStringProperty(type);
@@ -66,6 +78,11 @@ public class CatalogItem {
             this.cable_length = new SimpleFloatProperty(cable_length);
         else
             this.cable_length = new SimpleFloatProperty(0);
+
+        if (connect_type != null)
+            this.connect_type = new SimpleStringProperty(connect_type);
+        else
+            this.connect_type = new SimpleStringProperty("");
     }
 
     public Integer getCount() {
@@ -125,6 +142,18 @@ public class CatalogItem {
 
     public void setCable_length(float cable_length) {
         this.cable_length.set(cable_length);
+    }
+
+    public String getConnect_type() {
+        return connect_type.get();
+    }
+
+    public StringProperty connect_typeProperty() {
+        return connect_type;
+    }
+
+    public void setConnect_type(String connect_type) {
+        this.connect_type.set(connect_type);
     }
 
 //    @Override

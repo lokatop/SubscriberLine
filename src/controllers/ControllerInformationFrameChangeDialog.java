@@ -2,6 +2,7 @@ package controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -26,6 +27,7 @@ public class ControllerInformationFrameChangeDialog {
     public TextField __title;
     public ImageView __image;
     public HTMLEditor __description;
+    public ComboBox<String> __connection_type;
 
     // Для свременного сохранения изображения и отображения иконки DragAndDrop
     private Image dropIconTemp;
@@ -42,6 +44,15 @@ public class ControllerInformationFrameChangeDialog {
      */
     @FXML
     private void initialize() {
+        fillConTypeList();
+    }
+
+    private void fillConTypeList() {
+        __connection_type.getItems().clear();
+        __connection_type.getItems().addAll(CatalogItem.CONNECT_TYPES);
+
+        if (__connection_type.getItems().size() != 0)
+            __connection_type.getSelectionModel().select(0);
     }
 
     /**
@@ -65,6 +76,8 @@ public class ControllerInformationFrameChangeDialog {
             __title.setText(catalogItemItem.getTitle());
             __description.setHtmlText(catalogItemItem.getDescription());
             __image.setImage(catalogItemItem.getImage());
+
+            __connection_type.getSelectionModel().select(catalogItemItem.getConnect_type());
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -131,7 +144,8 @@ public class ControllerInformationFrameChangeDialog {
                         __title.getText(),
                         itemType,
                         __description.getHtmlText(),
-                        __image.getImage()
+                        __image.getImage(),
+                        __connection_type.getSelectionModel().getSelectedItem()
                 )) {
                     okClicked = true;
                     dialogStage.close();
@@ -142,7 +156,8 @@ public class ControllerInformationFrameChangeDialog {
                     __title.getText(),
                     itemType,
                     __description.getHtmlText(),
-                    __image.getImage()
+                    __image.getImage(),
+                    __connection_type.getSelectionModel().getSelectedItem()
             )) {
                 okClicked = true;
                 dialogStage.close();

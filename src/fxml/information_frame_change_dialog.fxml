@@ -2,6 +2,7 @@
 
 <?import java.lang.*?>
 <?import java.util.*?>
+<?import javafx.collections.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
@@ -28,17 +29,36 @@
             </ImageView>
           </children>
         </FlowPane>
-        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+        <VBox id="VBox" alignment="CENTER" spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
           <children>
-            <Button mnemonicParsing="false" onAction="#__save" text="Сохранить">
-              <HBox.margin>
-                <Insets />
-              </HBox.margin>
-            </Button>
-            <Separator opacity="0.0" prefWidth="8.0" />
-            <Button mnemonicParsing="false" onAction="#__cancel" text="Закрыть" />
+            <HBox alignment="CENTER" prefHeight="75.0" prefWidth="400.0">
+              <children>
+                <Label text="Режим подключения" />
+                <Separator opacity="0.0" prefWidth="32.0" />
+                <ComboBox fx:id="__connection_type">
+                  <items>
+                    <FXCollections fx:factory="observableArrayList">
+                      <String fx:value="Item 1" />
+                      <String fx:value="Item 2" />
+                      <String fx:value="Item 3" />
+                    </FXCollections>
+                  </items>
+                </ComboBox>
+              </children>
+            </HBox>
+            <HBox alignment="TOP_CENTER" prefHeight="70.0" prefWidth="400.0">
+              <children>
+                <Button mnemonicParsing="false" onAction="#__save" text="Сохранить">
+                  <HBox.margin>
+                    <Insets />
+                  </HBox.margin>
+                </Button>
+                <Separator opacity="0.0" prefWidth="8.0" />
+                <Button mnemonicParsing="false" onAction="#__cancel" text="Закрыть" />
+              </children>
+            </HBox>
           </children>
-        </HBox>
+        </VBox>
         <HTMLEditor fx:id="__description" htmlText="&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body contenteditable=&quot;true&quot; align=&quot;justify&quot;&gt;&lt;/body&gt;&lt;/html&gt;" onKeyReleased="#__desc_text_changed" style="" GridPane.columnSpan="2" GridPane.rowIndex="1" />
       </children>
       <columnConstraints>

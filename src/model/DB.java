@@ -96,7 +96,8 @@ public class DB {
                         rs.getString("title"),
                         rs.getString("type"),
                         rs.getString("description"),
-                        rs.getString("image")
+                        rs.getString("image"),
+                        rs.getString("connect_type")
                 ));
             }
         } catch (SQLException e) {
@@ -174,7 +175,8 @@ public class DB {
                 rs.getString("title"),
                 rs.getString("type"),
                 rs.getString("description"),
-                rs.getString("image")
+                rs.getString("image"),
+                rs.getString("connect_type")
         );
 
         return result;
@@ -196,7 +198,8 @@ public class DB {
                 rs.getString("title"),
                 rs.getString("type"),
                 rs.getString("description"),
-                rs.getString("image")
+                rs.getString("image"),
+                rs.getString("connect_type")
         );
 
         return result;
@@ -258,13 +261,17 @@ public class DB {
     }
 
     static public boolean saveCatalogItemById(Integer id, String title, String type, String description, Image image) {
+        return  saveCatalogItemById(id, title, type, description, image, null);
+    }
+
+    static public boolean saveCatalogItemById(Integer id, String title, String type, String description, Image image, String connect_type) {
 
         boolean result = false;
         Connection connection = getConnection();
 
         try {
             PreparedStatement pstat = null;
-            pstat = connection.prepareStatement("UPDATE catalog SET title=?, type=?, description=?, image=? WHERE id=?");
+            pstat = connection.prepareStatement("UPDATE catalog SET title=?, type=?, description=?, image=?, connect_type=? WHERE id=?");
 
             pstat.setString(1, title);
             pstat.setString(2, type);
@@ -276,7 +283,12 @@ public class DB {
             else
                 pstat.setString(4, imageFilename);
 
-            pstat.setInt(5, id);
+            if (connect_type == null)
+                pstat.setNull(5, Types.NULL);
+            else
+                pstat.setString(5, connect_type);
+
+            pstat.setInt(6, id);
 
             pstat.execute();
             result = true;
@@ -287,13 +299,16 @@ public class DB {
     }
 
     static public boolean saveNewCatalogItem(String title, String type, String description, Image image) {
+        return saveNewCatalogItem(title, type, description, image, null);
+    }
+    static public boolean saveNewCatalogItem(String title, String type, String description, Image image, String connect_type) {
 
         boolean result = false;
         Connection connection = getConnection();
 
         try {
             PreparedStatement pstat = null;
-            pstat = connection.prepareStatement("INSERT INTO catalog (title,type,description,image) VALUES (?,?,?,?);");
+            pstat = connection.prepareStatement("INSERT INTO catalog (title,type,description,image,connect_type) VALUES (?,?,?,?,?);");
 
             pstat.setString(1, title);
             pstat.setString(2, type);
@@ -304,6 +319,11 @@ public class DB {
                 pstat.setNull(4, Types.NULL);
             else
                 pstat.setString(4, imageFilename);
+
+            if (connect_type == null)
+                pstat.setNull(5, Types.NULL);
+            else
+                pstat.setString(5, connect_type);
 
             pstat.execute();
             result = true;

@@ -104,8 +104,21 @@ public class ControllerInformationDescription {
 
                 treeItemRoot.getChildren().add(treeItemMass);
                 treeItemRoot.getChildren().add(treeItemLength);
+                break;
 
+            case "DS":
+            case "ZAS":
+            case "ARM":
+                // Заполняем древо
+                TreeItem<String> treeItem = new TreeItem<String>("Режим подключения");
+                treeItem.setExpanded(true);
 
+                treeItem.getChildren().add(new TreeItem<String>(
+                    catalogItem.getConnect_type()
+                ));
+
+                treeItemRoot.getChildren().add(treeItem);
+                break;
 
             case "FIT":
                 // Получаем кабели на вход
