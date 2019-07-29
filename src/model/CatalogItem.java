@@ -14,6 +14,7 @@ public class CatalogItem {
     private FloatProperty mass = null;
     private FloatProperty cable_length = null;
     private StringProperty connect_type = null;
+    private IntegerProperty work_pair = null;
 
     /**
      * Список сокращений категоий
@@ -34,23 +35,23 @@ public class CatalogItem {
      */
 
     public CatalogItem(Integer id, String title) {
-        this(id, title, null, null, null, null, null, null);
+        this(id, title, null, null, null, null, null, null, null);
     }
 
     public CatalogItem(Integer id, String title, String type, String description, String image_filename) {
-        this(id, title, type, description, image_filename, null, null, null);
+        this(id, title, type, description, image_filename, null, null, null, null);
     }
     public CatalogItem(Integer id, String title, String type, String description, String image_filename, String connect_type) {
-        this(id, title, type, description, image_filename, null, null, connect_type);
+        this(id, title, type, description, image_filename, null, null, connect_type, null);
     }
-    public CatalogItem(Integer id, String title, String type, String description, String image_filename, Float mass, Float cable_length) {
-        this(id, title, type, description, image_filename, mass, cable_length, null);
+    public CatalogItem(Integer id, String title, String type, String description, String image_filename, Float mass, Float cable_length, Integer work_pair) {
+        this(id, title, type, description, image_filename, mass, cable_length, null, work_pair);
     }
 
     /**
      * Конструктор с некоторыми начальными данными.
      */
-    public CatalogItem(Integer id, String title, String type, String description, String image_filename, Float mass, Float cable_length, String connect_type) {
+    public CatalogItem(Integer id, String title, String type, String description, String image_filename, Float mass, Float cable_length, String connect_type, Integer work_pair) {
         this.id = new SimpleIntegerProperty(id);
         this.title = new SimpleStringProperty(title);
         this.type = new SimpleStringProperty(type);
@@ -78,6 +79,11 @@ public class CatalogItem {
             this.cable_length = new SimpleFloatProperty(cable_length);
         else
             this.cable_length = new SimpleFloatProperty(0);
+
+        if (work_pair != null)
+            this.work_pair = new SimpleIntegerProperty(work_pair);
+        else
+            this.work_pair = new SimpleIntegerProperty(0);
 
         if (connect_type != null)
             this.connect_type = new SimpleStringProperty(connect_type);
@@ -154,6 +160,18 @@ public class CatalogItem {
 
     public void setConnect_type(String connect_type) {
         this.connect_type.set(connect_type);
+    }
+
+    public int getWork_pair() {
+        return work_pair.get();
+    }
+
+    public IntegerProperty work_pairProperty() {
+        return work_pair;
+    }
+
+    public void setWork_pair(int work_pair) {
+        this.work_pair.set(work_pair);
     }
 
 //    @Override

@@ -101,9 +101,13 @@ public class ControllerInformationDescription {
                 TreeItem<String> treeItemLength = new TreeItem<String>("Длина");
                 treeItemLength.setExpanded(true);
                 treeItemLength.getChildren().add(new TreeItem<String>(Float.toString(cableItem.getCable_length()) + " м"));
+                TreeItem<String> treeItemWorkPair = new TreeItem<String>("Количество рабочих пар");
+                treeItemWorkPair.setExpanded(true);
+                treeItemWorkPair.getChildren().add(new TreeItem<String>(Integer.toString(cableItem.getWork_pair()) + " шт"));
 
                 treeItemRoot.getChildren().add(treeItemMass);
                 treeItemRoot.getChildren().add(treeItemLength);
+                treeItemRoot.getChildren().add(treeItemWorkPair);
                 break;
 
             case "DS":

@@ -84,6 +84,8 @@
                     <TextField fx:id="__cable_mass" prefWidth="200.0" />
                     <Label text="Длина" />
                     <TextField fx:id="__cable_length" prefWidth="200.0" />
+                    <Label text="Количество рабочих пар" />
+                    <TextField fx:id="__work_pair" prefWidth="200.0" />
                   </children>
                 </VBox>
               </children>

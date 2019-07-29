@@ -223,20 +223,21 @@ public class DB {
                 rs.getString("description"),
                 rs.getString("image"),
                 rs.getFloat("mass"),
-                rs.getFloat("cable_length")
+                rs.getFloat("cable_length"),
+                rs.getInt("work_pair")
         );
 
         return result;
     }
 
-    static public boolean saveCableById(Integer id, String title, String type, String description, Image image, Float mass, Float cable_length) {
+    static public boolean saveCableById(Integer id, String title, String type, String description, Image image, Float mass, Float cable_length, Integer work_pair) {
 
         boolean result = false;
         Connection connection = getConnection();
 
         try {
             PreparedStatement pstat = null;
-            pstat = connection.prepareStatement("UPDATE catalog SET title=?, type=?, description=?, mass=?, cable_length=?, image=? WHERE id=?");
+            pstat = connection.prepareStatement("UPDATE catalog SET title=?, type=?, description=?, mass=?, cable_length=?, image=?, work_pair=? WHERE id=?");
 
             pstat.setString(1, title);
             pstat.setString(2, type);
@@ -250,7 +251,8 @@ public class DB {
             else
                 pstat.setString(6, imageFilename);
 
-            pstat.setInt(7, id);
+            pstat.setInt(7, work_pair);
+            pstat.setInt(8, id);
 
             pstat.execute();
             result = true;
@@ -333,14 +335,14 @@ public class DB {
         return result;
     }
 
-    static public boolean saveNewCableItem(String title, String type, String description, Image image, Float mass, Float cableLength) {
+    static public boolean saveNewCableItem(String title, String type, String description, Image image, Float mass, Float cableLength, Integer work_pair) {
 
         boolean result = false;
         Connection connection = getConnection();
 
         try {
             PreparedStatement pstat = null;
-            pstat = connection.prepareStatement("INSERT INTO catalog (title,type,description,image,mass,cable_length) VALUES (?,?,?,?,?,?)");
+            pstat = connection.prepareStatement("INSERT INTO catalog (title,type,description,image,mass,cable_length,work_pair) VALUES (?,?,?,?,?,?,?)");
 
             pstat.setString(1, title);
             pstat.setString(2, type);
@@ -354,6 +356,7 @@ public class DB {
             else
                 pstat.setString(6, imageFilename);
 
+            pstat.setInt(7, work_pair);
             pstat.execute();
             result = true;
         } catch (SQLException e) {

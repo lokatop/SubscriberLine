@@ -52,6 +52,7 @@ public class ControllerInformationFrameChangeDialogForCables implements Initiali
     public TextField __cable_mass;
     public TextField __cable_length;
     public VBox _additional_data_block;
+    public TextField __work_pair;
 
     // Для свременного сохранения изображения и отображения иконки DragAndDrop
     private Image dropIconTemp;
@@ -93,6 +94,7 @@ public class ControllerInformationFrameChangeDialogForCables implements Initiali
             __image.setImage(item.getImage());
             __cable_mass.setText(Float.toString(item.getMass()));
             __cable_length.setText(Float.toString(item.getCable_length()));
+            __work_pair.setText(Integer.toString(item.getWork_pair()));
 
             fillWireTable();
             fillWireList();
@@ -132,6 +134,7 @@ public class ControllerInformationFrameChangeDialogForCables implements Initiali
         try {
             Float.parseFloat(__cable_mass.getText());
             Float.parseFloat(__cable_length.getText());
+            Integer.parseInt(__work_pair.getText());
         } catch (Exception e) {
             errorMessage += "Введено неправильное число\n";
         }
@@ -168,7 +171,8 @@ public class ControllerInformationFrameChangeDialogForCables implements Initiali
                         __description.getHtmlText(),
                         __image.getImage(),
                         Float.parseFloat(__cable_mass.getText()),
-                        Float.parseFloat(__cable_length.getText())
+                        Float.parseFloat(__cable_length.getText()),
+                        Integer.parseInt(__work_pair.getText())
                 )) {
                     okClicked = true;
                     dialogStage.close();
@@ -181,7 +185,8 @@ public class ControllerInformationFrameChangeDialogForCables implements Initiali
                     __description.getHtmlText(),
                     __image.getImage(),
                     Float.parseFloat(__cable_mass.getText()),
-                    Float.parseFloat(__cable_length.getText())
+                    Float.parseFloat(__cable_length.getText()),
+                    Integer.parseInt(__work_pair.getText())
             )) {
                 okClicked = true;
                 try {
@@ -356,6 +361,15 @@ public class ControllerInformationFrameChangeDialogForCables implements Initiali
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
                 if (!newValue.matches("\\d{0,7}([\\.]\\d{0,4})?")) {
                     __cable_length.setText(oldValue);
+                }
+            }
+        });
+        // Только положительные целые числа
+        __work_pair.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                if (!newValue.matches("[0-9]*")) {
+                    __work_pair.setText(oldValue);
                 }
             }
         });
