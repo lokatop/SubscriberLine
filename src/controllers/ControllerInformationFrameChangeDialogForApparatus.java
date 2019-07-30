@@ -24,6 +24,7 @@ import javafx.util.converter.IntegerStringConverter;
 import model.CatalogItem;
 import model.DB;
 import model.InfoModel;
+import model.TableCableModel;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -50,11 +51,12 @@ public class ControllerInformationFrameChangeDialogForApparatus implements Initi
     public TableColumn<CatalogItem, String> _ta_column_1;
     @FXML
     public TableColumn<CatalogItem, Integer> _ta_column_2;
-    public TableView<CatalogItem> _cable_table;
+    public TableView<TableCableModel> _cable_table;
     public ComboBox<CatalogItem> _cable_list;
     public TextField _cable_count;
-    public TableColumn<CatalogItem, String> _cable_column_1;
+    public TableColumn<TableCableModel, String> _cable_column_1;
     public TableColumn<TableCableModel, Integer> _cable_column_2;
+    public TableColumn<TableCableModel, Integer> _cable_column_3;
     public GridPane _additional_data_block;
 
     // Для свременного сохранения изображения и отображения иконки DragAndDrop
@@ -305,7 +307,29 @@ public class ControllerInformationFrameChangeDialogForApparatus implements Initi
         _cable_table.getItems().clear();
 
         // Настройка
-        _cable_column_1.setCellValueFactory(new PropertyValueFactory<CatalogItem, String>("title"));
+        _cable_column_1.setCellValueFactory(new PropertyValueFactory<TableCableModel, String>("name"));
+        _cable_column_2.setCellValueFactory(new PropertyValueFactory<TableCableModel, Integer>("length"));
+        _cable_column_3.setCellValueFactory(new PropertyValueFactory<TableCableModel, Integer>("count"));
+        _cable_column_3.setCellFactory(TextFieldTableCell.<TableCableModel, Integer>forTableColumn(new IntegerStringConverter()));
+        _cable_column_3.setMinWidth(10);
+        _cable_column_3.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<TableCableModel, Integer>>() {
+            @Override
+            public void handle(TableColumn.CellEditEvent<TableCableModel, Integer> event) {
+                TablePosition<TableCableModel, Integer> pos = event.getTablePosition();
+
+                Integer newCount = event.getNewValue();
+
+                // Делаем кол-во положительным
+                if (newCount < 1) newCount = 1;
+
+                int rowId = pos.getRow();
+                TableCableModel row = event.getTableView().getItems().get(rowId);
+
+                DB.updateCountCableInApparatousById(aparatousId, row.getCableId(), newCount);
+
+                fillCableTable();
+            }
+        });
     }
 
     private void fillTaTable() {
@@ -318,7 +342,7 @@ public class ControllerInformationFrameChangeDialogForApparatus implements Initi
 
     private void fillCableTable() {
 
-        ObservableList<CatalogItem> Cables = DB.getCablesInApparatousById(aparatousId);
+        ObservableList<TableCableModel> Cables = DB.getCablesInApparatousById(aparatousId);
 
         _cable_table.setItems(Cables);
     }
@@ -377,12 +401,14 @@ public class ControllerInformationFrameChangeDialogForApparatus implements Initi
 
     public void _cable_add(ActionEvent actionEvent) {
         Integer cable_id;
+        Integer cable_count;
 
         cable_id = _cable_list.getSelectionModel().getSelectedItem().getId();
+        cable_count = Integer.parseInt(_cable_count.getText());
 
         try {
 
-            DB.addCableInApparatous(aparatousId, cable_id);
+            DB.addCableInApparatous(aparatousId, cable_id, cable_count);
 
             fillCableTable();
             fillCableList();
@@ -416,7 +442,7 @@ public class ControllerInformationFrameChangeDialogForApparatus implements Initi
 
     public void _cable_del(ActionEvent actionEvent) {
         try {
-            Integer cableId = _cable_table.getSelectionModel().getSelectedItem().getId();
+            Integer cableId = _cable_table.getSelectionModel().getSelectedItem().getCableId();
             DB.deleteCableInApparatous(aparatousId, cableId);
 
             fillCableTable();
@@ -457,50 +483,6 @@ public class ControllerInformationFrameChangeDialogForApparatus implements Initi
 
         public void setCount(int count) {
             this.count.set(count);
-        }
-    }
-
-    public class TableCableModel {
-        private final StringProperty name;
-        private final IntegerProperty count;
-
-        public TableCableModel(String name, Integer count) {
-            this.name = new SimpleStringProperty(name);
-            this.count = new SimpleIntegerProperty(count);
-        }
-
-        public String getName() {
-            return name.get();
-        }
-
-        public StringProperty nameProperty() {
-            return name;
-        }
-
-        public int getCount() {
-            return count.get();
-        }
-
-        public void setCount(Integer count) {
-            this.count.set(count);
-        }
-
-        public IntegerProperty countProperty() {
-            return count;
-        }
-
-        @Override
-        public boolean equals(Object obj) {
-
-            boolean condition_1 = false;
-            boolean condition_2 = false;
-
-            if (this.getName().equals(((TableCableModel) obj).getName()))
-                condition_1 = true;
-            if (this.getCount() == ((TableCableModel) obj).getCount())
-                condition_2 = true;
-
-            return condition_1 && condition_2;
         }
     }
 

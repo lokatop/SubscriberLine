@@ -15,6 +15,7 @@ CREATE TABLE if not exists 'catalog' (
 CREATE TABLE if not exists 'apparatus_to_cable' (
   'apparatus_id' INTEGER NOT NULL,
   'cable_id' INTEGER NOT NULL,
+  'count' INTEGER NOT NULL,
   FOREIGN KEY (apparatus_id) REFERENCES catalog(id),
   FOREIGN KEY (cable_id) REFERENCES catalog(id),
   PRIMARY KEY (apparatus_id,cable_id)

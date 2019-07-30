@@ -38,6 +38,12 @@ public class CatalogItem {
         this(id, title, null, null, null, null, null, null, null);
     }
 
+    public CatalogItem(Integer id, String title, Integer count) {
+        this(id, title, null, null, null, null, null, null, null);
+        if (count != null)
+            this.setCount(count);
+    }
+
     public CatalogItem(Integer id, String title, String type, String description, String image_filename) {
         this(id, title, type, description, image_filename, null, null, null, null);
     }

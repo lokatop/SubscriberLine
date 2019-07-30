@@ -14,10 +14,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.VBox;
 import javafx.util.converter.IntegerStringConverter;
-import model.CatalogItem;
-import model.DB;
-import model.TableViewApparatus;
-import model.TheLastTable;
+import model.*;
 import thread.FirstTreadOnCalc_2;
 
 import java.io.IOException;
@@ -28,7 +25,7 @@ import java.util.ResourceBundle;
 public class ControllerCalculate implements Initializable {
     @FXML
     public VBox vbox;
-    public ListView<CatalogItem> typeCable_choose_list;
+    public ListView<TableCableModel> typeCable_choose_list;
     public Label calculated_time;
     public TextField _putting_speed;
     public TextField _people_count;
@@ -85,7 +82,7 @@ public class ControllerCalculate implements Initializable {
                 try {
                     CatalogItem app = DB.getCatalogItemByTitle(appTitle);
 
-                    ObservableList<CatalogItem> cableList = DB.getCablesInApparatousById(app.getId());
+                    ObservableList<TableCableModel> cableList = DB.getCablesInApparatousById(app.getId());
 
                     typeCable_choose_list.getItems().clear();
                     typeCable_choose_list.getItems().addAll(cableList);
@@ -243,11 +240,11 @@ public class ControllerCalculate implements Initializable {
 
     public void _typeCable_choose_list_add(ActionEvent actionEvent) {
         if (!typeCable_choose_list.getItems().isEmpty()) {
-            CatalogItem selectedCable = typeCable_choose_list.getSelectionModel().getSelectedItem();
+            TableCableModel selectedCable = typeCable_choose_list.getSelectionModel().getSelectedItem();
             TheLastTable selectedTheLastTableItem = (TheLastTable) tableView.getSelectionModel().getSelectedItem();
 
             if (selectedCable != null) {
-                selectedTheLastTableItem.setTypeCable(selectedCable.getTitle());
+                selectedTheLastTableItem.setTypeCable(selectedCable.getName());
             }
         }
     }

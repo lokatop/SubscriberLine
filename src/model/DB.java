@@ -404,8 +404,8 @@ public class DB {
         return result;
     }
 
-    static public ObservableList<CatalogItem> getCablesInApparatousById(Integer id) {
-        ObservableList<CatalogItem> result = FXCollections.observableArrayList();
+    static public ObservableList<TableCableModel> getCablesInApparatousById(Integer id) {
+        ObservableList<TableCableModel> result = FXCollections.observableArrayList();
 
         try {
             Connection connection = getConnection();
@@ -418,9 +418,11 @@ public class DB {
             ResultSet rs = pstat.executeQuery();
 
             while (rs.next()) {
-                result.add(new CatalogItem(
+                result.add(new TableCableModel(
                         rs.getInt("id"),
-                        rs.getString("title")
+                        rs.getString("title"),
+                        rs.getInt("count"),
+                        rs.getInt("cable_length")
                 ));
             }
         } catch (SQLException e) {
@@ -532,6 +534,27 @@ public class DB {
         return result;
     }
 
+    static public boolean updateCountCableInApparatousById(Integer apparatousId, Integer cableId, Integer count) {
+
+        boolean result = false;
+        Connection connection = getConnection();
+
+        try {
+            PreparedStatement pstat = null;
+            pstat = connection.prepareStatement("UPDATE apparatus_to_cable SET count=? WHERE apparatus_id=? AND cable_id=?");
+
+            pstat.setInt(1, count);
+            pstat.setInt(2, apparatousId);
+            pstat.setInt(3, cableId);
+
+            pstat.execute();
+            result = true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
     static public boolean addTaInApparatous(Integer apparatousId, Integer taId, Integer count) {
 
         boolean result = false;
@@ -573,17 +596,18 @@ public class DB {
         return result;
     }
 
-    static public boolean addCableInApparatous(Integer apparatousId, Integer cableId) {
+    static public boolean addCableInApparatous(Integer apparatousId, Integer cableId, Integer count) {
 
         boolean result = false;
         Connection connection = getConnection();
 
         try {
             PreparedStatement pstat = null;
-            pstat = connection.prepareStatement("INSERT OR IGNORE INTO apparatus_to_cable (apparatus_id, cable_id) VALUES (?,?)");
+            pstat = connection.prepareStatement("INSERT OR IGNORE INTO apparatus_to_cable (apparatus_id, cable_id, count) VALUES (?,?,?)");
 
             pstat.setInt(1, apparatousId);
             pstat.setInt(2, cableId);
+            pstat.setInt(3, count);
 
             pstat.execute();
             result = true;

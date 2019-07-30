@@ -12,6 +12,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.web.WebView;
 import model.CatalogItem;
 import model.DB;
+import model.TableCableModel;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -54,7 +55,7 @@ public class ControllerInformationDescription {
             case "ATZU":
 
                 // Получаем кабели в аппаратной
-                ObservableList<CatalogItem> appCalbes = DB.getCablesInApparatousById(catalogItem.getId());
+                ObservableList<TableCableModel> appCalbes = DB.getCablesInApparatousById(catalogItem.getId());
                 // Получаем та в аппаратной
                 ObservableList<CatalogItem> appTa = DB.getTaInApparatousById(catalogItem.getId());
 
@@ -65,7 +66,7 @@ public class ControllerInformationDescription {
 
                     for (int i = 0; i < appCalbes.size(); i++) {
                         treeItemCables.getChildren().add(new TreeItem<String>(
-                                appCalbes.get(i).getTitle()
+                                appCalbes.get(i).getName() + " " + appCalbes.get(i).getCount() + " шт. " + appCalbes.get(i).getLength() + " м."
                         ));
                     }
 
