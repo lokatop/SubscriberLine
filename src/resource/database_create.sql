@@ -44,8 +44,8 @@ CREATE TABLE if not exists 'fitting_cables' (
   'direct' INTEGER NOT NULL,
   'cable_count' INTEGER NOT NULL,
   FOREIGN KEY (fitting_id) REFERENCES catalog(id),
-  FOREIGN KEY (wire_id) REFERENCES catalog(id),
-  PRIMARY KEY (fitting_id,wire_id,direct)
+  FOREIGN KEY (cable_id) REFERENCES catalog(id),
+  PRIMARY KEY (fitting_id,cable_id,direct)
 );
 
 CREATE TABLE if not exists 'type_of_military_part' (
