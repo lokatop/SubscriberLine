@@ -73,4 +73,9 @@ public class TableCableModel {
     public IntegerProperty cableIdProperty() {
         return cableId;
     }
+
+    @Override
+    public String toString() {
+        return this.getName();
+    }
 }
