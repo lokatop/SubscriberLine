@@ -46,14 +46,16 @@ public class TableCableModel {
         boolean condition_3 = false;
         boolean condition_4 = false;
 
-        if (this.getName().equals(((TableCableModel) obj).getName()))
-            condition_1 = true;
-        if (this.getCount() == ((TableCableModel) obj).getCount())
-            condition_2 = true;
-        if (this.getCableId() == ((TableCableModel) obj).getCableId())
-            condition_3 = true;
-        if (this.getLength() == ((TableCableModel) obj).getLength())
-            condition_4 = true;
+        if (obj != null) {
+            if (this.getName().equals(((TableCableModel) obj).getName()))
+                condition_1 = true;
+            if (this.getCount() == ((TableCableModel) obj).getCount())
+                condition_2 = true;
+            if (this.getCableId() == ((TableCableModel) obj).getCableId())
+                condition_3 = true;
+            if (this.getLength() == ((TableCableModel) obj).getLength())
+                condition_4 = true;
+        }
 
         return condition_1 && condition_2 && condition_3 && condition_4;
     }
